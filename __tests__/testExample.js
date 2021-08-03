@@ -47,7 +47,8 @@ describe('some examples of tests you could write', () => {
             node.text().toLowerCase.includes(username)
         );
         const mockEventHandler = jest.spyOn(wrap.props(), 'onPress');
-
+        wrap.simulate('press');
+        expect(mockEventHandler).toHaveBeenCalled();
     });
 
 });

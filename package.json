@@ -1,0 +1,31 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "enzyme": "^3.11.0",
+    "jest": "^26.6.3",
+    "jest-expo-enzyme": "^1.2.1",
+    "react-dom": "^16.14.0",
+    "react": "^16.13.1",
+    "react-native": "^0.64.2",
+    "react-redux": "^7.2.4",
+    "redux-mock-store": "^1.5.4",
+    "redux-thunk": "^2.3.0",
+    "ts-jest": "^26.5.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Perfect-Personnel-Placement/frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Perfect-Personnel-Placement/frontend/issues"
+  },
+  "homepage": "https://github.com/Perfect-Personnel-Placement/frontend#readme"
+}
