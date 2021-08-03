@@ -11,9 +11,9 @@ const App = () => {
 
   const loadFonts = async() => {
     await Font.loadAsync({
-      FuturaBold: require('./assets/fonts/Futura-Std-Bold.oft'),
-      FuturaBook: require('./assets/fonts/Futura-Std-Book.oft'),
-      FuturaMedium: require('./assets/fonts/Futura-Std-Medium.oft'),
+      FuturaBold: require('./assets/fonts/Futura-Std-Bold.otf'),
+      FuturaBook: require('./assets/fonts/Futura-Std-Book.otf'),
+      FuturaMedium: require('./assets/fonts/Futura-Std-Medium.otf'),
     });
     setFonts(true);
   }
@@ -26,8 +26,8 @@ const App = () => {
       <Text>Open up App.tsx to start working on your app!</Text>
       <StatusBar style="auto" />
     </SafeAreaProvider>
-  );
-  }
+  );}
+    
 }
 
 export default App;
