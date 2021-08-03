@@ -11,7 +11,7 @@ module.exports = {
     ],
     collectCoverage: true,
     collectCoverageFrom: [
-      '<rootDir>/src/**{.ts,.tsx,.js,.jsx}',
+      '<rootDir>/src/**.{ts,tsx,js,jsx}',
     ],
     coverageDirectory: 'coverage',
     coverageThreshold: {

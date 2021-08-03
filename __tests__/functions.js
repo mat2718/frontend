@@ -49,7 +49,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 };
 
 /**
- * Wrap component in a store provider with a mocked store.
+ * Wrap component in a store provider with either a mocked store or your actual store.
  * 
  * @param {*} Component - component to wrap in store provider
  * @param {*} state - (OPTIONAL) an object representing the initial value of the mocked state store  

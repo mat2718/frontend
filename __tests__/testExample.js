@@ -7,7 +7,7 @@ const returnComponent = (userName = 'dummyuser') => {
         username: userName,
     }
     return () => {
-        return <ExampleComponent props={...props}/>
+        return <ExampleComponent {...props}/>
     }
 }
 
@@ -43,8 +43,8 @@ describe('some examples of tests you could write', () => {
     });
 
     it('has pressable text with functional press event handler', () => {
-        const wrap = wrapper.findWhere( node => 
-            node.text().toLowerCase.includes(username)
+        const wrap = shallowWrap.findWhere( node => 
+            node.text().toLowerCase().includes(username)
         );
         const mockEventHandler = jest.spyOn(wrap.props(), 'onPress');
         wrap.simulate('press');

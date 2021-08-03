@@ -33,4 +33,4 @@ export const AnotherComponent = () => {
     return <Text>AnotherComponent</Text>
 }
 
-export default SomeComponent;s
+export default SomeComponent;
