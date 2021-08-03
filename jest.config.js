@@ -1,4 +1,4 @@
-const withEnzyme = require('jest-expo-enzyme');
+const { withEnzyme } = require('jest-expo-enzyme');
 
 const addSetup = (config) => {
     config.setupFilesAfterEnv.push('<rootDir>/__tests__/setup.js');
