@@ -38,51 +38,37 @@ describe('some examples of tests you could write', () => {
 // Now let's fancy
 //
 
-// const returnComponent = (userName = 'dummyuser') => {
-//     const props = {
-//         username: userName,
-//     }
-//     return () => {
-//         return <ExampleComponent {...props}/>
-//     }
-// }
+const returnComponent = (userName = 'dummyuser') => {
+    const props = {
+        username: userName,
+    }
+    return () => {
+        return <ExampleComponent {...props}/>
+    }
+}
 
-// jest.mock('./constants', () => {
-//     return ({
-//         __esModule: true,
-//         AnotherComponent: () => {
-//             return <></>
-//         },
-//         default: () => {
-//             return <></>
-//         },
-//     });
-// });
+describe('some examples of tests you could write, but with the wrapComponent function', () => {
 
-// describe('some examples of tests you could write, but with the wrapComponent function', () => {
+    beforeEach( () => {
+        wrapper = mount( wrapComponent(returnComponent(username)) );
+        // shallow won't work with the heavily nested component
+        // shallowWrap = shallow( wrapComponent(returnComponent(username)) );
+    });
 
-//     beforeEach( () => {
-//         wrapper = mount( wrapComponent(returnComponent(username)) );
-//         // shallowWrap = shallow( wrapComponent(returnComponent(username)) );
-//     });
+    it('should contain a textbox welcoming the user', () => {
+        expect(
+            wrapper.findWhere( node => 
+                node.text().toLowerCase().includes(username)
+            )
+            .length
+        ).toBeGreaterThan(0);
+    });
 
-//     it('should contain a textbox welcoming the user', () => {
-//         expect(
-//             wrapper.findWhere( node => 
-//                 node.text().toLowerCase.includes(username)
-//             )
-//         ).toBeGreaterThan(0);
-//     });
-
-//     it('has pressable text with functional press event handler', () => {
-//         const wrap = wrapper.find(Pressable);
-//         const shallowed = shallow(wrap.getElement());
-//         const mockEventHandler = jest.spyOn(shallowed.props(), 'onPress');
-//         shallowed.simulate('press');
-//         expect(mockEventHandler).toHaveBeenCalled();
-//     });
+    it('has pressable text with functional press event handler', () => {
+        const wrap = wrapper.find(Pressable);
+        const mockEventHandler = jest.spyOn(wrap.props(), 'onPress');
+        wrap.prop('onPress')(); //simulate doesn't work with mounted components
+        expect(mockEventHandler).toHaveBeenCalled();
+    });
 
 });
-
-// describe("One more thing: the dangers of finding components by prop", () => {
-// });
