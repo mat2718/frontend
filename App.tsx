@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Font from 'expo-font';
+import SplashScreen from './component/screens/splash';
 
 const App = () => {
   const [fontsLoaded, setFonts] = useState(false);
@@ -19,11 +20,16 @@ const App = () => {
   }
 
   if (!fontsLoaded){
-    return null;
+    return (
+      <SafeAreaProvider style={styles.container}>
+        <SplashScreen/>
+        <StatusBar style="auto" />
+      </SafeAreaProvider>
+    )
   } else {
     return (
     <SafeAreaProvider style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text style={{fontFamily:"FuturaBold"}}>Revature's internal batch making and matching app</Text>
       <StatusBar style="auto" />
     </SafeAreaProvider>
   );}
