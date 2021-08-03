@@ -44,3 +44,4 @@ To-do list:
 
 This project uses the following license: [<license_name>](<link>).
 
+NaCl
