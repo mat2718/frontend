@@ -1,15 +1,18 @@
 import React from 'react';
-import {View,Text,StyleSheet, Button, TouchableOpacity} from 'react-native';
+import {View,Text,StyleSheet, Picker, TouchableOpacity} from 'react-native';
 
 const ClientScreen=()=>{
 
-    return(<View style={styles.clientName}>
-                <Text>Client Name 
-                    <TouchableOpacity style={styles.button}><Text>"Add"</Text></TouchableOpacity>
-                </Text>
+    return(
+            <><View style={styles.clientName}>
 
-
-    </View>
+            <TouchableOpacity style={styles.button}>
+                <Text>"Add"</Text>
+            </TouchableOpacity>
+        </View>
+        <View>
+               
+            </View></>
         
             
         

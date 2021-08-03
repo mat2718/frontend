@@ -2,6 +2,7 @@ const { withEnzyme } = require('jest-expo-enzyme');
 
 const addSetup = (config) => {
     config.setupFilesAfterEnv.push('<rootDir>/__tests__/setup.js');
+    config.testPathIgnorePatterns = ['<rootDir>/__tests__/exampleTest.js'];  
     return config;
 }
 
