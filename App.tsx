@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import ClientScreen from './src/Components/Screens/Clients/ClientScreen';
+import ClientNavigation from './src/Screens/ClientNavigation';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <ClientScreen/>
+      <ClientNavigation/>
 
       <Text>Open up App.tsx to start working on your app!</Text>
       <StatusBar style="auto" />

@@ -1,13 +1,13 @@
 import React from 'react';
 import {View,Text,StyleSheet, Picker, TouchableOpacity} from 'react-native';
-
+import GlobalStyles from '../../../../assets/constants/GlobalStyles';
 const ClientScreen=()=>{
 
     return(
             <><View style={styles.clientName}>
-
-            <TouchableOpacity style={styles.button}>
-                <Text>"Add"</Text>
+                <Text>Client Name: </Text>
+            <TouchableOpacity style={GlobalStyles.button}>
+                <Text style={GlobalStyles.button}>Add</Text>
             </TouchableOpacity>
         </View>
         <View>
@@ -21,11 +21,10 @@ const ClientScreen=()=>{
 const styles= StyleSheet.create({
     clientName:{
         flexDirection:"row",
+       alignItems:"center",
+        justifyContent:"center",
     },
-    button:{
-        backgroundColor:"orange"
-    }
-
+    
 })
 
 export default ClientScreen;
