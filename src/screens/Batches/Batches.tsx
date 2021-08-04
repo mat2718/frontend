@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   addBatchButton: {
     justifyContent: 'center',
     height: 40,
-    width: 120,
+    width: 100,
     backgroundColor: '#f26925',
     borderRadius: 50,
     marginLeft: 10,
