@@ -8,6 +8,10 @@ button:{
     borderRadius:300,
     padding:5,
     color:colors.primaryWhite,
+},
+container:{
+    flex:.75,
+    justifyContent:"space-evenly",
 }
 
 

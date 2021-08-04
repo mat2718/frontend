@@ -1,18 +1,27 @@
 import React from 'react';
 import {View,Text,StyleSheet, Picker, TouchableOpacity} from 'react-native';
 import GlobalStyles from '../../../../assets/constants/GlobalStyles';
+import DemandList from './DemandList';
+import ClientList from './ClientList';
+
+
 const ClientScreen=()=>{
 
     return(
-            <><View style={styles.clientName}>
+        <View style={GlobalStyles.container}>
+            <View style={styles.clientName}>
                 <Text>Client Name: </Text>
-            <TouchableOpacity style={GlobalStyles.button}>
-                <Text style={GlobalStyles.button}>Add</Text>
-            </TouchableOpacity>
-        </View>
-        <View>
+                
                
-            </View></>
+            <TouchableOpacity style={GlobalStyles.container}>
+            <Text style={GlobalStyles.button}>Add</Text>
+            </TouchableOpacity>
+            </View>
+            <ClientList/>
+            <View>
+               <DemandList/>
+            </View>
+            </View>
         
             
         

@@ -8,7 +8,7 @@ export default function App() {
     <View style={styles.container}>
       <ClientNavigation/>
 
-      <Text>Open up App.tsx to start working on your app!</Text>
+      
       <StatusBar style="auto" />
     </View>
   );
