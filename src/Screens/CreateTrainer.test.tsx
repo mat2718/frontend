@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {mount, shallow} from 'enzyme'
 import CreateTrainer from './CreateTrainer';
 
@@ -26,43 +26,67 @@ describe('Create Trainer', () =>
 
     it('Should update states on text input', () =>
     {
-        const inputFN = wrapper.findWhere(node => node.prop('placeholder') === 'First Name').last();
+        const inputFN = wrapper.findWhere(node => node.prop('placeholder') === 'First Name').last().getElement();
+        let shallowInput = shallow(inputFN);
         const mockEventHandler = jest.fn();
-        Object.defineProperty(  inputFN.props(), 'onChangeText', {
-            value: mockEventHandler,
-            writable: true,
-        });
+        if (shallowInput.props().hasOwnProperty('onChangeText')) {
 
-        //const inputLN = shallowWrapper.findWhere(node => node.prop('placeholder') === 'Last Name');
-        //const LNinput_Mock = jest.spyOn(inputLN.props(), 'onChangeText');
+            shallowInput.setProps({ onChangeText: mockEventHandler });
+            shallowInput.simulate('changeText', 'John')
+            
+            
+        }
+        expect(mockEventHandler).toBeCalled()
+        expect(mockEventHandler).toBeCalledWith('John')
 
-        //const inputEmail = shallowWrapper.findWhere(node => node.prop('placeholder') === 'Email');
-        //const Emailinput_Mock = jest.spyOn(inputEmail.props(), 'onChangeText');
-
-        //const inputID = shallowWrapper.findWhere(node => node.prop('placeholder') === 'ID Number');
-        //const IDinput_Mock = jest.spyOn(inputID.props(), 'onChangeText');
-
-        //inputFN.simulate('ChangeText', 'John');
-        //const spy = jest.spyOn(inputFN.props(), 'onChangeText');
-        inputFN.simulate('change', { target: { value: 'John' } })
+        const inputLN = shallowWrapper.findWhere(node => node.prop('placeholder') === 'Last Name').last().getElement();
+        shallowInput = shallow(inputLN);
         
-        wrapper.update();
-        console.log(inputFN.text());
-        //expect(1).toBe(1);
-        expect(mockEventHandler).toHaveBeenCalledWith('John');
+        if (shallowInput.props().hasOwnProperty('onChangeText')) {
 
-        expect(inputFN.text()).toEqual('John');
+            shallowInput.setProps({ onChangeText: mockEventHandler });
+            shallowInput.simulate('changeText', 'Smith')
+            
+            
+        }
+        expect(mockEventHandler).toBeCalled()
+        expect(mockEventHandler).toBeCalledWith('Smith')
+
+        const inputEmail = shallowWrapper.findWhere(node => node.prop('placeholder') === 'Email').last().getElement();
+        shallowInput = shallow(inputEmail);
         
-        // inputLN.simulate('ChangeText', 'Deere');
-        // shallowWrapper.update();
-        // expect(inputFN.text()).toEqual('Deere');
+        if (shallowInput.props().hasOwnProperty('onChangeText')) {
 
-        // inputEmail.simulate('ChangeText', 'anemail@yahoo.com');
-        // shallowWrapper.update();
-        // expect(inputFN.text()).toEqual('anemail@yahoo.com');
+            shallowInput.setProps({ onChangeText: mockEventHandler });
+            shallowInput.simulate('changeText', 'Email@site.com')
+            
+            
+        }
+        expect(mockEventHandler).toBeCalled()
+        expect(mockEventHandler).toBeCalledWith('Email@site.com')
 
-        // inputID.simulate('ChangeText', '26543');
-        // shallowWrapper.update();
-        // expect(inputFN.text()).toEqual('26543');
+        const inputID = shallowWrapper.findWhere(node => node.prop('placeholder') === 'ID Number').last().getElement();
+        shallowInput = shallow(inputID);
+        
+        if (shallowInput.props().hasOwnProperty('onChangeText')) {
+
+            shallowInput.setProps({ onChangeText: mockEventHandler });
+            shallowInput.simulate('changeText', '12345')
+            
+            
+        }
+        expect(mockEventHandler).toBeCalled()
+        expect(mockEventHandler).toBeCalledWith('12345')
+
+        
     });
+
+    it('should call submit function when button is pressed', () =>
+    {
+        const sub = wrapper.find('TouchableOpacity').findWhere((w)=>w.text()==='Submit').first();
+        const mockEventHandler = jest.spyOn(sub.props(), 'onPress');
+        // Enzyme usually allows wrapper.simulate() alternatively, but this doesn't support 'press' events.
+        sub.props().onPress();
+        expect(mockEventHandler).toHaveBeenCalled();
+    })
 })

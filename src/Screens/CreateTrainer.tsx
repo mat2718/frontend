@@ -10,6 +10,9 @@ const CreateTrainer = () =>
     const [email, setEmail] = useState('');
     const [ID, setID] = useState('');
     
+    const submit = () => {
+        return ('hi');
+    }
     
     return(
         <View style = {styles.container}>
@@ -30,7 +33,7 @@ const CreateTrainer = () =>
             </View>
             
             
-            <TouchableOpacity style = {styles.touchableStyle}>
+            <TouchableOpacity style = {styles.touchableStyle} onPress={submit}>
                 <Text>Submit</Text>
             </TouchableOpacity>
         </View>
@@ -38,7 +41,7 @@ const CreateTrainer = () =>
 }
 const styles = StyleSheet.create({
     container: {
-        
+        flex: 1,        
     },
 
     fieldRow: {
@@ -51,7 +54,7 @@ const styles = StyleSheet.create({
     },
     
     touchableStyle: {
-        
+        //backgroundColor: "",
     },
 });
 export default CreateTrainer;
