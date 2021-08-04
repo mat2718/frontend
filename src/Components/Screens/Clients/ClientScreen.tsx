@@ -21,6 +21,9 @@ const ClientScreen=()=>{
             <View>
                <DemandList/>
             </View>
+            <TouchableOpacity>
+                <Text style={GlobalStyles.button} onPress={()=>console.log("will create logic")}>Create A Demand</Text>
+            </TouchableOpacity>
             </View>
         
             
