@@ -1,8 +1,16 @@
 import React from 'react';
+import { useState } from 'react';
 import {Text, TextInput, TouchableOpacity, StyleSheet, View, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback} from 'react-native';
 //import axios from 'axios';
 
-const CreateTrainer = () => {
+const CreateTrainer = () =>
+{
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [ID, setID] = useState('');
+    
+    
     return(
         <View style = {styles.container}>
             <View style = {styles.fieldRow}>
@@ -14,10 +22,10 @@ const CreateTrainer = () => {
                 </View>
 
                 <View style = {styles.fieldCols}>
-                    <TextInput ></TextInput>
-                    <TextInput ></TextInput>
-                    <TextInput ></TextInput>
-                    <TextInput></TextInput>
+                    <TextInput testID = 'Firstname' placeholder='First Name' onChangeText={setFirstName}>{firstName}</TextInput>
+                    <TextInput testID = 'Lastname' placeholder='Last Name' onChangeText={setLastName}>{lastName}</TextInput>
+                    <TextInput testID = 'Email' placeholder= 'Email' onChangeText={setEmail}>{email}</TextInput>
+                    <TextInput testID = 'ID' placeholder='ID Number' onChangeText={setID}>{ID}</TextInput>
                 </View>
             </View>
             
