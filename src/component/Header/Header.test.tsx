@@ -3,19 +3,17 @@ import { mount } from 'enzyme';
 import Header from './Header';
 
 const component = () => {
-    return <Header />
+  return <Header />;
 };
 
 let wrapper: any;
 
 describe('display the logo', () => {
-    beforeEach(() => {
-        wrapper = mount(<Header />)
-    })
+  beforeEach(() => {
+    wrapper = mount(<Header />);
+  });
 
-    it('should be there', () => {
-        expect(wrapper).not.toBe(undefined)
-    })
-})
-
-
+  it('should be there', () => {
+    expect(wrapper).not.toBe(undefined);
+  });
+});
