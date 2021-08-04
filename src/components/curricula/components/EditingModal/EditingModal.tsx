@@ -31,3 +31,5 @@ const EditingModal = () => {
         </View>
       );
 }
+
+export default EditingModal;
