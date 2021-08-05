@@ -1,6 +1,8 @@
 import React from 'react';
 import { FlatList, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
-
+/**
+ * Authors: Joab Smith and Imran Ilyas
+**/
 interface IProps
 {
     trainerArr:ITrainer[]
@@ -22,11 +24,13 @@ const ViewFlatList = (props:IProps) => {
             <FlatList
                 data={props.trainerArr}
                 renderItem={(item) => (
-                    
+                        <View style={styles.row}>
+                        
                         <TouchableOpacity style = {styles.item} onPress={trainer}>
                             <Text style = {styles.trainer}>{item.item.name}</Text>
-                            <Text style = {styles.trainer}>{item.item.ID}</Text>
+                            <Text style = {styles.trainer}>ID#{item.item.ID}</Text>
                         </TouchableOpacity>
+                        </View>
                 )}
                 keyExtractor={item => item.ID}>
 
@@ -38,12 +42,23 @@ const ViewFlatList = (props:IProps) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width: '100%',
         margin: "10%",
-        justifyContent: 'center',
+        
+    },
+    row: {
+    flex: 1,
+        flexDirection: 'row',
+      
     },
     
     item: {
-        marginVertical: '20%',
+        flex: 1,
+        padding: '3%',
+        width: '100%',
+        //flexDirection: 'row',
+        
+        borderWidth:1
     },
 
     trainer: {

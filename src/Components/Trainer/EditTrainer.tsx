@@ -5,15 +5,29 @@ import {Text, TextInput, TouchableOpacity, StyleSheet, View, Keyboard, KeyboardA
 /**
  * Authors: Joab Smith and Imran Ilyas
 **/
-const CreateTrainer = () =>
+interface ITrainer
 {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [ID, setID] = useState('');
+    FirstName: string,
+    LastName: string,
+    Email: string,
+    ID: string,
+}
+
+interface IProps
+{
+    trainer: ITrainer
+    setEdit: (value:boolean) => void
+}
+const EditTrainer = (props:IProps) =>
+{
+    const [firstName, setFirstName] = useState(props.trainer.FirstName);
+    const [lastName, setLastName] = useState(props.trainer.LastName);
+    const [email, setEmail] = useState(props.trainer.Email);
+    const [ID, setID] = useState(props.trainer.ID);
     
-    const submit = () => {
-        console.log('Submit');
+    const update = () => {
+        console.log('Update');
+        props.setEdit(false);
     }
     
     return(
@@ -43,8 +57,8 @@ const CreateTrainer = () =>
             </View>
             
             
-            <TouchableOpacity style = {styles.touchableStyle} onPress={submit}>
-                <Text style = {styles.submit}>Submit</Text>
+            <TouchableOpacity style = {styles.touchableStyle} onPress={update}>
+                <Text style = {styles.submit}>Update</Text>
             </TouchableOpacity>
         </View>
     )
@@ -100,4 +114,4 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 });
-export default CreateTrainer;
+export default EditTrainer;

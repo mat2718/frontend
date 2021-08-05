@@ -1,7 +1,9 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 import ViewFlatList from './ViewFlatList';
-
+/**
+ * Authors: Joab Smith and Imran Ilyas
+**/
 describe('ViewFlatList', () =>
 {
     test('should have Flat list', () =>
