@@ -1,11 +1,14 @@
 import React from 'react';
-import { FlatList, TouchableOpacity, View, Text } from 'react-native';
+import { FlatList, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 
 interface IProps
 {
     trainerArr: string[]
 }
 
+const trainer = () => {
+    return('nothing');
+}
 
 const ViewFlatList = (props:IProps) => {
     return (
@@ -13,16 +16,21 @@ const ViewFlatList = (props:IProps) => {
             <FlatList
                 data={props.trainerArr}
                 renderItem={(item) => (
-                    <View>
-                        <TouchableOpacity>
+                    
+                        <TouchableOpacity style = {styles.item} onPress={trainer}>
                             <Text>{item}</Text>
                         </TouchableOpacity>
-                </View>
             )}>
 
             </FlatList>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    item: {
+        
+    }
+})
 
 export default ViewFlatList;
