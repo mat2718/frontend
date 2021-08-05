@@ -21,7 +21,7 @@ const DemandList=()=>{
             renderItem={({item})=>(
                 
                 <View style={styles.item}>
-                    <Text style={styles.listItem}>{item.curriculum}{item.needBy}{item.howMany}</Text>
+                    <Text style={GlobalStyles.listItem}>{item.curriculum}{item.needBy}{item.howMany}</Text>
                    <TouchableOpacity onPress={()=>console.log(item)}>
                        <Text style={GlobalStyles.button}>X</Text>
                    </TouchableOpacity>

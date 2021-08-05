@@ -12,10 +12,31 @@ button:{
 container:{
     flex:.75,
     justifyContent:"space-evenly",
-}
+},
+listItem:{
+    alignSelf: 'center',
+    justifyContent: 'center',
+    padding: 20,
+    paddingLeft: 30,
+    marginBottom: 10,
+    width: '90%',
+    shadowColor:colors.primaryGray,
+    shadowOffset: 
+        {
+      width: 0,
+      height: 2,
+        },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    borderRadius: 35,
+    backgroundColor:colors.primaryWhite,
+  },
+
+});
 
 
 
 
-})
+
 export default GlobalStyles;
