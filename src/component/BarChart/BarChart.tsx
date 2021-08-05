@@ -26,29 +26,29 @@ const BarGraph: React.FC<PropsI> = (props: PropsI) => {
 
     const data = [
         {
-          name: "Active Batches",
-          population: props.data[0],
-          color: props.index === 0 ? 'rgba(71,76,85,1)' : 'rgba(71,76,85,0.5)'
+            name: "Active Batches",
+            population: props.data[0],
+            color: props.index === 0 ? 'rgba(242,105,38,1)' : 'rgba(242,105,38,0.5)'
         },
         {
-          name: "Average Active Associates",
-          population: props.data[1],
-          color: props.index === 1 ? 'rgba(71,76,85,1)' : 'rgba(71,76,85,0.5)'
+            name: "Average Active Associates",
+            population: props.data[1],
+            color: props.index === 1 ? 'rgba(72,76,86,1)' : 'rgba(71,76,86,0.5)'
         },
         {
-          name: "Active Trainers",
-          population: props.data[2],
-          color: props.index === 2 ? 'rgba(71,76,85,1)' : 'rgba(71,76,85,0.5)'
+            name: "Active Trainers",
+            population: props.data[2],
+            color: props.index === 2 ? 'rgba(185,185,186,1)' : 'rgba(185,185,186,0.5)'
         },
         {
-          name: "Planned Batches",
-          population: props.data[3],
-          color: props.index === 3 ? 'rgba(71,76,85,1)' : 'rgba(71,76,85,0.5)'
+            name: "Planned Batches",
+            population: props.data[3],
+            color: props.index === 3 ? 'rgba(115, 165, 194,1)' : 'rgba(242,105,38,0.5)'
         },
         {
-          name: "Active Curriculums",
-          population: props.data[4],
-          color: props.index === 4 ? 'rgba(71,76,85,1)' : 'rgba(71,76,85,0.5)'
+            name: "Active Curriculums",
+            population: props.data[4],
+            color: props.index === 4 ? 'rgba(253, 181, 21,1)' : 'rgba(71,76,85,0.5)'
         }
       ];
 

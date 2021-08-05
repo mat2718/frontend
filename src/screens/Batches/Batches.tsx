@@ -50,7 +50,7 @@ const Batches: React.FC = () => {
           <TouchableOpacity style={styles.addBatchButton}>
             <Text style={styles.addBatchText}>Add batch</Text>
           </TouchableOpacity>
-        </View>
+        </View> 
         {/** Gantt Chart */}
         <View style={styles.plannedBatchesTable}>
           <StatsCarousel data={[40, 20, 40, 15, 23]} />
