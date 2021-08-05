@@ -3,20 +3,19 @@ import {View, Text, StyleSheet, Picker, TouchableOpacity} from 'react-native'
 import GlobalStyles from '../../../assets/constants/GlobalStyles'
 
 
-const AddDemandScreen = () =>{
+const EditDemandScreen = () =>{
     return(
         <View style={GlobalStyles.container}>
-            
 
       
         <View>
 
             <TouchableOpacity >
-                <Text style={GlobalStyles.button}>Add Demand</Text>
+                <Text style={GlobalStyles.button}>Edit Demand</Text>
 
             </TouchableOpacity>
         </View>
         </View>
     )
 }
-export default AddDemandScreen;
+export default EditDemandScreen;
