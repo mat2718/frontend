@@ -1,15 +1,21 @@
-import React from 'react'
-import {View} from 'react-native'
-import GlobalStyles from '../../assets/constants/GlobalStyles'
-import ClientScreen from '../Components/Screens/Clients/ClientScreen'
-const ClientNavigation=()=>{
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ClientScreen from '../Components/Clients/ClientScreen';
 
-    return(
 
-        <View>
-        <ClientScreen/>
-        </View>
-    )
 
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Client" component={ClientScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
-export default ClientNavigation;
+
+export default App;

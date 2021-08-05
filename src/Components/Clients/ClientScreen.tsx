@@ -1,8 +1,9 @@
 import React from 'react';
 import {View,Text,StyleSheet, Picker, TouchableOpacity} from 'react-native';
-import GlobalStyles from '../../../../assets/constants/GlobalStyles';
+import GlobalStyles from '../../../assets/constants/GlobalStyles';
 import DemandList from './DemandList';
 import ClientList from './ClientList';
+import AddDemandScreen from './AddDemandScreen'
 
 
 const ClientScreen=()=>{
@@ -22,7 +23,13 @@ const ClientScreen=()=>{
                <DemandList/>
             </View>
             <TouchableOpacity>
-                <Text style={GlobalStyles.button} onPress={()=>console.log("will create logic")}>Create A Demand</Text>
+                <Text style={GlobalStyles.button} onPress={()=>{
+                    return(
+                        <View>
+                            <AddDemandScreen/>
+                        </View>
+                    )
+                }}>Create A Demand</Text>
             </TouchableOpacity>
             </View>
         

@@ -1,5 +1,5 @@
 import {mount} from 'enzyme';
-import { ExampleComponent } from '../../../../__tests__/constants';
+import { ExampleComponent } from '../../../__tests__/constants';
 import ClientScreen from './ClientScreen';
 
 let wrapper;

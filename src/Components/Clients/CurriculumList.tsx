@@ -1,11 +1,11 @@
 import React,{useState} from 'react'
 import {View,Text,Picker,StyleSheet} from 'react-native'
-import GlobalStyles from '../../../../assets/constants/GlobalStyles'
+import GlobalStyles from '../../../assets/constants/GlobalStyles'
 const name="Bob"
 
 
 
-const ClientList=()=>{
+const CurriculumList=()=>{
     const [state,setState]=useState(name);
 
 
@@ -38,4 +38,4 @@ const styles=StyleSheet.create({
     }
 
 })
-export default ClientList;
+export default CurriculumList;

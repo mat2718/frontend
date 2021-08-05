@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {View,Text,Button, StyleSheet, FlatList, TouchableOpacity} from 'react-native'
-import colors from '../../../../assets/constants/colors'
-import GlobalStyles from '../../../../assets/constants/GlobalStyles'
+import colors from '../../../assets/constants/colors'
+import GlobalStyles from '../../../assets/constants/GlobalStyles'
 
 
 
