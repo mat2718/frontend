@@ -10,7 +10,7 @@ describe('ViewFlatList', () =>
         expect(wrapper.find('FlatList')).toHaveLength(1);
     })
 
-    test('item should be clickable', () => {
+    test('item should be pressable', () => {
         const wrapper = shallow(<ViewFlatList trainerArr={['John Doe']} />)
         expect(wrapper.find('TouchableOpacity')).toBeDefined();
         //check if function is triggered onPress
