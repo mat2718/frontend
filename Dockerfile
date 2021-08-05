@@ -22,7 +22,7 @@ RUN mkdir /app
 WORKDIR /app
 COPY . /app
 RUN npm install --force
-RUN npx expo login --non-interactive -u "mat2718"
+RUN npx expo login --non-interactive -u "hpenmulato"
 RUN expo publish
 RUN expo build:web
 RUN expo build:android -t apk --no-wait
