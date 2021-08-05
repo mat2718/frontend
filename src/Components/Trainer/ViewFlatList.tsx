@@ -3,7 +3,13 @@ import { FlatList, TouchableOpacity, View, Text, StyleSheet } from 'react-native
 
 interface IProps
 {
-    trainerArr: string[]
+    trainerArr:ITrainer[]
+}
+
+interface ITrainer
+{
+    name: string,
+    ID: string
 }
 
 const trainer = () => {
@@ -18,9 +24,10 @@ const ViewFlatList = (props:IProps) => {
                 renderItem={(item) => (
                     
                         <TouchableOpacity style = {styles.item} onPress={trainer}>
-                            <Text>{item}</Text>
+                            <Text>{item.item.name}</Text>
                         </TouchableOpacity>
-            )}>
+                )}
+                keyExtractor={item => item.ID}>
 
             </FlatList>
         </View>
