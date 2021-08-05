@@ -18,23 +18,28 @@ const StatsCarousel: React.FC<PropsI> = (props: PropsI) => {
 
     const stats = [{    
         'title': 'Current Active Batches',
-        'stat': props.data[0]
+        'stat': props.data[0],
+        'color': 'rgba(242,105,38,1)',
     },
     {
         'title': 'Active Associates',
-        'stat': props.data[1]
+        'stat': props.data[1],
+        'color': 'rgba(72,76,86,1)'
     },
     {
         'title': 'Active Trainers',
-        'stat': props.data[2]
+        'stat': props.data[2],
+        'color': 'rgba(185,185,186,1)',
     },
     {
         'title': 'Planned Batches',
-        'stat': props.data[3]
+        'stat': props.data[3],
+        'color': 'rgba(115, 165, 194,1)'
     },
     {
-        'title': 'Active Curriculum',
-        'stat': props.data[4]
+        'title': 'Active Curricula',
+        'stat': props.data[4],
+        'color': 'rgba(253, 181, 21,1)'
     }]
 
     const renderItem = ({item}: {item: any}) => {
@@ -55,7 +60,7 @@ const StatsCarousel: React.FC<PropsI> = (props: PropsI) => {
             borderRadius: 25,
             minHeight: 75,
             elevation: 5,}}>
-                <Text style={{color: '#000', textAlign: 'center', fontSize: 24, fontWeight: '700'}}>{item.stat}</Text>
+                <Text style={{color: item.color, textAlign: 'center', fontSize: 24, fontWeight: '700'}}>{item.stat}</Text>
                 <Text style={{color: '#000', textAlign: 'center'}}>{item.title}</Text>
             </View>
         );

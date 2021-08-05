@@ -33,7 +33,7 @@ const BarGraph: React.FC<PropsI> = (props: PropsI) => {
         {
             name: "Average Active Associates",
             population: props.data[1],
-            color: props.index === 1 ? 'rgba(72,76,86,1)' : 'rgba(71,76,86,0.5)'
+            color: props.index === 1 ? 'rgba(72,76,86,1)' : 'rgba(72,76,86,0.5)'
         },
         {
             name: "Active Trainers",
@@ -43,12 +43,12 @@ const BarGraph: React.FC<PropsI> = (props: PropsI) => {
         {
             name: "Planned Batches",
             population: props.data[3],
-            color: props.index === 3 ? 'rgba(115, 165, 194,1)' : 'rgba(242,105,38,0.5)'
+            color: props.index === 3 ? 'rgba(115, 165, 194,1)' : 'rgba(115, 165, 194,0.5)'
         },
         {
             name: "Active Curriculums",
             population: props.data[4],
-            color: props.index === 4 ? 'rgba(253, 181, 21,1)' : 'rgba(71,76,85,0.5)'
+            color: props.index === 4 ? 'rgba(253, 181, 21,1)' : 'rgba(253, 181, 21,0.5)'
         }
       ];
 
