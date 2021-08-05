@@ -1,4 +1,4 @@
-const { withEnzyme } = require('jest-expo-enzyme');
+const {withEnzyme} = require('jest-expo-enzyme');
 
 const addSetup = (config) => {
     config.setupFilesAfterEnv.push('<rootDir>/__tests__/setup.js');
@@ -13,6 +13,8 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/src/**.{ts,tsx,js,jsx}',
+    '<rootDir>/src/component/Header/Header.tsx',
+    '<rootDir>/src/screens/Batches/Batches.tsx',
   ],
   coverageDirectory: 'coverage',
   coverageThreshold: {
