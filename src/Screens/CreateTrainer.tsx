@@ -34,27 +34,37 @@ const CreateTrainer = () =>
             
             
             <TouchableOpacity style = {styles.touchableStyle} onPress={submit}>
-                <Text>Submit</Text>
+                <Text style = {styles.submit}>Submit</Text>
             </TouchableOpacity>
         </View>
     )
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,        
+        flex: 1,
+        margin: '10%',
+        justifyContent: 'center'        
     },
 
     fieldRow: {
         flexDirection: 'row',
-                
     },
+
     fieldCols: {
         flexDirection: 'column',
-        
+        padding: '10%',
+        justifyContent: 'space-around',
     },
     
     touchableStyle: {
-        //backgroundColor: "",
+        backgroundColor: "#F26925",
+        alignSelf:'center',
+    },
+
+    submit: {
+        color: 'white',
+        fontSize: 20,
+        padding: '4%',
     },
 });
 export default CreateTrainer;
