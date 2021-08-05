@@ -17,39 +17,27 @@ const CreateTrainer = () =>
     return(
         <View style = {styles.container}>
             <View style={styles.fieldRow}>
-                <View style = {styles.fieldCols}>
+            <View style = {styles.fieldCols}>
+               
                     <Text style={styles.label}>First Name:</Text>
-                </View>
-                <View style={styles.fieldCols}>
-                    <TextInput style = {styles.input} testID = 'Firstname' placeholder='First Name' onChangeText={setFirstName}>{firstName}</TextInput>
-                </View>
-            </View>
-            
-            <View style={styles.fieldRow}>
-                <View style = {styles.fieldCols}>
                     <Text style = {styles.label}>Last Name:</Text>
-                </View>
-                <View style = {styles.fieldCols}>
-                    <TextInput style = {styles.input} testID = 'Lastname' placeholder='Last Name' onChangeText={setLastName}>{lastName}</TextInput>
-                </View>                            
-            </View>
-
-            <View style={styles.fieldRow}>
-                <View style = {styles.fieldCols}>
                     <Text style = {styles.label}>Email:</Text>
-                </View>
-                <View style = {styles.fieldCols}>
-                    <TextInput style = {styles.input} testID = 'Email' placeholder= 'Email' onChangeText={setEmail}>{email}</TextInput>
-                </View>
-            </View>
-            
-            <View style={styles.fieldRow}>
-                <View style = {styles.fieldCols}>
                     <Text style={styles.label}>ID:</Text>
-                </View>
-                <View style = {styles.fieldCols}>
+                
+              
+            </View>
+                <View style={styles.fieldCols}>
+                    
+               
+                
+                    <TextInput style = {styles.input} testID = 'Firstname' placeholder='First Name' onChangeText={setFirstName}>{firstName}</TextInput>
+                    <TextInput style = {styles.input} testID = 'Lastname' placeholder='Last Name' onChangeText={setLastName}>{lastName}</TextInput>
+                    <TextInput style = {styles.input} testID = 'Email' placeholder= 'Email' onChangeText={setEmail}>{email}</TextInput>
                     <TextInput style = {styles.input} testID = 'ID' placeholder='ID Number' onChangeText={setID}>{ID}</TextInput>
-                </View>                
+                            
+
+            </View>
+                      
             </View>
             
             
@@ -61,32 +49,39 @@ const CreateTrainer = () =>
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        margin: '10%',
-        justifyContent: 'center'        
+        // flex: 1,
+        marginVertical: '10%',
+        //justifyContent: 'center'        
     },
 
     fieldRow: {
         flex: 1,
+        width: '100%',
         flexDirection: 'row',
     },
 
     label: {
         fontSize: 20,
-        paddingVertical: '2%',
-        alignSelf: 'flex-end'
+        // width: '150%',
+        paddingVertical: '10%',
+        // alignSelf: 'flex-end'
     },
     
     input: {
+        
+        // flexDirection: 'row',
+        // width: '150%',
         fontSize: 20,
-        paddingVertical: '2%',  
+        paddingVertical: '10%',
+        textAlign: 'left',
     },
     
     fieldCols: {
-        flexDirection: 'column',
-        padding: '10%',
+        flex:1,
+        
         //alignContent: 'space-between',
-        alignContent: 'center'
+        alignContent: 'center',
+        justifyContent: 'center'
         
     },
     
