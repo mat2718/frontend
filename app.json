@@ -20,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/RevatureLogo.png",
+        "foregroundImage": "./assets/images/revatureFav.png",
         "backgroundColor": "#FFFFFF"
       }
     },
