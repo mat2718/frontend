@@ -9,34 +9,35 @@ import {
 } from 'react-native';
 import Header from '../../component/Header/Header';
 
+// mock data for flatlist
+export const data = [
+  {
+    associate: 25,
+    batchId: 0,
+    curriculum: 'Java/Angular',
+    trainer: 'Robert Connell',
+    startDate: 'Thu, 1 April 2021',
+    endDate: 'Mon, 30 August 2021',
+  },
+  {
+    associate: 25,
+    batchId: 0,
+    curriculum: 'Among Us',
+    trainer: 'Matthew Otto',
+    startDate: 'Thu, 1 April 2021',
+    endDate: 'Mon, 30 August 2021',
+  },
+  {
+    associate: 25,
+    batchId: 0,
+    curriculum: 'Potatoes',
+    trainer: 'Red Oral',
+    startDate: 'Thu, 1 April 2021',
+    endDate: 'Mon, 30 August 2021',
+  },
+];
+
 const Batches: React.FC = () => {
-  // mock data for flatlist
-  const data = [
-    {
-      associate: 25,
-      batchId: 0,
-      curriculum: 'Java/Angular',
-      trainer: 'Robert Connell',
-      startDate: 'Thu, 1 April 2021',
-      endDate: 'Mon, 30 August 2021',
-    },
-    {
-      associate: 25,
-      batchId: 0,
-      curriculum: 'Among Us',
-      trainer: 'Matthew Otto',
-      startDate: 'Thu, 1 April 2021',
-      endDate: 'Mon, 30 August 2021',
-    },
-    {
-      associate: 25,
-      batchId: 0,
-      curriculum: 'Potatoes',
-      trainer: 'Red Oral',
-      startDate: 'Thu, 1 April 2021',
-      endDate: 'Mon, 30 August 2021',
-    },
-  ];
 
   const plannedBatchesTable = () => {
     return (
@@ -45,7 +46,7 @@ const Batches: React.FC = () => {
         <View style={styles.titleContainer}>
           <Text style={styles.screenTitle}>Planned batches</Text>
           {/** Add batch button */}
-          <TouchableOpacity style={styles.addBatchButton}>
+          <TouchableOpacity style={styles.addBatchButton} onPress={jest.fn}>
             <Text style={styles.addBatchText}>Add batch</Text>
           </TouchableOpacity>
         </View>
@@ -72,7 +73,7 @@ const Batches: React.FC = () => {
   return (
     <SafeAreaView style={{ backgroundColor: '#fafafa', flex: 1 }}>
       {/** Header */}
-      <Header></Header>
+      <Header />
       {/** List of batches */}
       <FlatList
         data={data}
