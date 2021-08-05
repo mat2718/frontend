@@ -18,17 +18,17 @@ const CreateTrainer = () =>
         <View style = {styles.container}>
             <View style = {styles.fieldRow}>
                 <View style = {styles.fieldCols}>
-                    <Text>First Name:</Text>
-                    <Text>Last Name:</Text>
-                    <Text>Email:</Text>
-                    <Text>ID:</Text>
+                    <Text style = {styles.label}>First Name:</Text>
+                    <Text style = {styles.label}>Last Name:</Text>
+                    <Text style = {styles.label}>Email:</Text>
+                    <Text style = {styles.label}>ID:</Text>
                 </View>
 
                 <View style = {styles.fieldCols}>
-                    <TextInput testID = 'Firstname' placeholder='First Name' onChangeText={setFirstName}>{firstName}</TextInput>
-                    <TextInput testID = 'Lastname' placeholder='Last Name' onChangeText={setLastName}>{lastName}</TextInput>
-                    <TextInput testID = 'Email' placeholder= 'Email' onChangeText={setEmail}>{email}</TextInput>
-                    <TextInput testID = 'ID' placeholder='ID Number' onChangeText={setID}>{ID}</TextInput>
+                    <TextInput style = {styles.input} testID = 'Firstname' placeholder='First Name' onChangeText={setFirstName}>{firstName}</TextInput>
+                    <TextInput style = {styles.input} testID = 'Lastname' placeholder='Last Name' onChangeText={setLastName}>{lastName}</TextInput>
+                    <TextInput style = {styles.input} testID = 'Email' placeholder= 'Email' onChangeText={setEmail}>{email}</TextInput>
+                    <TextInput style = {styles.input} testID = 'ID' placeholder='ID Number' onChangeText={setID}>{ID}</TextInput>
                 </View>
             </View>
             
@@ -50,10 +50,21 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
 
+    label: {
+        fontSize: 20,
+      paddingVertical: '2%'  
+    },
+    
+    input: {
+        fontSize: 20,
+        padding: '2%',  
+    },
+    
     fieldCols: {
         flexDirection: 'column',
         padding: '10%',
-        justifyContent: 'space-around',
+        alignContent: 'space-between',
+        
     },
     
     touchableStyle: {
