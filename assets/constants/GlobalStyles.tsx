@@ -8,6 +8,7 @@ button:{
     borderRadius:300,
     padding:5,
     color:colors.primaryWhite,
+   
 },
 container:{
     flex:.75,
@@ -31,7 +32,13 @@ listItem:{
     elevation: 5,
     borderRadius: 35,
     backgroundColor:colors.primaryWhite,
+    
+        
   },
+  dropDown:{
+  borderWidth:1,
+  padding:15,
+  }
 
 });
 

@@ -3,35 +3,36 @@ import {View,Text,StyleSheet, Picker, TouchableOpacity} from 'react-native';
 import GlobalStyles from '../../../assets/constants/GlobalStyles';
 import DemandList from './DemandList';
 import ClientList from './ClientList';
-import AddDemandScreen from './AddDemandScreen'
+import AddDemandScreen from './AddDemandScreen';
+import IDemand from '../../../assets/models/Demand';
+import Header from '../Header/Header';
 
 
 const ClientScreen=()=>{
-    const[currClient, setClient]=useState()
+    const[currClient, setClient]=useState("");
+   
 
     return(
         <View style={GlobalStyles.container}>
+            <Header/>
             <View style={styles.clientName}>
-                <Text>Client Name: </Text>         
+                <Text>Client Name:<Text>{currClient}</Text></Text>         
                
-            <TouchableOpacity style={GlobalStyles.container}>
+            <TouchableOpacity>
             <Text style={GlobalStyles.button}>Add</Text>
             </TouchableOpacity>
             </View>
-            <ClientList setClient={setClient}/>
+            <ClientList setClient={setClient} />
             <View>
-                <Text>{currClient}</Text>
-               <DemandList/>
+              
+               <DemandList currClient={currClient}/>
             </View>
+            <View style={styles.clientName}>
             <TouchableOpacity>
-                <Text style={GlobalStyles.button} onPress={()=>{
-                    return(
-                        <View>
-                            <AddDemandScreen/>
-                        </View>
-                    )
-                }}>Create A Demand</Text>
+                <Text style={GlobalStyles.button} onPress={()=>console.log("Add a demand")}>Create A Demand</Text>
+                <Text style={GlobalStyles.button} onPress={()=>console.log("Edit a demand")}>Edit A Demand</Text>
             </TouchableOpacity>
+            </View>
             </View>
         
             
@@ -40,10 +41,16 @@ const ClientScreen=()=>{
 }
 const styles= StyleSheet.create({
     clientName:{
-        flexDirection:"row",
-       alignItems:"center",
-        justifyContent:"center",
-    },
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingTop: 20,
+            paddingBottom: 20,
+            paddingLeft: 40,
+            paddingRight: 40,
+          },
+      
+    
     
 })
 
