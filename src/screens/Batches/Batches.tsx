@@ -8,32 +8,33 @@ import {
   StyleSheet,
 } from 'react-native';
 import Header from '../../component/Header/Header';
+import StatsCarousel from '../../component/Carousel/StatsCarousel'
 
 // mock data for flatlist
 export const data = [
   {
     associate: 25,
     batchId: 0,
-    curriculum: 'Java/Angular',
+    curriculum: 'Skinning Cats',
     trainer: 'Robert Connell',
-    startDate: 'Thu, 1 April 2021',
-    endDate: 'Mon, 30 August 2021',
+    startDate: 'June 01, 2021',
+    endDate: 'August 01, 2021',
   },
   {
     associate: 25,
     batchId: 0,
     curriculum: 'Among Us',
     trainer: 'Matthew Otto',
-    startDate: 'Thu, 1 April 2021',
-    endDate: 'Mon, 30 August 2021',
+    startDate: 'June 01, 2021',
+    endDate: 'August 01, 2021',
   },
   {
     associate: 25,
     batchId: 0,
-    curriculum: 'Potatoes',
+    curriculum: 'Dying of "Natural Causes"',
     trainer: 'Red Oral',
-    startDate: 'Thu, 1 April 2021',
-    endDate: 'Mon, 30 August 2021',
+    startDate: 'June 01, 2021',
+    endDate: 'August 01, 2021',
   },
 ];
 
@@ -46,12 +47,14 @@ const Batches: React.FC = () => {
         <View style={styles.titleContainer}>
           <Text style={styles.screenTitle}>Planned batches</Text>
           {/** Add batch button */}
-          <TouchableOpacity style={styles.addBatchButton} onPress={jest.fn}>
+          <TouchableOpacity style={styles.addBatchButton}>
             <Text style={styles.addBatchText}>Add batch</Text>
           </TouchableOpacity>
         </View>
         {/** Gantt Chart */}
-        <View style={styles.plannedBatchesTable}></View>
+        <View style={styles.plannedBatchesTable}>
+          <StatsCarousel data={[40, 20, 40, 15, 23]} />
+        </View>
       </>
     );
   };
@@ -93,20 +96,13 @@ const styles = StyleSheet.create({
   },
 
   plannedBatchesTable: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
     alignSelf: 'center',
-    height: 400,
+    marginBottom: 20,
     width: '90%',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    borderRadius: 35,
-    marginBottom: 10,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fafafa',
   },
 
   titleContainer: {
@@ -137,7 +133,7 @@ const styles = StyleSheet.create({
   batchListItem: {
     alignSelf: 'center',
     justifyContent: 'center',
-    padding: 20,
+    padding: 10,
     paddingLeft: 30,
     marginBottom: 10,
     width: '90%',
@@ -149,7 +145,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    borderRadius: 35,
+    borderRadius: 25,
     backgroundColor: '#ffffff',
   },
 
