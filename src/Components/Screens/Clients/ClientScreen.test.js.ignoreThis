@@ -1,12 +1,12 @@
 import {mount} from 'enzyme';
-import { ExampleComponent } from '../../../__tests__/constants';
+import { ExampleComponent } from '../../../../__tests__/constants';
 import ClientScreen from './ClientScreen';
 import RNPickerSelect from 'react-native-picker-select';
 import * as React from 'react';
 
-// jest.mock('react-native-picker-select');
-
 let wrapper;
+
+
 describe('testing client screen',()=>{
 
     beforeEach(()=>{

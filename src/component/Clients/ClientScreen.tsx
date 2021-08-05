@@ -5,7 +5,6 @@ import DemandList from './DemandList';
 import ClientList from './ClientList';
 import AddDemandScreen from './AddDemandScreen'
 
-
 const ClientScreen=()=>{
     const[currClient, setClient]=useState()
 
