@@ -6,10 +6,11 @@ const addSetup = (config) => {
     '<rootDir>/src/component/Clients/ClientScreen.test.js',
   ];
   config.transformIgnorePatterns.push(
-    '/node_modules/(?!react-native-picker-select)',
-    // '/node_modules/(?!@react-native|react-native)',
-    // '/node_modules/(?!(jest-)?@react-native|react-native|react-native-picker-select|react-clone-referenced-element/*)/',
+    // 'node_modules/(?!(jest-)?(react-native|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|react-native-picker-select)/)',
+    // '<rootDir>/node_modules/',
+    
   );
+  // config.preset = 'react-native';
   return config;
 }
 

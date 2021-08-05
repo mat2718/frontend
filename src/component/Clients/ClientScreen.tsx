@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View,Text,StyleSheet, Picker, TouchableOpacity} from 'react-native';
+import {View,Text,StyleSheet, TouchableOpacity} from 'react-native';
 import GlobalStyles from '../../../assets/constants/GlobalStyles';
 import DemandList from './DemandList';
 import ClientList from './ClientList';
