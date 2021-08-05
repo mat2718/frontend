@@ -11,8 +11,8 @@ button:{
    
 },
 container:{
-    flex:.75,
-    justifyContent:"space-evenly",
+    flex:1,
+    justifyContent:"space-between",
 },
 listItem:{
     alignSelf: 'center',
@@ -38,6 +38,14 @@ listItem:{
   dropDown:{
   borderWidth:1,
   padding:15,
+  },
+  calender:{
+    flex:.15,
+    marginHorizontal:15,
+    backgroundColor:colors.primaryOrange,
+  },
+  textInput:{
+    backgroundColor:colors.secondaryBlue,
   }
 
 });

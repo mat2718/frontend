@@ -7,7 +7,7 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native';
-import Header from '../../component/Header/Header';
+import Header from '../../components/Header/Header';
 
 // mock data for flatlist
 export const data = [

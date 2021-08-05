@@ -29,10 +29,7 @@ const ClientList=(props: { setClient: (arg0: any) => void; })=>{
     
 }
 const styles=StyleSheet.create({
-    drop:{
-        flex:1,
-        width:"80%",
-    }
+  
 
 })
 export default ClientList;
