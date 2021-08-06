@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
-import {View,Text,StyleSheet, Picker, TouchableOpacity} from 'react-native';
+import {View,Text,StyleSheet, TouchableOpacity} from 'react-native';
 import GlobalStyles from '../../../assets/constants/GlobalStyles';
 import DemandList from '../../components/Clients/DemandList';
 import ClientList from '../../components/Clients/ClientList';
 import AddDemandScreen from '../../components/Clients/AddDemandScreen';
 import IDemand from '../../../assets/models/Demand';
 import Header from '../../components/Header/Header';
-
 
 const ClientScreen=()=>{
     const[currClient, setClient]=useState("");

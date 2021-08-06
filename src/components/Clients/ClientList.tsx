@@ -9,7 +9,7 @@ const ClientList=(props: { setClient: (arg0: any) => void; })=>{
     
 
     return(
-        <View style={GlobalStyles.dropDown}>
+        <View testID='picker' style={GlobalStyles.dropDown}>
             <RNPickerSelect 
             placeholder={{
                 label: 'Select a client...',
@@ -24,6 +24,7 @@ const ClientList=(props: { setClient: (arg0: any) => void; })=>{
                     {label:"RevatureJr", value:"revaturejr"}
                 ]}
             />
+            <></>
 
         </View>
 
