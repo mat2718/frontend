@@ -11,6 +11,10 @@ const ClientList=(props: { setClient: (arg0: any) => void; })=>{
     return(
         <View style={GlobalStyles.dropDown}>
             <RNPickerSelect 
+            placeholder={{
+                label: 'Select a client...',
+                value: null,
+            }}
                 onValueChange={(value) => props.setClient(value)}
                 items={[
                     {label:"WebStuff", value:"webstuff"},

@@ -8,13 +8,13 @@ import ClientScreen from './src/Screens/Clients/ClientScreen';
 import AddDemandScreen from './src/components/Clients/AddDemandScreen';
 import GlobalStyles from './assets/constants/GlobalStyles';
 
-
 export default function App() {
   return(
     <View style={GlobalStyles.container}>
    {/*<Batches/>*/}
-  <ClientScreen/>
-  {/* <AddDemandScreen/> */}
+  {/* <ClientScreen/> */}
+  <AddDemandScreen />
+  
     </View>
   
   )

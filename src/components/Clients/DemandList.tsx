@@ -63,16 +63,19 @@ const DemandList=(props:any)=>{
 const styles=StyleSheet.create({
     listItem:{
         flexDirection:"row",
-        padding:10,
+        padding:5,
         borderWidth:1,
         borderColor:colors.primaryGray,
-        borderRadius:50,
-        marginHorizontal:10,
+        borderRadius:30,
+        marginHorizontal:5,
 
     },
     item:{
         flexDirection:"row",
-        justifyContent:"space-evenly"
+        justifyContent:"space-evenly",      
+        alignItems:"center",
+        margin:5,
+        padding:5,
     }
 
 

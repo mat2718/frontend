@@ -1,8 +1,8 @@
 interface IDemand {
+    client:string,
     curriculum:string,
     needBy:string,
-    howMany:string,
-    client:string,
+    howMany:string,   
     key?:string,
     
 }

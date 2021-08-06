@@ -15,7 +15,7 @@ const ClientScreen=()=>{
     return(
         <View style={GlobalStyles.container}>
             <Header/>
-            <View style={styles.clientName}>
+            <View>
                 <Text>Client Name:<Text>{currClient}</Text></Text>         
                
             <TouchableOpacity>
@@ -24,11 +24,11 @@ const ClientScreen=()=>{
             </View>
             <ClientList setClient={setClient} />
             <View>
-              
+                <Text>Here Are the Current Demands</Text>
                <DemandList currClient={currClient}/>
             </View>
-            <View style={styles.clientName}>
-            <TouchableOpacity>
+            <View >
+            <TouchableOpacity style={styles.screenNav}>
                 <Text style={GlobalStyles.button} onPress={()=>console.log("Add a demand")}>Create A Demand</Text>
                 <Text style={GlobalStyles.button} onPress={()=>console.log("Edit a demand")}>Edit A Demand</Text>
             </TouchableOpacity>
@@ -40,14 +40,10 @@ const ClientScreen=()=>{
     )
 }
 const styles= StyleSheet.create({
-    clientName:{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingTop: 20,
-            paddingBottom: 20,
-            paddingLeft: 40,
-            paddingRight: 40,
+   screenNav:{
+           flexDirection:"row",
+           justifyContent:"space-between"
+
           },
       
     

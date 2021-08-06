@@ -5,14 +5,18 @@ const GlobalStyles = StyleSheet.create({
 
 button:{
     backgroundColor:colors.primaryOrange,
-    borderRadius:300,
-    padding:5,
+    borderRadius:30,
+    padding:10,
     color:colors.primaryWhite,
+    justifyContent:"center",
+    alignSelf:"center",
+    textAlign:"center"
    
 },
 container:{
     flex:1,
-    justifyContent:"space-between",
+    justifyContent:"space-evenly",
+    
 },
 listItem:{
     alignSelf: 'center',
@@ -36,17 +40,46 @@ listItem:{
         
   },
   dropDown:{
+  color:colors.primaryOrange,  
   borderWidth:1,
+  margin:10,
   padding:15,
   },
   calender:{
-    flex:.15,
-    marginHorizontal:15,
-    backgroundColor:colors.primaryOrange,
+  
+    height:150,
+    width:300, 
+    
+    
   },
   textInput:{
-    backgroundColor:colors.secondaryBlue,
+    backgroundColor:colors.secondaryGray,
+    borderWidth:1,
+    padding:2,
+    margin:20,
+    height:30,
+    textAlign:"center",
+    
+
+  },
+  h1:{
+    
+    fontSize:18,
+    backgroundColor:colors.primaryOrange,
+    textAlign:"center",
+    color:colors.primaryWhite,
+    marginHorizontal:"10%",
+    marginBottom:10,
+  
+
+    
+  },
+  h2:{
+    fontSize:14,
+    color:colors.primaryGray,
+   
   }
+  
 
 });
 

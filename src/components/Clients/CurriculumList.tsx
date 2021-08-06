@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import {View,Text,Picker,StyleSheet} from 'react-native'
 import GlobalStyles from '../../../assets/constants/GlobalStyles'
 import RNPickerSelect from 'react-native-picker-select'
+import colors from '../../../assets/constants/colors'
 
 
 const curric=[
@@ -22,7 +23,15 @@ const CurriculumList=(props: { setCurriculum: (arg0: any) => void; })=>{
     return(
         <View style={GlobalStyles.dropDown}>
         <RNPickerSelect 
-            onValueChange={(value) => props.setCurriculum(value)}
+            style={{ inputAndroid: { color: 'black' } }}
+            useNativeAndroidPickerStyle={false}
+            
+            placeholder={{
+                label: 'Select a curriculum...',
+                value: null,
+            }}
+            onValueChange={(value) => props.setCurriculum(value) }
+            
             items={curric}
         />
     </View>
