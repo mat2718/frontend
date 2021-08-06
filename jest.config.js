@@ -13,10 +13,10 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/src/**.{ts,tsx,js,jsx}',
-    '<rootDir>/src/component/Header/index.tsx',
-    '<rootDir>/src/component/BatchStats/index.tsx',
-    '<rootDir>/src/component/BatchListItem/index.tsx',
-    '<rootDir>/src/screens/Batches/Batches.tsx',
+    '<rootDir>/src/components/batches/Header/index.tsx',
+    '<rootDir>/src/components/batches/BatchStats/index.tsx',
+    '<rootDir>/src/components/batches/BatchListItem/index.tsx',
+    '<rootDir>/src/screens/Batches/index.tsx',
   ],
   coverageDirectory: 'coverage',
   coverageThreshold: {
