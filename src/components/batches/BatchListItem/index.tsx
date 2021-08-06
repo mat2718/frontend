@@ -21,7 +21,7 @@ const BatchListItem: React.FC<PropsI> = (props: PropsI) => {
           </View>
         ) : props.endDate < Date.now() ? (
           <View style={[styles.badge, { backgroundColor: '#25F269' }]}>
-            <Text style={styles.badgeText}>Done</Text>
+            <Text style={styles.badgeText}>Completed</Text>
           </View>
         ) : props.startDate > Date.now() ? (
           <View style={[styles.badge, { backgroundColor: '#474C55' }]}>

@@ -2,10 +2,9 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Batches, { data } from './Batches';
 import { FlatList, TouchableOpacity } from 'react-native';
-import Header from '../../component/Header/Header';
+import Header from '../../components/batches/Header';
 
 let wrapper: any;
-
 
 describe('Batches', () => {
   beforeEach(() => {
@@ -28,10 +27,10 @@ describe('Batches', () => {
   it('should display the flatlist', () => {
     const shouldBeFlatlist = wrapper.find(FlatList);
     expect(shouldBeFlatlist).toBeDefined();
-  })
+  });
 
   // tests if the flatlist holds the data we need
-  it('should hold data', () => { 
+  it('should hold data', () => {
     const listData = wrapper.find(FlatList).props().data;
     expect(listData).toEqual(data);
   });
@@ -40,12 +39,12 @@ describe('Batches', () => {
     const shouldBePressed = wrapper.find(TouchableOpacity).at(0);
 
     const myEventHandler = jest.spyOn(shouldBePressed.props(), 'onPress');
-    
+
     const actualEventHandler = shouldBePressed.prop('onPress');
     actualEventHandler();
-  
+
     expect(myEventHandler).toHaveBeenCalled();
   });
 });
 
-// yeet 
+// yeet

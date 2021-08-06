@@ -8,9 +8,9 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import Header from '../../component/Header/Header';
-import BatchStats from '../../component/BatchStats';
-import BatchListItem from '../../component/BatchListItem';
+import Header from '../../components/batches/Header';
+import BatchStats from '../../components/batches/BatchStats';
+import BatchListItem from '../../components/batches/BatchListItem';
 
 // mock data for flatlist
 export const data = [
@@ -42,7 +42,6 @@ export const data = [
 
 const Batches: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = React.useState('all');
-
   const plannedBatchesTable = () => {
     return (
       <>
