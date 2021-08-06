@@ -19,7 +19,7 @@ const BatchListItem: React.FC<PropsI> = (props: PropsI) => {
   return (
     /** Individual Batch Touchable */
     /** Structures and displays the data from the FlatList */
-    <TouchableOpacity style={styles.batchListprops} onPress={jest.fn}>
+    <TouchableOpacity style={styles.batchListprops}>
       <View style={{ flexDirection: 'row' }}>
         <Text style={styles.curriculumText}>{props.curriculum}</Text>
         {/** Checks current date and start/end date of batch and applies tag based on status */}
