@@ -130,9 +130,9 @@ const ViewBatch: React.FC<PropsI> = (props: PropsI) => {
         <View style={styles.progressRingView}>
           <ProgressChart
             data={data}
-            width={80}
+            width={50}
             height={40}
-            strokeWidth={16}
+            strokeWidth={10}
             radius={12}
             chartConfig={chartConfig}
             hideLegend={true}
@@ -200,6 +200,7 @@ const styles = StyleSheet.create({
   subText: {
     fontSize: 14,
     paddingLeft: 5,
+    color: '#474c55',
   },
 
   subTextContainer: {
