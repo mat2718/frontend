@@ -9,10 +9,10 @@ export default function App() {
     <ViewBatch
       associate={25}
       batchId={2106}
-      curriculum='React Native/Cloud Native'
-      trainer='Robert Connell'
-      startDate={1622505600000}
-      endDate={1627776000000}
+      curriculum='React Native'
+      trainer='Matthew Otto'
+      startDate={1627862400000}
+      endDate={1633046400000}
     />
   );
 }

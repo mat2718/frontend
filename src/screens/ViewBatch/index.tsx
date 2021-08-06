@@ -131,14 +131,14 @@ const ViewBatch: React.FC<PropsI> = (props: PropsI) => {
           <ProgressChart
             data={data}
             width={80}
-            height={50}
+            height={40}
             strokeWidth={16}
-            radius={14}
+            radius={12}
             chartConfig={chartConfig}
             hideLegend={true}
           />
-          <Text style={styles.mainText}>
-            {progress < 1 ? data.data[0] * 100 : 100}% Complete
+          <Text style={styles.progressText}>
+            {progress < 1 ? (data.data[0] * 100).toFixed(0) : 100}% Complete
           </Text>
         </View>
       </ScrollView>
@@ -204,6 +204,7 @@ const styles = StyleSheet.create({
 
   subTextContainer: {
     justifyContent: 'center',
+    marginTop: 2,
   },
 
   progressRingView: {
@@ -224,6 +225,12 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderRadius: 25,
     backgroundColor: '#ffffff',
+  },
+
+  progressText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#474c55',
   },
 
   badge: {
