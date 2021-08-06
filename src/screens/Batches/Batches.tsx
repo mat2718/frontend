@@ -12,12 +12,12 @@ import Header from '../../components/batches/Header';
 import BatchStats from '../../components/batches/BatchStats';
 import BatchListItem from '../../components/batches/BatchListItem';
 
-// mock data for flatlist
+/** Mock Data - PreRedux */
 export const data = [
   {
     associate: 25,
     batchId: 0,
-    curriculum: 'Cat Skinning/Cloud Native',
+    curriculum: 'Cloud Native',
     trainer: 'Robert Connell',
     startDate: 1622505600000,
     endDate: 1627776000000,
@@ -25,7 +25,7 @@ export const data = [
   {
     associate: 25,
     batchId: 0,
-    curriculum: 'Among Us',
+    curriculum: 'React Native',
     trainer: 'Matthew Otto',
     startDate: 1627862400000,
     endDate: 1633046400000,
@@ -33,13 +33,14 @@ export const data = [
   {
     associate: 25,
     batchId: 0,
-    curriculum: 'Dying of "Natural Causes"',
+    curriculum: 'React',
     trainer: 'Red Oral',
     startDate: 1633132800000,
     endDate: 1638316800000,
   },
 ];
 
+/** Basis for Entire Batch Screen */
 const Batches: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = React.useState('all');
   const plannedBatchesTable = () => {
@@ -48,20 +49,26 @@ const Batches: React.FC = () => {
         {/** Screen title */}
         <View style={styles.titleContainer}>
           <Text style={styles.screenTitle}>Batches</Text>
+
           {/** Add batch button */}
           <TouchableOpacity style={styles.addBatchButton}>
             <Text style={styles.addBatchText}>Add batch</Text>
           </TouchableOpacity>
         </View>
+
         {/** Gantt Chart */}
         <View style={styles.plannedBatchesTable}>
           <BatchStats data={[47, 7, 10, 20]} />
         </View>
+
+        {/** FlatList title text */}
         <View style={styles.titleContainer}>
           <Text style={styles.screenTitle}>
             {selectedFilter.charAt(0).toUpperCase() + selectedFilter.slice(1)}{' '}
             batches
           </Text>
+
+          {/** Picker filter for the FlatList */}
           <Picker
             selectedValue={selectedFilter}
             onValueChange={(itemValue: any, itemIndex: any) =>
@@ -79,7 +86,7 @@ const Batches: React.FC = () => {
     );
   };
 
-  // renderItem
+  /** Main item to render for the FlatList */
   const renderItem = ({ item }: { item: any }) => {
     return (
       <BatchListItem
@@ -93,12 +100,15 @@ const Batches: React.FC = () => {
     );
   };
 
-  // Main return
+  /** Main return statement */
   return (
     <SafeAreaView style={{ backgroundColor: '#fafafa', flex: 1 }}>
       {/** Header */}
       <Header />
-      {/** List of batches */}
+      {/** List of batches
+       * Takes in the picker filter value and updates accordingly
+       */}
+
       <FlatList
         data={
           selectedFilter === 'active'

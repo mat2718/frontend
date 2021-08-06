@@ -11,10 +11,18 @@ interface PropsI {
 }
 
 const BatchListItem: React.FC<PropsI> = (props: PropsI) => {
+  /**
+   * Touchable Link to contain individual Batch information.
+   * Will lead to Individual Batch information
+   */
+
   return (
-    <TouchableOpacity style={styles.batchListprops}>
+    /** Individual Batch Touchable */
+    /** Structures and displays the data from the FlatList */
+    <TouchableOpacity style={styles.batchListprops} onPress={jest.fn}>
       <View style={{ flexDirection: 'row' }}>
         <Text style={styles.curriculumText}>{props.curriculum}</Text>
+        {/** Checks current date and start/end date of batch and applies tag based on status */}
         {props.startDate < Date.now() && props.endDate > Date.now() ? (
           <View style={[styles.badge, { backgroundColor: '#f26925' }]}>
             <Text style={styles.badgeText}>Active</Text>
@@ -28,7 +36,9 @@ const BatchListItem: React.FC<PropsI> = (props: PropsI) => {
             <Text style={styles.badgeText}>Upcoming</Text>
           </View>
         ) : null}
+        {/** End of date checker */}
       </View>
+
       <Text style={styles.trainerText}>{props.trainer}</Text>
       <Text style={styles.dateText}>
         {new Date(props.startDate).toDateString() +

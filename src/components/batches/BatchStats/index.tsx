@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
 
+/**  Props that are needed to build the statistics */
 interface PropsI {
   data: [
     plannedBatches: number,
@@ -12,6 +13,7 @@ interface PropsI {
 }
 
 const BatchStats: React.FC<PropsI> = (props: PropsI) => {
+  /**  Passes props data to dataset for the BarChart */
   const data = {
     labels: ['PB', 'AB', 'AT', 'AA'],
     datasets: [
@@ -21,19 +23,21 @@ const BatchStats: React.FC<PropsI> = (props: PropsI) => {
     ],
   };
 
+  /**  Configuration file for BarChart */
   const chartConfig = {
     backgroundGradientFrom: '#fff',
     backgroundGradientFromOpacity: 0,
     backgroundGradientTo: '#fff',
     backgroundGradientToOpacity: 0.5,
     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-    strokeWidth: 2, // optional, default 3
+    strokeWidth: 2,
     barPercentage: 0.5,
-    useShadowColorFromDataset: false, // optional
+    useShadowColorFromDataset: false,
   };
 
   return (
     <>
+      {/**  BarChart */}
       <BarChart
         data={data}
         width={275}
@@ -44,6 +48,7 @@ const BatchStats: React.FC<PropsI> = (props: PropsI) => {
         chartConfig={chartConfig}
         verticalLabelRotation={30}
       />
+      {/** 1st row of statistics badges */}
       <View>
         <View
           style={{
@@ -52,12 +57,14 @@ const BatchStats: React.FC<PropsI> = (props: PropsI) => {
             justifyContent: 'space-between',
           }}
         >
+          {/** Planned batches badge */}
           <View style={styles.statView}>
             <View style={styles.badge}>
               <Text style={styles.badgeText}>PB</Text>
             </View>
             <Text style={styles.statText}>{props.data[0]} Planned Batches</Text>
           </View>
+          {/** Active badge */}
           <View style={styles.statView}>
             <View style={styles.badge}>
               <Text style={styles.badgeText}>AB</Text>
@@ -65,6 +72,7 @@ const BatchStats: React.FC<PropsI> = (props: PropsI) => {
             <Text style={styles.statText}>{props.data[1]} Active Batches </Text>
           </View>
         </View>
+        {/** 2nd row of statistics badges */}
         <View
           style={{
             flexDirection: 'row',
@@ -73,12 +81,14 @@ const BatchStats: React.FC<PropsI> = (props: PropsI) => {
             justifyContent: 'space-between',
           }}
         >
+          {/** Active trainers badge */}
           <View style={styles.statView}>
             <View style={styles.badge}>
               <Text style={styles.badgeText}>AT</Text>
             </View>
             <Text style={styles.statText}>{props.data[2]} Active Trainers</Text>
           </View>
+          {/** Active associates badge */}
           <View style={styles.statView}>
             <View style={styles.badge}>
               <Text style={styles.badgeText}>AC</Text>

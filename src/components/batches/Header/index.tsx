@@ -3,6 +3,7 @@ import { View, Image, StyleSheet, StatusBar } from 'react-native';
 
 const Header: React.FC = () => {
   return (
+    /** Contains the Header for the application */
     <View style={styles.headerView}>
       <Image
         source={{
