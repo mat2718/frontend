@@ -7,53 +7,74 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import Header from '../../component/Header/Header';
-import StatsCarousel from '../../component/Carousel/StatsCarousel'
+import BatchStats from '../../component/BatchStats';
+import BatchListItem from '../../component/BatchListItem';
 
 // mock data for flatlist
 export const data = [
   {
     associate: 25,
     batchId: 0,
-    curriculum: 'Skinning Cats',
+    curriculum: 'Cat Skinning/Cloud Native',
     trainer: 'Robert Connell',
-    startDate: 'June 01, 2021',
-    endDate: 'August 01, 2021',
+    startDate: 1622505600000,
+    endDate: 1627776000000,
   },
   {
     associate: 25,
     batchId: 0,
     curriculum: 'Among Us',
     trainer: 'Matthew Otto',
-    startDate: 'June 01, 2021',
-    endDate: 'August 01, 2021',
+    startDate: 1627862400000,
+    endDate: 1633046400000,
   },
   {
     associate: 25,
     batchId: 0,
     curriculum: 'Dying of "Natural Causes"',
     trainer: 'Red Oral',
-    startDate: 'June 01, 2021',
-    endDate: 'August 01, 2021',
+    startDate: 1633132800000,
+    endDate: 1638316800000,
   },
 ];
 
 const Batches: React.FC = () => {
+  const [selectedFilter, setSelectedFilter] = React.useState('all');
 
   const plannedBatchesTable = () => {
     return (
       <>
         {/** Screen title */}
         <View style={styles.titleContainer}>
-          <Text style={styles.screenTitle}>Planned batches</Text>
+          <Text style={styles.screenTitle}>Batches</Text>
           {/** Add batch button */}
           <TouchableOpacity style={styles.addBatchButton}>
             <Text style={styles.addBatchText}>Add batch</Text>
           </TouchableOpacity>
-        </View> 
+        </View>
         {/** Gantt Chart */}
         <View style={styles.plannedBatchesTable}>
-          <StatsCarousel data={[40, 20, 40, 15, 23]} />
+          <BatchStats data={[47, 7, 10, 20]} />
+        </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.screenTitle}>
+            {selectedFilter.charAt(0).toUpperCase() + selectedFilter.slice(1)}{' '}
+            batches
+          </Text>
+          <Picker
+            selectedValue={selectedFilter}
+            onValueChange={(itemValue: any, itemIndex: any) =>
+              setSelectedFilter(itemValue)
+            }
+            style={{ height: 50, width: 75 }}
+          >
+            <Picker.Item label='All Batches' value='all' />
+            <Picker.Item label='Active Batches' value='active' />
+            <Picker.Item label='Upcoming Batches' value='upcoming' />
+            <Picker.Item label='Completed Batches' value='completed' />
+          </Picker>
         </View>
       </>
     );
@@ -62,13 +83,14 @@ const Batches: React.FC = () => {
   // renderItem
   const renderItem = ({ item }: { item: any }) => {
     return (
-      <TouchableOpacity style={styles.batchListItem}>
-        <Text style={styles.curriculumText}>{item.curriculum}</Text>
-        <Text style={styles.trainerText}>{item.trainer}</Text>
-        <Text style={styles.dateText}>
-          {item.startDate + '\n to ' + item.endDate}
-        </Text>
-      </TouchableOpacity>
+      <BatchListItem
+        associate={item.associate}
+        batchId={item.batchId}
+        curriculum={item.curriculum}
+        trainer={item.trainer}
+        startDate={item.startDate}
+        endDate={item.endDate}
+      />
     );
   };
 
@@ -79,7 +101,18 @@ const Batches: React.FC = () => {
       <Header />
       {/** List of batches */}
       <FlatList
-        data={data}
+        data={
+          selectedFilter === 'active'
+            ? data.filter(
+                (date) =>
+                  date.startDate < Date.now() && date.endDate > Date.now()
+              )
+            : selectedFilter === 'upcoming'
+            ? data.filter((date) => date.startDate > Date.now())
+            : selectedFilter === 'completed'
+            ? data.filter((date) => date.endDate < Date.now())
+            : data
+        }
         renderItem={renderItem}
         keyExtractor={(item) => item.curriculum}
         ListHeaderComponent={plannedBatchesTable}
@@ -95,6 +128,12 @@ const styles = StyleSheet.create({
     color: '#474c55',
   },
 
+  screenSubTitle: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#474c55',
+  },
+
   plannedBatchesTable: {
     justifyContent: 'center',
     alignContent: 'center',
@@ -103,6 +142,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: '90%',
     backgroundColor: '#fafafa',
+    borderRadius: 25,
   },
 
   titleContainer: {
@@ -128,42 +168,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#ffffff',
     alignSelf: 'center',
-  },
-
-  batchListItem: {
-    alignSelf: 'center',
-    justifyContent: 'center',
-    padding: 10,
-    paddingLeft: 30,
-    marginBottom: 10,
-    width: '90%',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    borderRadius: 25,
-    backgroundColor: '#ffffff',
-  },
-
-  curriculumText: {
-    fontWeight: '700',
-    fontSize: 16,
-    color: '#474C55',
-  },
-
-  trainerText: {
-    fontWeight: '700',
-    fontSize: 12,
-    color: '#474C55',
-  },
-
-  dateText: {
-    fontSize: 12,
-    color: '#474C55',
   },
 });
 
