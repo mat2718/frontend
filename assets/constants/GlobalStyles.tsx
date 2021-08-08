@@ -17,6 +17,7 @@ container:{
     flex:1,
     justifyContent:"space-evenly",
     
+    
 },
 listItem:{
     alignSelf: 'center',

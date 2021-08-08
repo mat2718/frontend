@@ -7,14 +7,17 @@ import Batches from './src/Screens/Batches/Batches'
 import ClientScreen from './src/Screens/Clients/ClientScreen';
 import AddDemandScreen from './src/components/Clients/AddDemandScreen';
 import GlobalStyles from './assets/constants/GlobalStyles';
+import EditClient from './src/components/Clients/EditClient';
+import AddClient from './src/components/Clients/AddClient';
 
 export default function App() {
   return(
     <View style={GlobalStyles.container}>
    {/*<Batches/>*/}
   {/* <ClientScreen/> */}
-  <AddDemandScreen />
-  
+  {/* <AddDemandScreen /> */}
+    <AddClient/>
+    {/* <EditClient/> */}
     </View>
   
   )
