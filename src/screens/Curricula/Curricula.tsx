@@ -3,6 +3,7 @@ import { View, FlatList, Text, StyleSheet, TouchableOpacity } from "react-native
 import { ExpandableList } from '../../components/curricula/components/ExpandableList';
 import { Transitioning, Transition } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Curricula2: React.FC = () => {
     //mock data for flatlist
@@ -54,7 +55,7 @@ const Curricula2: React.FC = () => {
   //const navigation = useNavigation();
 
   return (
-      <Transitioning.View ref={transitionRef} transition={transition}>
+      <Transitioning.View ref={transitionRef} transition={transition} style={{marginBottom: 150}}>
         {/**Title*/}
         <View style={styles.titleContainer}>
             <Text style={styles.title}>CURRICULUMS</Text>
@@ -63,7 +64,8 @@ const Curricula2: React.FC = () => {
         {/**Add Curriculum button */}
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={() => {}}>
-                <Text style={styles.buttonText}>ADD CURRICULUM</Text>
+                <Text style={styles.buttonText}>ADD CURRICULUM  <MaterialCommunityIcons name="plus-circle-outline" size={20} color="#fff" style={{alignSelf:'center'}} /></Text>
+                
             </TouchableOpacity>
         </View>  
 
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fafafa',
       alignItems: 'center', 
       paddingTop: 50,
-      flex: 1
+      flex: 1,
     },
     titleContainer: {
       color: '#474C55',
@@ -90,21 +92,21 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       marginTop: 20,
       paddingTop: 20,
-      paddingBottom: 10
+      paddingBottom: 10,
     },
     title: {
       fontSize: 24,
       color: '#474C55',
-      fontWeight: 'bold'
+      fontFamily: 'FuturaBold'
     },
     buttonContainer: {
         flexDirection: 'row',
-        alignSelf: 'flex-end', 
+        alignSelf: 'center', 
         paddingVertical:5,
         paddingHorizontal:10
     },
     button: {
-        alignSelf: 'flex-end',
+        alignSelf: 'center',
         paddingVertical: 2,
         paddingHorizontal: 10,
         backgroundColor: '#72A4C2',
@@ -112,9 +114,10 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         padding: 10,
-        fontWeight: 'bold',
         color: '#fff',
-        fontSize: 15
+        fontSize: 15,
+        fontFamily: 'FuturaBold',
+        justifyContent:'center'
     }
 });
 

@@ -3,6 +3,7 @@ import { RootStackParamList} from '../types';
 import SplashScreen from '../component/screens/splash';
 import SplashScreen2 from '../component/screens/test';
 import React from 'react';
+import Curricula from '../src/screens/Curricula/Curricula';
 
 //please import your screen and put in your screen in components-kai 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -26,8 +27,8 @@ const RootStackNavigator = () => {
         component={}/> */}
       {/* <Stack.Screen name="Trainer"
         component={}/> */}
-      {/* <Stack.Screen name="Curricula"
-        component={}/> */}
+      <Stack.Screen name="Curricula"
+        component={Curricula}/> 
       {/* <Stack.Screen name="Clients"
         component={}/> */}
     </Stack.Navigator>

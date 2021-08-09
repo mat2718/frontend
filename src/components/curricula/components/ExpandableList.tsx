@@ -34,17 +34,17 @@ export const ExpandableList = ({item, onPress}) => {
                 <Text style={styles.title2}>Created By: </Text>
                 <Text style={styles.text}>{item.createdBy}</Text>
             </View>
-            <View style={styles.textContainer}>
-                <Text style={styles.title2}>Last Modified On: </Text>
-                <Text style={styles.text}>{item.lastModified}</Text>
-            </View>
-            <View style={styles.textContainer}>
-                <Text style={styles.title2}>Last Modified By: </Text>
-                <Text style={styles.text}>{item.lastModifiedBy}</Text>
-            </View>
-           
+
             {expanded && (
             <>
+                <View style={styles.textContainer}>
+                    <Text style={styles.title2}>Last Modified On: </Text>
+                    <Text style={styles.text}>{item.lastModified}</Text>
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={styles.title2}>Last Modified By: </Text>
+                    <Text style={styles.text}>{item.lastModifiedBy}</Text>
+                </View>
                 <View style={styles.textContainer}>
                     <Text style={styles.title2}>Batches: </Text>
                     <Text style={styles.text}>{batches}</Text>
@@ -55,7 +55,7 @@ export const ExpandableList = ({item, onPress}) => {
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button} onPress={() => {}}>
-                        <Text style={styles.buttonText}>EDIT CURRICULUM</Text>
+                        <Text style={styles.buttonText}>EDIT</Text>
                     </TouchableOpacity>
                 </View>
             </>
@@ -90,22 +90,27 @@ const styles = StyleSheet.create({
     curriculumName: {
         fontSize: 20,
         color: '#474C55',
-        fontWeight: 'bold',
+        fontFamily: 'FuturaBold',
         alignSelf: 'flex-start'
     },
     text: { 
         opacity: 0.7,
         flexDirection: 'row',
-        paddingVertical: 2 
+        paddingVertical: 2,
+        fontFamily:'FuturaBook',
+        fontSize: 15
     },
     icon: {
-        alignSelf: 'flex-end'
+        alignSelf: 'flex-end',
+        marginLeft: 'auto',
+        marginRight: 0
     },
     title2: {
-        fontSize: 15,
+        fontSize: 18,
         alignSelf: 'flex-start',
         fontWeight: 'bold',
-        color: '#474C55'
+        color: '#474C55',
+        fontFamily: 'FuturaBook'
     },
     buttonContainer: {
         flexDirection: 'row',
@@ -116,14 +121,14 @@ const styles = StyleSheet.create({
     button: {
         alignSelf: 'flex-end',
         paddingVertical: 2,
-        paddingHorizontal: 10,
+        paddingHorizontal: 5,
         backgroundColor: '#72A4C2',
         borderRadius: 10
     },
     buttonText: {
         padding: 10,
-        fontWeight: 'bold',
         color: '#fff',
-        fontSize: 15
+        fontSize: 15,
+        fontFamily: 'FuturaBold'
     }
   });

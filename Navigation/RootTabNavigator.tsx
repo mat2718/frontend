@@ -5,6 +5,7 @@ import RootStackNavigator from './RootStackNavigator';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import React from 'react';
+import Curricula from '../src/screens/Curricula/Curricula';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -44,7 +45,7 @@ const RootTabNavigator = () => {
 
         <Tab.Screen 
         name="Curricula" 
-        component={SplashScreen2}
+        component={Curricula}
         options={{
           tabBarIcon:({ color, size }) => (
             <Icon
