@@ -7,15 +7,15 @@ interface PropsI {
   data: [
     plannedBatches: number,
     activeBatches: number,
-    totalTrainers: number,
-    totalAssociates: number
+    activeTrainers: number,
+    inactiveTrainers: number
   ];
 }
 
 const BatchStats: React.FC<PropsI> = (props: PropsI) => {
   /**  Passes props data to dataset for the BarChart */
   const data = {
-    labels: ['PB', 'AB', 'AT', 'AA'],
+    labels: ['PB', 'AB', 'AT', 'IT'],
     datasets: [
       {
         data: [props.data[0], props.data[1], props.data[2], props.data[3]],
@@ -91,10 +91,10 @@ const BatchStats: React.FC<PropsI> = (props: PropsI) => {
           {/** Active associates badge */}
           <View style={styles.statView}>
             <View style={styles.badge}>
-              <Text style={styles.badgeText}>AC</Text>
+              <Text style={styles.badgeText}>IT</Text>
             </View>
             <Text style={styles.statText}>
-              {props.data[3]} Active Associates
+              {props.data[3]} Inactive Trainers
             </Text>
           </View>
         </View>
