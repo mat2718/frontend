@@ -1,5 +1,6 @@
 import React from 'react';
 import { FlatList, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import Header from '../Header/index';
 /**
  * Authors: Joab Smith and Imran Ilyas
 **/
@@ -21,6 +22,7 @@ const trainer = () => {
 const ViewFlatList = (props:IProps) => {
     return (
         <View style = {styles.container}>
+            <Header />
             <FlatList
                 data={props.trainerArr}
                 renderItem={(item) => (
@@ -43,7 +45,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        margin: "10%",
         
     },
     row: {
@@ -55,14 +56,24 @@ const styles = StyleSheet.create({
     item: {
         flex: 1,
         padding: '3%',
+        marginTop: '2%',
+        marginHorizontal: '2%',
         width: '100%',
-        //flexDirection: 'row',
-        
-        borderWidth:1
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 2,
+            height: 5,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        backgroundColor: '#F26925',
+        borderRadius: 20,
     },
 
     trainer: {
         fontSize: 26,
+        color: 'white',
     },
 })
 
