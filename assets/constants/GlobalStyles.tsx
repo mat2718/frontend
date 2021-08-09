@@ -41,7 +41,7 @@ listItem:{
         
   },
   dropDown:{
-  color:colors.primaryOrange,  
+  color:colors.primaryGray,  
   borderWidth:1,
   margin:10,
   padding:15,

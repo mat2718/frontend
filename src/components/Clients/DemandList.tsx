@@ -45,10 +45,10 @@ const DemandList=(props:any)=>{
 
                     )}
                     renderItem={({item})=>(
-                        <View style={styles.item}>
-                            <Text style={GlobalStyles.listItem}>{item.curriculum}  {item.needBy}  {item.howMany}</Text>
+                        <View style={styles.listItem}>
+                            <Text >{item.curriculum}  {item.needBy}  {item.howMany}</Text>
                            <TouchableOpacity onPress={()=>console.log(item)}>
-                               <Text style={GlobalStyles.button}>X</Text>
+                               <Text style={GlobalStyles.button}>Delete</Text>
                            </TouchableOpacity>
                         </View>
                         )}
@@ -61,22 +61,34 @@ const DemandList=(props:any)=>{
 
 }
 const styles=StyleSheet.create({
-    listItem:{
-        flexDirection:"row",
-        padding:5,
-        borderWidth:1,
-        borderColor:colors.primaryGray,
-        borderRadius:30,
-        marginHorizontal:5,
-
-    },
+    
     item:{
         flexDirection:"row",
         justifyContent:"space-evenly",      
         alignItems:"center",
         margin:5,
         padding:5,
-    }
+    },
+    listItem:{
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent: 'space-between',
+        padding: 20,
+        paddingLeft: 10,
+        margin: 10,       
+        shadowColor:colors.primaryGray,
+        shadowOffset: 
+            {
+          width: 0,
+          height: 2,
+            },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        borderRadius: 35,
+        backgroundColor:colors.primaryWhite,
+        
+    },    
 
 
 
