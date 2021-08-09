@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1628185868727" clover="3.2.0">
-  <project timestamp="1628185868728" name="All files">
-    <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0" elements="4" coveredelements="0" complexity="0" loc="3" ncloc="3" packages="1" files="1" classes="1"/>
-    <file name="Header.tsx" path="C:\Users\Bigmo\Revature\Perfect-Personnel-Placement\frontend\src\component\Header\Header.tsx">
-      <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <line num="4" count="0" type="stmt"/>
-      <line num="5" count="0" type="stmt"/>
-      <line num="18" count="0" type="stmt"/>
-    </file>
+<<<<<<< HEAD
+<coverage generated="1628536125548" clover="3.2.0">
+  <project timestamp="1628536125549" name="All files">
+=======
+<coverage generated="1628022640786" clover="3.2.0">
+  <project timestamp="1628022640786" name="All files">
+>>>>>>> dev-branch
+    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0"/>
   </project>
 </coverage>

@@ -1,18 +1,23 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import { mount } from 'enzyme';
-import Batches, { data } from '.';
-import { FlatList, TouchableOpacity } from 'react-native';
-<<<<<<< HEAD:src/Screens/Batches/Batches.test.tsx
-import Header from '../../components/Header/Header';
-=======
 import Header from '../../components/batches/Header';
->>>>>>> dev-branch:src/screens/Batches/Batches.test.tsx
+import ViewBatch from './';
 
 let wrapper: any;
 
 describe('Batches', () => {
   beforeEach(() => {
-    wrapper = mount(<Batches />);
+    wrapper = mount(
+      <ViewBatch
+        associate={25}
+        batchId={0}
+        curriculum='Cloud Native'
+        trainer='Robert Connell'
+        startDate={1622505600000}
+        endDate={1627776000000}
+      />
+    );
   });
 
   //tests if the component is there
@@ -24,21 +29,9 @@ describe('Batches', () => {
   it('should display the header', () => {
     const shouldBeHeader = wrapper.find(Header);
     expect(shouldBeHeader).toBeDefined();
-    //expect(shouldBeHeader.length).toBeGreaterThan(0); would also work
   });
 
-  // tests if the flatlist is defined
-  it('should display the flatlist', () => {
-    const shouldBeFlatlist = wrapper.find(FlatList);
-    expect(shouldBeFlatlist).toBeDefined();
-  });
-
-  // tests if the flatlist holds the data we need
-  it('should hold data', () => {
-    const listData = wrapper.find(FlatList).props().data;
-    expect(listData).toEqual(data);
-  });
-
+  /** tests the edit batch button */
   it('should be pressed', () => {
     const shouldBePressed = wrapper.find(TouchableOpacity).at(0);
 
