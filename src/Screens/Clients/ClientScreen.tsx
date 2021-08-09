@@ -41,19 +41,27 @@ const ClientScreen=()=>{
     return(
         <View style={GlobalStyles.container}>
             <Header/>
+            <Text style={GlobalStyles.h1}>Current Client</Text>
             <View style={styles.clientDisplay}>
-                <Text>Client Name: {"\n"}
+                <Text>Client Name: {currClient} {"\n"}
                       Client Id: 
                 </Text>         
                
             <TouchableOpacity>
-            <Text style={GlobalStyles.button}>Add Client</Text>          
+             
             <Text style={GlobalStyles.button} >Edit Client</Text>
            
             </TouchableOpacity>
             </View>
-         
+            <View style={styles.clientStuff}>
             <ClientList setClient={setClient} />
+              <View>
+            <TouchableOpacity>
+            <Text style={GlobalStyles.button}>Add Client</Text>          
+            
+            </TouchableOpacity>
+            </View> 
+            </View>
             <View>
                 <Text style={GlobalStyles.h1}>Here Are the Current Demands</Text>
                <DemandList currClient={currClient}/>
@@ -85,7 +93,10 @@ const styles= StyleSheet.create({
               padding:20,
               marginBottom:5,
               backgroundColor:colors.secondaryBlue,
+          },
+          clientStuff:{
           }
+           
       
     
     

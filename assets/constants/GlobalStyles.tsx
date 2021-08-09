@@ -36,7 +36,7 @@ listItem:{
     shadowRadius: 3.84,
     elevation: 5,
     borderRadius: 35,
-    backgroundColor:colors.primaryWhite,
+    backgroundColor:colors.secondaryBlue,
     
         
   },

@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import {View,Text,StyleSheet} from 'react-native'
 import GlobalStyles from '../../../assets/constants/GlobalStyles'
 import RNPickerSelect from 'react-native-picker-select';
-
+import colors from '../../../assets/constants/colors';
 
 
 const ClientList=(props: { setClient: (arg0: any) => void; })=>{
@@ -11,6 +11,7 @@ const ClientList=(props: { setClient: (arg0: any) => void; })=>{
     return(
         <View testID='picker' style={GlobalStyles.dropDown}>
             <RNPickerSelect 
+             style={{ inputAndroid: { color:colors.primaryGray } }}
             placeholder={{
                 label: 'Select a client...',
                 value: null,

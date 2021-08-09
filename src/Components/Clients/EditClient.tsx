@@ -10,7 +10,7 @@ let client=[{
     clientId:"001",clientName:"webstuff"
 }];
 
-const EditClient=()=>{
+const EditClient=((props:any)=>{
 
     const[newClientID , setNewClientID] = useState(client[0].clientId);
     const[newClientName, setNewClientName]=useState(client[0].clientName);
@@ -73,7 +73,7 @@ const EditClient=()=>{
                 </View>
             </View>
         </View>
-    )};
+    )});
 const styles=StyleSheet.create({
     textEntry:{
        
