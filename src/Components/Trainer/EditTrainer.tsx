@@ -34,9 +34,11 @@ const EditTrainer = (props:IProps) =>
     
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style = {styles.container}>
-            <Header/>
+            <View style={styles.container}>
+               
             <Text style = {styles.header}>Edit Trainer</Text>
+
+           
 
             <View style={styles.fieldRow}>
             <View style = {styles.fieldCols}>
@@ -73,6 +75,7 @@ const EditTrainer = (props:IProps) =>
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        width: '100%'
         //justifyContent: 'center'        
     },
 

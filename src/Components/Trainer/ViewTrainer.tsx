@@ -26,29 +26,33 @@ const ViewTrainer = (props: IProps) =>
     }
     return(
         <View style = {styles.container}>
-        <View style={styles.fieldRow}>
+            <Text style = {styles.header}>{props.trainer.FirstName + ' ' + props.trainer.LastName}'s Profile</Text>
         <View style = {styles.fieldCols}>
            
-                <Text style={styles.label}>First Name:</Text>
-                <Text style = {styles.label}>Last Name:</Text>
-                <Text style = {styles.label}>Email:</Text>
+        <View style={styles.fieldRow}>
+                    <Text style={styles.label}>First Name:</Text>
+            <Text style={styles.value}>{props.trainer.FirstName}</Text>
+        </View>
+                    <View style={styles.fieldRow}>
+                    <Text style={styles.label}>Last Name:</Text>
+                    <Text style={styles.value}>{props.trainer.LastName}</Text>
+
+                    </View>
+                    <View style={styles.fieldRow}>
+                    <Text style={styles.label}>Email:</Text>
+                    <Text style={styles.value}>{props.trainer.Email}</Text>
+
+                    </View>
+                    <View style={styles.fieldRow}>
                 <Text style={styles.label}>ID:</Text>
+                    <Text style={styles.value}>{props.trainer.ID}</Text>
+
+                    </View>
+        </View>
             
           
-        </View>
-            <View style={styles.fieldCols}>
-                
-            <Text style={styles.label}>First Name:</Text>
-                <Text style = {styles.label}>Last Name:</Text>
-                <Text style = {styles.label}>Email:</Text>
-                <Text style={styles.label}>ID:</Text>
             
-                
-                        
-
-        </View>
                   
-        </View>
         
         
         <TouchableOpacity style = {styles.touchableStyle} onPress={edit}>
@@ -60,46 +64,57 @@ const ViewTrainer = (props: IProps) =>
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
+        flex: 1,
+        width: '100%',
         marginVertical: '10%',
-        marginHorizontal: '2%'
-        //justifyContent: 'center'        
+        marginHorizontal: '2%',
+        justifyContent: 'center'        
+    },
+
+    header: {
+        fontSize: 24,
     },
 
     fieldRow: {
         flex: 1,
         width: '100%',
         flexDirection: 'row',
+
     },
 
     label: {
         fontSize: 20,
-        // width: '150%',
+        width: '30%',
         paddingVertical: '10%',
-        // alignSelf: 'flex-end'
+        textAlign: 'right'
+        //alignSelf: 'flex-end'
     },
     
-    input: {
+    value: {
         
         // flexDirection: 'row',
-        // width: '150%',
+        width: '70%',
         fontSize: 20,
         paddingVertical: '10%',
-        textAlign: 'left',
+        textAlign: 'center',
     },
     
     fieldCols: {
         flex:1,
-        
+        width: '100%',
         //alignContent: 'space-between',
         alignContent: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+       
         
     },
     
     touchableStyle: {
         backgroundColor: "#F26925",
-        alignSelf:'center',
+        alignSelf: 'center',
+        
+        borderRadius: 100,
+        margin: '10%',
     },
 
     submit: {

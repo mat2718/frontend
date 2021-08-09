@@ -31,7 +31,10 @@ const ViewEditTrainer = (props:Iprops) =>
 }
 
 const styles = StyleSheet.create({
-    container: {},
+    container: {
+        //flex: 1,
+        //width:'100%'
+    },
 })
 
 export default ViewEditTrainer;
