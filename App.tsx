@@ -14,9 +14,9 @@ export default function App() {
   return(
     <View style={GlobalStyles.container}>
    {/*<Batches/>*/}
-  {/* <ClientScreen/> */}
+  <ClientScreen/>
   {/* <AddDemandScreen /> */}
-    <AddClient/>
+    {/* <AddClient/> */}
     {/* <EditClient/> */}
     </View>
   
