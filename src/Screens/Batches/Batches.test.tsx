@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Batches, { data } from './Batches';
 import { FlatList, TouchableOpacity } from 'react-native';
-import Header from '../../component/Header/Header';
+import Header from '../../components/Header/Header';
 
 let wrapper: any;
 
