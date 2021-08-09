@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import ViewFlatList from './src/Components/Trainer/ViewFlatList';
-import CreateTrainer from './src/Screens/CreateTrainer';
-import Header from './src/Components/Header';
-import EditTrainer from './src/Components/Trainer/EditTrainer';
-import SearchBar from './src/Components/Trainer/Searchbar';
+import SearchBar from './src/components/Trainer/Searchbar';
+import ViewFlatList from './src/components/Trainer/ViewFlatList';
+import MainTrainer from './src/Screens/MainTrainer';
+import ViewEditTrainer from './src/Screens/ViewEditTrainer';
+
 
 export default function App() {
   const str = [{name: 'Johnathan Jingles', ID: '87654'}, {name: 'chup', ID: '87774'}]
@@ -13,10 +13,12 @@ export default function App() {
   return (
 
     <View style={styles.container}>
-    <ViewFlatList trainerArr={str}/>
+      {/* <MainTrainer/> */}
+      {/* <SearchBar/> */}
+      <ViewEditTrainer/>
+    {/* <ViewFlatList trainerArr={str}/> */}
       {/* <CreateTrainer/> */}
       {/* <EditTrainer trainer = {trainer}/> */}
-      {/* <SearchBar/> */}
     </View>
   );
 }

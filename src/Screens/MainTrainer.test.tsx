@@ -11,7 +11,11 @@ describe('Main Trainer', () =>
 
     test('Should have all components', () =>
     {
-        expect(1).toBe(1);
-        //expect(wrapper.find('FlatList')).toBeDefined();
+        
+        expect(shallowWrapper.find('ViewFlatList')).toHaveLength(1);
+        expect(shallowWrapper.find('SearchBar')).toHaveLength(1);
+        //Find add trainer button
+        const add = wrapper.find('TouchableOpacity').findWhere((w) => w.text() === 'Add Trainer').first();
+        expect(add).toHaveLength(1);
     })
 })

@@ -22,7 +22,6 @@ const trainer = () => {
 const ViewFlatList = (props:IProps) => {
     return (
         <View style = {styles.container}>
-            <Header />
             <FlatList
                 data={props.trainerArr}
                 renderItem={(item) => (

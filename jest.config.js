@@ -12,11 +12,7 @@ module.exports = {
   projects: [addSetup(withEnzyme(require('jest-expo/android/jest-preset')))],
   collectCoverage: true,
   collectCoverageFrom: [
-    '<rootDir>/src/**.{ts,tsx,js,jsx}',
-    '<rootDir>/src/components/batches/Header/index.tsx',
-    '<rootDir>/src/components/batches/BatchStats/index.tsx',
-    '<rootDir>/src/components/batches/BatchListItem/index.tsx',
-    '<rootDir>/src/screens/Batches/index.tsx',
+    '<rootDir>/src/**/*.{tsx,ts,jsx,js}',
   ],
   coverageDirectory: 'coverage',
   coverageThreshold: {
