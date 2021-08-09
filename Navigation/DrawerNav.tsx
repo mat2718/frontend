@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 
 
-export const DrawerContent: React.FC = (props: any) => {
+export const DrawerContent: React.FC = () => {
     const navigation = useNavigation();
 
     const signOut = () => {
@@ -28,7 +28,7 @@ export const DrawerContent: React.FC = (props: any) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <DrawerContentScrollView {...props}>
+            <DrawerContentScrollView>
                 <View style={styles.drawerContent}>
                     <View style={styles.userInfoSection}>
                         <View style={{ flexDirection: 'row', marginTop: 15 }}>
@@ -48,46 +48,35 @@ export const DrawerContent: React.FC = (props: any) => {
                         <DrawerItem
                             icon={({ color, size }) => (
                                 <Icon
-                                    name="home"
+                                    name="home-outline"
                                     color={color}
                                     size={size}
                                 />
                             )}
                             label="Home"
-                            onPress={() => {navigation.navigate("Root") }}
+                            onPress={() => {navigation.navigate("Home") }}
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
                                 <Icon
-                                    name="account"
+                                    name="chart-bell-curve"
                                     color={color}
                                     size={size}
                                 />
                             )}
-                            label="Profile"
-                            onPress={() => {navigation.navigate('Profile') }}
+                            label="Diagram"
+                            onPress={() => {navigation.navigate('Home2') }}
                         />
                         <DrawerItem labelStyle={styles.label}
                             icon={({ color, size }) => (
                                 <Icon
-                                    name="cog"
+                                    name="calendar-check-outline"
                                     color={color}
                                     size={size}
                                 />
                             )}
-                            label="Settings"
-                            onPress={() => {navigation.navigate("Settings") }}
-                        />
-                        <DrawerItem
-                            icon={({ color, size }) => (
-                                <Icon
-                                    name="search-web"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                            label="Search"
-                            onPress={() => {navigation.navigate("Search") }}
+                            label="Calendar"
+                            onPress={() => {navigation.navigate("") }}
                         />
                     </Drawer.Section>
                 </View>
