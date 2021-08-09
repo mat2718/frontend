@@ -9,7 +9,7 @@ const AddClient=()=> {
     const[newClientName,setNewClientName]=useState("")
     return (
         <View style={GlobalStyles.container}>
-            <Header/>
+            {/* <Header/> */}
             <Text style={GlobalStyles.h1}>Please Enter New Client Information:</Text>
             <View style={styles.textEntry}>
                 <Text>New Client ID:  </Text>

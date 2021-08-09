@@ -18,11 +18,11 @@ const ClientList=(props: { setClient: (arg0: any) => void; })=>{
             }}
                 onValueChange={(value) => props.setClient(value)}
                 items={[
-                    {label:"WebStuff", value:"webstuff"},
-                    {label:"InfoMe", value:"infome"},
-                    {label:"CogWheel", value:"cogwheel"},
-                    {label:"NoAWS" ,value:"noaws"},
-                    {label:"RevatureJr", value:"revaturejr"}
+                    {label:"WebStuff", value:["webstuff", 1]},
+                    {label:"InfoMe", value:["infome", 2]},
+                    {label:"CogWheel", value:["cogwheel",3]},
+                    {label:"NoAWS" ,value:["noaws", 4]},
+                    {label:"RevatureJr", value:["revaturejr",5]}
                 ]}
             />
             <></>

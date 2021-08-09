@@ -10,8 +10,11 @@ import { TextInput } from 'react-native-gesture-handler';
 import IDemand from '../../../assets/models/Demand';
 import colors from '../../../assets/constants/colors'
 
+import moment from 'moment';
 
 let today=new Date()
+
+
 //sends client name as prop to add to demand 
 const EditDemandScreen =(props: { currClient: string })=>{
     const[currCurriculum, setCurriculum]=useState("");
@@ -34,7 +37,15 @@ let name="RevatureJr"
             <CalendarPicker
                 minDate={today}
                
-                onDateChange={(selected)=>setDemandDate}
+                onDateChange={(date)=>
+                    {
+                        console.log(demandDate);
+                        console.log(date);
+                        setDemandDate(date)
+                        console.log(demandDate);
+                    }
+                
+                }
                 /> 
                
                     
@@ -61,7 +72,8 @@ let name="RevatureJr"
                         <Text>
                            Clients: {name}{"\n"}
                            Curriculum:   {currCurriculum} {"\n"}
-                           Needed By:{demandDate.getMonth()}/{demandDate.getDate()}/{demandDate.getFullYear()}{"\n"}
+                            {/* Needed By:{demandDate.getMonth()}/{demandDate.getDate()}/{demandDate.getFullYear()}{"\n"} */}
+                            Needed By: {moment(demandDate).format('MM-DD-YYYY')}{"\n"}
                            # of Associates Needed:  {howMany}{"\n"}
                            </Text>
                        

@@ -10,7 +10,8 @@ button:{
     color:colors.primaryWhite,
     justifyContent:"center",
     alignSelf:"center",
-    textAlign:"center"
+    textAlign:"center",
+    margin:6,
    
 },
 container:{

@@ -12,20 +12,20 @@ let client=[{
 
 const EditClient=((props:any)=>{
 
-    const[newClientID , setNewClientID] = useState(client[0].clientId);
-    const[newClientName, setNewClientName]=useState(client[0].clientName);
+    const[newClientID , setNewClientID] = useState();
+    const[newClientName, setNewClientName]=useState(props.route.params);
 
     return (
         <View style={GlobalStyles.container}>
-            <Header/>
+            {/* <Header/> */}
             <View>
                <Text style={GlobalStyles.h1}>Edit or Delete Client</Text> 
             </View>
             <View >
                 <Text>Current Client:</Text>
                 <View style={GlobalStyles.listItem}>
-                    <Text>Client ID: {client[0].clientId}{"\n"}
-                          Client Name: {client[0].clientName}  </Text>
+                    <Text>Client ID: {props.route.params[1].toString()}{"\n"}
+                          Client Name: {props.route.params[0]}  </Text>
                 </View>
                 <View>
                     <TouchableOpacity>
@@ -68,7 +68,7 @@ const EditClient=((props:any)=>{
                 </View>
                 <View>
                     <TouchableOpacity >
-                                <Text style={GlobalStyles.button} onPress={()=>console.log(newClientID+newClientName)} >Edit Client</Text>
+                                <Text style={GlobalStyles.button} onPress={()=>console.log(props.route.params)} >Edit Client</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -81,6 +81,7 @@ const styles=StyleSheet.create({
         borderRadius:50,
         padding:20,
         alignContent:"center",
+        margin:10,
 
 
     },

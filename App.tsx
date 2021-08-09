@@ -1,30 +1,8 @@
-import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-<<<<<<< HEAD
-import Batches from './src/Screens/Batches/Batches'
-import ClientScreen from './src/Screens/Clients/ClientScreen';
-import AddDemandScreen from './src/components/Clients/AddDemandScreen';
-import GlobalStyles from './assets/constants/GlobalStyles';
-import EditClient from './src/components/Clients/EditClient';
-import AddClient from './src/components/Clients/AddClient';
-
-export default function App() {
-  return(
-    <View style={GlobalStyles.container}>
-   {/*<Batches/>*/}
-  <ClientScreen/>
-     {/* <AddDemandScreen/> */}
-    {/* <AddClient/> */}
-    {/* <EditClient/> */}
-    </View>
-  
-  )
-};
-
-=======
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -61,7 +39,6 @@ const App = () => {
   );}
     
 }
->>>>>>> dev-branch
 
 export default App;
 

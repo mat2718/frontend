@@ -3,6 +3,11 @@ import { RootStackParamList} from '../types';
 import SplashScreen from '../component/screens/splash';
 import SplashScreen2 from '../component/screens/test';
 import React from 'react';
+import ClientScreen from '../src/Screens/Clients/ClientScreen';
+import EditClient from '../src/components/Clients/EditClient';
+import AddClient from '../src/components/Clients/AddClient';
+import AddDemandScreen from '../src/components/Clients/AddDemandScreen';
+import EditDemandScreen from '../src/components/Clients/EditDemandScreen';
 
 //please import your screen and put in your screen in components-kai 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -28,8 +33,16 @@ const RootStackNavigator = () => {
         component={}/> */}
       {/* <Stack.Screen name="Curricula"
         component={}/> */}
-      {/* <Stack.Screen name="Clients"
-        component={}/> */}
+      <Stack.Screen name="Clients"
+        component={ClientScreen}/>
+      <Stack.Screen name="EditClient"
+        component={EditClient}/>
+      <Stack.Screen name="AddClient"
+        component={AddClient}/>
+      <Stack.Screen name="AddDemand"
+        component={AddDemandScreen}/>    
+      <Stack.Screen name="EditDemand"
+        component={EditDemandScreen}/>
     </Stack.Navigator>
   )
 }
