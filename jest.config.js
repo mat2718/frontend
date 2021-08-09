@@ -26,7 +26,7 @@ module.exports = {
  * @param {*} ignoreThese array of strings representing third-party libraries in node_modules
  * @returns array with a single string element
  */
-const returnTransformIgnorePatterns = (ignoreThese) => {
+function returnTransformIgnorePatterns(ignoreThese) {
   const start = 'node_modules/(?!(jest-)?(';
   const end = ')/)';
   let str = start;
@@ -41,6 +41,7 @@ const returnTransformIgnorePatterns = (ignoreThese) => {
   return [str];
 }
 
+
 /**
  * `withEnzyme` comes with a lot of useful configuration to save you time, 
  * but sometimes you need a little more. This function will modify the object 
@@ -49,13 +50,13 @@ const returnTransformIgnorePatterns = (ignoreThese) => {
  * @param {*} config the object returned by `withEnzyme`
  * @returns the same object but with modified properties
  */
-const addConfig = (config) => {
+function addConfig(config) {
   // add extra setup file
   config.setupFilesAfterEnv.push('<rootDir>/__tests__/setup.js');
   
   // comment this out if you want to test all files
   config.testMatch = [
-    '<rootDir>/src/component/Clients/ClientScreen.test.js',
+    '<rootDir>/src/Screens/Clients/ClientScreen.test.js',
   ];
 
   // third-party libraries that throw errors
