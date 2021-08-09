@@ -1,7 +1,7 @@
 //undefined for now, please change it to intake expected prop parameters
-//can change and add screen names too 
+//can change and add screen names too - Kai 
 export type RootDrawerParamList = {
-  Root: undefined;
+  DrawerRoot: undefined;
 };
 
 export type RootStackParamList = {
@@ -11,4 +11,8 @@ export type RootStackParamList = {
   Curricula: undefined;
   Trainers: undefined;
   Search: undefined;
+};
+
+export type RootTabParamList = {
+  TabRoot: undefined;
 };

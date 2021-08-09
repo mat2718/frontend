@@ -3,12 +3,14 @@ import { enableScreens } from 'react-native-screens';
 import { NavigationContainer} from '@react-navigation/native';
 import { DrawerContent } from './DrawerNav';
 import { createDrawerNavigator} from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator,  TransitionPresets} from '@react-navigation/stack';
-import { RootDrawerParamList, RootStackParamList} from '../types';
+import { RootDrawerParamList, RootStackParamList, RootTabParamList} from '../types';
 import React from 'react';
 import SplashScreen from '../component/screens/splash';
+import Logo from '../component/logo'
 
-//https://docs.expo.dev/versions/latest/sdk/screens/
+//https://docs.expo.dev/versions/latest/sdk/screens/ -Kai
 enableScreens();
 
 const Navigation: React.FC = (props:any) => {
@@ -24,18 +26,34 @@ const Navigation: React.FC = (props:any) => {
 
 export default Navigation;
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
-const Stack = createStackNavigator<RootStackParamList>();
+
 
 const RootDrawerNavigator = () => {
   return (
-    <Drawer.Navigator 
+    <Drawer.Navigator screenOptions={{
+      headerTitleAlign: 'center',
+      headerTitle: () => <Logo/>}}
       drawerContent={() => <DrawerContent/> }>
-      <Drawer.Screen name="Root"
-      component={RootStackNavigator}/>
+      <Drawer.Screen name="DrawerRoot"
+      component={RootTabNavigator}/>
     </Drawer.Navigator>
   )
 }
 
+const Tab = createBottomTabNavigator<RootTabParamList>();
+
+const RootTabNavigator = () => {
+  return (
+    <Tab.Navigator screenOptions={{
+      headerShown: false}}>
+      <Tab.Screen name="TabRoot" component={RootStackNavigator}/>
+    </Tab.Navigator>
+  )
+}
+
+
+//add your screens to this RootStackNavigator- Kai
+const Stack = createStackNavigator<RootStackParamList>();
 const RootStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{

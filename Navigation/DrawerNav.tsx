@@ -24,7 +24,7 @@ export const DrawerContent: React.FC = (props: any) => {
         // })
     }
 
-    //the onPress is the navigationing so if you need to change it to get to your screens change it to what you named your screens. these are placeholders for now
+    //the onPress is the navigationing so if you need to change it to get to your screens change it to what you named your screens. these are placeholders for now- Kai
 
     return (
         <View style={{ flex: 1 }}>
