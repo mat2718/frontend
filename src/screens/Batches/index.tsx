@@ -8,6 +8,9 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../types';
 import Header from '../../components/batches/Header';
 import BatchStats from '../../components/batches/BatchStats';
 import BatchListItem from '../../components/batches/BatchListItem';
@@ -40,9 +43,13 @@ export const data = [
   },
 ];
 
+type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
+
 /** Basis for Entire Batch Screen */
 const Batches: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = React.useState('all');
+  const navigation = useNavigation<mainScreenProp>();
+
   const plannedBatchesTable = () => {
     return (
       <>
@@ -51,7 +58,10 @@ const Batches: React.FC = () => {
           <Text style={styles.screenTitle}>Batches</Text>
 
           {/** Add batch button */}
-          <TouchableOpacity style={styles.addBatchButton}>
+          <TouchableOpacity
+            style={styles.addBatchButton}
+            onPress={() => navigation.navigate('AddEditBatch')}
+          >
             <Text style={styles.addBatchText}>Add batch</Text>
           </TouchableOpacity>
         </View>
@@ -103,8 +113,6 @@ const Batches: React.FC = () => {
   /** Main return statement */
   return (
     <SafeAreaView style={{ backgroundColor: '#fafafa', flex: 1 }}>
-      {/** Header */}
-      <Header />
       {/** List of batches
        * Takes in the picker filter value and updates accordingly
        */}
