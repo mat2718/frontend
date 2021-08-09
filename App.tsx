@@ -5,7 +5,7 @@ import Curricula from './src/screens/Curricula/Curricula';
 
 export default function App() {
   return (
-    <Curricula></Curricula>
+    <Curricula />
   );
 }
 
