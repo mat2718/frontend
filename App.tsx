@@ -1,27 +1,45 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Batches from './src/screens/Batches';
-import ViewBatch from './src/screens/ViewBatch';
+import React, {useEffect, useState} from 'react';
+import { StyleSheet, Text } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import * as Font from 'expo-font';
+import Navigation from './Navigation/index';
 
-export default function App() {
-  return (
-    <ViewBatch
-      associate={25}
-      batchId={2106}
-      curriculum='React Native'
-      trainer='Matthew Otto'
-      startDate={1627862400000}
-      endDate={1633046400000}
-    />
-  );
+const App = () => {
+  const [fontsLoaded, setFonts] = useState(false);
+  
+  useEffect(() => {loadFonts()});
+
+  const loadFonts = async() => {
+    await Font.loadAsync({
+      FuturaBold: require('./assets/fonts/Futura-Std-Bold.otf'),
+      FuturaBook: require('./assets/fonts/Futura-Std-Book.otf'),
+      FuturaMedium: require('./assets/fonts/Futura-Std-Medium.otf'),
+    });
+    setFonts(true);
+  }
+
+  if (!fontsLoaded){
+    return (
+      <SafeAreaProvider style={styles.container}>
+        <Text style={{fontFamily:"FuturaBold"}}>The app is loading</Text>
+        <StatusBar style="auto" />
+      </SafeAreaProvider>
+    )
+  } else {
+    return (
+    <SafeAreaProvider style={styles.container}>
+      <Navigation/>
+      <StatusBar style="auto" />
+    </SafeAreaProvider>
+  );}
+    
 }
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
