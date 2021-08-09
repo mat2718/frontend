@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import {Text, TextInput, TouchableOpacity, StyleSheet, View, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback} from 'react-native';
+import Header from '../Header/index';
+
 //import axios from 'axios';
 /**
  * Authors: Joab Smith and Imran Ilyas
@@ -31,7 +33,11 @@ const EditTrainer = (props:IProps) =>
     }
     
     return(
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style = {styles.container}>
+            <Header/>
+            <Text style = {styles.header}>Edit Trainer</Text>
+
             <View style={styles.fieldRow}>
             <View style = {styles.fieldCols}>
                
@@ -61,14 +67,19 @@ const EditTrainer = (props:IProps) =>
                 <Text style = {styles.submit}>Update</Text>
             </TouchableOpacity>
         </View>
+        </TouchableWithoutFeedback>
     )
 }
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        marginVertical: '10%',
-        marginHorizontal: '2%'
+        flex: 1,
         //justifyContent: 'center'        
+    },
+
+    header: {
+        margin: '2%',
+        fontSize: 30,
+        textAlign: 'center',
     },
 
     fieldRow: {
@@ -81,7 +92,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         // width: '150%',
         paddingVertical: '10%',
-        // alignSelf: 'flex-end'
+        // alignSelf: 'flex-end',
+        textAlign: 'right',
     },
     
     input: {
@@ -94,8 +106,9 @@ const styles = StyleSheet.create({
     },
     
     fieldCols: {
-        flex:1,
-        
+        flex: 1,
+        marginVertical: '10%',
+        marginHorizontal: '2%',
         //alignContent: 'space-between',
         alignContent: 'center',
         justifyContent: 'center'
@@ -105,6 +118,8 @@ const styles = StyleSheet.create({
     touchableStyle: {
         backgroundColor: "#F26925",
         alignSelf:'center',
+        borderRadius: 100,
+        margin: '10%',
     },
 
     submit: {
