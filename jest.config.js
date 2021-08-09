@@ -1,5 +1,24 @@
 const { withEnzyme } = require('jest-expo-enzyme');
 
+module.exports = {
+  projects: [
+    addConfig(withEnzyme(require('jest-expo/android/jest-preset'))),
+  ],
+  collectCoverage: true,
+  collectCoverageFrom: [
+    '<rootDir>/src/**.{ts,tsx,js,jsx}',
+    '<rootDir>/src/component/Header/Header.tsx',
+    '<rootDir>/src/screens/Batches/Batches.tsx',
+  ],
+  coverageDirectory: 'coverage',
+  coverageThreshold: {
+    global: {
+      statements: 70
+    }
+  },
+}
+
+
 /**
  * Returns an array with a single string that tells Babel to ignore uncompiled
  * third-party React Native libraries.
@@ -76,22 +95,4 @@ const addConfig = (config) => {
   };
 
   return config;
-}
-
-module.exports = {
-  projects: [
-    addConfig(withEnzyme(require('jest-expo/android/jest-preset'))),
-  ],
-  collectCoverage: true,
-  collectCoverageFrom: [
-    '<rootDir>/src/**.{ts,tsx,js,jsx}',
-    '<rootDir>/src/component/Header/Header.tsx',
-    '<rootDir>/src/screens/Batches/Batches.tsx',
-  ],
-  coverageDirectory: 'coverage',
-  coverageThreshold: {
-    global: {
-      statements: 70
-    }
-  },
 }
