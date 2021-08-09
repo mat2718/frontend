@@ -1,5 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../../types';
 
 interface PropsI {
   associate: number;
@@ -10,7 +13,11 @@ interface PropsI {
   endDate: number;
 }
 
+type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
+
 const BatchListItem: React.FC<PropsI> = (props: PropsI) => {
+  const navigation = useNavigation<mainScreenProp>();
+
   /**
    * Touchable Link to contain individual Batch information.
    * Will lead to Individual Batch information
@@ -18,8 +25,14 @@ const BatchListItem: React.FC<PropsI> = (props: PropsI) => {
 
   return (
     /** Individual Batch Touchable */
+
     /** Structures and displays the data from the FlatList */
-    <TouchableOpacity style={styles.batchListprops}>
+    <TouchableOpacity
+      style={styles.batchListprops}
+      onPress={() => {
+        navigation.navigate('ViewBatch', props);
+      }}
+    >
       <View style={{ flexDirection: 'row' }}>
         <Text style={styles.curriculumText}>{props.curriculum}</Text>
         {/** Checks current date and start/end date of batch and applies tag based on status */}
