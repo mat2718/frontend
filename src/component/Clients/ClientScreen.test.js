@@ -16,7 +16,7 @@ import ClientList from './ClientList';
 //     })
 // })
 
-jest.mock('@react-native-picker/picker')
+// jest.mock('@react-native-picker/picker')
 
 let wrapper;
 describe('testing client screen',()=>{
