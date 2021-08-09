@@ -2,17 +2,17 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { mount } from 'enzyme';
 import Header from '../../components/batches/Header';
-import ViewBatch from './';
+import AddEditBatch from './';
 
 let wrapper: any;
 
 describe('Batches', () => {
   beforeEach(() => {
     wrapper = mount(
-      <ViewBatch
+      <AddEditBatch
         route={{
           params: {
-            associate: 25,
+            associates: 25,
             batchId: 0,
             curriculum: 'Cloud Native',
             trainer: 'Robert Connell',

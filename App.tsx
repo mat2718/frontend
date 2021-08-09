@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+<<<<<<< HEAD
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import SearchBar from './src/components/Trainer/Searchbar';
@@ -22,12 +23,57 @@ export default function App() {
     </View>
   );
 }
+=======
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import * as Font from 'expo-font';
+import { NavigationContainer } from '@react-navigation/native';
+import RootStackNavigator from './Navigation/RootStackNavigator';
+
+const App = () => {
+  const [fontsLoaded, setFonts] = useState(false);
+
+  useEffect(() => {
+    loadFonts();
+  });
+
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      FuturaBold: require('./assets/fonts/Futura-Std-Bold.otf'),
+      FuturaBook: require('./assets/fonts/Futura-Std-Book.otf'),
+      FuturaMedium: require('./assets/fonts/Futura-Std-Medium.otf'),
+    });
+    setFonts(true);
+  };
+
+  if (!fontsLoaded) {
+    return (
+      <SafeAreaProvider style={styles.container}>
+        <Text style={{ fontFamily: 'FuturaBold' }}>The app is loading</Text>
+        <StatusBar style='auto' />
+      </SafeAreaProvider>
+    );
+  } else {
+    return (
+      <SafeAreaProvider style={styles.container}>
+        <NavigationContainer>
+          <PaperProvider theme={DefaultTheme}>
+            <StatusBar style='auto' />
+            <RootStackNavigator />
+          </PaperProvider>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    );
+  }
+};
+
+export default App;
+>>>>>>> dev-branch
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

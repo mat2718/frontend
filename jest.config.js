@@ -11,9 +11,13 @@ const addSetup = (config) => {
 module.exports = {
   projects: [addSetup(withEnzyme(require('jest-expo/android/jest-preset')))],
   collectCoverage: true,
+<<<<<<< HEAD
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{tsx,ts,jsx,js}',
   ],
+=======
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx,js,jsx}'],
+>>>>>>> dev-branch
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
