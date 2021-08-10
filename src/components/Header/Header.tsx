@@ -1,30 +1,17 @@
 import React from 'react';
-<<<<<<< HEAD
 import { View, Image, StyleSheet, StatusBar } from 'react-native';
 import colors from '../../../assets/constants/colors';
-=======
-import {
-  View,
-  Text,
-  StyleSheet,
-  StatusBar,
-  TouchableOpacity,
-} from 'react-native';
-import { colors } from '../../../styles';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
->>>>>>> dev-branch
 const Header: React.FC = () => {
   return (
     /** Contains the Header for the application */
     <View style={styles.headerView}>
-      <TouchableOpacity>
-        <MaterialCommunityIcons
-          name='keyboard-backspace'
-          size={24}
-          color={colors.darkGray}
-        />
-      </TouchableOpacity>
+      <Image
+        source={{
+          uri: 'https://www.investcorp.com/wp-content/uploads/2020/05/Revature.png',
+        }}
+        resizeMode='contain'
+        style={styles.revatureLogo}
+      />
     </View>
   );
 };
@@ -43,14 +30,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     justifyContent: 'center',
-<<<<<<< HEAD
     paddingTop: 60,
     paddingBottom:30,
    
-=======
-    paddingTop: 65,
-    paddingBottom: 35,
->>>>>>> dev-branch
   },
 
   revatureLogo: {

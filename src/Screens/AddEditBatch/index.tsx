@@ -9,7 +9,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import Header from '../../components/batches/Header';
+
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
@@ -75,6 +75,15 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
   };
 
   return (
+<<<<<<< HEAD:src/Screens/AddEditBatch/index.tsx
+    <SafeAreaView style={{ flex: 1 }}>
+     
+      <ScrollView style={styles.addEditBatchScreen}>
+        {/** Screen title text */}
+        <Text style={styles.screenTitle}>
+          {route.params ? 'Edit batch' : 'Add batch'}
+        </Text>
+=======
     <SafeAreaView style={screenStyles.safeAreaView}>
       <Header />
       <ScrollView style={screenStyles.mainView}>
@@ -98,6 +107,7 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
             <Text style={buttonStyles.buttonText}>Add</Text>
           </TouchableOpacity>
         </View>
+>>>>>>> dev-branch:src/screens/AddEditBatch/index.tsx
         {/** Form view */}
         <View>
           {/** Curriculum  */}

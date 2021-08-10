@@ -7,6 +7,7 @@ import Batches from '../src/screens/Batches';
 import MainTrainer from '../src/screens/MainTrainer';
 
 import React from 'react';
+import ClientScreen from '../src/Screens/Clients/ClientScreen';
 import Navigation from './';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();

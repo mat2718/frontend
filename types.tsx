@@ -17,6 +17,10 @@ export type RootStackParamList = {
   Diagram: undefined;
   Skills: undefined;
   Calendar: undefined;
+  EditClient:undefined;
+  AddClient:undefined;
+  AddDemand:undefined;
+  EditDemand:undefined;
 };
 
 export type RootTabParamList = {

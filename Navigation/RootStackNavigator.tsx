@@ -2,9 +2,7 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack';
-import { RootStackParamList } from '../types';
-import SplashScreen from '../component/screens/splash';
-import SplashScreen2 from '../component/screens/test';
+import { RootStackParamList, RootTabParamList, RootDrawerParamList } from '../types';
 import React from 'react';
 import ViewBatch from '../src/screens/ViewBatch';
 import Navigation from '.';
@@ -15,6 +13,8 @@ import ViewEditTrainer from '../src/screens/ViewEditTrainer';
 //see what happens
 //please import your screen and put in your screen in components-kai
 const Stack = createStackNavigator<RootStackParamList>();
+
+
 const RootStackNavigator = () => {
   return (
     <Stack.Navigator
@@ -29,7 +29,14 @@ const RootStackNavigator = () => {
       <Stack.Screen name='AddTrainer' component={CreateTrainer} options={{ headerShown: true }}/>
       <Stack.Screen name='ViewEditTrainer' component={ViewEditTrainer} options={{ headerShown: true }}/>
       {/** add your view/addedit screens here */}
-    </Stack.Navigator>
+       
+    <Stack.Screen name="Clients" component={ClientScreen}/>
+    <Stack.Screen name="EditClient" component={EditClient}/>
+    <Stack.Screen name="AddClient" component={AddClient}/>
+    <Stack.Screen name="AddDemand" component={AddDemandScreen}/>    
+    <Stack.Screen name="EditDemand" component={EditDemandScreen}/>
+     
+  </Stack.Navigator>
   );
 };
 
