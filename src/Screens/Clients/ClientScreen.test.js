@@ -1,22 +1,11 @@
 import {mount} from 'enzyme';
-import { ExampleComponent } from '../../../__tests__/constants';
+import { Text } from 'react-native';
 import ClientScreen from './ClientScreen';
-// import RNPickerSelect from 'react-native-picker-select';
+import RNPickerSelect from 'react-native-picker-select';
 import * as React from 'react';
 
-// jest.mock('react-native-picker-select');
-
-// import ClientList from './ClientList';
-// jest.mock('./ClientList', () => {
-//     return ({
-//         __esModule: true,
-//         default: () => {
-//             return <></>
-//         }
-//     })
-// })
-
-// jest.mock('@react-native-picker/picker')
+import ClientList from '../../Components/Clients/ClientList';
+import DemandList from '../../Components/Clients/DemandList';
 
 let wrapper;
 describe('testing client screen',()=>{
@@ -25,27 +14,137 @@ describe('testing client screen',()=>{
         wrapper=mount(<ClientScreen/>)
     })
 
-    it('should render correctly on screen',()=>{
+    it('should render without throwing errors',()=>{
         expect(wrapper).toBeDefined();
     })
 
-    it('', () => {
-        const mockSetClient = jest.fn();
-        jest.spyOn(React, 'useState').mockImplementationOnce( (arg) => {
-            return [arg, mockSetClient];
-        });
-        // const dropDownMenu = wrapper.find(RNPickerSelect);
-        // console.log(wrapper.debug());
-        let dropDownMenu = wrapper.find( {testID: 'picker'} );
-        console.log(dropDownMenu.length)
-        if (dropDownMenu.length > 1) {
-            dropDownMenu = dropDownMenu.last();
-        }
-        dropDownMenu.props().onValueChange();
-        console.log('number of calls: ', mockSetClient.mock.calls);
-        wrapper.update();
-        expect(1).toBe(1);
+    it('should display "button" for adding a client', () => {
+        expect(
+            wrapper
+            .find(Text)
+            .someWhere( node => 
+                   node.text().toLowerCase().includes('add')
+                && node.text().toLowerCase().includes('client')
+            )
+        )
+        .toBe(true);
+    })
+
+    it('"button" for adding client is pressable', () => {
+        expect(
+            wrapper
+            .find(Text)
+            .someWhere( node => 
+                   node.text().toLowerCase().includes('add')
+                && node.text().toLowerCase().includes('client')
+                && node.props().hasOwnProperty('onPress')
+            )
+        )
+        .toBe(true);
+    })
+
+    it('should display "button" for editing a client', () => {
+        expect(
+            wrapper
+            .find(Text)
+            .someWhere( node => 
+                   node.text().toLowerCase().includes('edit')
+                && node.text().toLowerCase().includes('client') 
+            )
+        )
+        .toBe(true);
+    })
+
+    it('edit client "button" is pressable ', () => {
+        expect(
+            wrapper
+            .find(Text)
+            .someWhere( node => 
+                   node.text().toLowerCase().includes('edit')
+                && node.text().toLowerCase().includes('client') 
+                && node.props().hasOwnProperty('onPress')
+            )
+        )
+        .toBe(true);
+    })
+
+    it('should display ClientList', () => {
+        expect(
+            wrapper
+            .find(ClientList)
+            .length
+        )
+        .toBeGreaterThan(0);
+    })
+
+    it('should display DemandList', () => {
+        expect(
+            wrapper
+            .find(DemandList)
+            .length
+        )
+        .toBeGreaterThan(0);
+    })
+
+    it('should display "button" for adding demand', () => {
+        expect(
+            wrapper
+            .find(Text)
+            .someWhere( node => 
+                   node.text().toLowerCase().includes('create') //brittle?
+                && node.text().toLowerCase().includes('demand')
+            )
+        )
+        .toBe(true);
+    })
+
+    it('add demand "button" is pressable', () => {
+        expect(
+            wrapper
+            .find(Text)
+            .someWhere( node => 
+                   node.text().toLowerCase().includes('create') //brittle?
+                && node.text().toLowerCase().includes('demand')
+                && node.props().hasOwnProperty('onPress')
+            )
+        )
+        .toBe(true);
+    })
+
+    it('should display "button" for editing demand', () => {
+        expect(
+            wrapper
+            .find(Text)
+            .someWhere( node => 
+                   node.text().toLowerCase().includes('edit')
+                && node.text().toLowerCase().includes('demand')
+            )
+        )
+        .toBe(true);
+    })
+
+    it('edit demand "button" is pressable', () => {
+        expect(
+            wrapper
+            .find(Text)
+            .someWhere( node => 
+                   node.text().toLowerCase().includes('edit')
+                && node.text().toLowerCase().includes('demand')
+                && node.props().hasOwnProperty('onPress')
+            )
+        )
+        .toBe(true);
+    })
+
+
+    // integration test
+    it('if we change currClient using Picker, DemandList has a new prop', () => {
+        dropDownMenu = wrapper.find(RNPickerSelect);
+        const arg = 'yeet';
+        dropDownMenu.invoke('onValueChange')(arg);
+        expect(
+            Object.values( wrapper.find(DemandList).props() )
+        )
+        .toContain(arg);
     })
 })
-
-

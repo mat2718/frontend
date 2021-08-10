@@ -58,7 +58,7 @@ function addConfig(config) {
   
   // comment this out if you want to test all files
   config.testMatch = [
-    '<rootDir>/src/Screens/Clients/ClientScreen.test.js',
+    '<rootDir>/src/Components/Clients/__tests__/AddClient.test.tsx',
   ];
 
   // third-party libraries that throw errors
@@ -93,8 +93,8 @@ function addConfig(config) {
   config.transformIgnorePatterns = returnTransformIgnorePatterns(ignoreThese);
 
   config.displayName = {
-    name: 'component tests',
-    color: 'yellow',
+    name: 'components',
+    color: 'blue',
   };
 
   return config;
