@@ -13,26 +13,31 @@ import Header from '../../components/batches/Header';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface PropsI {
-  associate: number;
-  batchId: number;
-  curriculum: string;
-  trainer: string;
-  startDate: number;
-  endDate: number;
+  route: {
+    params: {
+      associate: number;
+      batchId: number;
+      curriculum: string;
+      trainer: string;
+      startDate: number;
+      endDate: number;
+    };
+  };
 }
 
-const ViewBatch: React.FC<PropsI> = (props: PropsI) => {
+const ViewBatch: React.FC<PropsI> = ({ route }) => {
   /** Date variables for the calendar component */
   const currentDate = new Date(Date.now()).toISOString().slice(0, 10);
-  const startDate = new Date(props.startDate).toISOString().slice(0, 10);
-  const endDate = new Date(props.endDate).toISOString().slice(0, 10);
+  const startDate = new Date(route.params.startDate).toISOString().slice(0, 10);
+  const endDate = new Date(route.params.endDate).toISOString().slice(0, 10);
   const progress =
-    (Date.now() - props.startDate) / (props.endDate - props.startDate);
+    (Date.now() - route.params.startDate) /
+    (route.params.endDate - route.params.startDate);
 
   /** Data for progress ring */
   const data = {
     labels: ['Progress'], // optional
-    data: [progress < 1 ? progress : 1],
+    data: [progress < 1 && progress > 0 ? progress : progress < 0 ? 0 : 1],
   };
 
   /** ChartConfig  */
@@ -54,22 +59,23 @@ const ViewBatch: React.FC<PropsI> = (props: PropsI) => {
         {/**Title: Curriculum */}
         <View style={styles.mainTextContainer}>
           <Text style={styles.mainText}>
-            {props.batchId + ' ' + props.curriculum}
+            {route.params.batchId + ' ' + route.params.curriculum}
           </Text>
 
           <TouchableOpacity style={styles.editBatchButton}>
             <Text style={styles.editBatchText}>Edit Batch</Text>
           </TouchableOpacity>
         </View>
-        {props.startDate < Date.now() && props.endDate > Date.now() ? (
+        {route.params.startDate < Date.now() &&
+        route.params.endDate > Date.now() ? (
           <View style={[styles.badge, { backgroundColor: '#f26925' }]}>
             <Text style={styles.badgeText}>Active</Text>
           </View>
-        ) : props.endDate < Date.now() ? (
+        ) : route.params.endDate < Date.now() ? (
           <View style={[styles.badge, { backgroundColor: '#25F269' }]}>
             <Text style={styles.badgeText}>Completed</Text>
           </View>
-        ) : props.startDate > Date.now() ? (
+        ) : route.params.startDate > Date.now() ? (
           <View style={[styles.badge, { backgroundColor: '#474C55' }]}>
             <Text style={styles.badgeText}>Upcoming</Text>
           </View>
@@ -81,7 +87,7 @@ const ViewBatch: React.FC<PropsI> = (props: PropsI) => {
             size={16}
             color='#222'
           />
-          <Text style={styles.subText}>{props.trainer}</Text>
+          <Text style={styles.subText}>{route.params.trainer}</Text>
         </View>
 
         {/**Body: Batch information */}
@@ -93,15 +99,17 @@ const ViewBatch: React.FC<PropsI> = (props: PropsI) => {
               size={16}
               color='#222'
             />
-            <Text style={styles.subText}>{props.associate} Associates</Text>
+            <Text style={styles.subText}>
+              {route.params.associate} Associates
+            </Text>
           </View>
           {/**SubBody: Start and End Date */}
           <View style={{ flexDirection: 'row' }}>
             <MaterialCommunityIcons name='calendar' size={16} color='#222' />
             <Text style={styles.subText}>
-              {new Date(props.startDate).toDateString() +
+              {new Date(route.params.startDate).toDateString() +
                 '\nto ' +
-                new Date(props.endDate).toDateString()}
+                new Date(route.params.endDate).toDateString()}
             </Text>
           </View>
         </View>
