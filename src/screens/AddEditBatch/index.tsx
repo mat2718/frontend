@@ -1,14 +1,13 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  StyleSheet,
-  Text,
-  TextInput,
-} from 'react-native';
+import { SafeAreaView, ScrollView, View, StyleSheet, Text } from 'react-native';
 import Header from '../../components/batches/Header';
 import { Picker } from '@react-native-picker/picker';
+import {
+  badgesStyles,
+  screenStyles,
+  textStyles,
+  buttonStyles,
+} from '../../styles';
 
 interface PropsI {
   route: {
@@ -30,11 +29,11 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
   const [selectedFilter, setSelectedFilter] = React.useState('all');
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={screenStyles.safeAreaView}>
       <Header />
-      <ScrollView style={styles.addEditBatchScreen}>
+      <ScrollView style={screenStyles.mainView}>
         {/** Screen title text */}
-        <Text style={styles.screenTitle}>
+        <Text style={textStyles.heading}>
           {route.params ? 'Edit batch' : 'Add batch'}
         </Text>
         {/** Form view */}
@@ -47,7 +46,6 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
               setSelectedFilter(itemValue)
             }
             style={{ width: '100%', height: 50 }}
-            itemStyle={styles.fullInput}
           >
             {data.map((curr) => {
               return <Picker.Item label={curr} value={curr} key={curr} />;
@@ -60,16 +58,3 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
 };
 
 export default AddEditBatch;
-
-const styles = StyleSheet.create({
-  addEditBatchScreen: {
-    padding: 25,
-  },
-  screenTitle: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#474c55',
-  },
-
-  fullInput: {},
-});
