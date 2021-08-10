@@ -86,8 +86,15 @@ Then, a new tab will appear in your browser giving you several methods of runnin
 > Here, you instruct other people on how to use your project after they’ve installed it. This would also be a good place to include screenshots of your project in action.
 
 ## Contributors
-
-> Here list the people who have contributed to this project. (ignore this section, if its a solo project)
+* [Joab Smith](https://github.com/j-m-smith426)
+* [Red Oral](https://github.com/redoral)
+* [Matthew Otto](https://github.com/MattlttaM)
+* [Matthew Hanrahan](https://github.com/Thomas-Marik)
+* [Caleb Sword](https://github.com/calebmsword)
+* [Hannah Mulato](https://github.com/hpeninah)
+* [Kent Smith](https://github.com/kentsmith1996)
+* [Kaiyip Ho](https://github.com/Kaichloe)
+* [Imran Ilyas](https://github.com/imranilyas)
 
 ## License
 
