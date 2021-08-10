@@ -111,8 +111,10 @@ const AddEditCurriculum: React.FC = () => {
 
                 <View style={{flexDirection: 'row'}}>
                     <Text style={styles.txtContainer}>Skills:</Text>
-                    <TagInput
-                    updateState={}
+                    <TextInput
+                    value={text}
+                    onChangeText={text => setText(text)}
+                    style={styles.input}
                     />
                 </View>
                 <TouchableOpacity style={styles.saveBtnContainer}>

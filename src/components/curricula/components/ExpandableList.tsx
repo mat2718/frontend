@@ -63,7 +63,7 @@ export const ExpandableList = ({item, onPress}) => {
                     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AddEditCurriculum')}>
                         <Text style={styles.buttonText}>EDIT</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.deleteButton} onPress={() => navigation.navigate('AddEditCurriculum')}>
+                    <TouchableOpacity style={styles.deleteButton} onPress={() => {}}>
                         <Text style={styles.buttonText}>DELETE</Text>
                     </TouchableOpacity>
                 </View>
