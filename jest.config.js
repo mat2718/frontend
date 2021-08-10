@@ -58,7 +58,7 @@ function addConfig(config) {
   
   // comment this out if you want to test all files
   config.testMatch = [
-    '<rootDir>/src/Components/Clients/__tests__/AddClient.test.tsx',
+    '<rootDir>/src/Components/Clients/__tests__/AddClient.test.js',
   ];
 
   // third-party libraries that throw errors

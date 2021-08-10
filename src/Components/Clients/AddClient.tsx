@@ -3,10 +3,16 @@ import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
 import GlobalStyles from '../../../assets/constants/GlobalStyles';
 import colors from '../../../assets/constants/colors';
 import Header from '../Header/Header';
-const AddClient=()=> {
 
-    const[newClientID,setNewClientID]=useState("")
-    const[newClientName,setNewClientName]=useState("")
+
+const newClient = (newClientID:string, newClientName:string) => {
+    console.log(newClientID+newClientName);
+}
+
+
+const AddClient=({addNewClient = newClient} ) => {
+    const [newClientID,setNewClientID]=useState("")
+    const [newClientName,setNewClientName]=useState("")
     return (
         <View style={GlobalStyles.container}>
             {/* <Header/> */}
@@ -18,7 +24,7 @@ const AddClient=()=> {
                  
                     keyboardType="default" 
                     placeholder="New Client ID"                
-                    onChangeText={text =>setNewClientID(text)}                 
+                    onChangeText={text => setNewClientID(text)}                 
                   />
                   
                     <Text>New Client Name: </Text>
@@ -32,7 +38,7 @@ const AddClient=()=> {
                 </View>
                 <View>
                     <TouchableOpacity >
-                                <Text style={GlobalStyles.button} onPress={()=>console.log(newClientID+newClientName)} >Add a New Client</Text>
+                                <Text style={GlobalStyles.button} onPress={() => addNewClient(newClientID,newClientName)} >Add a New Client</Text>
                     </TouchableOpacity>
                 </View>
             </View>
