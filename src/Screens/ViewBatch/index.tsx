@@ -9,14 +9,10 @@ import {
 } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { ProgressChart } from 'react-native-chart-kit';
-<<<<<<< HEAD:src/Screens/ViewBatch/index.tsx
-// import Header from '../../components/batches/Header';
-=======
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import Header from '../../components/batches/Header';
->>>>>>> dev-branch:src/screens/ViewBatch/index.tsx
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   badgesStyles,
@@ -71,15 +67,9 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
   };
 
   return (
-<<<<<<< HEAD:src/Screens/ViewBatch/index.tsx
-    <SafeAreaView style={{ flex: 1 }}>
-      {/* <Header /> */}
-      <ScrollView style={styles.viewBatchScreen}>
-=======
     <SafeAreaView style={screenStyles.safeAreaView}>
       <Header />
       <ScrollView style={screenStyles.mainView}>
->>>>>>> dev-branch:src/screens/ViewBatch/index.tsx
         {/**Title: Curriculum */}
         <View style={screenStyles.titleContainer}>
           {/** Touchable that takes us to the edit batch screen when clicking on the title */}

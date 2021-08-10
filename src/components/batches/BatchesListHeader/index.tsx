@@ -29,7 +29,7 @@ const BatchesListHeader: React.FC<PropsI> = (props: PropsI) => {
           style={buttonStyles.buttonContainer}
           onPress={() => navigation.navigate('AddEditBatch')}
         >
-          <Text style={buttonStyles.buttonText}>Add batch</Text>
+          <Text style={buttonStyles.buttonText}>Add Batch</Text>
         </TouchableOpacity>
       </View>
 

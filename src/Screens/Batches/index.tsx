@@ -11,16 +11,10 @@ import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
-<<<<<<< HEAD:src/Screens/Batches/index.tsx
-import Header from '../../components/batches/Header';
-import BatchStats from '../../Components/batches/BatchStats';
-import BatchListItem from '../../Components/batches/BatchListItem'
-=======
 import BatchStats from '../../components/batches/BatchStats';
 import BatchListItem from '../../components/batches/BatchListItem';
 import { colors, screenStyles, textStyles, buttonStyles } from '../../styles';
 import BatchesListHeader from '../../components/batches/BatchesListHeader';
->>>>>>> dev-branch:src/screens/Batches/index.tsx
 
 /** Mock Data - PreRedux */
 export const data = [
