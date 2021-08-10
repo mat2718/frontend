@@ -5,7 +5,7 @@ import RootStackNavigator from './RootStackNavigator';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import React from 'react';
-
+import ClientScreen from '../src/Screens/Clients/ClientScreen';
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
 //please import your screen and put in your screen in components, SplashScreen2 will is a placeholder! -kai 
@@ -57,7 +57,7 @@ const RootTabNavigator = () => {
 
         <Tab.Screen 
         name="Clients" 
-        component={SplashScreen2}
+        component={ClientScreen}
         options={{
           tabBarIcon:({ color, size }) => (
             <Icon
@@ -67,6 +67,7 @@ const RootTabNavigator = () => {
             />
           )
         }}/>
+        
     </Tab.Navigator>
   )
 }

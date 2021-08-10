@@ -7,7 +7,8 @@ import AddDemandScreen from '../../components/Clients/AddDemandScreen';
 import IDemand from '../../../assets/models/Demand';
 import Header from '../../components/Header/Header';
 import IClient from '../../../assets/models/Client';
-import colors from '../../../assets/constants/colors'
+import colors from '../../../assets/constants/colors';
+import {useNavigation} from '@react-navigation/native'
 
 let clients = [
     { clientId:"001",clientName:"webstuff"},
@@ -26,7 +27,8 @@ let current: IClient[]=[];
 
 
 const ClientScreen=()=>{
-    const[currClient, setClient]=useState("");
+    const[currClient, setClient]=useState<IClient>("");
+    const navigation = useNavigation();
 
   
     for(let x=0;x<clients.length;x++){
@@ -40,28 +42,36 @@ const ClientScreen=()=>{
     
     return(
         <View style={GlobalStyles.container}>
-            <Header/>
+            {/* <Header/> */}
+            <Text style={GlobalStyles.h1}>Current Client</Text>
             <View style={styles.clientDisplay}>
-                <Text>Client Name: {"\n"}
-                      Client Id: 
+                <Text>Client Name: {currClient.clientName} {"\n"}
+                      Client Id: {currClient.clientId}
                 </Text>         
                
             <TouchableOpacity>
-            <Text style={GlobalStyles.button}>Add Client</Text>          
-            <Text style={GlobalStyles.button} >Edit Client</Text>
+             
+            <Text style={GlobalStyles.button} onPress={() => {navigation.navigate("EditClient", currClient) }}>Edit Client</Text>
            
             </TouchableOpacity>
             </View>
-         
+            <View style={styles.clientStuff}>
             <ClientList setClient={setClient} />
+              <View>
+            <TouchableOpacity>
+            <Text style={GlobalStyles.button} onPress={() => {navigation.navigate("AddClient") }}>Add Client</Text>          
+            
+            </TouchableOpacity>
+            </View> 
+            </View>
             <View>
                 <Text style={GlobalStyles.h1}>Here Are the Current Demands</Text>
                <DemandList currClient={currClient}/>
             </View>
             <View >
             <TouchableOpacity style={styles.screenNav}>
-                <Text style={GlobalStyles.button} onPress={()=>console.log("Add a demand")}>Create A Demand</Text>
-                <Text style={GlobalStyles.button} onPress={()=>console.log("Edit a demand")}>Edit A Demand</Text>
+                <Text style={GlobalStyles.button} onPress={() => {navigation.navigate("AddDemand") }}>Create A Demand</Text>
+                <Text style={GlobalStyles.button} onPress={() => {navigation.navigate("EditDemand") }}>Edit A Demand</Text>
             </TouchableOpacity>
             </View>
             </View>
@@ -85,7 +95,10 @@ const styles= StyleSheet.create({
               padding:20,
               marginBottom:5,
               backgroundColor:colors.secondaryBlue,
+          },
+          clientStuff:{
           }
+           
       
     
     

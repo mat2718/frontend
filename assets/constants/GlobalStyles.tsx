@@ -10,7 +10,8 @@ button:{
     color:colors.primaryWhite,
     justifyContent:"center",
     alignSelf:"center",
-    textAlign:"center"
+    textAlign:"center",
+    margin:6,
    
 },
 container:{
@@ -36,7 +37,7 @@ listItem:{
     shadowRadius: 3.84,
     elevation: 5,
     borderRadius: 35,
-    backgroundColor:colors.primaryWhite,
+    backgroundColor:colors.secondaryBlue,
     
         
   },

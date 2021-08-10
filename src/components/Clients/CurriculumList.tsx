@@ -23,7 +23,7 @@ const CurriculumList=(props: { setCurriculum: (arg0: any) => void; })=>{
     return(
         <View style={GlobalStyles.dropDown}>
         <RNPickerSelect 
-            style={{ inputAndroid: { color: 'black' } }}
+            style={{ inputAndroid: { color:colors.primaryGray } }}
             useNativeAndroidPickerStyle={false}
             
             placeholder={{
