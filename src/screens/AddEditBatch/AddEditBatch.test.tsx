@@ -34,18 +34,6 @@ describe('Batches', () => {
     const shouldBeHeader = wrapper.find(Header);
     expect(shouldBeHeader).toBeDefined();
   });
-
-  /** tests the edit batch button */
-  it('should be pressed', () => {
-    const shouldBePressed = wrapper.find(TouchableOpacity).at(0);
-
-    const myEventHandler = jest.spyOn(shouldBePressed.props(), 'onPress');
-
-    const actualEventHandler = shouldBePressed.prop('onPress');
-    actualEventHandler();
-
-    expect(myEventHandler).toHaveBeenCalled();
-  });
 });
 
 // yeet
