@@ -1,12 +1,10 @@
 import { RootTabParamList } from '../types';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SplashScreen2 from '../component/screens/test';
-import RootStackNavigator from './RootStackNavigator';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Batches from '../src/screens/Batches';
-
 import React from 'react';
-import Navigation from './';
+import Curricula from '../src/screens/Curricula/Curricula';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -39,6 +37,16 @@ const RootTabNavigator = () => {
         }}
       />
       {/** add your main screens down here */}
+      
+      <Tab.Screen
+        name='Curricula'
+        component={Curricula}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon name='notebook-multiple' color={color} size={size} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };

@@ -5,7 +5,7 @@ import { Transitioning, Transition } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const Curricula2: React.FC = () => {
+const Curricula: React.FC = () => {
     //mock data for flatlist
     const DATA = [{
         'batches': [7, 9, 3],
@@ -36,7 +36,18 @@ const Curricula2: React.FC = () => {
       'lastModifiedBy': '2021-08-05',
       'name':	'Curriculum 3',
       'skills': ["JS", "TS", "React", "React-Native"]
-  }];
+    },    
+    {
+        'batches': [3, 4, 6],
+        'createdBy': 'Third Creator',
+        'createdOn': "2021-08-04",
+        'id': 0,
+        'lastModified': 'Third Creator'	,
+        'lastModifiedBy': '2021-08-05',
+        'name':	'Curriculum 3',
+        'skills': ["JS", "TS", "React", "React-Native"]
+    }
+];
 
   const transitionRef = useRef();
   const transition = <Transition.Change interpolation='easeInOut' />
@@ -58,14 +69,13 @@ const Curricula2: React.FC = () => {
       <Transitioning.View ref={transitionRef} transition={transition} style={{marginBottom: 150}}>
         {/**Title*/}
         <View style={styles.titleContainer}>
-            <Text style={styles.title}>CURRICULUMS</Text>
+            <Text style={styles.title}>CURRICULA</Text>
         </View>
 
         {/**Add Curriculum button */}
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={() => {}}>
-                <Text style={styles.buttonText}>ADD CURRICULUM  <MaterialCommunityIcons name="plus-circle-outline" size={20} color="#fff" style={{alignSelf:'center'}} /></Text>
-                
+                <Text style={styles.buttonText}>ADD CURRICULUM <MaterialCommunityIcons name="plus-circle-outline" size={20} color="#fff" /></Text>
             </TouchableOpacity>
         </View>  
 
@@ -89,19 +99,20 @@ const styles = StyleSheet.create({
     titleContainer: {
       color: '#474C55',
       flexDirection: 'row',
-      justifyContent: 'center',
-      marginTop: 20,
+      justifyContent: 'flex-start',
+      paddingHorizontal: 10,
+      marginTop: 10,
       paddingTop: 20,
       paddingBottom: 10,
     },
     title: {
-      fontSize: 24,
+      fontSize: 22,
       color: '#474C55',
       fontFamily: 'FuturaBold'
     },
     buttonContainer: {
         flexDirection: 'row',
-        alignSelf: 'center', 
+        alignSelf: 'flex-end', 
         paddingVertical:5,
         paddingHorizontal:10
     },
@@ -110,7 +121,7 @@ const styles = StyleSheet.create({
         paddingVertical: 2,
         paddingHorizontal: 10,
         backgroundColor: '#72A4C2',
-        borderRadius: 10
+        borderRadius: 50
     },
     buttonText: {
         padding: 10,
@@ -121,4 +132,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Curricula2;
+export default Curricula;

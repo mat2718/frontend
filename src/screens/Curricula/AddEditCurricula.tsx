@@ -1,5 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { View, ScrollView, Text } from 'react-native';
+import Header from '../../components/batches/Header';
+
 
 const AddEditCurricula: React.FC = () => {
-    const [edit, toggleEdit] = useState(false);
+    return(
+        <View>
+            <Header />
+            <ScrollView>
+                <Text>
+                </Text>
+            </ScrollView>
+        </View>
+    )
 }

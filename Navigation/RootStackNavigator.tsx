@@ -10,6 +10,7 @@ import ViewBatch from '../src/screens/ViewBatch';
 import Navigation from '.';
 import RootTabNavigator from './RootTabNavigator';
 import AddEditBatch from '../src/screens/AddEditBatch';
+import Curricula from '../src/screens/Curricula/Curricula';
 
 //please import your screen and put in your screen in components-kai
 const Stack = createStackNavigator<RootStackParamList>();
@@ -25,6 +26,7 @@ const RootStackNavigator = () => {
       <Stack.Screen name='ViewBatch' component={ViewBatch} />
       <Stack.Screen name='AddEditBatch' component={AddEditBatch} />
       {/** add your view/addedit screens here */}
+      <Stack.Screen name='Curricula' component={Curricula} />
     </Stack.Navigator>
   );
 };

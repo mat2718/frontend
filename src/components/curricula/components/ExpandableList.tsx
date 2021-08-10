@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         paddingVertical: 2,
         paddingHorizontal: 5,
         backgroundColor: '#72A4C2',
-        borderRadius: 10
+        borderRadius: 50
     },
     buttonText: {
         padding: 10,
