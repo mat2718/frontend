@@ -12,8 +12,9 @@ export type RootStackParamList = {
   AddTrainer: any;
   ViewEditTrainer: any;
   Clients: undefined;
-  Curricula: undefined;
-  Trainers: any;
+  Curricula: any;
+  AddEditCurriculum: any;
+  Trainers: undefined;
   Diagram: undefined;
   Skills: undefined;
   Calendar: undefined;
