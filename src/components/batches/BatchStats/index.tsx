@@ -1,12 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
-import {
-  screenStyles,
-  textStyles,
-  listStyles,
-  badgesStyles,
-} from '../../../styles';
+import { badgesStyles } from '../../../styles';
 
 /**  Props that are needed to build the statistics */
 interface PropsI {

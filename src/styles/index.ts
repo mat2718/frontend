@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native';
 /** Main Color Palette */
 export const colors = {
   screenBg: 'rgb(250,250,250)',
-  white: 'rgb(0,0,0)',
+  white: 'rgb(255,255,255)',
   lightGray: 'rgb(185,185,186)',
   darkGray: 'rgb(72,76,86)',
   orange: 'rgb(242,105,38)',
@@ -18,7 +18,7 @@ export const colors = {
 export const screenStyles = StyleSheet.create({
   /** Wrap your top-level in a safeareaview with this style */
   safeAreaView: {
-    backgroundColor: 'rgb(250,250,250)',
+    backgroundColor: colors.screenBg,
     flex: 1,
   },
 
@@ -41,25 +41,62 @@ export const textStyles = StyleSheet.create({
   heading: {
     fontSize: 24,
     fontWeight: '700',
-    color: '#474c55',
+    color: colors.darkGray,
   },
 
   /** Any additional text that you want as a header under the main screen's title, use this style */
   subHeading: {
     fontSize: 22,
     fontWeight: '700',
-    color: '#474c55',
+    color: colors.darkGray,
   },
 
   /** Any normal text */
   regular: {
-    color: '#474c55',
+    color: colors.darkGray,
   },
 
   /** Any normal text but bold */
   regularBold: {
-    color: '#474c55',
+    color: colors.darkGray,
     fontWeight: '700',
+  },
+});
+
+/** Input Styles */
+export const inputStyles = StyleSheet.create({
+  pickerContainer: {
+    backgroundColor: colors.white,
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    margin: 5,
+  },
+
+  textInput: {
+    backgroundColor: colors.white,
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    margin: 5,
+    padding: 10,
+  },
+
+  inputLabelText: {
+    marginTop: 5,
+    paddingLeft: 5,
   },
 });
 
@@ -67,16 +104,16 @@ export const textStyles = StyleSheet.create({
 export const buttonStyles = StyleSheet.create({
   buttonContainer: {
     justifyContent: 'center',
-    height: 40,
-    width: 100,
-    backgroundColor: '#f26925',
+    height: 35,
+    width: 90,
+    backgroundColor: colors.orange,
     borderRadius: 50,
     marginLeft: 10,
   },
 
   buttonText: {
     fontWeight: '700',
-    color: '#ffffff',
+    color: colors.white,
     alignSelf: 'center',
   },
 });
@@ -99,25 +136,25 @@ export const listStyles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     borderRadius: 25,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.white,
   },
 
   heading: {
     fontWeight: '700',
     fontSize: 14,
-    color: '#474C55',
+    color: colors.darkGray,
     marginRight: 5,
   },
 
   subHeading: {
     fontWeight: '700',
     fontSize: 12,
-    color: '#474C55',
+    color: colors.darkGray,
   },
 
   textRegular: {
     fontSize: 12,
-    color: '#474C55',
+    color: colors.darkGray,
   },
 });
 
@@ -135,14 +172,14 @@ export const badgesStyles = StyleSheet.create({
 
   badgeText: {
     textAlign: 'center',
-    color: '#fff',
+    color: colors.white,
     fontWeight: '700',
     fontSize: 10,
   },
 
   /** Badge with legends (ex: planned batches badge) */
   legendBadge: {
-    backgroundColor: '#474C55',
+    backgroundColor: colors.darkGray,
     width: 30,
     alignItems: 'center',
     justifyContent: 'center',
@@ -155,7 +192,7 @@ export const badgesStyles = StyleSheet.create({
 
   legendBadgeText: {
     textAlign: 'center',
-    color: '#fff',
+    color: colors.white,
     fontWeight: '700',
     fontSize: 12,
   },

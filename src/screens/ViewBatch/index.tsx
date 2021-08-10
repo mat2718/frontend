@@ -19,6 +19,7 @@ import {
   screenStyles,
   textStyles,
   buttonStyles,
+  colors,
 } from '../../styles';
 
 interface PropsI {
@@ -71,12 +72,8 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
       <ScrollView style={screenStyles.mainView}>
         {/**Title: Curriculum */}
         <View style={screenStyles.titleContainer}>
-          <Text style={textStyles.heading}>
-            {route.params.batchId + ' ' + route.params.curriculum}
-          </Text>
-
+          {/** Touchable that takes us to the edit batch screen when clicking on the title */}
           <TouchableOpacity
-            style={buttonStyles.buttonContainer}
             onPress={() =>
               navigation.navigate('AddEditBatch', {
                 batchId: route.params.batchId,
@@ -87,8 +84,22 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
                 endDate: route.params.endDate,
               })
             }
+            style={{ flexDirection: 'row', alignItems: 'center' }}
           >
-            <Text style={buttonStyles.buttonText}>Edit Batch</Text>
+            <Text style={textStyles.heading}>
+              {route.params.batchId + ' ' + route.params.curriculum}
+            </Text>
+            <MaterialCommunityIcons
+              name='pencil'
+              size={20}
+              color={colors.darkGray}
+              style={{ paddingLeft: 5 }}
+            />
+          </TouchableOpacity>
+
+          {/** Confirm Button */}
+          <TouchableOpacity style={buttonStyles.buttonContainer}>
+            <Text style={buttonStyles.buttonText}>Confirm</Text>
           </TouchableOpacity>
         </View>
         {route.params.startDate < Date.now() &&
@@ -181,6 +192,14 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
             {progress < 1 ? (data.data[0] * 100).toFixed(0) : 100}% Complete
           </Text>
         </View>
+        <TouchableOpacity
+          style={styles.deleteButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={styles.deleteButtonText}>
+            Delete {route.params.batchId + ' ' + route.params.curriculum}
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -230,6 +249,21 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     color: '#474c55',
+  },
+
+  deleteButton: {
+    marginTop: 10,
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 3,
+    borderRadius: 15,
+    borderColor: colors.orange,
+  },
+
+  deleteButtonText: {
+    fontWeight: '700',
+    color: colors.orange,
   },
 });
 

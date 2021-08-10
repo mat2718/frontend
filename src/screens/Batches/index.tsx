@@ -20,7 +20,7 @@ import BatchesListHeader from '../../components/batches/BatchesListHeader';
 export const data = [
   {
     associate: 25,
-    batchId: 0,
+    batchId: 2106,
     curriculum: 'Cloud Native',
     trainer: 'Robert Connell',
     startDate: 1622505600000,
@@ -28,7 +28,7 @@ export const data = [
   },
   {
     associate: 25,
-    batchId: 0,
+    batchId: 2172,
     curriculum: 'React Native',
     trainer: 'Matthew Otto',
     startDate: 1627862400000,
@@ -36,7 +36,7 @@ export const data = [
   },
   {
     associate: 25,
-    batchId: 0,
+    batchId: 2132,
     curriculum: 'React',
     trainer: 'Red Oral',
     startDate: 1633132800000,

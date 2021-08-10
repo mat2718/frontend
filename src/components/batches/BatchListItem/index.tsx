@@ -35,7 +35,9 @@ const BatchListItem: React.FC<PropsI> = (props: PropsI) => {
       }}
     >
       <View style={{ flexDirection: 'row' }}>
-        <Text style={listStyles.heading}>{props.curriculum}</Text>
+        <Text style={listStyles.heading}>
+          {props.batchId + ' ' + props.curriculum}
+        </Text>
         {/** Checks current date and start/end date of batch and applies tag based on status */}
         {props.startDate < Date.now() && props.endDate > Date.now() ? (
           <View style={[badgesStyles.badge, { backgroundColor: '#f26925' }]}>
