@@ -15,7 +15,7 @@ const curriculum = {
 
 const AddEditCurriculum: React.FC = () => {
     const [text, setText] = useState('');
-    
+    /** Does it work? */
     return(
         <View>
             <Header />
