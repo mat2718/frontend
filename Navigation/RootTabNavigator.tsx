@@ -1,11 +1,10 @@
 import { RootTabParamList } from '../types';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import SplashScreen2 from '../component/screens/test';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Batches from '../src/screens/Batches';
+import Batches from '../src/Screens/Batches';
 import React from 'react';
-import Curricula from '../src/screens/Curricula/Curricula';
-import MainTrainer from '../src/screens/MainTrainer';
+import Curricula from '../src/Screens/Curricula/Curricula';
+import MainTrainer from '../src/Screens/MainTrainer';
 import ClientScreen from '../src/Screens/Clients/ClientScreen';
 import Navigation from './';
 
@@ -40,10 +39,20 @@ const RootTabNavigator = () => {
         }}
       />
       {/** add your main screens down here */}
-      
+
       <Tab.Screen
         name='Curricula'
         component={Curricula}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon name='notebook-multiple' color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name='Clients'
+        component={ClientScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name='notebook-multiple' color={color} size={size} />

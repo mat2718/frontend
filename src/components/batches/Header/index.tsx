@@ -1,8 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-import { View, Image, StyleSheet, StatusBar } from 'react-native';
-import colors from '../../../assets/constants/colors';
-=======
 import {
   View,
   Text,
@@ -13,7 +9,6 @@ import {
 import { colors } from '../../../styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
->>>>>>> dev-branch
 const Header: React.FC = () => {
   return (
     /** Contains the Header for the application */
@@ -32,25 +27,19 @@ const Header: React.FC = () => {
 const styles = StyleSheet.create({
   headerView: {
     height: StatusBar.currentHeight,
-    padding:20,
-    backgroundColor:colors.primaryWhite,
-    shadowColor: "rgb(0,0,0)",
+    padding: 20,
+    backgroundColor: colors.white,
+    shadowColor: 'rgb(0,0,0)',
     shadowOffset: {
       width: 0,
-      height:2,
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
     justifyContent: 'center',
-<<<<<<< HEAD
-    paddingTop: 60,
-    paddingBottom:30,
-   
-=======
     paddingTop: 65,
     paddingBottom: 35,
->>>>>>> dev-branch
   },
 
   revatureLogo: {

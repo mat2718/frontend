@@ -1,34 +1,33 @@
-//undefined for now, please change it to intake expected prop parameters
+//any for now, please change it to intake expected prop parameters
 //can change and add screen names too - Kai
 export type RootDrawerParamList = {
-  DrawerRoot: undefined;
+  DrawerRoot: any;
 };
 
 export type RootStackParamList = {
   Main: any;
-
   ViewBatch: any;
   AddEditBatch: any;
   AddTrainer: any;
   ViewEditTrainer: any;
-  Clients: undefined;
+  Clients: any;
   Curricula: any;
   AddEditCurriculum: any;
-  Trainers: undefined;
-  Diagram: undefined;
-  Skills: undefined;
-  Calendar: undefined;
-  EditClient:undefined;
-  AddClient:undefined;
-  AddDemand:undefined;
-  EditDemand:undefined;
+  Trainers: any;
+  Diagram: any;
+  Skills: any;
+  Calendar: any;
+  EditClient: any;
+  AddClient: any;
+  AddDemand: any;
+  EditDemand: any;
 };
 
 export type RootTabParamList = {
-  Home: undefined;
-  Home2: undefined;
-  Batches: undefined;
-  Clients: undefined;
-  Curricula: undefined;
+  Home: any;
+  Home2: any;
+  Batches: any;
+  Clients: any;
+  Curricula: any;
   Trainers: any;
 };
