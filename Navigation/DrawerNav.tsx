@@ -11,7 +11,7 @@ import {
 } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
-
+import { RootDrawerParamList, RootTabParamList,RootStackParamList } from '../types';
 
 export const DrawerContent: React.FC = () => {
     const navigation = useNavigation();

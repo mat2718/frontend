@@ -9,14 +9,14 @@ import CurriculumList from './CurriculumList';
 import { TextInput } from 'react-native-gesture-handler';
 import IDemand from '../../../assets/models/Demand';
 import colors from '../../../assets/constants/colors'
-
+import IClient from '../../../assets/models/Client';
 import moment from 'moment';
 
 let today=new Date()
 
 
 //sends client name as prop to add to demand 
-const AddDemandScreen =(props: { currClient: string })=>{
+const AddDemandScreen =(props: any)=>{
     const[currCurriculum, setCurriculum]=useState("");
     const[demandDate, setDemandDate]= useState(today)
     const[howMany, setHowMany]=useState(0);
@@ -25,7 +25,7 @@ const AddDemandScreen =(props: { currClient: string })=>{
   
 //sets name for mockable stuff
 
-let name="RevatureJr"
+
     return(
         <SafeAreaView style={GlobalStyles.container}>
             <Header/>
@@ -70,7 +70,7 @@ let name="RevatureJr"
             <View style={styles.demand}>
                         
                         <Text>
-                           Clients: {name}{"\n"}
+                           Clients: {props.route.params[0]}{"\n"}
                            Curriculum:   {currCurriculum} {"\n"}
                             {/* Needed By:{demandDate.getMonth()}/{demandDate.getDate()}/{demandDate.getFullYear()}{"\n"} */}
                             Needed By: {moment(demandDate).format('MM-DD-YYYY')}{"\n"}

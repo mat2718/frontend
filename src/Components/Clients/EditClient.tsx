@@ -24,7 +24,7 @@ const EditClient=((props:any)=>{
             <View >
                 <Text>Current Client:</Text>
                 <View style={GlobalStyles.listItem}>
-                    <Text>Client ID: {props.route.params[1].toString()}{"\n"}
+                    <Text>Client ID: {props.route.params[1]}{"\n"}
                           Client Name: {props.route.params[0]}  </Text>
                 </View>
                 <View>

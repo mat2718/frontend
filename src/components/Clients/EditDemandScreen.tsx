@@ -16,7 +16,7 @@ let today=new Date()
 
 
 //sends client name as prop to add to demand 
-const EditDemandScreen =(props: { currClient: string })=>{
+const EditDemandScreen =(props:any)=>{
     const[currCurriculum, setCurriculum]=useState("");
     const[demandDate, setDemandDate]= useState(today)
     const[howMany, setHowMany]=useState(0);
@@ -25,7 +25,7 @@ const EditDemandScreen =(props: { currClient: string })=>{
   
 //sets name for mockable stuff
 
-let name="RevatureJr"
+
     return(
         <SafeAreaView style={GlobalStyles.container}>
             <Header/>
@@ -70,10 +70,9 @@ let name="RevatureJr"
             <View style={styles.demand}>
                         
                         <Text>
-                           Clients: {name}{"\n"}
-                           Curriculum:   {currCurriculum} {"\n"}
-                            {/* Needed By:{demandDate.getMonth()}/{demandDate.getDate()}/{demandDate.getFullYear()}{"\n"} */}
-                            Needed By: {moment(demandDate).format('MM-DD-YYYY')}{"\n"}
+                           Clients: {props.route.params[0]}{"\n"}
+                           Curriculum:   {currCurriculum} {"\n"}                         
+                           Needed By: {moment(demandDate).format('MM-DD-YYYY')}{"\n"}
                            # of Associates Needed:  {howMany}{"\n"}
                            </Text>
                        
