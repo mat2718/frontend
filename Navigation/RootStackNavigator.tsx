@@ -12,7 +12,7 @@ import RootTabNavigator from './RootTabNavigator';
 import AddEditBatch from '../src/screens/AddEditBatch';
 import CreateTrainer from '../src/Screens/CreateTrainer';
 import ViewEditTrainer from '../src/Screens/ViewEditTrainer';
-
+//see what happens
 //please import your screen and put in your screen in components-kai
 const Stack = createStackNavigator<RootStackParamList>();
 const RootStackNavigator = () => {
