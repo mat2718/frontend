@@ -34,7 +34,7 @@ const BatchListItem: React.FC<PropsI> = (props: PropsI) => {
         navigation.navigate('ViewBatch', props);
       }}
     >
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Text style={listStyles.heading}>
           {props.batchId + ' ' + props.curriculum}
         </Text>
@@ -58,7 +58,7 @@ const BatchListItem: React.FC<PropsI> = (props: PropsI) => {
       <Text style={listStyles.subHeading}>{props.trainer}</Text>
       <Text style={listStyles.textRegular}>
         {new Date(props.startDate).toDateString() +
-          '\n to ' +
+          '\nto ' +
           new Date(props.endDate).toDateString()}
       </Text>
     </TouchableOpacity>

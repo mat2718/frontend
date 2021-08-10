@@ -4,8 +4,8 @@ import GlobalStyles from '../../../assets/constants/GlobalStyles';
 import DemandList from '../../components/Clients/DemandList';
 import ClientList from '../../components/Clients/ClientList';
 import IClient from '../../../assets/models/Client';
-import colors from '../../../assets/constants/colors';
 import { useNavigation } from '@react-navigation/native';
+import { colors, screenStyles, textStyles, buttonStyles } from '../../styles';
 
 let clients = [
   { clientId: '001', clientName: 'webstuff' },
@@ -29,7 +29,7 @@ const ClientScreen = () => {
   return (
     <View style={GlobalStyles.container}>
       {/* <Header/> */}
-      <Text style={GlobalStyles.h1}>Current Client</Text>
+      <Text style={textStyles.heading}>Current Client</Text>
       <View style={styles.clientDisplay}>
         <Text>Client Name: {currClient.clientName}</Text>
 
@@ -42,26 +42,23 @@ const ClientScreen = () => {
           >
             Edit Client
           </Text>
+
+          <Text
+            style={GlobalStyles.button}
+            onPress={() => {
+              navigation.navigate('AddClient');
+            }}
+          >
+            Add Client
+          </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.clientStuff}>
         <ClientList setClient={setClient} />
-        <View>
-          <TouchableOpacity>
-            <Text
-              style={GlobalStyles.button}
-              onPress={() => {
-                navigation.navigate('AddClient');
-              }}
-            >
-              Add Client
-            </Text>
-          </TouchableOpacity>
-        </View>
       </View>
       <View>
         <Text style={GlobalStyles.h1}>Here Are the Current Demands</Text>
-        <DemandList currClient={currClient} />
+        <DemandList currClient={currClient[0]} />
       </View>
       <View>
         <TouchableOpacity style={styles.screenNav}>
@@ -99,7 +96,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     padding: 20,
     marginBottom: 5,
-    backgroundColor: colors.secondaryBlue,
+    backgroundColor: colors.blue,
   },
   clientStuff: {},
 });

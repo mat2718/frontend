@@ -45,7 +45,7 @@ const RootTabNavigator = () => {
         component={Curricula}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Icon name='notebook-multiple' color={color} size={size} />
+            <Icon name='notebook-outline' color={color} size={size} />
           ),
         }}
       />
@@ -55,7 +55,7 @@ const RootTabNavigator = () => {
         component={ClientScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Icon name='notebook-multiple' color={color} size={size} />
+            <Icon name='account-box-outline' color={color} size={size} />
           ),
         }}
       />
