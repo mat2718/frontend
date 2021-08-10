@@ -1,6 +1,6 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { FlatList, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
-import Header from '../Header/index';
 /**
  * Authors: Joab Smith and Imran Ilyas
 **/
@@ -15,11 +15,14 @@ interface ITrainer
     ID: string
 }
 
-const trainer = () => {
-    return('nothing');
-}
 
-const ViewFlatList = (props:IProps) => {
+
+const ViewFlatList = (props: IProps) =>
+{
+    const navigator = useNavigation();
+    const trainer = (item:ITrainer) => {
+        navigator.navigate('ViewEditTrainer', {name: item.name, ID: item.ID})
+    }
     return (
         <View style = {styles.container}>
             <FlatList
@@ -27,7 +30,7 @@ const ViewFlatList = (props:IProps) => {
                 renderItem={(item) => (
                         <View style={styles.row}>
                         
-                        <TouchableOpacity style = {styles.item} onPress={trainer}>
+                        <TouchableOpacity style = {styles.item} onPress={() =>trainer(item.item)}>
                             <Text style = {styles.trainer}>{item.item.name}</Text>
                             <Text style = {styles.trainer}>ID#{item.item.ID}</Text>
                         </TouchableOpacity>

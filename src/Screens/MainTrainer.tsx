@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import{Text, StyleSheet, TouchableOpacity, View} from 'react-native'
 import SearchBar from '../components/Trainer/Searchbar';
@@ -7,9 +8,10 @@ import ViewFlatList from '../components/Trainer/ViewFlatList';
 **/
 const MainTrainer = () =>
 {
+    const navigation = useNavigation();
     const str = [{name: 'Johnathan Jingles', ID: '87654'}, {name: 'chup', ID: '87774'}]
     const addTrainer = () => {
-        console.log('Route to add trainer screen');
+        navigation.navigate('AddTrainer');
     }
     return (
         <View style={styles.container}>
