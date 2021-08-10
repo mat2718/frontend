@@ -7,10 +7,24 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import { Calendar } from 'react-native-calendars';
 import { ProgressChart } from 'react-native-chart-kit';
+<<<<<<< HEAD:src/Screens/ViewBatch/index.tsx
+// import Header from '../../components/batches/Header';
+=======
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../../../types';
+import { StackNavigationProp } from '@react-navigation/stack';
 import Header from '../../components/batches/Header';
+>>>>>>> dev-branch:src/screens/ViewBatch/index.tsx
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  badgesStyles,
+  screenStyles,
+  textStyles,
+  buttonStyles,
+  colors,
+} from '../../styles';
 
 interface PropsI {
   route: {
@@ -26,6 +40,10 @@ interface PropsI {
 }
 
 const ViewBatch: React.FC<PropsI> = ({ route }) => {
+  /** Navigation stuff */
+  type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
+  const navigation = useNavigation<mainScreenProp>();
+
   /** Date variables for the calendar component */
   const currentDate = new Date(Date.now()).toISOString().slice(0, 10);
   const startDate = new Date(route.params.startDate).toISOString().slice(0, 10);
@@ -53,31 +71,59 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
   };
 
   return (
+<<<<<<< HEAD:src/Screens/ViewBatch/index.tsx
     <SafeAreaView style={{ flex: 1 }}>
-      <Header />
+      {/* <Header /> */}
       <ScrollView style={styles.viewBatchScreen}>
+=======
+    <SafeAreaView style={screenStyles.safeAreaView}>
+      <Header />
+      <ScrollView style={screenStyles.mainView}>
+>>>>>>> dev-branch:src/screens/ViewBatch/index.tsx
         {/**Title: Curriculum */}
-        <View style={styles.mainTextContainer}>
-          <Text style={styles.mainText}>
-            {route.params.batchId + ' ' + route.params.curriculum}
-          </Text>
+        <View style={screenStyles.titleContainer}>
+          {/** Touchable that takes us to the edit batch screen when clicking on the title */}
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('AddEditBatch', {
+                batchId: route.params.batchId,
+                curriculum: route.params.curriculum,
+                trainer: route.params.trainer,
+                associates: route.params.associate,
+                startDate: route.params.startDate,
+                endDate: route.params.endDate,
+              })
+            }
+            style={{ flexDirection: 'row', alignItems: 'center' }}
+          >
+            <Text style={textStyles.heading}>
+              {route.params.batchId + ' ' + route.params.curriculum}
+            </Text>
+            <MaterialCommunityIcons
+              name='pencil'
+              size={20}
+              color={colors.darkGray}
+              style={{ paddingLeft: 5 }}
+            />
+          </TouchableOpacity>
 
-          <TouchableOpacity style={styles.editBatchButton}>
-            <Text style={styles.editBatchText}>Edit Batch</Text>
+          {/** Confirm Button */}
+          <TouchableOpacity style={buttonStyles.buttonContainer}>
+            <Text style={buttonStyles.buttonText}>Confirm</Text>
           </TouchableOpacity>
         </View>
         {route.params.startDate < Date.now() &&
         route.params.endDate > Date.now() ? (
-          <View style={[styles.badge, { backgroundColor: '#f26925' }]}>
-            <Text style={styles.badgeText}>Active</Text>
+          <View style={[badgesStyles.badge, { backgroundColor: '#f26925' }]}>
+            <Text style={badgesStyles.badgeText}>Active</Text>
           </View>
         ) : route.params.endDate < Date.now() ? (
-          <View style={[styles.badge, { backgroundColor: '#25F269' }]}>
-            <Text style={styles.badgeText}>Completed</Text>
+          <View style={[badgesStyles.badge, { backgroundColor: '#25F269' }]}>
+            <Text style={badgesStyles.badgeText}>Completed</Text>
           </View>
         ) : route.params.startDate > Date.now() ? (
-          <View style={[styles.badge, { backgroundColor: '#474C55' }]}>
-            <Text style={styles.badgeText}>Upcoming</Text>
+          <View style={[badgesStyles.badge, { backgroundColor: '#474C55' }]}>
+            <Text style={badgesStyles.badgeText}>Upcoming</Text>
           </View>
         ) : null}
         {/**Subtitle: Trainer */}
@@ -86,27 +132,34 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
             name='account-outline'
             size={16}
             color='#222'
+            style={{ marginRight: 5 }}
           />
-          <Text style={styles.subText}>{route.params.trainer}</Text>
+          <Text style={textStyles.regular}>{route.params.trainer}</Text>
         </View>
 
         {/**Body: Batch information */}
-        <View style={styles.subTextContainer}>
+        <View>
           {/**SubBody: Number of Associates */}
           <View style={{ flexDirection: 'row' }}>
             <MaterialCommunityIcons
               name='account-group-outline'
               size={16}
               color='#222'
+              style={{ marginRight: 5 }}
             />
-            <Text style={styles.subText}>
+            <Text style={textStyles.regular}>
               {route.params.associate} Associates
             </Text>
           </View>
           {/**SubBody: Start and End Date */}
           <View style={{ flexDirection: 'row' }}>
-            <MaterialCommunityIcons name='calendar' size={16} color='#222' />
-            <Text style={styles.subText}>
+            <MaterialCommunityIcons
+              name='calendar'
+              size={16}
+              color='#222'
+              style={{ marginRight: 5 }}
+            />
+            <Text style={textStyles.regular}>
               {new Date(route.params.startDate).toDateString() +
                 '\nto ' +
                 new Date(route.params.endDate).toDateString()}
@@ -149,16 +202,20 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
             {progress < 1 ? (data.data[0] * 100).toFixed(0) : 100}% Complete
           </Text>
         </View>
+        <TouchableOpacity
+          style={styles.deleteButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={styles.deleteButtonText}>
+            Delete {route.params.batchId + ' ' + route.params.curriculum}
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  viewBatchScreen: {
-    padding: 25,
-  },
-
   calendarView: {
     marginTop: 20,
     alignSelf: 'center',
@@ -176,44 +233,6 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderRadius: 25,
     backgroundColor: '#ffffff',
-  },
-
-  editBatchButton: {
-    justifyContent: 'center',
-    height: 40,
-    width: 100,
-    backgroundColor: '#f26925',
-    borderRadius: 20,
-  },
-
-  editBatchText: {
-    fontWeight: '700',
-    color: '#ffffff',
-    alignSelf: 'center',
-  },
-
-  mainTextContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-
-  mainText: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#474c55',
-    flex: 0.9,
-  },
-
-  subText: {
-    fontSize: 14,
-    paddingLeft: 5,
-    color: '#474c55',
-  },
-
-  subTextContainer: {
-    justifyContent: 'center',
-    marginTop: 2,
   },
 
   progressRingView: {
@@ -242,21 +261,19 @@ const styles = StyleSheet.create({
     color: '#474c55',
   },
 
-  badge: {
-    width: 60,
-    alignItems: 'center',
+  deleteButton: {
+    marginTop: 10,
+    padding: 10,
     justifyContent: 'center',
-    padding: 2,
-    borderRadius: 10,
-    marginBottom: 5,
-    overflow: 'hidden',
+    alignItems: 'center',
+    borderWidth: 3,
+    borderRadius: 15,
+    borderColor: colors.orange,
   },
 
-  badgeText: {
-    textAlign: 'center',
-    color: '#fff',
+  deleteButtonText: {
     fontWeight: '700',
-    fontSize: 10,
+    color: colors.orange,
   },
 });
 

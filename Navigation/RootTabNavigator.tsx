@@ -5,6 +5,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Batches from '../src/screens/Batches';
 import React from 'react';
 import Curricula from '../src/screens/Curricula/Curricula';
+import MainTrainer from '../src/screens/MainTrainer';
+import ClientScreen from '../src/Screens/Clients/ClientScreen';
+import Navigation from './';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -29,7 +32,7 @@ const RootTabNavigator = () => {
 
       <Tab.Screen
         name='Trainers'
-        component={SplashScreen2}
+        component={MainTrainer}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name='teach' color={color} size={size} />

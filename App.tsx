@@ -1,10 +1,14 @@
+
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import * as Font from 'expo-font';
-import { NavigationContainer } from '@react-navigation/native';
+
 import RootStackNavigator from './Navigation/RootStackNavigator';
 
 const App = () => {
@@ -36,7 +40,7 @@ const App = () => {
         <NavigationContainer>
           <PaperProvider theme={DefaultTheme}>
             <StatusBar style='auto' />
-            <RootStackNavigator />
+            <RootStackNavigator/>
           </PaperProvider>
         </NavigationContainer>
       </SafeAreaProvider>
@@ -51,3 +55,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+

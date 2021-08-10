@@ -9,6 +9,8 @@ export type RootStackParamList = {
 
   ViewBatch: any;
   AddEditBatch: any;
+  AddTrainer: any;
+  ViewEditTrainer: any;
   Clients: undefined;
   Curricula: any;
   AddEditCurriculum: any;
@@ -16,6 +18,10 @@ export type RootStackParamList = {
   Diagram: undefined;
   Skills: undefined;
   Calendar: undefined;
+  EditClient:undefined;
+  AddClient:undefined;
+  AddDemand:undefined;
+  EditDemand:undefined;
 };
 
 export type RootTabParamList = {
@@ -24,5 +30,5 @@ export type RootTabParamList = {
   Batches: undefined;
   Clients: undefined;
   Curricula: undefined;
-  Trainers: undefined;
+  Trainers: any;
 };
