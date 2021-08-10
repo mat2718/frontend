@@ -12,8 +12,8 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import Header from '../../components/batches/Header';
-import BatchStats from '../../components/batches/BatchStats';
-import BatchListItem from '../../components/batches/BatchListItem';
+import BatchStats from '../../Components/batches/BatchStats';
+import BatchListItem from '../../Components/batches/BatchListItem'
 
 /** Mock Data - PreRedux */
 export const data = [

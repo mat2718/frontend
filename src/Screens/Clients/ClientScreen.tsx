@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {View,Text,StyleSheet, TouchableOpacity} from 'react-native';
 import GlobalStyles from '../../../assets/constants/GlobalStyles';
-import DemandList from '../../components/Clients/DemandList';
-import ClientList from '../../components/Clients/ClientList';
+import DemandList from '../../Components/Clients/DemandList'
+import ClientList from '../../Components/Clients/ClientList'
 import AddDemandScreen from '../../components/Clients/AddDemandScreen';
 import IDemand from '../../../assets/models/Demand';
-import Header from '../../components/Header/Header';
+// import Header from '../../components/Header/Header';
 import IClient from '../../../assets/models/Client';
 import colors from '../../../assets/constants/colors';
 import {useNavigation} from '@react-navigation/native'
@@ -19,7 +19,7 @@ let clients = [
         
 
 ]
-let current: IClient[]=[];
+let current  : IClient[]=[]
 
 
 
@@ -32,11 +32,10 @@ const ClientScreen=()=>{
 
   
     for(let x=0;x<clients.length;x++){
-        if (clients[x].clientName===currClient)
-        {
-
-            current.push(clients[x])
-        }
+    if (clients[x].clientName==currClient.clientName)
+     {
+       current.push(clients[x])
+       }
     }
     
     
@@ -45,8 +44,8 @@ const ClientScreen=()=>{
             {/* <Header/> */}
             <Text style={GlobalStyles.h1}>Current Client</Text>
             <View style={styles.clientDisplay}>
-                <Text>Client Name: {currClient.clientName} {"\n"}
-                      Client Id: {currClient.clientId}
+                <Text>Client Name: {currClient.clientName} 
+                     
                 </Text>         
                
             <TouchableOpacity>
@@ -56,7 +55,7 @@ const ClientScreen=()=>{
             </TouchableOpacity>
             </View>
             <View style={styles.clientStuff}>
-            <ClientList setClient={setClient} />
+            <ClientList setClient={setClient}  />
               <View>
             <TouchableOpacity>
             <Text style={GlobalStyles.button} onPress={() => {navigation.navigate("AddClient") }}>Add Client</Text>          
@@ -70,8 +69,8 @@ const ClientScreen=()=>{
             </View>
             <View >
             <TouchableOpacity style={styles.screenNav}>
-                <Text style={GlobalStyles.button} onPress={() => {navigation.navigate("AddDemand") }}>Create A Demand</Text>
-                <Text style={GlobalStyles.button} onPress={() => {navigation.navigate("EditDemand") }}>Edit A Demand</Text>
+                <Text style={GlobalStyles.button} onPress={() => {navigation.navigate("AddDemand",currClient) }}>Create A Demand</Text>
+                <Text style={GlobalStyles.button} onPress={() => {navigation.navigate("EditDemand",currClient) }}>Edit A Demand</Text>
             </TouchableOpacity>
             </View>
             </View>

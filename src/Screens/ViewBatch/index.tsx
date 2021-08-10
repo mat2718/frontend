@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import { ProgressChart } from 'react-native-chart-kit';
-import Header from '../../components/batches/Header';
+// import Header from '../../components/batches/Header';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface PropsI {
@@ -54,7 +54,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Header />
+      {/* <Header /> */}
       <ScrollView style={styles.viewBatchScreen}>
         {/**Title: Curriculum */}
         <View style={styles.mainTextContainer}>

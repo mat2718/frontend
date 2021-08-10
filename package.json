@@ -48,6 +48,7 @@
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
     "@types/react-native-calendar-picker": "^7.0.2",
+    "@types/react-native-calendars": "^1.1264.2",
     "@types/react-native-table-component": "^1.2.1",
     "@types/react-native-vector-icons": "^6.4.8",
     "enzyme": "^3.11.0",

@@ -7,7 +7,7 @@ import {
   Text,
   TextInput,
 } from 'react-native';
-import Header from '../../components/batches/Header';
+
 import { Picker } from '@react-native-picker/picker';
 
 interface PropsI {
@@ -31,7 +31,7 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Header />
+     
       <ScrollView style={styles.addEditBatchScreen}>
         {/** Screen title text */}
         <Text style={styles.screenTitle}>
