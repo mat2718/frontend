@@ -4,29 +4,30 @@ import {
 } from '@react-navigation/stack';
 import { RootStackParamList, RootTabParamList, RootDrawerParamList } from '../types';
 import React from 'react';
-import ClientScreen from '../src/Screens/Clients/ClientScreen';
-import EditClient from '../src/Components/Clients/EditClient';
-import AddClient from '../src/Components/Clients/AddClient';
-import AddDemandScreen from '../src/Components/Clients/AddDemandScreen';
-import EditDemandScreen from '../src/Components/Clients/EditDemandScreen';
-import ViewBatch from '../src/Screens/ViewBatch/index'
-import Navigation from './index';
-import AddEditBatch from '../src/Screens/AddEditBatch';
-
+import ViewBatch from '../src/screens/ViewBatch';
+import Navigation from '.';
+import RootTabNavigator from './RootTabNavigator';
+import AddEditBatch from '../src/screens/AddEditBatch';
+import CreateTrainer from '../src/screens/CreateTrainer';
+import ViewEditTrainer from '../src/screens/ViewEditTrainer';
+//see what happens
 //please import your screen and put in your screen in components-kai
 const Stack = createStackNavigator<RootStackParamList>();
 
 
 const RootStackNavigator = () => {
-  return(
-  <Stack.Navigator
-    screenOptions={{
-      headerShown: false,
-      ...TransitionPresets.SlideFromRightIOS,
-    }}>
-    <Stack.Screen name='Main' component={Navigation} />
-    <Stack.Screen name='ViewBatch' component={ViewBatch} />
-    <Stack.Screen name='AddEditBatch' component={AddEditBatch} />
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        ...TransitionPresets.SlideFromRightIOS,
+      }}
+    >
+      <Stack.Screen name='Main' component={Navigation} />
+      <Stack.Screen name='ViewBatch' component={ViewBatch} />
+      <Stack.Screen name='AddEditBatch' component={AddEditBatch} />
+      <Stack.Screen name='AddTrainer' component={CreateTrainer} options={{ headerShown: true }}/>
+      <Stack.Screen name='ViewEditTrainer' component={ViewEditTrainer} options={{ headerShown: true }}/>
       {/** add your view/addedit screens here */}
        
     <Stack.Screen name="Clients" component={ClientScreen}/>

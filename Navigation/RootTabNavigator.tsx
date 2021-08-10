@@ -3,7 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SplashScreen2 from '../component/screens/test';
 import RootStackNavigator from './RootStackNavigator';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Batches from '../src/Screens/Batches/index'
+import Batches from '../src/screens/Batches';
+import MainTrainer from '../src/screens/MainTrainer';
+
 import React from 'react';
 import ClientScreen from '../src/Screens/Clients/ClientScreen';
 import Navigation from './';
@@ -30,8 +32,8 @@ const RootTabNavigator = () => {
       />
 
       <Tab.Screen
-        name='Clients'
-        component={ClientScreen}
+        name='Trainers'
+        component={MainTrainer}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name='teach' color={color} size={size} />
