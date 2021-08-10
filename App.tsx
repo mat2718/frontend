@@ -8,7 +8,7 @@ import { StyleSheet, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import * as Font from 'expo-font';
-import { NavigationContainer } from '@react-navigation/native';
+
 import RootStackNavigator from './Navigation/RootStackNavigator';
 
 const App = () => {
@@ -40,7 +40,7 @@ const App = () => {
         <NavigationContainer>
           <PaperProvider theme={DefaultTheme}>
             <StatusBar style='auto' />
-            <RootStackNavigator />
+            <RootStackNavigator/>
           </PaperProvider>
         </NavigationContainer>
       </SafeAreaProvider>
