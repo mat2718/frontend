@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
+import { badgesStyles } from '../../../styles';
 
 /**  Props that are needed to build the statistics */
 interface PropsI {
@@ -59,15 +60,15 @@ const BatchStats: React.FC<PropsI> = (props: PropsI) => {
         >
           {/** Planned batches badge */}
           <View style={styles.statView}>
-            <View style={styles.badge}>
-              <Text style={styles.badgeText}>PB</Text>
+            <View style={badgesStyles.legendBadge}>
+              <Text style={badgesStyles.legendBadgeText}>PB</Text>
             </View>
             <Text style={styles.statText}>{props.data[0]} Planned Batches</Text>
           </View>
           {/** Active badge */}
           <View style={styles.statView}>
-            <View style={styles.badge}>
-              <Text style={styles.badgeText}>AB</Text>
+            <View style={badgesStyles.legendBadge}>
+              <Text style={badgesStyles.legendBadgeText}>AB</Text>
             </View>
             <Text style={styles.statText}>{props.data[1]} Active Batches </Text>
           </View>
@@ -83,15 +84,15 @@ const BatchStats: React.FC<PropsI> = (props: PropsI) => {
         >
           {/** Active trainers badge */}
           <View style={styles.statView}>
-            <View style={styles.badge}>
-              <Text style={styles.badgeText}>AT</Text>
+            <View style={badgesStyles.legendBadge}>
+              <Text style={badgesStyles.legendBadgeText}>AT</Text>
             </View>
             <Text style={styles.statText}>{props.data[2]} Active Trainers</Text>
           </View>
           {/** Active associates badge */}
           <View style={styles.statView}>
-            <View style={styles.badge}>
-              <Text style={styles.badgeText}>IT</Text>
+            <View style={badgesStyles.legendBadge}>
+              <Text style={badgesStyles.legendBadgeText}>IT</Text>
             </View>
             <Text style={styles.statText}>
               {props.data[3]} Inactive Trainers
@@ -112,6 +113,8 @@ const styles = StyleSheet.create({
   },
 
   statView: {
+    marginRight: 2,
+    marginLeft: 2,
     width: 175,
     alignItems: 'center',
     flexDirection: 'row',
@@ -126,25 +129,6 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     overflow: 'hidden',
-  },
-
-  badge: {
-    backgroundColor: '#474C55',
-    width: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 10,
-    paddingBottom: 10,
-    borderTopStartRadius: 10,
-    borderBottomStartRadius: 10,
-    overflow: 'hidden',
-  },
-
-  badgeText: {
-    textAlign: 'center',
-    color: '#fff',
-    fontWeight: '700',
-    fontSize: 12,
   },
 });
 
