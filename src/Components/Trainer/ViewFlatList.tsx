@@ -21,7 +21,7 @@ const ViewFlatList = (props: IProps) =>
 {
     const navigator = useNavigation();
     const trainer = (item:ITrainer) => {
-        navigator.navigate('ViewEditTrainer', {name: item.name, ID: item.ID})
+        navigator.navigate('ViewEditTrainer', {ID: item.ID})
     }
     return (
         <View style = {styles.container}>

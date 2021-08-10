@@ -40,27 +40,27 @@ const EditTrainer = (props:IProps) =>
 
            
 
-            <View style={styles.fieldRow}>
+            {/* <View style={styles.fieldRow}> */}
             <View style = {styles.fieldCols}>
-               
-                    <Text style={styles.label}>First Name:</Text>
-                    <Text style = {styles.label}>Last Name:</Text>
-                    <Text style = {styles.label}>Email:</Text>
-                    <Text style={styles.label}>ID:</Text>
-                
-              
-            </View>
-                <View style={styles.fieldCols}>
-                    
-               
-                
-                    <TextInput style = {styles.input} testID = 'Firstname' placeholder='First Name' onChangeText={setFirstName}>{firstName}</TextInput>
-                    <TextInput style = {styles.input} testID = 'Lastname' placeholder='Last Name' onChangeText={setLastName}>{lastName}</TextInput>
-                    <TextInput style = {styles.input} testID = 'Email' placeholder= 'Email' onChangeText={setEmail}>{email}</TextInput>
-                    <TextInput style = {styles.input} testID = 'ID' placeholder='ID Number' onChangeText={setID}>{ID}</TextInput>
-                            
-
-            </View>
+           
+                    <View style={styles.fieldRow}>
+                        <Text style={styles.label}>First Name:</Text>
+                        <TextInput style = {styles.input} testID = 'Firstname' placeholder='First Name' onChangeText={setFirstName}>{firstName}</TextInput>
+           
+                    </View>
+                    <View style={styles.fieldRow}>
+                        <Text style={styles.label}>Last Name:</Text>
+                        <TextInput style = {styles.input} testID = 'Lastname' placeholder='Last Name' onChangeText={setLastName}>{lastName}</TextInput>
+                   </View>
+                    <View style={styles.fieldRow}>
+                        <Text style={styles.label}>Email:</Text>
+                        <TextInput style={styles.input} selection={{ start: 1 }} testID = 'Email' placeholder= 'Email' onChangeText={setEmail}>{email}</TextInput>
+                    </View>
+                    <View style={styles.fieldRow}>
+                        <Text style={styles.label}>ID:</Text>
+                        <TextInput style = {styles.input} testID = 'ID' placeholder='ID Number' onChangeText={setID}>{ID}</TextInput>
+                    </View>
+                {/* </View> */}
                       
             </View>
             
@@ -75,8 +75,9 @@ const EditTrainer = (props:IProps) =>
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%'
-        //justifyContent: 'center'        
+        width: '100%',
+        marginVertical: '10%',
+        marginHorizontal: '2%',        
     },
 
     header: {
@@ -86,35 +87,37 @@ const styles = StyleSheet.create({
     },
 
     fieldRow: {
-        flex: 1,
+        //flex: 1,
         width: '100%',
         flexDirection: 'row',
+       
+
     },
 
     label: {
         fontSize: 20,
-        // width: '150%',
+        width: '30%',
         paddingVertical: '10%',
-        // alignSelf: 'flex-end',
-        textAlign: 'right',
+        textAlign: 'right'
+        //alignSelf: 'flex-end'
     },
     
     input: {
         
         // flexDirection: 'row',
-        // width: '150%',
+        width: '70%',
         fontSize: 20,
-        paddingVertical: '10%',
-        textAlign: 'left',
+        //paddingVertical: '10%',
+        textAlign: 'center',
     },
     
     fieldCols: {
-        flex: 1,
-        marginVertical: '10%',
-        marginHorizontal: '2%',
+        flex:1,
+        width: '100%',
         //alignContent: 'space-between',
         alignContent: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+       
         
     },
     

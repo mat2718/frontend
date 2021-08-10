@@ -29,25 +29,25 @@ const ViewTrainer = (props: IProps) =>
             <Text style = {styles.header}>{props.trainer.FirstName + ' ' + props.trainer.LastName}'s Profile</Text>
         <View style = {styles.fieldCols}>
            
-        <View style={styles.fieldRow}>
+                <View style={styles.fieldRow}>
                     <Text style={styles.label}>First Name:</Text>
-            <Text style={styles.value}>{props.trainer.FirstName}</Text>
-        </View>
-                    <View style={styles.fieldRow}>
+                    <Text style={styles.value}>{props.trainer.FirstName}</Text>
+                </View>
+                <View style={styles.fieldRow}>
                     <Text style={styles.label}>Last Name:</Text>
                     <Text style={styles.value}>{props.trainer.LastName}</Text>
 
-                    </View>
-                    <View style={styles.fieldRow}>
+                </View>
+                <View style={styles.fieldRow}>
                     <Text style={styles.label}>Email:</Text>
                     <Text style={styles.value}>{props.trainer.Email}</Text>
 
-                    </View>
-                    <View style={styles.fieldRow}>
+                </View>
+                <View style={styles.fieldRow}>
                 <Text style={styles.label}>ID:</Text>
                     <Text style={styles.value}>{props.trainer.ID}</Text>
 
-                    </View>
+                </View>
         </View>
             
           
@@ -72,7 +72,9 @@ const styles = StyleSheet.create({
     },
 
     header: {
-        fontSize: 24,
+        margin: '2%',
+        fontSize: 30,
+        textAlign: 'center',
     },
 
     fieldRow: {

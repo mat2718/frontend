@@ -7,11 +7,29 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 /**
  * Authors: Joab Smith and Imran Ilyas
 **/
-const SearchBar = () => {
-    const [search, setSearch] = useState('');
-    const [selectedValue, setSelectedValue] = useState('Search By');
-    const searched = () => {
-        return('searching for a trainer');
+interface ITrainer
+{
+    name: string,
+    ID: string
+}
+interface IProps
+{
+    setTrainer: (trainerArr:ITrainer[]) => void
+}
+const SearchBar = (props:IProps) => {
+    const [search, setSearch] = useState(''); // Search text
+    const [selectedValue, setSelectedValue] = useState('Search By'); //Search catagory
+    const searched = () =>
+    {
+        //call all trainers
+        switch (selectedValue) {
+            case 'ALL':
+            case 'Fname':
+            case 'Lname':
+            case 'id':
+            
+        }
+
     }
     return(
         <View style={styles.container}>
@@ -61,4 +79,4 @@ const styles = StyleSheet.create({
     searchIcon: {},
 })
 
-export default SearchBar;
+    export default SearchBar;

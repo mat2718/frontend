@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import {Text, TextInput, TouchableOpacity, StyleSheet, View, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, Platform} from 'react-native';
-import Header from '../Components/Header';
+//import Header from '../Components/Header';
 //import axios from 'axios';
 /**
  * Authors: Joab Smith and Imran Ilyas
@@ -20,7 +20,7 @@ const CreateTrainer = () =>
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style = {styles.container}>
-            <Header/>
+            {/* <Header/> */}
             <Text style = {styles.header}>Add a Trainer</Text>
             <View style={styles.fieldRow}>
             <View style = {styles.fieldCols}>

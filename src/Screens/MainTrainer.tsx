@@ -1,22 +1,32 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import{Text, StyleSheet, TouchableOpacity, View} from 'react-native'
 import SearchBar from '../components/Trainer/Searchbar';
 import ViewFlatList from '../components/Trainer/ViewFlatList';
 /**
  * Authors: Joab Smith and Imran Ilyas
 **/
+
+interface ITrainer
+{
+    name: string,
+    ID: string
+}
+
 const MainTrainer = () =>
 {
+    const [trainerArr, setTrainerArr] = useState<ITrainer[]>([])
     const navigation = useNavigation();
     const str = [{name: 'Johnathan Jingles', ID: '87654'}, {name: 'chup', ID: '87774'}]
     const addTrainer = () => {
         navigation.navigate('AddTrainer');
     }
+
+
     return (
         <View style={styles.container}>
             <View style={styles.searchBar}>
-                <SearchBar />
+                <SearchBar setTrainer={setTrainerArr}/>
             </View>
             <View>
                 <Text style = {styles.header}>Trainers Page</Text>
