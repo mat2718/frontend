@@ -8,6 +8,10 @@ import ViewBatch from '../src/screens/ViewBatch';
 import Navigation from '.';
 import RootTabNavigator from './RootTabNavigator';
 import AddEditBatch from '../src/screens/AddEditBatch';
+import Curricula from '../src/screens/Curricula/Curricula';
+import AddEditCurriculum from '../src/screens/AddEditCurriculum/AddEditCurriculum';
+
+
 import CreateTrainer from '../src/screens/CreateTrainer';
 import ViewEditTrainer from '../src/screens/ViewEditTrainer';
 //see what happens
@@ -29,12 +33,13 @@ const RootStackNavigator = () => {
       <Stack.Screen name='AddTrainer' component={CreateTrainer} options={{ headerShown: true }}/>
       <Stack.Screen name='ViewEditTrainer' component={ViewEditTrainer} options={{ headerShown: true }}/>
       {/** add your view/addedit screens here */}
-       
-    <Stack.Screen name="Clients" component={ClientScreen}/>
-    <Stack.Screen name="EditClient" component={EditClient}/>
-    <Stack.Screen name="AddClient" component={AddClient}/>
-    <Stack.Screen name="AddDemand" component={AddDemandScreen}/>    
-    <Stack.Screen name="EditDemand" component={EditDemandScreen}/>
+      <Stack.Screen name='Curricula' component={Curricula} />
+      <Stack.Screen name='AddEditCurriculum' component={AddEditCurriculum} />       
+      <Stack.Screen name="Clients" component={ClientScreen}/>
+      <Stack.Screen name="EditClient" component={EditClient}/>
+      <Stack.Screen name="AddClient" component={AddClient}/>
+      <Stack.Screen name="AddDemand" component={AddDemandScreen}/>    
+      <Stack.Screen name="EditDemand" component={EditDemandScreen}/>
      
   </Stack.Navigator>
   );
