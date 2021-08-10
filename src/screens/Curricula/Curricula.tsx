@@ -40,11 +40,11 @@ const Curricula: React.FC = () => {
     {
         'batches': [3, 4, 6],
         'createdBy': 'Third Creator',
-        'createdOn': "2021-08-04",
+        'createdOn': "2018-08-16",
         'id': 0,
         'lastModified': 'Third Creator'	,
         'lastModifiedBy': '2021-08-05',
-        'name':	'Curriculum 3',
+        'name':	'Curriculum 4',
         'skills': ["JS", "TS", "React", "React-Native"]
     }
 ];

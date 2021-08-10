@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Image, Text, View, StyleSheet, TouchableOpacity } from 'react-native';;
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
+type CurriculaScreenProp = StackNavigationProp<RootStackParamList, 'Curricula'>
 
 export const ExpandableList = ({item, onPress}) => {
     const [expanded, setExpanded] = useState(false);
@@ -20,6 +23,9 @@ export const ExpandableList = ({item, onPress}) => {
 
     const batches = item.batches.join(', ');
     const skills = item.skills.join(', ');
+
+    const navigation = useNavigation<CurriculaScreenProp>();
+
     return (
         <TouchableOpacity style={styles.wrap} onPress={onCurriculumPress}>
             <View style={{flexDirection: 'row', paddingVertical: 10}}>
@@ -54,8 +60,11 @@ export const ExpandableList = ({item, onPress}) => {
                     <Text style={styles.text}>{skills}</Text>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button} onPress={() => {}}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AddEditCurriculum')}>
                         <Text style={styles.buttonText}>EDIT</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.deleteButton} onPress={() => navigation.navigate('AddEditCurriculum')}>
+                        <Text style={styles.buttonText}>DELETE</Text>
                     </TouchableOpacity>
                 </View>
             </>
@@ -130,5 +139,13 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 15,
         fontFamily: 'FuturaBold'
-    }
+    },
+    deleteButton: {
+        alignSelf: 'flex-end',
+        paddingVertical: 2,
+        paddingHorizontal: 5,
+        backgroundColor: '#F26925',
+        borderRadius: 50,
+        marginLeft: 10
+    },
   });

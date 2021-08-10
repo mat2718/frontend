@@ -10,7 +10,8 @@ export type RootStackParamList = {
   ViewBatch: any;
   AddEditBatch: any;
   Clients: undefined;
-  Curricula: undefined;
+  Curricula: any;
+  AddEditCurriculum: any;
   Trainers: undefined;
   Diagram: undefined;
   Skills: undefined;
