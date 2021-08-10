@@ -9,10 +9,11 @@ const newClient = (newClientID:string, newClientName:string) => {
     console.log(newClientID+newClientName);
 }
 
-
 const AddClient=({addNewClient = newClient} ) => {
     const [newClientID,setNewClientID]=useState("")
     const [newClientName,setNewClientName]=useState("")
+
+
     return (
         <View style={GlobalStyles.container}>
             {/* <Header/> */}
@@ -33,7 +34,7 @@ const AddClient=({addNewClient = newClient} ) => {
                       keyboardType="default" 
                       placeholder="New Client Name"                 
                       defaultValue={""}
-                      onChangeText={text =>setNewClientName(text)}                    
+                      onChangeText={text => setNewClientName(text)}                  
                         />   
                 </View>
                 <View>
