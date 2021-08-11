@@ -5,12 +5,12 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import { listStyles } from '../../../styles';
 
-interface PropsI {
+interface IProps {
   name: string;
   email: string;
 }
 
-const TrainersListItem: React.FC<PropsI> = (props: PropsI) => {
+const TrainersListItem: React.FC<IProps> = (props: IProps) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
