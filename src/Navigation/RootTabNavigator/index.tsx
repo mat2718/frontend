@@ -5,7 +5,7 @@ import Batches from '../../screens/Batches';
 import React from 'react';
 import Curricula from '../../screens/Curricula';
 import MainTrainer from '../../screens/Trainers';
-import ClientScreen from '../../screens/Clients_Old';
+import Clients from '../../screens/Clients';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -48,15 +48,15 @@ const RootTabNavigator = () => {
         }}
       />
 
-      {/* <Tab.Screen
+      <Tab.Screen
         name='Clients'
-        component={ClientScreen}
+        component={Clients}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name='account-box-outline' color={color} size={size} />
           ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 };

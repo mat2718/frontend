@@ -11,11 +11,12 @@ import Curricula from '../../screens/Curricula';
 import AddEditCurriculum from '../../screens/AddEditCurriculum';
 import ClientScreen from '../../screens/Clients_Old';
 import EditClient from '../../components/clients_old/EditClient';
-import AddClient from '../../components/clients_old/AddClient';
+import AddClient from '../../screens/AddClient';
 import AddDemandScreen from '../../components/clients_old/AddDemandScreen';
 import EditDemandScreen from '../../components/clients_old/EditDemandScreen';
 import CreateTrainer from '../../screens/CreateTrainer';
 import ViewEditTrainer from '../../screens/ViewEditTrainer';
+import ViewClient from '../../screens/ViewClient';
 //see what happens
 //please import your screen and put in your screen in components-kai
 const Stack = createStackNavigator<RootStackParamList>();
@@ -44,6 +45,8 @@ const RootStackNavigator = () => {
       {/** add your view/addedit screens here */}
       <Stack.Screen name='Curricula' component={Curricula} />
       <Stack.Screen name='AddEditCurriculum' component={AddEditCurriculum} />
+      <Stack.Screen name='ViewClient' component={ViewClient} />
+      <Stack.Screen name='AddClient' component={AddClient} />
       {/* <Stack.Screen name='Clients' component={ClientScreen} />
       <Stack.Screen name='EditClient' component={EditClient} />
       <Stack.Screen name='AddClient' component={AddClient} />

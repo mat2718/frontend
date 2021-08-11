@@ -11,6 +11,7 @@ export type RootStackParamList = {
   AddTrainer: any;
   ViewEditTrainer: any;
   Clients: any;
+  ViewClient: any;
   Curricula: any;
   AddEditCurriculum: any;
   Trainers: any;
