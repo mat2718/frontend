@@ -52,7 +52,7 @@ function addConfig(config) {
   
   // comment this out if you want to test all files
   config.testMatch = [
-    '<rootDir>/src/Components/Clients/__tests__/AddDemandScreen.test.js',
+    '<rootDir>/src/Components/Clients/__tests__/*',
   ];
 
   // third-party libraries that throw errors
@@ -74,6 +74,7 @@ function addConfig(config) {
     'react-native-chart-kit',
     'react-native-calendars',
     'react-native-swipe-gestures',
+    'react-native-calendar-picker',
     'expo-font',
     'expo-asset',
     'expo-constants',

@@ -1,13 +1,14 @@
 import { mount } from 'enzyme';
 import { Text } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+import moment from 'moment';
 
+import RNPickerSelect from 'react-native-picker-select';
 import CalendarPicker from 'react-native-calendar-picker';
 import CurriculumList from '../CurriculumList';
-import Header from '../../Header'
+import Header from '../../Header/Header'
 
-
-import AddDemandScreen from './AddDemandScreen';
+import AddDemandScreen from '../AddDemandScreen';
 
 let wrapper;
 
@@ -40,21 +41,32 @@ describe('testing AddDemandScreen', () => {
     // WARNING: Implementation detail
     it('CurriculumList has setter for currCurriculum in its props', () => {
         const curriculum = 'curriculum';
+
+        // make array of curriculumList props, find the function, and call it
+        // with curriculum as argument
         Object.values( wrapper.find(CurriculumList).props() ).forEach( x => {
             if (typeof x === 'function') {
                 x(curriculum);
             }
         });
+
+        // having called the setter, the text showing currCurriculum should now
+        // display the argument to the setter
         let isNewCurriculumShown = wrapper.find(Text).someWhere( node =>
             node.text().toLowerCase().includes(curriculum)     
         );
         expect(isNewCurriculumShown).toBeTruthy();
     })
 
-    // really good version of previous test, integration test
-    // it('by interacting with Curriculum list, we can change displayed Curriculum', () => {
-
-    // })
+    // a better version of previous test (integration test)
+    it('by interacting with Curriculum list, we can change displayed Curriculum', () => {
+        const curriculum = 'curriculum';
+        wrapper.find(RNPickerSelect).invoke('onValueChange')(curriculum);
+        let isNewCurriculumShown = wrapper.find(Text).someWhere( node =>
+            node.text().toLowerCase().includes(curriculum)     
+        );
+        expect(isNewCurriculumShown).toBeTruthy();
+    })
 
     it('renders pressable button to add demand', () => {
         expect(
@@ -71,15 +83,15 @@ describe('testing AddDemandScreen', () => {
     })
 
     it('add demand button performs correct behavior when pressed', () => {
-        expect(1).toBe(0); // not yet implemented
+        expect(1).toBe(0); // test not yet implemented
     })
 
-    it('when we make a choice in Calendar picker, the text box displays the new demanded date', () => {
+    it('when we make a choice in Calendar picker, some text box displays the new demanded date', () => {
         let calendar = wrapper.find(CalendarPicker);
         let date = Date.now();
         calendar.invoke('onDateChange')(date);
         let isNewDateShown = wrapper.find(Text).someWhere( node =>
-            node.text().toLowerCase().includes(moment(demandDate).format('MM-DD-YYYY'))     
+            node.text().toLowerCase().includes(moment(date).format('MM-DD-YYYY'))     
         )
         expect(isNewDateShown).toBeTruthy();
     })
