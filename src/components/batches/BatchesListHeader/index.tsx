@@ -8,12 +8,12 @@ import BatchStats from '../BatchStats';
 import { screenStyles, textStyles, buttonStyles } from '../../../styles';
 
 /** We pass the filter state from the Batches screen to this component */
-interface PropsI {
+interface IProps {
   selectedFilter: any;
   setSelectedFilter: any;
 }
 
-const BatchesListHeader: React.FC<PropsI> = (props: PropsI) => {
+const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
@@ -40,7 +40,7 @@ const BatchesListHeader: React.FC<PropsI> = (props: PropsI) => {
 
       {/** FlatList title text */}
       <View style={screenStyles.titleContainer}>
-        <Text style={textStyles.heading}>
+        <Text style={textStyles.subHeading}>
           {props.selectedFilter.charAt(0).toUpperCase() +
             props.selectedFilter.slice(1)}{' '}
           batches

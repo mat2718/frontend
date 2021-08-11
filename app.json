@@ -4,28 +4,26 @@
     "slug": "frontend",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/revatureFav.png",
+    "icon": "./src/assets/images/revatureFav.png",
     "splash": {
-      "image": "./assets/images/RevatureLogo.png",
+      "image": "./src/assets/images/RevatureLogo.png",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/revatureFav.png",
+        "foregroundImage": "./src/assets/images/revatureFav.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/images/revatureFav.png"
+      "favicon": "./src/assets/images/revatureFav.png"
     }
   }
 }

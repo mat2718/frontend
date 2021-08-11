@@ -5,7 +5,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../../types';
 import { listStyles, badgesStyles } from '../../../styles';
 
-interface PropsI {
+interface IProps {
   associate: number;
   batchId: number;
   curriculum: string;
@@ -14,7 +14,7 @@ interface PropsI {
   endDate: number;
 }
 
-const BatchListItem: React.FC<PropsI> = (props: PropsI) => {
+const BatchListItem: React.FC<IProps> = (props: IProps) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
