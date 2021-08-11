@@ -1,8 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-import { View, Image, StyleSheet, StatusBar } from 'react-native';
-import colors from '../../../assets/constants/colors';
-=======
 import {
   View,
   Text,
@@ -13,7 +9,6 @@ import {
 import { colors } from '../../../styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
->>>>>>> dev-branch
 const Header: React.FC = () => {
   return (
     /** Contains the Header for the application */
@@ -43,14 +38,8 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     justifyContent: 'center',
-<<<<<<< HEAD
-    paddingTop: 60,
-    paddingBottom:30,
-   
-=======
     paddingTop: 65,
     paddingBottom: 35,
->>>>>>> dev-branch
   },
 
   revatureLogo: {
