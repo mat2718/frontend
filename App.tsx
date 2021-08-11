@@ -1,15 +1,11 @@
-
-
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import * as Font from 'expo-font';
-
-import RootStackNavigator from './Navigation/RootStackNavigator';
+import RootStackNavigator from './src/Navigation/RootStackNavigator';
 
 const App = () => {
   const [fontsLoaded, setFonts] = useState(false);
@@ -20,9 +16,9 @@ const App = () => {
 
   const loadFonts = async () => {
     await Font.loadAsync({
-      FuturaBold: require('./assets/fonts/Futura-Std-Bold.otf'),
-      FuturaBook: require('./assets/fonts/Futura-Std-Book.otf'),
-      FuturaMedium: require('./assets/fonts/Futura-Std-Medium.otf'),
+      FuturaBold: require('./src/assets/fonts/Futura-Std-Bold.otf'),
+      FuturaBook: require('./src/assets/fonts/Futura-Std-Book.otf'),
+      FuturaMedium: require('./src/assets/fonts/Futura-Std-Medium.otf'),
     });
     setFonts(true);
   };
@@ -40,7 +36,7 @@ const App = () => {
         <NavigationContainer>
           <PaperProvider theme={DefaultTheme}>
             <StatusBar style='auto' />
-            <RootStackNavigator/>
+            <RootStackNavigator />
           </PaperProvider>
         </NavigationContainer>
       </SafeAreaProvider>
@@ -55,5 +51,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-

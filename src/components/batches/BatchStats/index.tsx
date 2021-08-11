@@ -4,7 +4,7 @@ import { BarChart } from 'react-native-chart-kit';
 import { badgesStyles } from '../../../styles';
 
 /**  Props that are needed to build the statistics */
-interface PropsI {
+interface IProps {
   data: [
     plannedBatches: number,
     activeBatches: number,
@@ -13,7 +13,7 @@ interface PropsI {
   ];
 }
 
-const BatchStats: React.FC<PropsI> = (props: PropsI) => {
+const BatchStats: React.FC<IProps> = (props: IProps) => {
   /**  Passes props data to dataset for the BarChart */
   const data = {
     labels: ['PB', 'AB', 'AT', 'IT'],

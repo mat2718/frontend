@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  StatusBar,
-  TouchableOpacity,
-} from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
 import { colors } from '../../../styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -27,12 +21,12 @@ const Header: React.FC = () => {
 const styles = StyleSheet.create({
   headerView: {
     height: StatusBar.currentHeight,
-    padding:20,
-    backgroundColor:colors.primaryWhite,
-    shadowColor: "rgb(0,0,0)",
+    padding: 20,
+    backgroundColor: colors.white,
+    shadowColor: 'rgb(0,0,0)',
     shadowOffset: {
       width: 0,
-      height:2,
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,

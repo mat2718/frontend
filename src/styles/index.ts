@@ -40,26 +40,28 @@ export const textStyles = StyleSheet.create({
   /** Main title, as in your screen's title */
   heading: {
     fontSize: 24,
-    fontWeight: '700',
     color: colors.darkGray,
+    fontFamily: 'FuturaBold',
   },
 
   /** Any additional text that you want as a header under the main screen's title, use this style */
   subHeading: {
-    fontSize: 22,
-    fontWeight: '700',
+    fontSize: 20,
+    fontFamily: 'FuturaBold',
     color: colors.darkGray,
   },
 
   /** Any normal text */
   regular: {
     color: colors.darkGray,
+    fontFamily: 'FuturaBook',
+    fontWeight: '700',
   },
 
   /** Any normal text but bold */
   regularBold: {
     color: colors.darkGray,
-    fontWeight: '700',
+    fontFamily: 'FuturaBold',
   },
 });
 
@@ -105,16 +107,46 @@ export const buttonStyles = StyleSheet.create({
   buttonContainer: {
     justifyContent: 'center',
     height: 35,
-    width: 90,
+    width: 125,
+    padding: 10,
     backgroundColor: colors.orange,
     borderRadius: 50,
     marginLeft: 10,
   },
 
+  buttonCompactContainer: {
+    justifyContent: 'center',
+    height: 35,
+    width: 100,
+    padding: 10,
+    backgroundColor: colors.orange,
+    borderRadius: 50,
+    marginLeft: 10,
+  },
+
+  buttonCompactOutlineContainer: {
+    justifyContent: 'center',
+    height: 35,
+    width: 100,
+    padding: 10,
+    borderWidth: 2,
+    borderColor: colors.orange,
+    borderRadius: 50,
+    marginLeft: 10,
+  },
+
   buttonText: {
-    fontWeight: '700',
     color: colors.white,
     alignSelf: 'center',
+    fontFamily: 'FuturaBook',
+    fontWeight: '700',
+  },
+
+  buttonSecondaryText: {
+    color: colors.orange,
+    alignSelf: 'center',
+    fontFamily: 'FuturaBook',
+    fontWeight: '700',
   },
 });
 
@@ -124,9 +156,10 @@ export const listStyles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     padding: 10,
-    paddingLeft: 30,
-    marginBottom: 10,
+    paddingLeft: 20,
+    flex: 1,
     width: '90%',
+    marginBottom: 10,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -135,18 +168,20 @@ export const listStyles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    borderRadius: 25,
+    borderRadius: 15,
     backgroundColor: colors.white,
   },
 
   heading: {
-    fontWeight: '700',
     fontSize: 14,
     color: colors.darkGray,
     marginRight: 5,
+    fontFamily: 'FuturaBold',
+    flex: 0.8,
   },
 
   subHeading: {
+    fontFamily: 'FuturaBook',
     fontWeight: '700',
     fontSize: 12,
     color: colors.darkGray,
@@ -155,6 +190,8 @@ export const listStyles = StyleSheet.create({
   textRegular: {
     fontSize: 12,
     color: colors.darkGray,
+    fontFamily: 'FuturaBook',
+    fontWeight: '700',
   },
 });
 
@@ -162,17 +199,19 @@ export const listStyles = StyleSheet.create({
 export const badgesStyles = StyleSheet.create({
   /** Standard badge (ex: active, upcoming, completed badges) */
   badge: {
-    width: 60,
+    width: 65,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 2,
     borderRadius: 10,
     overflow: 'hidden',
+    marginBottom: 5,
   },
 
   badgeText: {
     textAlign: 'center',
     color: colors.white,
+    fontFamily: 'FuturaBook',
     fontWeight: '700',
     fontSize: 10,
   },
@@ -193,6 +232,7 @@ export const badgesStyles = StyleSheet.create({
   legendBadgeText: {
     textAlign: 'center',
     color: colors.white,
+    fontFamily: 'FuturaBook',
     fontWeight: '700',
     fontSize: 12,
   },
