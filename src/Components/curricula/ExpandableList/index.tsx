@@ -96,13 +96,13 @@ export const ExpandableList: React.FC<IProps> = ({ item, onPress }) => {
           </View>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
-              style={buttonStyles.buttonContainer}
+              style={buttonStyles.buttonCompactOutlineContainer}
               onPress={() => navigation.navigate('AddEditCurriculum')}
             >
-              <Text style={buttonStyles.buttonText}>Edit</Text>
+              <Text style={buttonStyles.buttonSecondaryText}>Edit</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={buttonStyles.buttonContainer}
+              style={buttonStyles.buttonCompactContainer}
               onPress={() => {
                 /** must define a function here */
               }}
