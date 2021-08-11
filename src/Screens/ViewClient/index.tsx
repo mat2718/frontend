@@ -10,11 +10,11 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
-import Header from '../../components/batches/Header';
+import Header from '../../Components/batches/Header';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { screenStyles, textStyles, buttonStyles, colors } from '../../styles';
 import { FlatList } from 'react-native-gesture-handler';
-import DemandsListItem from '../../components/demands/DemandsListItem';
+import DemandsListItem from '../../Components/demands/DemandsListItem';
 
 interface PropsI {
   route: {

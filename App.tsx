@@ -5,7 +5,7 @@ import { StyleSheet, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import * as Font from 'expo-font';
-import RootStackNavigator from './src/navigation/RootStackNavigator';
+import RootStackNavigator from './src/Navigation/RootStackNavigator';
 
 const App = () => {
   const [fontsLoaded, setFonts] = useState(false);

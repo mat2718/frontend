@@ -26,7 +26,7 @@ const TrainersListItem: React.FC<PropsI> = (props: PropsI) => {
     <TouchableOpacity
       style={listStyles.listItemContainer}
       onPress={() => {
-        navigation.navigate('ViewClient', props);
+        navigation.navigate('ViewEditTrainer', props);
       }}
     >
       <Text style={listStyles.heading}>{props.name}</Text>

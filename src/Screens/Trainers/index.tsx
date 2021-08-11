@@ -10,9 +10,9 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
-import TrainerListHeader from '../../components/trainers/TrainerListHeader';
+import TrainerListHeader from '../../Components/trainers/TrainerListHeader';
 import { screenStyles, listStyles } from '../../styles';
-import TrainersListItem from '../../components/trainers/TrainersListItem';
+import TrainersListItem from '../../Components/trainers/TrainersListItem';
 /**
  * Authors: Joab Smith and Imran Ilyas
  **/

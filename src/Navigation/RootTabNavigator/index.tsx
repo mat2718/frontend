@@ -1,11 +1,11 @@
 import { RootTabParamList } from '../../../types';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Batches from '../../screens/Batches';
+import Batches from '../../Screens/Batches';
 import React from 'react';
-import Curricula from '../../screens/Curricula';
-import MainTrainer from '../../screens/Trainers';
-import Clients from '../../screens/Clients';
+import Curricula from '../../Screens/Curricula';
+import MainTrainer from '../../Screens/Trainers';
+import Clients from '../../Screens/Clients';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
