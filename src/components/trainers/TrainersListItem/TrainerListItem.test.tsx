@@ -6,9 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 let wrapper: any;
 
-describe('Batches', () =>
-{
-  const mockNavigate = jest.fn();
+const mockNavigate = jest.fn();
 jest.mock('@react-navigation/native' , () => {
   return ({
     ...jest.requireActual('@react-navigation/native'),
@@ -19,6 +17,8 @@ jest.mock('@react-navigation/native' , () => {
     },
   });
 });
+describe('Batches', () =>
+{
   beforeEach(() => {
     wrapper = mount(<TrainerListItem name='Robert Connell' email='robcon@revature.net' />);
   });
