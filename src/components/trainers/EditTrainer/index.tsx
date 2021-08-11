@@ -19,7 +19,6 @@ interface ITrainer {
   FirstName: string;
   LastName: string;
   Email: string;
-  ID: string;
 }
 
 interface IProps {
@@ -30,7 +29,6 @@ const EditTrainer: React.FC<IProps> = (props: IProps) => {
   const [firstName, setFirstName] = useState(props.trainer.FirstName);
   const [lastName, setLastName] = useState(props.trainer.LastName);
   const [email, setEmail] = useState(props.trainer.Email);
-  const [ID, setID] = useState(props.trainer.ID);
 
   const update = () => {
     console.log('Update');
@@ -75,15 +73,6 @@ const EditTrainer: React.FC<IProps> = (props: IProps) => {
             {email}
           </TextInput>
 
-          <Text style={inputStyles.inputLabelText}>ID:</Text>
-          <TextInput
-            style={inputStyles.textInput}
-            testID='ID'
-            placeholder='ID Number'
-            onChangeText={setID}
-          >
-            {ID}
-          </TextInput>
         </View>
         {/* </View> */}
 

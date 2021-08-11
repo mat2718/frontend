@@ -8,7 +8,6 @@ interface ITrainer {
   FirstName: string;
   LastName: string;
   Email: string;
-  ID: string;
 }
 
 interface IProps {
@@ -35,8 +34,6 @@ const ViewTrainer: React.FC<IProps> = (props: IProps) => {
         <Text style={inputStyles.inputLabelText}>Email:</Text>
         <Text style={inputStyles.textInput}>{props.trainer.Email}</Text>
 
-        <Text style={inputStyles.inputLabelText}>ID:</Text>
-        <Text style={inputStyles.textInput}>{props.trainer.ID}</Text>
       </View>
 
       <TouchableOpacity style={styles.touchableStyle} onPress={edit}>

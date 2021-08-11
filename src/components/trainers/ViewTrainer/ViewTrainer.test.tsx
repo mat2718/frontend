@@ -9,7 +9,6 @@ describe('ViewTrainer', () => {
     FirstName: 'John',
     LastName: 'Doe',
     Email: 'johndoe@hotmail.com',
-    ID: '0987654',
   };
 
   const mock = jest.fn();
@@ -19,7 +18,7 @@ describe('ViewTrainer', () => {
   );
 
   it('Should have all text fields', () => {
-    expect(shallowWrapper.find('Text')).toHaveLength(9);
+    expect(shallowWrapper.find('Text')).toHaveLength(8);
   });
 
   it('should have an edit button', () => {

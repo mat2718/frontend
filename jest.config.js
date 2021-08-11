@@ -52,7 +52,7 @@ function addConfig(config) {
   
   // comment this out if you want to test all files
   config.testMatch = [
-    '<rootDir>/src/Components/Clients/__tests__/AddClient.test.js',
+    '<rootDir>/src/**/**/*Trainer*/*.test.*',
   ];
 
   // third-party libraries that throw errors

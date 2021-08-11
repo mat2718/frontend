@@ -1,10 +1,19 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import ViewEditTrainer from '.';
+import { useRoute } from '@react-navigation/native';
+
+jest.mock('@react-navigation/native');
 /**
  * Authors: Joab Smith and Imran Ilyas
  **/
 describe('View/Edit Trainer', () => {
+  useRoute.mockReturnValue({
+    params: {
+      name: `John`,
+      email: `Johndoe@yahoo.com`
+    }
+  })
   const wrapper = mount(
     /*wrapComponent(returnComponent(*/ <ViewEditTrainer default={false} />
   ); //)

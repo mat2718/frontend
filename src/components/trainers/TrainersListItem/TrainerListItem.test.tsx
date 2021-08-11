@@ -7,7 +7,7 @@ let wrapper: any;
 
 describe('Batches', () => {
   beforeEach(() => {
-    wrapper = mount(<TrainerListItem name='Robert Connell' id={0} />);
+    wrapper = mount(<TrainerListItem name='Robert Connell' email='robcon@revature.net' />);
   });
 
   // tests if the component is there

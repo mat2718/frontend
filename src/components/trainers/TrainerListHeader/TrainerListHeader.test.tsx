@@ -2,14 +2,27 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { TouchableOpacity } from 'react-native';
 import TrainerListHeader from '.';
+import { useNavigation } from '@react-navigation/native';
 
+
+const mockNavigate = jest.fn();
+jest.mock('@react-navigation/native' , () => {
+  return ({
+    ...jest.requireActual('@react-navigation/native'),
+    useNavigation: () => {
+      return ({
+        navigate: mockNavigate,
+      })
+    },
+  });
+});
 let wrapper: any;
 const selectedFilter = 'all';
 const setSelectedFilter = (filter: string) => {
   return filter;
 };
 
-describe('Batches', () => {
+describe('TrainerListHeader', () => {
   beforeEach(() => {
     wrapper = mount(
       <TrainerListHeader

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../types';
+import { RootStackParamList } from '../../types';
 import TrainerListHeader from '../../Components/trainers/TrainerListHeader';
 import { screenStyles, listStyles } from '../../styles';
 import TrainersListItem from '../../Components/trainers/TrainersListItem';
@@ -19,7 +19,7 @@ import TrainersListItem from '../../Components/trainers/TrainersListItem';
 
 interface ITrainer {
   name: string;
-  ID: string;
+  email: string;
 }
 
 const MainTrainer: React.FC<ITrainer> = () => {
@@ -29,13 +29,13 @@ const MainTrainer: React.FC<ITrainer> = () => {
   const navigation = useNavigation<mainScreenProp>();
 
   const str = [
-    { name: 'Johnathan Jingles', ID: '87654' },
-    { name: 'chup', ID: '87774' },
+    { name: 'Johnathan Jingles', email: '87654' },
+    { name: 'chup', email: '87774' },
   ];
 
   /** Main item to render for the FlatList */
   const renderItem = ({ item }: { item: any }) => {
-    return <TrainersListItem name={item.name} id={item.ID} />;
+    return <TrainersListItem name={item.name} email={item.email} />;
   };
 
   return (
@@ -43,7 +43,7 @@ const MainTrainer: React.FC<ITrainer> = () => {
       <FlatList
         data={str}
         renderItem={renderItem}
-        keyExtractor={(item) => item.ID}
+        keyExtractor={(item) => item.email}
         ListHeaderComponent={TrainerListHeader}
       ></FlatList>
     </SafeAreaView>

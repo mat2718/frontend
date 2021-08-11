@@ -9,7 +9,6 @@ describe('Create Trainer', () => {
     FirstName: 'John',
     LastName: 'Doe',
     Email: 'johndoe@hotmail.com',
-    ID: '0987654',
   };
   const mock = jest.fn();
   const wrapper = mount(
@@ -26,14 +25,9 @@ describe('Create Trainer', () => {
   ); //)
 
   it('Should contain all labels and Input fields', () => {
-    //firstname, lastname, email, id
-    expect(wrapper.find('TextInput')).toHaveLength(4);
+    //firstname, lastname, email
+    expect(wrapper.find('TextInput')).toHaveLength(3);
 
-    expect(
-      shallowWrapper.findWhere((node) =>
-        node.text().toLowerCase().includes('id')
-      )
-    ).toHaveLength(1);
     expect(
       shallowWrapper.findWhere((node) =>
         node.text().toLowerCase().includes('first')
@@ -74,13 +68,7 @@ describe('Create Trainer', () => {
         .last()
         .text()
     ).toEqual(trainer.Email);
-    expect(
-      wrapper
-        .find('TextInput')
-        .findWhere((node) => node.text().includes(trainer.ID))
-        .last()
-        .text()
-    ).toEqual(trainer.ID);
+    
   });
 
   it('Should have a submit button', () => {
@@ -127,12 +115,6 @@ describe('Create Trainer', () => {
     }
     expect(mockEventHandler).toBeCalled();
     expect(mockEventHandler).toBeCalledWith('Email@site.com');
-
-    const inputID = shallowWrapper
-      .findWhere((node) => node.prop('placeholder') === 'ID Number')
-      .last()
-      .getElement();
-    shallowInput = shallow(inputID);
 
     if (shallowInput.props().hasOwnProperty('onChangeText')) {
       shallowInput.setProps({ onChangeText: mockEventHandler });

@@ -11,11 +11,10 @@ const fillertrainer = {
   FirstName: 'John',
   LastName: 'Doe',
   Email: 'johndoe@hotmail.com',
-  ID: '0987654',
 };
 interface ITrainer {
   name: string;
-  ID: string;
+  email: string;
 }
 interface IProps {
   default?: boolean;
