@@ -3,24 +3,16 @@ import {
   View,
   Text,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { Calendar } from 'react-native-calendars';
-import { ProgressChart } from 'react-native-chart-kit';
+
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import Header from '../../components/batches/Header';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {
-  badgesStyles,
-  screenStyles,
-  textStyles,
-  buttonStyles,
-  colors,
-} from '../../styles';
+import { screenStyles, textStyles, buttonStyles, colors } from '../../styles';
 import { FlatList } from 'react-native-gesture-handler';
 import DemandsListItem from '../../components/demands/DemandsListItem';
 

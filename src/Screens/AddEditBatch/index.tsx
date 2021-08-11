@@ -41,6 +41,7 @@ const dataCurricula = ['React Native/Cloud Native', 'Java', 'Python'];
 /** Mock data for trainer */
 const dataTrainer = ['Robert Connell', 'Matthew Otto', 'Red Oral'];
 
+/** Main component screen */
 const AddEditBatch: React.FC<PropsI> = ({ route }) => {
   /** States for Picker */
   const [selectedFilter, setSelectedFilter] = React.useState('all');

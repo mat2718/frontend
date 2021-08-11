@@ -62,37 +62,4 @@ const AddClient: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  datePicker: {
-    width: 320,
-    height: 260,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-  },
-
-  dateView: {
-    alignSelf: 'center',
-    justifyContent: 'center',
-    padding: 15,
-    height: 45,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    borderRadius: 15,
-    backgroundColor: colors.white,
-    margin: 5,
-  },
-
-  dateText: {
-    color: colors.darkGray,
-    paddingLeft: 5,
-  },
-});
-
 export default AddClient;

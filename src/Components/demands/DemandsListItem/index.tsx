@@ -1,10 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, StyleSheet } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../../types';
-import { listStyles, inputStyles, colors } from '../../../styles';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { listStyles, colors } from '../../../styles';
 import { Picker } from '@react-native-picker/picker';
 
 interface IProps {
@@ -16,7 +14,6 @@ interface IProps {
 const DemandsListItem: React.FC<IProps> = (props: IProps) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
-  const navigation = useNavigation<mainScreenProp>();
 
   /** States for Picker */
   const [selectedFilter, setSelectedFilter] = React.useState();

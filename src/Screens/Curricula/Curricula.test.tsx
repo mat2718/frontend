@@ -4,11 +4,7 @@ import { FlatList } from 'react-native';
 import Curricula, { DATA } from '.';
 
 describe('Curricula', () => {
-  let wrapper;
-
-  const component = () => {
-    return <Curricula />;
-  };
+  let wrapper: any;
 
   beforeEach(() => {
     wrapper = mount(<Curricula />);

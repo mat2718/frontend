@@ -5,9 +5,17 @@ import MainTrainer from '.';
  * Authors: Joab Smith and Imran Ilyas
  **/
 describe('Main Trainer', () => {
-  const wrapper = mount(/*wrapComponent(returnComponent(*/ <MainTrainer />); //)
+  const wrapper = mount(
+    /*wrapComponent(returnComponent(*/ <MainTrainer
+      name='Robert Connell'
+      ID='0'
+    />
+  ); //)
   const shallowWrapper = shallow(
-    /*wrapComponent(returnComponent(*/ <MainTrainer />
+    /*wrapComponent(returnComponent(*/ <MainTrainer
+      name='Robert Connell'
+      ID='0'
+    />
   ); //)
 
   test('Should have all components', () => {
