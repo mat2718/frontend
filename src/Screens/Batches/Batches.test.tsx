@@ -2,11 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Batches, { data } from '.';
 import { FlatList, TouchableOpacity } from 'react-native';
-<<<<<<< HEAD:src/Screens/Batches/Batches.test.tsx
-import Header from '../../components/Header/Header';
-=======
 import Header from '../../components/batches/Header';
->>>>>>> dev-branch:src/screens/Batches/Batches.test.tsx
 
 let wrapper: any;
 

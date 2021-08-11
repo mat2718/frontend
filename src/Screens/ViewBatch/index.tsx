@@ -84,17 +84,17 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
                 endDate: route.params.endDate,
               })
             }
-            style={{ flexDirection: 'row', alignItems: 'center' }}
+            style={{ flexDirection: 'row', alignItems: 'center', flex: 0.75 }}
           >
             <Text style={textStyles.heading}>
               {route.params.batchId + ' ' + route.params.curriculum}
+              <MaterialCommunityIcons
+                name='pencil'
+                size={20}
+                color={colors.darkGray}
+                style={{ paddingLeft: 5 }}
+              />
             </Text>
-            <MaterialCommunityIcons
-              name='pencil'
-              size={20}
-              color={colors.darkGray}
-              style={{ paddingLeft: 5 }}
-            />
           </TouchableOpacity>
 
           {/** Confirm Button */}

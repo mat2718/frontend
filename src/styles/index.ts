@@ -106,7 +106,7 @@ export const buttonStyles = StyleSheet.create({
   buttonContainer: {
     justifyContent: 'center',
     height: 35,
-    width: 150,
+    width: 125,
     padding: 10,
     backgroundColor: colors.orange,
     borderRadius: 50,
