@@ -10,7 +10,7 @@ import {
 import { Calendar } from 'react-native-calendars';
 import { ProgressChart } from 'react-native-chart-kit';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from '../../../types';
+import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import Header from '../../Components/batches/Header';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
