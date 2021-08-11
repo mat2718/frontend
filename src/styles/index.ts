@@ -46,7 +46,7 @@ export const textStyles = StyleSheet.create({
 
   /** Any additional text that you want as a header under the main screen's title, use this style */
   subHeading: {
-    fontSize: 22,
+    fontSize: 20,
     fontFamily: 'FuturaBold',
     color: colors.darkGray,
   },
@@ -126,7 +126,7 @@ export const listStyles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     padding: 10,
-    paddingLeft: 30,
+    paddingLeft: 20,
     flex: 1,
     width: '90%',
     marginBottom: 10,
@@ -147,6 +147,7 @@ export const listStyles = StyleSheet.create({
     color: colors.darkGray,
     marginRight: 5,
     fontFamily: 'FuturaBold',
+    flex: 0.8,
   },
 
   subHeading: {

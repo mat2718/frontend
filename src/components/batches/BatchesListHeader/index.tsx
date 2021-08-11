@@ -40,7 +40,7 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
 
       {/** FlatList title text */}
       <View style={screenStyles.titleContainer}>
-        <Text style={textStyles.heading}>
+        <Text style={textStyles.subHeading}>
           {props.selectedFilter.charAt(0).toUpperCase() +
             props.selectedFilter.slice(1)}{' '}
           batches

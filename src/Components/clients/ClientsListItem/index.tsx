@@ -7,15 +7,53 @@ import { listStyles } from '../../../styles';
 
 interface IProps {
   client: string;
-  demand: [];
-  needBy: number;
-  quantityDemanded: number;
 }
 
 const ClientsListItem: React.FC<IProps> = (props: IProps) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
+
+  /** We must fetch demand data from the client id */
+  /** Mock data for now */
+  const demands = [
+    {
+      client: 'Revature',
+      curriculum: 'React',
+      needby: Date.now(),
+      quantitydemanded: 25,
+    },
+    {
+      client: 'Revature',
+      curriculum: 'React Native',
+      needby: Date.now(),
+      quantitydemanded: 25,
+    },
+    {
+      client: 'Revature',
+      curriculum: 'AWS',
+      needby: Date.now(),
+      quantitydemanded: 25,
+    },
+    {
+      client: 'Matts BBQ and Foot Massage',
+      curriculum: 'Cooking',
+      needby: Date.now(),
+      quantitydemanded: 25,
+    },
+    {
+      client: 'Matts BBQ and Foot Massage',
+      curriculum: 'Foot Massaging',
+      needby: Date.now(),
+      quantitydemanded: 25,
+    },
+    {
+      client: 'Cognizant',
+      curriculum: 'React',
+      needby: Date.now(),
+      quantitydemanded: 25,
+    },
+  ];
 
   /**
    * Touchable Link to contain individual Batch information.
@@ -33,9 +71,8 @@ const ClientsListItem: React.FC<IProps> = (props: IProps) => {
     >
       <Text style={listStyles.heading}>{props.client}</Text>
       <Text style={listStyles.textRegular}>
-        {props.quantityDemanded +
-          ' needed by ' +
-          new Date(props.needBy).toDateString()}
+        {demands.filter((item) => item.client === props.client).length +
+          ' demands'}
       </Text>
     </TouchableOpacity>
   );

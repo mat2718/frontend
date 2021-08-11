@@ -4,7 +4,7 @@ import { screenStyles, textStyles, buttonStyles } from '../../../styles';
 
 const CurriculaListHeader: React.FC = () => {
   return (
-    <>
+    <View style={screenStyles.mainView}>
       <View style={screenStyles.titleContainer}>
         <Text style={textStyles.heading}>Curricula</Text>
         <TouchableOpacity
@@ -16,7 +16,7 @@ const CurriculaListHeader: React.FC = () => {
           <Text style={buttonStyles.buttonText}>Add Curricula</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </View>
   );
 };
 

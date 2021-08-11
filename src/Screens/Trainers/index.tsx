@@ -5,12 +5,14 @@ import {
   TouchableOpacity,
   View,
   FlatList,
+  SafeAreaView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import TrainerListHeader from '../../components/trainers/TrainerListHeader';
 import { screenStyles, listStyles } from '../../styles';
+import TrainersListItem from '../../components/trainers/TrainersListItem';
 /**
  * Authors: Joab Smith and Imran Ilyas
  **/
@@ -31,29 +33,20 @@ const MainTrainer: React.FC<ITrainer> = () => {
     { name: 'chup', ID: '87774' },
   ];
 
+  /** Main item to render for the FlatList */
+  const renderItem = ({ item }: { item: any }) => {
+    return <TrainersListItem name={item.name} id={item.ID} />;
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={screenStyles.mainView}>
-        <FlatList
-          data={str}
-          renderItem={(item) => (
-            <View style={styles.row}>
-              <TouchableOpacity
-                style={listStyles.listItemContainer}
-                onPress={() =>
-                  navigation.navigate('ViewEditTrainer', { ID: item.item.ID })
-                }
-              >
-                <Text style={listStyles.heading}>{item.item.name}</Text>
-                <Text style={listStyles.subHeading}>ID#{item.item.ID}</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-          keyExtractor={(item) => item.ID}
-          ListHeaderComponent={TrainerListHeader}
-        ></FlatList>
-      </View>
-    </View>
+    <SafeAreaView style={screenStyles.safeAreaView}>
+      <FlatList
+        data={str}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.ID}
+        ListHeaderComponent={TrainerListHeader}
+      ></FlatList>
+    </SafeAreaView>
   );
 };
 

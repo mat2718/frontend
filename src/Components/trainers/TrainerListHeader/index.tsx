@@ -4,7 +4,7 @@ import SearchBar from '../Searchbar';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../../types';
-import { textStyles, buttonStyles } from '../../../styles';
+import { textStyles, buttonStyles, screenStyles } from '../../../styles';
 
 interface PropsI {
   setTrainerArr: any;
@@ -21,25 +21,26 @@ const TrainerListHeader: React.FC<PropsI> = (props: PropsI) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: 'row',
-          marginTop: 20,
-          marginBottom: 20,
-          justifyContent: 'space-between',
-        }}
-      >
-        <Text style={textStyles.heading}>Trainers</Text>
-        <TouchableOpacity
-          style={buttonStyles.buttonContainer}
-          onPress={addTrainer}
+    <View style={screenStyles.safeAreaView}>
+      <View style={screenStyles.mainView}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginBottom: 30,
+          }}
         >
-          <Text style={buttonStyles.buttonText}>Add Trainer</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.searchBar}>
-        <SearchBar setTrainer={props.setTrainerArr} />
+          <Text style={textStyles.heading}>Trainers</Text>
+          <TouchableOpacity
+            style={buttonStyles.buttonContainer}
+            onPress={addTrainer}
+          >
+            <Text style={buttonStyles.buttonText}>Add Trainer</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.searchBar}>
+          <SearchBar setTrainer={props.setTrainerArr} />
+        </View>
       </View>
     </View>
   );

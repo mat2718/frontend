@@ -4,6 +4,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../../types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { buttonStyles, listStyles } from '../../../styles';
 
 interface IProps {
   item: any;
@@ -58,52 +59,55 @@ export const ExpandableList: React.FC<IProps> = ({ item, onPress }) => {
   const skills = item.skills.join(', ');
 
   return (
-    <TouchableOpacity style={styles.wrap} onPress={onCurriculumPress}>
-      <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
-        <Text style={styles.curriculumName}>{item.name}</Text>
+    <TouchableOpacity
+      style={listStyles.listItemContainer}
+      onPress={onCurriculumPress}
+    >
+      <View style={{ flexDirection: 'row' }}>
+        <Text style={listStyles.heading}>{item.name}</Text>
         {icon}
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.title2}>Created On: </Text>
-        <Text style={styles.text}>{item.createdOn}</Text>
+        <Text style={listStyles.subHeading}>Created On: </Text>
+        <Text style={listStyles.textRegular}>{item.createdOn}</Text>
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.title2}>Created By: </Text>
-        <Text style={styles.text}>{item.createdBy}</Text>
+        <Text style={listStyles.subHeading}>Created By: </Text>
+        <Text style={listStyles.textRegular}>{item.createdBy}</Text>
       </View>
 
       {expanded && (
         <>
           <View style={styles.textContainer}>
-            <Text style={styles.title2}>Last Modified On: </Text>
-            <Text style={styles.text}>{item.lastModified}</Text>
+            <Text style={listStyles.subHeading}>Last Modified On: </Text>
+            <Text style={listStyles.textRegular}>{item.lastModified}</Text>
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.title2}>Last Modified By: </Text>
-            <Text style={styles.text}>{item.lastModifiedBy}</Text>
+            <Text style={listStyles.subHeading}>Last Modified By: </Text>
+            <Text style={listStyles.textRegular}>{item.lastModifiedBy}</Text>
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.title2}>Batches: </Text>
-            <Text style={styles.text}>{batches}</Text>
+            <Text style={listStyles.subHeading}>Batches: </Text>
+            <Text style={listStyles.textRegular}>{batches}</Text>
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.title2}>Skills: </Text>
-            <Text style={styles.text}>{skills}</Text>
+            <Text style={listStyles.subHeading}>Skills: </Text>
+            <Text style={listStyles.textRegular}>{skills}</Text>
           </View>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
-              style={styles.button}
+              style={buttonStyles.buttonContainer}
               onPress={() => navigation.navigate('AddEditCurriculum')}
             >
-              <Text style={styles.buttonText}>EDIT</Text>
+              <Text style={buttonStyles.buttonText}>Edit</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.deleteButton}
+              style={buttonStyles.buttonContainer}
               onPress={() => {
                 /** must define a function here */
               }}
             >
-              <Text style={styles.buttonText}>DELETE</Text>
+              <Text style={buttonStyles.buttonText}>Delete</Text>
             </TouchableOpacity>
           </View>
         </>

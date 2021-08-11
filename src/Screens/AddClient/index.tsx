@@ -57,10 +57,6 @@ const AddClient: React.FC = () => {
           <Text style={inputStyles.inputLabelText}>Client name</Text>
           <TextInput style={inputStyles.textInput} />
         </View>
-        <View style={{ flexDirection: 'column' }}>
-          <Text style={inputStyles.inputLabelText}>Demanded quantity</Text>
-          <TextInput style={inputStyles.textInput} keyboardType='numeric' />
-        </View>
       </ScrollView>
     </SafeAreaView>
   );

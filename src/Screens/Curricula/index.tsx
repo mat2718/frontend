@@ -64,21 +64,19 @@ const Curricula: React.FC = () => {
   //const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={screenStyles.safeAreaView}>
-      <Transitioning.View
-        ref={transitionRef}
-        transition={transition}
-        style={screenStyles.mainView}
-      >
-        {/**List of Curriculums */}
-        <FlatList
-          data={DATA}
-          keyExtractor={(item, index) => `${item.name}${index}`}
-          renderItem={renderItem}
-          ListHeaderComponent={CurriculaListHeader}
-        />
-      </Transitioning.View>
-    </SafeAreaView>
+    <Transitioning.View
+      ref={transitionRef}
+      transition={transition}
+      style={screenStyles.safeAreaView}
+    >
+      {/**List of Curriculums */}
+      <FlatList
+        data={DATA}
+        keyExtractor={(item, index) => `${item.name}${index}`}
+        renderItem={renderItem}
+        ListHeaderComponent={CurriculaListHeader}
+      />
+    </Transitioning.View>
   );
 };
 

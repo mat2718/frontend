@@ -28,12 +28,50 @@ interface PropsI {
   route: {
     params: {
       client: string;
-      demand: [];
-      needBy: number;
-      quantityDemanded: number;
     };
   };
 }
+
+/** We must fetch demand data from the client id */
+/** Mock data for now */
+const demands = [
+  {
+    client: 'Revature',
+    curriculum: 'React',
+    needby: Date.now(),
+    quantitydemanded: 25,
+  },
+  {
+    client: 'Revature',
+    curriculum: 'React Native',
+    needby: Date.now(),
+    quantitydemanded: 25,
+  },
+  {
+    client: 'Revature',
+    curriculum: 'AWS',
+    needby: Date.now(),
+    quantitydemanded: 25,
+  },
+  {
+    client: 'Matts BBQ and Foot Massage',
+    curriculum: 'Cooking',
+    needby: Date.now(),
+    quantitydemanded: 25,
+  },
+  {
+    client: 'Matts BBQ and Foot Massage',
+    curriculum: 'Foot Massaging',
+    needby: Date.now(),
+    quantitydemanded: 25,
+  },
+  {
+    client: 'Cognizant',
+    curriculum: 'React',
+    needby: Date.now(),
+    quantitydemanded: 25,
+  },
+];
 
 const ViewClient: React.FC<PropsI> = ({ route }) => {
   /** Navigation stuff */
@@ -42,7 +80,13 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
 
   /** Render item for Demands list */
   const renderItem = ({ item }: { item: any }) => {
-    return <DemandsListItem demand={item} />;
+    return (
+      <DemandsListItem
+        curriculum={item.curriculum}
+        needby={item.needby}
+        quantitydemanded={item.quantitydemanded}
+      />
+    );
   };
 
   return (
@@ -51,13 +95,15 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
       <View style={screenStyles.mainView}>
         {/**Title: Curriculum */}
         <View style={screenStyles.titleContainer}>
-          <Text style={textStyles.heading}>{route.params.client}</Text>
+          <View style={{ flex: 0.75 }}>
+            <Text style={textStyles.heading}>{route.params.client}</Text>
+          </View>
           {/** Confirm Button */}
           <TouchableOpacity style={buttonStyles.buttonContainer}>
             <Text style={buttonStyles.buttonText}>Add Demand</Text>
           </TouchableOpacity>
         </View>
-        {/**Subtitle: Trainer */}
+        {/**Subtitle: Demands */}
         <View style={{ flexDirection: 'row' }}>
           <MaterialCommunityIcons
             name='account-group-outline'
@@ -66,24 +112,9 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
             style={{ marginRight: 5 }}
           />
           <Text style={textStyles.regular}>
-            {route.params.quantityDemanded + ' Demanded Quantity'}
+            {demands.filter((item) => item.client === route.params.client)
+              .length + ' demands'}
           </Text>
-        </View>
-
-        {/**Body: Batch information */}
-        <View>
-          {/**SubBody: Number of Associates */}
-          <View style={{ flexDirection: 'row' }}>
-            <MaterialCommunityIcons
-              name='clock-outline'
-              size={16}
-              color='#222'
-              style={{ marginRight: 5 }}
-            />
-            <Text style={textStyles.regular}>
-              {'by ' + new Date(route.params.needBy).toDateString()}
-            </Text>
-          </View>
         </View>
 
         <View
@@ -95,9 +126,9 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
         </View>
         {/** Demands */}
         <FlatList
-          data={route.params.demand}
+          data={demands.filter((item) => item.client === route.params.client)}
           renderItem={renderItem}
-          keyExtractor={(item) => item}
+          keyExtractor={(item) => item.curriculum}
           style={{
             backgroundColor: colors.white,
             marginTop: 10,
