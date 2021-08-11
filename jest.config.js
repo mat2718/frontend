@@ -52,7 +52,10 @@ function addConfig(config) {
   
   // comment this out if you want to test all files
   config.testMatch = [
-    '<rootDir>/src/Components/Clients/__tests__/AddClient.test.js',
+    '<rootDir>/src/Screens/Curricula/Curricula.test.tsx',
+    '<rootDir>/src/Screens/AddEditCurriculum/AddEditCurriculum.test.tsx',
+    '<rootDir>/src/components/curricula/CurriculaListHeader/CurriculaListHeader.test.tsx',
+    '<rootDir>/src/components/curricula/ExpandableList/ExpandableList.test.tsx'
   ];
 
   // third-party libraries that throw errors
@@ -74,6 +77,7 @@ function addConfig(config) {
     'react-native-chart-kit',
     'react-native-calendars',
     'react-native-swipe-gestures',
+    'react-native-reanimated',
     'expo-font',
     'expo-asset',
     'expo-constants',
