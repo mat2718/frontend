@@ -5,7 +5,12 @@ module.exports = {
     addConfig(withEnzyme(require('jest-expo/android/jest-preset'))),
   ],
   collectCoverage: true,
-  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx,js,jsx}'],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
+  ],
+  coveragePathIgnorePatterns: [
+    '**/__tests__/**/*.[jt]s?(x)'
+  ],
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
@@ -54,7 +59,7 @@ function addConfig(config) {
   // config.testMatch = [
   //   '<rootDir>/src/Components/Clients/__tests__/AddDemandScreen.test.js',
   // ];
-  
+
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization 
   const ignoreThese = [
