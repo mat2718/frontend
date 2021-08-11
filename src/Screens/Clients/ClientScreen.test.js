@@ -137,7 +137,7 @@ describe('testing client screen',()=>{
     })
 
 
-    // integration test
+    // would be better to do as integration test instead of looking at DemandList props, but whatever
     it('if we change currClient using Picker, DemandList has a new prop', () => {
         dropDownMenu = wrapper.find(RNPickerSelect);
         const arg = 'yeet';
