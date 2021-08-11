@@ -79,6 +79,7 @@ function addConfig(config) {
     'react-native-chart-kit',
     'react-native-calendars',
     'react-native-swipe-gestures',
+    'react-native-calendar-picker',
     'expo-font',
     'expo-asset',
     'expo-constants',
