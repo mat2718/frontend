@@ -97,9 +97,9 @@
 
 import React , {useState} from 'react'
 import {View,Text,Button, StyleSheet, FlatList, TouchableOpacity} from 'react-native'
-import colors from '../../../assets/constants/colors'
-import GlobalStyles from '../../../assets/constants/GlobalStyles'
-import IDemand from '../../../assets/models/Demand'
+import colors from '../../assets/constants/colors'
+import GlobalStyles from '../../assets/constants/GlobalStyles'
+import IDemand from '../../assets/models/Demand'
 
 let wants=[
     { curriculum: 'Cloud/Native', needBy:'08/21/21', howMany:'20',client:"webstuff", key:'1'},
