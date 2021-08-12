@@ -83,7 +83,9 @@ const chartConfig = {
 
   const Diagram: React.FC = () => {
     const [currCurriculum, setCurriculum] = useState('All Curriculum');
-    const [demandData, setDemandData] = useState('hello');
+    const [demandData, setDemandData] = useState('Demand');
+    const [supplyData, setSupplyData] = useState('Supply');
+
 
     const date = new Date();
     const start = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -91,19 +93,20 @@ const chartConfig = {
     const startDate = new Date(start.setMonth(start.getMonth() - 6)).toISOString().substring(0,10);
     const endDate = new Date(end.setMonth(end.getMonth() + 6)).toISOString().substring(0,10);
     
-    // const demandGetter = async() => {
-    //   await axios.get(`https://dcox0bl0me.execute-api.us-east-1.amazonaws.com/Prod/trainer`).then(resp => {
-    //     console.log(resp);
-    //     setDemandData(resp.data)}).catch(error=> console.log(error.response.data));
-    // }
-
-    const batchesGetter = async() => {
-      await axios.get(`https://dcox0bl0me.execute-api.us-east-1.amazonaws.com/Prod/batch`).then(resp => {
+    const demandGetter = async() => {
+      await axios.get(`https://dcox0bl0me.execute-api.us-east-1.amazonaws.com/Prod/demand`).then(resp => {
         console.log(resp);
         setDemandData(resp.data)}).catch(error=> console.log(error.response.data));
     }
 
+    const batchesGetter = async() => {
+      await axios.get(`https://dcox0bl0me.execute-api.us-east-1.amazonaws.com/Prod/batch`).then(resp => {
+        console.log(resp);
+        setSupplyData(resp.data)}).catch(error=> console.log(error.response.data));
+    }
+
     useEffect(() => {
+      demandGetter();
       batchesGetter();
     }, [currCurriculum]);
 
@@ -129,7 +132,8 @@ const chartConfig = {
     
     return (
       <View style={screenStyles.mainView}>
-        <Button title="Console log State" onPress={() => console.log(demandData)}/>
+        <Button title="Console log DemandState" onPress={() => console.log(demandData)}/>
+        <Button title="Console log SupplyState" onPress={() => console.log(demandData)}/>
         <View style={screenStyles.titleContainer}>
 
           <Text style={textStyles.subHeading}>
