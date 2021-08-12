@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  TouchableOpacity, Dimensions
+  TouchableOpacity, Dimensions, Button,
 } from 'react-native';
 import { screenStyles, textStyles, buttonStyles } from '../../styles';
 import { LineChart } from 'react-native-chart-kit';
 import { Picker } from '@react-native-picker/picker';
+import axios from 'axios';
+
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -34,7 +36,7 @@ const chartConfig = {
     }
     return dataArr;
   }
-  // kai to use later when we have redux to get data on clients and associates
+  // kai to use later when we have redux to get data on curricula and associates
 
   // let clientData = {
   //   data: fakeDataGen(),
@@ -50,6 +52,7 @@ const chartConfig = {
 
   const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
+  //calls for +6 and -6 from date.now then sort - kai with BE 
   const renderData = () => {
     return {
   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -66,9 +69,8 @@ const chartConfig = {
     }
   ],
   legend: ["Client Demand","Associate Supply"] // optional
-};
+    };
   }
-  
 
   //will use this later to see if overflow or underflow of client's demand
   const negOrPost = () => {
@@ -80,28 +82,69 @@ const chartConfig = {
   }
 
   const Diagram: React.FC = () => {
-    const [currClient, setClient] = useState('All Clients')
+    const [currCurriculum, setCurriculum] = useState('All Curriculum');
+    const [demandData, setDemandData] = useState('hello');
 
+    const date = new Date();
+    const start = new Date(date.getFullYear(), date.getMonth(), 1);
+    const end = new Date(date.getFullYear(), date.getMonth(), 1);
+    const startDate = new Date(start.setMonth(start.getMonth() - 6)).toISOString().substring(0,10);
+    const endDate = new Date(end.setMonth(end.getMonth() + 6)).toISOString().substring(0,10);
+    
+    // const demandGetter = async() => {
+    //   await axios.get(`https://dcox0bl0me.execute-api.us-east-1.amazonaws.com/Prod/trainer`).then(resp => {
+    //     console.log(resp);
+    //     setDemandData(resp.data)}).catch(error=> console.log(error.response.data));
+    // }
+
+    const batchesGetter = async() => {
+      await axios.get(`https://dcox0bl0me.execute-api.us-east-1.amazonaws.com/Prod/batch`).then(resp => {
+        console.log(resp);
+        setDemandData(resp.data)}).catch(error=> console.log(error.response.data));
+    }
+
+    useEffect(() => {
+      batchesGetter();
+    }, [currCurriculum]);
+
+//  const createNewComment = async() => {
+//         if (working) return;
+//         setWorking(true)
+        
+//         await axios.post(`https://w822121nz1.execute-api.us-east-2.amazonaws.com/Prod/post/${props.timeStamp}`, {
+//             displayName: user?.displayName,
+//             displayImg: user?.profileImg,
+//             comment: newComment
+//         }, {
+//             headers: {
+//                 Authorization : token
+//             },  
+//         }).then(resp => {
+//             props.submitComm();
+//         }).then(resp => {
+//             setWorking(false);
+//             setNewComment('');
+//         })
+//     }
+    
     return (
       <View style={screenStyles.mainView}>
-        
+        <Button title="Console log State" onPress={() => console.log(demandData)}/>
         <View style={screenStyles.titleContainer}>
 
           <Text style={textStyles.subHeading}>
-          {currClient.charAt(0).toUpperCase() +
-            currClient.slice(1)}{' '}
+          {currCurriculum.charAt(0).toUpperCase() +
+            currCurriculum.slice(1)}{' '}
         </Text>
           <Picker
-          selectedValue={currClient}
-          onValueChange={(clientName: string) => setClient(clientName)}
+          selectedValue={currCurriculum}
+          onValueChange={(currCurriculum: string) => setCurriculum(currCurriculum)}
           style={{ height: 50, width: 50,  }}
-          // itemStyle={{fontFamily:"FuturaBold"}}
         >
-          <Picker.Item label='All Clients' value='All Clients' />
-          <Picker.Item label='Amazon' value='Amazon' />
-          <Picker.Item label='Google' value='Google' />
-          <Picker.Item label='Apple' value='Apple' />
-          <Picker.Item label='McDonalds' value='McDonalds' />
+          <Picker.Item label='All Curriculum' value='All Curriculum' />
+          <Picker.Item label='JavaScript' value='JavaScript' />
+          <Picker.Item label='Java' value='Java' />
+          <Picker.Item label='Python' value='Python' />
         </Picker>
         </View>
 
@@ -117,7 +160,7 @@ const chartConfig = {
 
         <View style={styles.infoContainer}>
 
-          <View style={styles.clientNameContainer}><Text style={styles.clientName}>{currClient}</Text></View>
+          <View style={styles.curriculaNameContainer}><Text style={styles.curriculaName}>{`${currCurriculum} - YTD`}</Text></View>
 
           <View style={styles.numbersContainer}>
 
@@ -163,8 +206,8 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: '#ffffff',
   }, 
-  clientNameContainer:{
-    alignItems: 'center',
+  curriculaNameContainer:{
+    // alignItems: 'center',
     marginBottom:10
   }, 
   numbersContainer:{
@@ -180,7 +223,7 @@ const styles = StyleSheet.create({
     padding:7,
     flexDirection:"row",
     justifyContent:'space-between',
-    backgroundColor:'red',
+    backgroundColor:'#BC7A00', //red for neg, netural color for close and green for pass
     borderRadius: 25,
   },
   progressRingView: {
@@ -205,9 +248,9 @@ const styles = StyleSheet.create({
     color: '#474C55',
   },
 
-  clientName:{
+  curriculaName:{
     paddingLeft: 5,
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '700',
     color: '#474C55',
   }
