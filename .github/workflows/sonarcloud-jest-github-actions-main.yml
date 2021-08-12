@@ -24,7 +24,8 @@ jobs:
     - name: Where the fuck am I
       run: ls -l
     - name: Run Tests
-      run:  npm run test 'src/components/batches/BatchListItem/BatchListItem.test.tsx'
+      # run:  npm run test 'src/components/batches/BatchListItem/BatchListItem.test.tsx'
+      run: npm run test-stupid
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       # with: 
