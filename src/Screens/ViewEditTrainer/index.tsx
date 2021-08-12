@@ -1,8 +1,8 @@
 import { useRoute } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import EditTrainer from '../../Components/trainers/EditTrainer';
-import ViewTrainer from '../../Components/trainers/ViewTrainer';
+import EditTrainer from '../../components/trainers/EditTrainer';
+import ViewTrainer from '../../components/trainers/ViewTrainer';
 
 /**
  * Authors: Joab Smith and Imran Ilyas
