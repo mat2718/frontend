@@ -1,7 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Header from '../../components/batches/Header';
-import AddEditCurriculum from '.';
+import AddEditCurriculum from '.'
+import DateTimePicker from '@react-native-community/datetimepicker'
+import { TextInput } from 'react-native';
 
 let wrapper: any;
 
@@ -54,6 +56,18 @@ describe('AddEditCurriculum', () => {
     expect(wrapper.findWhere((node:any) => 
     node.text().toLowerCase().includes('skills'))
     ).toBeDefined();
+  });
+
+  it('onPress should run', () => {
+    const pickerBtn = wrapper.find({testID: 'pickerBtn'}).last();
+    pickerBtn.invoke('onPress')()
+    expect(wrapper.find(DateTimePicker).length).toBeGreaterThan(0)
+  });
+
+  it('textInput can run onChange text', () => {
+    wrapper.find(TextInput).forEach((node: any) => {
+      node.invoke('onTextChange')('hello')
+    })
   })
 });
 

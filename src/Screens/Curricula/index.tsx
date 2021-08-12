@@ -49,6 +49,8 @@ export const DATA = [
   },
 ];
 
+
+
 const Curricula: React.FC = () => {
   const transitionRef = useRef<any>(null);
   const transition = <Transition.Change interpolation='easeInOut' />;
