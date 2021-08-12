@@ -31,11 +31,30 @@ describe('AddEditCurriculum', () => {
 
   // tests if the header is defined
   it('should display the header', () => {
-    const shouldBeHeader = wrapper.find(Header);
+    const shouldBeHeader = wrapper.find(<Header />);
     expect(shouldBeHeader).toBeDefined();
   });
 
   //tests
+  it('should have labels and input fields', () => {
+    expect(wrapper.find('TextInput')).toHaveLength(4);
+
+    expect(wrapper.findWhere((node:any) => 
+    node.text().toLowerCase().includes('createdBy'))
+    ).toBeDefined();
+
+    expect(wrapper.findWhere((node:any) => 
+    node.text().toLowerCase().includes('modifiedBy'))
+    ).toBeDefined();
+
+    expect(wrapper.findWhere((node:any) => 
+    node.text().toLowerCase().includes('batches'))
+    ).toBeDefined();
+
+    expect(wrapper.findWhere((node:any) => 
+    node.text().toLowerCase().includes('skills'))
+    ).toBeDefined();
+  })
 });
 
 // yeet
