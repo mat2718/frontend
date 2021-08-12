@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../types';
-import TrainerListHeader from '../../Components/trainers/TrainerListHeader';
+import { RootStackParamList } from '../../types';
+import TrainerListHeader from '../../components/trainers/TrainerListHeader';
 import { screenStyles, listStyles } from '../../styles';
-import TrainersListItem from '../../Components/trainers/TrainersListItem';
+import TrainersListItem from '../../components/trainers/TrainersListItem';
 /**
  * Authors: Joab Smith and Imran Ilyas
  **/

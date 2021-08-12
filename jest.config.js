@@ -3,7 +3,14 @@ const { withEnzyme } = require('jest-expo-enzyme');
 module.exports = {
   projects: [addConfig(withEnzyme(require('jest-expo/android/jest-preset')))],
   collectCoverage: true,
-  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx,js,jsx}'],
+  collectCoverageFrom: [
+    // '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/components/batches/BatchListItem/BatchListItem.test.tsx',
+    // C:\Users\Bigmo\Revature\Perfect-Personnel-Placement\frontend\src\components\Clients\__tests__\AddClient.test.js
+  ],
+  coveragePathIgnorePatterns: [
+    '**/__tests__/**/*.[jt]s?(x)'
+  ],
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
@@ -11,6 +18,7 @@ module.exports = {
     },
   },
 };
+
 
 /**
  * Returns an array with a single string that tells Babel to ignore uncompiled
@@ -47,11 +55,13 @@ function addConfig(config) {
   config.setupFilesAfterEnv.push('<rootDir>/__tests__/setup.js');
 
   // comment this out if you want to test all files
+
   // config.testMatch = [
   //   '<rootDir>/src/Screens/Batches/*.test.{ts,tsx,js,jsx}',
   //   '<rootDir>/src/Screens/ViewBatch/*.test.{ts,tsx,js,jsx}',
   //   '<rootDir>/src/Screens/AddEditBatch/*.test.{ts,tsx,js,jsx}',
   // ];
+
 
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
@@ -72,6 +82,8 @@ function addConfig(config) {
     'react-native-chart-kit',
     'react-native-calendars',
     'react-native-swipe-gestures',
+    'react-native-reanimated',
+    'react-native-calendar-picker',
     'expo-font',
     'expo-asset',
     'expo-constants',

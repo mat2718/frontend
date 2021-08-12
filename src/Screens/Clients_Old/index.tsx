@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import GlobalStyles from '../../../assets/constants/GlobalStyles';
+import GlobalStyles from '../..//assets/constants/GlobalStyles';
 import DemandList from '../../components/clients_old/DemandList';
 import ClientList from '../../components/clients_old/ClientList';
-import IClient from '../../../assets/models/Client';
+import IClient from '../..//assets/models/Client';
 import { useNavigation } from '@react-navigation/native';
 import { colors, screenStyles, textStyles, buttonStyles } from '../../styles';
 

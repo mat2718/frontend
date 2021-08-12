@@ -5,7 +5,7 @@ import AddEditCurriculum from '.';
 
 let wrapper: any;
 
-describe('Batches', () => {
+describe('AddEditCurriculum', () => {
   beforeEach(() => {
     wrapper = mount(
       <AddEditCurriculum
@@ -16,8 +16,8 @@ describe('Batches', () => {
             modifiedOn: 1627776000000,
             createdBy: 'Robert Connell',
             modifiedBy: 'Robert Connell',
-            skills: 0,
-            batches: 0,
+            skills: [0, 1, 2],
+            batches: [2, 3, 4],
           },
         }}
       />
@@ -34,6 +34,8 @@ describe('Batches', () => {
     const shouldBeHeader = wrapper.find(Header);
     expect(shouldBeHeader).toBeDefined();
   });
+
+  //tests
 });
 
 // yeet

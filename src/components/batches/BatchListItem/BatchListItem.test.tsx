@@ -3,6 +3,7 @@ import { mount, shallow } from 'enzyme';
 import BatchListItem from './';
 import { TouchableOpacity, Text } from 'react-native';
 
+
 const today = new Date();
 const yesterday = new Date(today);
 const tomorrow = new Date(today);

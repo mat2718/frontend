@@ -5,7 +5,7 @@ import CurriculaListHeader from '.';
 
 let wrapper: any;
 
-describe('Batches', () => {
+describe('CurriculaListHeader', () => {
   beforeEach(() => {
     wrapper = mount(<CurriculaListHeader />);
   });
