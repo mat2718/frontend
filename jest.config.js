@@ -56,11 +56,9 @@ function addConfig(config) {
 
   // comment this out if you want to test all files
 
-  // config.testMatch = [
-  //   '<rootDir>/src/Screens/Batches/*.test.{ts,tsx,js,jsx}',
-  //   '<rootDir>/src/Screens/ViewBatch/*.test.{ts,tsx,js,jsx}',
-  //   '<rootDir>/src/Screens/AddEditBatch/*.test.{ts,tsx,js,jsx}',
-  // ];
+  config.testMatch = [
+    '<rootDir>/src/Screens/Diagram/Diagram.test.tsx',
+  ];
 
 
   // third-party libraries that throw errors
