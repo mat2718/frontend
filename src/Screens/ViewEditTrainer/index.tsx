@@ -1,8 +1,8 @@
 import { useRoute } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import EditTrainer from '../../components/trainers/EditTrainer';
-import ViewTrainer from '../../components/trainers/ViewTrainer';
+import { View, StyleSheet, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Text, TextInput } from 'react-native';
+import ITrainer from '../../Entities/Trainer';
+import { inputStyles } from '../../styles';
 
 /**
  * Authors: Joab Smith and Imran Ilyas
@@ -12,32 +12,76 @@ const fillertrainer = {
   LastName: 'Doe',
   Email: 'johndoe@hotmail.com',
 };
-interface ITrainer {
-  name: string;
-  email: string;
-}
-interface IProps {
-  default?: boolean;
+interface IProps
+{
+
 }
 
-const ViewEditTrainer: React.FC<IProps> = (props: IProps) => {
-  const initial = props.default || false;
-  const [edit, setEdit] = useState(initial);
-  const [trainer, setTrainer] = useState(fillertrainer);
+const ViewEditTrainer: React.FC<IProps> = (props: IProps) =>
+{
+
   const route = useRoute();
   const params = route.params as ITrainer;
-  console.log(params, trainer);
-  const getTrainerInfo = () => {
-    //axios to get trainer info
-    //params should have name and id
+  const [trainer, setTrainer] = useState(fillertrainer);
+  const [firstName, setFirstName] = useState(params.trainerfirst);
+  const [lastName, setLastName] = useState(params.trainerlast);
+  const [email, setEmail] = useState(params.email);
+
+  const update = () =>
+  {
+    //update redux 
+    //axios
+    console.log('Update');
   };
+  console.log(params, trainer);
   return (
     <View style={styles.container}>
-      {edit ? (
-        <EditTrainer trainer={fillertrainer} setEdit={setEdit} />
-      ) : (
-        <ViewTrainer trainer={fillertrainer} setEdit={setEdit} />
-      )}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <Text style={styles.header}>Edit Trainer</Text>
+
+          {/* <View style={styles.fieldRow}> */}
+          <View style={styles.fieldCols}>
+            <Text style={inputStyles.inputLabelText}>First Name:</Text>
+            <TextInput
+              style={inputStyles.textInput}
+              testID='Firstname'
+              placeholder='First Name'
+              onChangeText={setFirstName}
+            >
+              {firstName}
+            </TextInput>
+
+            <Text style={inputStyles.inputLabelText}>Last Name:</Text>
+            <TextInput
+              style={inputStyles.textInput}
+              testID='Lastname'
+              placeholder='Last Name'
+              onChangeText={setLastName}
+            >
+              {lastName}
+            </TextInput>
+
+            <Text style={inputStyles.inputLabelText}>Email:</Text>
+            <TextInput
+              style={inputStyles.textInput}
+              selection={{ start: 1 }}
+              testID='Email'
+              placeholder='Email'
+              onChangeText={setEmail}
+            >
+              {email}
+            </TextInput>
+
+          </View>
+          {/* </View> */}
+
+          <TouchableOpacity style={styles.touchableStyle} onPress={update}>
+            <Text style={styles.submit}>Update</Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableWithoutFeedback>
+      );
     </View>
   );
 };
@@ -45,7 +89,59 @@ const ViewEditTrainer: React.FC<IProps> = (props: IProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //width:'100%'
+    width: '100%',
+    marginVertical: '10%',
+    marginHorizontal: '2%',
+  },
+
+  header: {
+    margin: '2%',
+    fontSize: 30,
+    textAlign: 'center',
+  },
+
+  fieldRow: {
+    //flex: 1,
+    width: '100%',
+    flexDirection: 'row',
+  },
+
+  label: {
+    fontSize: 20,
+    width: '30%',
+    paddingVertical: '10%',
+    textAlign: 'right',
+    //alignSelf: 'flex-end'
+  },
+
+  input: {
+    // flexDirection: 'row',
+    width: '70%',
+    fontSize: 20,
+    //paddingVertical: '10%',
+    textAlign: 'center',
+  },
+
+  fieldCols: {
+    flex: 1,
+    width: '100%',
+    //alignContent: 'space-between',
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
+
+  touchableStyle: {
+    backgroundColor: '#F26925',
+    alignSelf: 'center',
+    borderRadius: 100,
+    margin: '10%',
+  },
+
+  submit: {
+    color: 'white',
+    fontSize: 20,
+    padding: '4%',
+    textAlign: 'center',
   },
 });
 

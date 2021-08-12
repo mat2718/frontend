@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
-import {
+import
+{
   Text,
   TextInput,
   TouchableOpacity,
@@ -9,18 +10,29 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
+import ITrainer from '../../Entities/Trainer';
 import { inputStyles } from '../../styles';
 
 /**
  * Authors: Joab Smith and Imran Ilyas
  **/
-const CreateTrainer: React.FC = () => {
+const CreateTrainer: React.FC = () =>
+{
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [ID, setID] = useState('');
 
-  const submit = () => {
+  const submit = () =>
+  {
+    const newTrainer: ITrainer = {
+      trainerfirst: firstName,
+      trainerlast: lastName,
+      email: email,
+      trainerid: 0
+    }
+    //toast
+    //make axios call
+    //update Redux
     console.log('Submit');
   };
 
@@ -57,15 +69,6 @@ const CreateTrainer: React.FC = () => {
               onChangeText={setEmail}
             >
               {email}
-            </TextInput>
-            <Text style={inputStyles.inputLabelText}>ID:</Text>
-            <TextInput
-              style={inputStyles.textInput}
-              testID='ID'
-              placeholder='ID Number'
-              onChangeText={setID}
-            >
-              {ID}
             </TextInput>
           </View>
         </View>

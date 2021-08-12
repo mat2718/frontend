@@ -3,14 +3,17 @@ import { mount } from 'enzyme';
 import TrainerListItem from './';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import ITrainer from '../../../Entities/Trainer';
 
 let wrapper: any;
 
 const mockNavigate = jest.fn();
-jest.mock('@react-navigation/native' , () => {
+jest.mock('@react-navigation/native', () =>
+{
   return ({
     ...jest.requireActual('@react-navigation/native'),
-    useNavigation: () => {
+    useNavigation: () =>
+    {
       return ({
         navigate: mockNavigate,
       })
@@ -19,12 +22,21 @@ jest.mock('@react-navigation/native' , () => {
 });
 describe('Batches', () =>
 {
-  beforeEach(() => {
-    wrapper = mount(<TrainerListItem name='Robert Connell' email='robcon@revature.net' />);
+  const trainer: ITrainer = {
+    trainerfirst: 'John',
+    trainerlast: 'Doe',
+    email: 'johndoe@hotmail.com',
+    trainerid: 1
+  }
+  beforeEach(() =>
+  {
+
+    wrapper = mount(<TrainerListItem trainer={trainer} />);
   });
 
   // tests if the component is there
-  it('should be there', () => {
+  it('should be there', () =>
+  {
     expect(wrapper).not.toBe(undefined);
   });
 
@@ -32,7 +44,7 @@ describe('Batches', () =>
   {
     const touchable = wrapper.find('TouchableOpacity');
     touchable.props().onPress();
-    const payload = ['ViewEditTrainer', {name:'Robert Connell', email:'robcon@revature.net'}]
+    const payload = ['ViewEditTrainer', trainer]
     expect(mockNavigate).toBeCalledWith(...payload)
   })
 });
