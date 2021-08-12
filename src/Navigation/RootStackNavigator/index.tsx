@@ -15,6 +15,7 @@ import ViewEditTrainer from '../../Screens/ViewEditTrainer';
 import ViewClient from '../../Screens/ViewClient';
 import Diagram from '../../Screens/Diagram';
 import AddDemand from '../../Screens/AddDemand';
+import EditDemand from '../../Screens/EditDemand';
 //see what happens
 //please import your screen and put in your screen in components-kai
 const Stack = createStackNavigator<RootStackParamList>();
@@ -47,11 +48,12 @@ const RootStackNavigator = () => {
       <Stack.Screen name='AddClient' component={AddClient} />
       <Stack.Screen name='Diagram' component={Diagram} options={{ headerShown: true }} />
       <Stack.Screen name='AddDemand' component={AddDemand} />
+      <Stack.Screen name='EditDemand' component={EditDemand} />
       {/* <Stack.Screen name='Clients' component={ClientScreen} />
       <Stack.Screen name='EditClient' component={EditClient} />
       <Stack.Screen name='AddClient' component={AddClient} />
       
-      <Stack.Screen name='EditDemand' component={EditDemandScreen} /> */}
+      */}
     </Stack.Navigator>
   );
 };

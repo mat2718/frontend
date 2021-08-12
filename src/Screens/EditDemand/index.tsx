@@ -27,7 +27,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 /** Mock data for curriculum */
 const dataCurricula = ['React Native/Cloud Native', 'Java', 'Python'];
 
-const AddDemand: React.FC  = ({route}) => {
+const EditDemand: React.FC  = ({route}) => {
   /** Navigation for going back a screen */
   const navigation = useNavigation();
   const [selectedFilter, setSelectedFilter] = React.useState('all');
@@ -60,17 +60,17 @@ const AddDemand: React.FC  = ({route}) => {
           }}
         >
           {/** Heading text */}
-          <Text style={textStyles.heading}>Add a Demand</Text>
+          <Text style={textStyles.heading}>Edit a Demand</Text>
           {/** Add/Edit */}
           <TouchableOpacity
             style={buttonStyles.buttonContainer}
-            onPress={() => navigation.navigate('AddDemand')}
+            onPress={() =>
+                 //navigation.navigate('ViewClient')}
+                 console.log("Edited")}
           >
             <Text style={buttonStyles.buttonText}>Add</Text>
           </TouchableOpacity>
-        </View>
-        {/** Form view */}
-       
+       </View>
         <View style={{ flexDirection: 'column' }}>
           <Text style={inputStyles.inputLabelText}>Current Client </Text>
           <Text style={inputStyles.textInput} >{route.params.client}</Text>
@@ -79,7 +79,8 @@ const AddDemand: React.FC  = ({route}) => {
         <Text style={inputStyles.inputLabelText}>Curriculum</Text>
           {/** Picker Container */}
           <View style={inputStyles.pickerContainer}>
-            <Picker
+            <Picker            
+              prompt={route.params.client}            
               selectedValue={selectedFilter}
               mode='dropdown'
               onValueChange={(itemValue: any, itemIndex: any) =>
@@ -95,7 +96,7 @@ const AddDemand: React.FC  = ({route}) => {
       
         <View style={{ flexDirection: 'column' }}>
           <Text style={inputStyles.inputLabelText}>Enter # of Associates Needed </Text>
-          <TextInput style={inputStyles.textInput} keyboardType='numeric' />
+          <TextInput style={inputStyles.textInput} keyboardType='numeric' placeholder={route.params.client}/>
         </View>
         
         
@@ -173,4 +174,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddDemand;
+export default EditDemand;

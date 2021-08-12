@@ -92,7 +92,7 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
           </View>
           {/** Confirm Button */}
           <TouchableOpacity style={buttonStyles.buttonContainer}>
-            <Text style={buttonStyles.buttonText} onPress={() => navigation.navigate('AddDemand')}  >Add Demand</Text>
+            <Text style={buttonStyles.buttonText} onPress={() => navigation.navigate('AddDemand',route.params)}  >Add Demand</Text>
           </TouchableOpacity>
         </View>
         {/**Subtitle: Demands */}
