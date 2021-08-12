@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from '../../../types';
+import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import Header from '../../Components/batches/Header';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -46,14 +46,14 @@ const demands = [
     quantitydemanded: 25,
   },
   {
-    client: 'Matts BBQ and Foot Massage',
+    client: 'Matts BBQ',
     curriculum: 'Cooking',
     needby: Date.now(),
     quantitydemanded: 25,
   },
   {
-    client: 'Matts BBQ and Foot Massage',
-    curriculum: 'Foot Massaging',
+    client: 'Matts BBQ',
+    curriculum: 'BBQ Making?',
     needby: Date.now(),
     quantitydemanded: 25,
   },

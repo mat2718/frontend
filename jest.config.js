@@ -3,11 +3,7 @@ const { withEnzyme } = require('jest-expo-enzyme');
 module.exports = {
   projects: [addConfig(withEnzyme(require('jest-expo/android/jest-preset')))],
   collectCoverage: true,
-  collectCoverageFrom: [
-    '<rootDir>/src/Screens/Batches/*.{ts,tsx,js,jsx}',
-    '<rootDir>/src/Screens/ViewBatch/*.{ts,tsx,js,jsx}',
-    '<rootDir>/src/Screens/AddEditBatch/*.{ts,tsx,js,jsx}',
-  ],
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx,js,jsx}'],
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
@@ -51,11 +47,11 @@ function addConfig(config) {
   config.setupFilesAfterEnv.push('<rootDir>/__tests__/setup.js');
 
   // comment this out if you want to test all files
-  config.testMatch = [
-    '<rootDir>/src/Screens/Batches/*.test.{ts,tsx,js,jsx}',
-    '<rootDir>/src/Screens/ViewBatch/*.test.{ts,tsx,js,jsx}',
-    '<rootDir>/src/Screens/AddEditBatch/*.test.{ts,tsx,js,jsx}',
-  ];
+  // config.testMatch = [
+  //   '<rootDir>/src/Screens/Batches/*.test.{ts,tsx,js,jsx}',
+  //   '<rootDir>/src/Screens/ViewBatch/*.test.{ts,tsx,js,jsx}',
+  //   '<rootDir>/src/Screens/AddEditBatch/*.test.{ts,tsx,js,jsx}',
+  // ];
 
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
