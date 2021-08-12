@@ -23,7 +23,7 @@ jobs:
       run:  sudo npm install -g jest
     # - name: What directory does this occur in
     #  run: ls -l
-    # - name: Run Tests
+    - name: Run Tests
       # run:  npm run test 'src/components/batches/BatchListItem/BatchListItem.test.tsx'
       run: npm run test-stupid
     - name: SonarCloud Scan
