@@ -8,7 +8,7 @@ import {
   Platform,
   TextInput,
 } from 'react-native';
-import Header from '../../Components/batches/Header';
+import Header from '../../components/batches/Header';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { buttonStyles, inputStyles, screenStyles, textStyles } from '../../styles';
