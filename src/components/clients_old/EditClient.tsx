@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import IClient from '../../../assets/models/Client';
-import GlobalStyles from '../../../assets/constants/GlobalStyles';
-import Header from '../Header/Header';
+import IClient from '../../assets/models/Client';
+import GlobalStyles from '../../assets/constants/GlobalStyles';
 import { TextInput } from 'react-native-gesture-handler';
-import colors from '../../../assets/constants/colors';
+import colors from '../../assets/constants/colors';
 
 let client = [
   {

@@ -62,6 +62,7 @@ function addConfig(config) {
   config.testMatch = [
     // '<rootDir>/src/components/Clients/__tests__/AddClient.test.js',
     '<rootDir>/src/components/batches/BatchListItem/BatchListItem.test.tsx'
+
   ];
 
   // third-party libraries that throw errors
@@ -83,6 +84,7 @@ function addConfig(config) {
     'react-native-chart-kit',
     'react-native-calendars',
     'react-native-swipe-gestures',
+    'react-native-reanimated',
     'react-native-calendar-picker',
     'expo-font',
     'expo-asset',

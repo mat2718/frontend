@@ -1,8 +1,8 @@
 import React from 'react';
 import { SafeAreaView, FlatList } from 'react-native';
 import { screenStyles } from '../../styles';
-import ClientsListHeader from '../../Components/clients/ClientsListHeader';
-import ClientsListItem from '../../Components/clients/ClientsListItem';
+import ClientsListHeader from '../../components/clients/ClientsListHeader';
+import ClientsListItem from '../../components/clients/ClientsListItem';
 
 /** Mock Data - PreRedux */
 export const data = ['Cognizant', 'Revature', 'Matts BBQ and Foot Massage'];
