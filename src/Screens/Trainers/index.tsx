@@ -1,41 +1,41 @@
 import React, { useState } from 'react';
-import {
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  FlatList,
-  SafeAreaView,
-} from 'react-native';
+import
+  {
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+    View,
+    FlatList,
+    SafeAreaView,
+  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 import TrainerListHeader from '../../components/trainers/TrainerListHeader';
 import { screenStyles, listStyles } from '../../styles';
 import TrainersListItem from '../../components/trainers/TrainersListItem';
+import ITrainer from '../../Entities/Trainer';
 /**
  * Authors: Joab Smith and Imran Ilyas
  **/
 
-interface ITrainer {
-  name: string;
-  ID: string;
-}
 
-const MainTrainer: React.FC<ITrainer> = () => {
+
+const MainTrainer: React.FC<ITrainer> = () =>
+{
   const [trainerArr, setTrainerArr] = useState<ITrainer[]>([]);
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 
-  const str = [
-    { name: 'Johnathan Jingles', ID: '87654' },
-    { name: 'chup', ID: '87774' },
-  ];
+  const str: ITrainer[] = [
+    { trainerid: 1, email: "marc.skwarczynski@revature.net", trainerfirst: "Marc", trainerlast: "Skwarczynski" },
+    { trainerid: 2, email: "nobody@mail.com", trainerfirst: "Robert", trainerlast: "Connell" }];
 
   /** Main item to render for the FlatList */
-  const renderItem = ({ item }: { item: any }) => {
-    return <TrainersListItem name={item.name} id={item.ID} />;
+  const renderItem = ({ item }: { item: ITrainer }) =>
+  {
+    return <TrainersListItem trainer={item} />;
   };
 
   return (
@@ -43,7 +43,7 @@ const MainTrainer: React.FC<ITrainer> = () => {
       <FlatList
         data={str}
         renderItem={renderItem}
-        keyExtractor={(item) => item.ID}
+        keyExtractor={(item) => item.email}
         ListHeaderComponent={TrainerListHeader}
       ></FlatList>
     </SafeAreaView>

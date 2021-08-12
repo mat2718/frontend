@@ -11,8 +11,7 @@ import {
 import Header from '../../components/batches/Header';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { buttonStyles, inputStyles, screenStyles, textStyles } from '../../styles';
-import { useNavigation } from '@react-navigation/native';
+import { screenStyles, textStyles } from '../../styles';
 
 interface IProps {
   route: {
@@ -30,12 +29,8 @@ interface IProps {
 
 /** code complexity is above the threshold here according to sonarlint, might need to modularize parts of this */
 const AddEditCurriculum: React.FC<IProps> = ({ route }) => {
-  const navigation = useNavigation();
-  
-  const [createdBy, setCreatedBy] = useState('');
-  const [modifiedBy, setModifiedBy] = useState('')
-  const [batches, setBatches] = useState('');
-  const [skills, setSkills] = useState('')
+  const [text, setText] = useState('');
+
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [createdDate, setCreatedDate] = useState(new Date(Date.now()));
   const [modifiedDate, setModifiedDate] = useState(new Date(Date.now()));
@@ -77,7 +72,6 @@ const AddEditCurriculum: React.FC<IProps> = ({ route }) => {
     <View style={screenStyles.safeAreaView}>
       <Header />
       <ScrollView style={screenStyles.mainView}>
-        {/**Heading and button*/}
         <View
           style={{
             justifyContent: 'space-between',
@@ -85,25 +79,18 @@ const AddEditCurriculum: React.FC<IProps> = ({ route }) => {
             marginTop: 10,
           }}
         >
-          {/** Heading */}
           <Text style={textStyles.heading}>
             {route.params ? 'Edit Curriculum' : 'Add Curriculum'}
           </Text>
-          {/**Add or Edit */}
-          <TouchableOpacity style={buttonStyles.buttonContainer} onPress={() => navigation.goBack()}>
-            <Text style={buttonStyles.buttonText}>Add</Text> 
-          </TouchableOpacity>
         </View>
-
-        {/**Form */}
-        <View style={{flexDirection: 'row'}}>
-          <Text style={inputStyles.inputLabelText}>Created On:</Text>
-          <Text style={inputStyles.textInput}>{convertDate(createdDate)}</Text>
-          {!isPickerShow && (
+        <View style={styles.container}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.txtContainer}>Created On</Text>
+            <Text style={styles.input}>{convertDate(createdDate)}</Text>
+            {!isPickerShow && (
               <TouchableOpacity
                 style={styles.btnContainer}
                 onPress={showPicker}
-                testID='pickerBtn'
               >
                 <Text style={styles.buttonText2}>
                   <MaterialCommunityIcons
@@ -124,21 +111,20 @@ const AddEditCurriculum: React.FC<IProps> = ({ route }) => {
                 style={styles.datePicker}
               />
             )}
-        </View>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.txtContainer}>Created By:</Text>
+            <TextInput
+              value={text}
+              onChangeText={(createdByText) => setText(createdByText)}
+              style={styles.input}
+            />
+          </View>
 
-        <View style={{flexDirection: 'row'}}>
-          <Text style={inputStyles.inputLabelText}>Created By:</Text>
-          <TextInput 
-          style={inputStyles.textInput}
-          value={createdBy}
-          onChangeText={createdBy => setCreatedBy(createdBy)}
-          />
-        </View>
-        
-        <View style={{flexDirection: 'row'}}>
-          <Text style={inputStyles.inputLabelText}>Modified On:</Text>
-          <Text style={inputStyles.textInput}>{convertDate(modifiedDate)}</Text>
-          {!isPickerShow && (
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.txtContainer}>Last Modified On:</Text>
+            <Text style={styles.input}>{convertDate(modifiedDate)}</Text>
+            {!isPickerShow && (
               <TouchableOpacity
                 style={styles.btnContainer}
                 onPress={showPicker}
@@ -162,45 +148,88 @@ const AddEditCurriculum: React.FC<IProps> = ({ route }) => {
                 style={styles.datePicker}
               />
             )}
-        </View>
+          </View>
 
-        <View style={{flexDirection: 'row'}}>
-          <Text style={inputStyles.inputLabelText}>Last Modified By:</Text>
-          <TextInput 
-          style={inputStyles.textInput}
-          value={modifiedBy}
-          onChangeText={modifiedBy => setModifiedBy(modifiedBy)}
-          />
-        </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.txtContainer}>Last Modified By:</Text>
+            <TextInput
+              value={text}
+              onChangeText={(modifiedByText) => setText(modifiedByText)}
+              style={styles.input}
+            />
+          </View>
 
-        <View style={{flexDirection: 'row'}}>
-          <Text style={inputStyles.inputLabelText}>Batches:</Text>
-          <TextInput 
-          style={inputStyles.textInput}
-          value={batches}
-          onChangeText={batches => setBatches(batches)}
-          />
-        </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.txtContainer}>Batches:</Text>
+            <TextInput
+              value={text}
+              onChangeText={(batchesText) => setText(batchesText)}
+              style={styles.input}
+            />
+          </View>
 
-        <View style={{flexDirection: 'row'}}>
-          <Text style={inputStyles.inputLabelText}>Skills:</Text>
-          <TextInput 
-          style={inputStyles.textInput}
-          value={skills}
-          onChangeText={skills => setSkills(skills)}
-          />
-        </View>
-
-        {/**Save button */}
-          <TouchableOpacity style={buttonStyles.buttonContainer}>
-            <Text style={buttonStyles.buttonText}>Save</Text>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.txtContainer}>Skills:</Text>
+            <TextInput
+              value={text}
+              onChangeText={(skillsText) => setText(skillsText)}
+              style={styles.input}
+            />
+          </View>
+          <TouchableOpacity style={styles.saveBtnContainer}>
+            <Text style={styles.saveBtn}>SAVE</Text>
           </TouchableOpacity>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    margin: 10,
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.75,
+    shadowRadius: 4,
+    elevation: 8,
+  },
+  title: {
+    margin: 10,
+    marginTop: 20,
+    fontFamily: 'FuturaBold',
+    fontSize: 22,
+  },
+  input: {
+    margin: 10,
+    borderRadius: 50,
+    marginHorizontal: 10,
+    padding: 10,
+    paddingHorizontal: 'auto',
+  },
+  saveBtnContainer: {
+    alignSelf: 'flex-end',
+    paddingVertical: 2,
+    paddingHorizontal: 10,
+    backgroundColor: '#F26925',
+    borderRadius: 50,
+    marginHorizontal: 10,
+  },
+  saveBtn: {
+    padding: 10,
+    color: '#fff',
+    fontSize: 15,
+    fontFamily: 'FuturaBold',
+    justifyContent: 'center',
+  },
   btnContainer: {
     marginTop: 5,
     justifyContent: 'center',

@@ -2,13 +2,11 @@ import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
 /**
  * Authors: Joab Smith and Imran Ilyas
  **/
 interface ITrainer {
   name: string;
-  ID: string;
 }
 interface IProps {
   setTrainer: (trainerArr: ITrainer[]) => void;
@@ -22,7 +20,6 @@ const SearchBar: React.FC<IProps> = (props: IProps) => {
       case 'ALL':
       case 'Fname':
       case 'Lname':
-      case 'id':
     }
   };
   return (
@@ -37,7 +34,6 @@ const SearchBar: React.FC<IProps> = (props: IProps) => {
         >
           <Picker.Item label='First Name' value='Fname' />
           <Picker.Item label='Last Name' value='Lname' />
-          <Picker.Item label='ID' value='id' />
           <Picker.Item label='ALL' value='All' />
         </Picker>
 

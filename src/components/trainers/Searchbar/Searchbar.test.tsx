@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import SearchBar from '.';
 
 describe('Search Bar', () => {
-  it('Should contain all componets', () => {
+  it('Should contain all components', () => {
     const mock = jest.fn();
     const wrapper = shallow(<SearchBar setTrainer={mock} />);
     const search = wrapper.findWhere(
