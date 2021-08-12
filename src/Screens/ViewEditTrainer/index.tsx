@@ -1,9 +1,8 @@
 import { useRoute } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Text, TextInput } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Text, TextInput, SafeAreaView, ScrollView } from 'react-native';
 import ITrainer from '../../Entities/Trainer';
-import { inputStyles } from '../../styles';
-
+import { inputStyles, screenStyles, buttonStyles, textStyles } from '../../styles';
 /**
  * Authors: Joab Smith and Imran Ilyas
  **/
@@ -22,6 +21,7 @@ const ViewEditTrainer: React.FC<IProps> = (props: IProps) =>
 
   const route = useRoute();
   const params = route.params as ITrainer;
+  // console.log(params);
   const [trainer, setTrainer] = useState(fillertrainer);
   const [firstName, setFirstName] = useState(params.trainerfirst);
   const [lastName, setLastName] = useState(params.trainerlast);
@@ -33,27 +33,43 @@ const ViewEditTrainer: React.FC<IProps> = (props: IProps) =>
     //axios
     console.log('Update');
   };
-  console.log(params, trainer);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={screenStyles.safeAreaView}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-          <Text style={styles.header}>Edit Trainer</Text>
-
-          {/* <View style={styles.fieldRow}> */}
-          <View style={styles.fieldCols}>
-            <Text style={inputStyles.inputLabelText}>First Name:</Text>
-            <TextInput
+        {/** Heading and button */}
+        <View style={screenStyles.mainView}>
+        <View
+          style={{
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            marginTop: 10,
+          }}
+        >
+          {/** Heading text */}
+          <Text style={textStyles.heading}>Edit Trainer</Text>
+          {/** Add/Edit */}
+          <TouchableOpacity
+            style={buttonStyles.buttonContainer}
+            onPress={() => update()}
+          >
+            <Text style={buttonStyles.buttonText}>Update</Text>
+          </TouchableOpacity>
+        </View>
+        {/** Form view */}
+        {/** Client name */}
+        <View style={{ flexDirection: 'column' }}>
+              <Text style={inputStyles.inputLabelText}>First Name:</Text>
+        <TextInput
               style={inputStyles.textInput}
               testID='Firstname'
               placeholder='First Name'
               onChangeText={setFirstName}
-            >
-              {firstName}
-            </TextInput>
+                >
+               {firstName}
+             </TextInput>
 
-            <Text style={inputStyles.inputLabelText}>Last Name:</Text>
-            <TextInput
+             <Text style={inputStyles.inputLabelText}>Last Name:</Text>
+             <TextInput
               style={inputStyles.textInput}
               testID='Lastname'
               placeholder='Last Name'
@@ -72,17 +88,29 @@ const ViewEditTrainer: React.FC<IProps> = (props: IProps) =>
             >
               {email}
             </TextInput>
-
-          </View>
-          {/* </View> */}
-
-          <TouchableOpacity style={styles.touchableStyle} onPress={update}>
-            <Text style={styles.submit}>Update</Text>
-          </TouchableOpacity>
+        </View>
         </View>
       </TouchableWithoutFeedback>
-      );
-    </View>
+    </SafeAreaView>
+    // <View style = {styles.container}>
+    //   <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={screenStyles.safeAreaView}>
+    //     <View >
+    //       <Text style={styles.header}>Edit Trainer</Text>
+
+    //       <View style={styles.fieldCols}>
+    //       {/* <View style={styles.fieldRow}> */}
+    //         
+
+    //       </View>
+
+    //       {/* </View> */}
+    //       <TouchableOpacity style={styles.touchableStyle} onPress={update}>
+    //         <Text style={styles.submit}>Update</Text>
+    //       </TouchableOpacity>
+    //     </View>
+    //   </TouchableWithoutFeedback>
+      
+    // </View>
   );
 };
 
@@ -95,6 +123,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
+    
     margin: '2%',
     fontSize: 30,
     textAlign: 'center',

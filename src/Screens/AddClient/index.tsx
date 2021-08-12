@@ -31,7 +31,6 @@ const AddClient: React.FC = () => {
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
-      <Header />
       <ScrollView style={screenStyles.mainView}>
         {/** Heading and button */}
         <View
