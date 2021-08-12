@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../../types';
+
+import { RootStackParamList } from '../../../types';
+
 import { listStyles, colors } from '../../../styles';
 import { Picker } from '@react-native-picker/picker';
 

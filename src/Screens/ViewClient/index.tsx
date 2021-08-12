@@ -8,13 +8,13 @@ import {
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from '../../../types';
+import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
-import Header from '../../Components/batches/Header';
+import Header from '../../components/batches/Header';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { screenStyles, textStyles, buttonStyles, colors } from '../../styles';
 import { FlatList } from 'react-native-gesture-handler';
-import DemandsListItem from '../../Components/demands/DemandsListItem';
+import DemandsListItem from '../../components/demands/DemandsListItem';
 
 interface PropsI {
   route: {
@@ -46,14 +46,14 @@ const demands = [
     quantitydemanded: 25,
   },
   {
-    client: 'Matts BBQ and Foot Massage',
+    client: 'Matts BBQ',
     curriculum: 'Cooking',
     needby: Date.now(),
     quantitydemanded: 25,
   },
   {
-    client: 'Matts BBQ and Foot Massage',
-    curriculum: 'Foot Massaging',
+    client: 'Matts BBQ',
+    curriculum: 'BBQ Making?',
     needby: Date.now(),
     quantitydemanded: 25,
   },
@@ -92,7 +92,7 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
           </View>
           {/** Confirm Button */}
           <TouchableOpacity style={buttonStyles.buttonContainer}>
-            <Text style={buttonStyles.buttonText}>Add Demand</Text>
+            <Text style={buttonStyles.buttonText} onPress={() => navigation.navigate('AddDemand',route.params)}  >Add Demand</Text>
           </TouchableOpacity>
         </View>
         {/**Subtitle: Demands */}

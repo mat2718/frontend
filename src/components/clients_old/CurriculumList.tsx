@@ -1,8 +1,8 @@
 import React,{useState} from 'react'
 import {View,Text,Picker,StyleSheet} from 'react-native'
-import GlobalStyles from '../../../assets/constants/GlobalStyles'
+import GlobalStyles from '../../assets/constants/GlobalStyles'
 import RNPickerSelect from 'react-native-picker-select'
-import colors from '../../../assets/constants/colors'
+import colors from '../../assets/constants/colors'
 
 
 const curric=[
