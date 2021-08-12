@@ -109,26 +109,6 @@ const chartConfig = {
       demandGetter();
       batchesGetter();
     }, [currCurriculum]);
-
-//  const createNewComment = async() => {
-//         if (working) return;
-//         setWorking(true)
-        
-//         await axios.post(`https://w822121nz1.execute-api.us-east-2.amazonaws.com/Prod/post/${props.timeStamp}`, {
-//             displayName: user?.displayName,
-//             displayImg: user?.profileImg,
-//             comment: newComment
-//         }, {
-//             headers: {
-//                 Authorization : token
-//             },  
-//         }).then(resp => {
-//             props.submitComm();
-//         }).then(resp => {
-//             setWorking(false);
-//             setNewComment('');
-//         })
-//     }
     
     return (
       <View style={screenStyles.mainView}>
