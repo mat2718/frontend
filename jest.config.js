@@ -15,11 +15,11 @@ module.exports = {
   ],
   coverageDirectory: 'coverage',
   testResultsProcessor: 'jest-sonar-reporter',
-  coverageThreshold: {
-    global: {
-      statements: 70,
-    },
-  },
+  // coverageThreshold: {
+  //   global: {
+  //     statements: 70,
+  //   },
+  // },
 }
 
 
