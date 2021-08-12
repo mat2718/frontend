@@ -27,4 +27,10 @@ describe('Batches', () => {
     const chartData = wrapper.find(BarChart).props().data;
     expect(chartData.datasets.length).toBeGreaterThan(0);
   });
+
+  // tests the color opacity function
+  it('opacity function does not throw errors when called', () => {
+    const chartConfig = wrapper.find(BarChart);
+    chartConfig.prop('chartConfig').color();
+  });
 });

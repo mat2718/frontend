@@ -93,6 +93,7 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
           </Text>
           {/** Add/Edit */}
           <TouchableOpacity
+            testID='goBackButton'
             style={buttonStyles.buttonContainer}
             onPress={() => navigation.goBack()}
           >

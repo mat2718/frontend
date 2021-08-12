@@ -46,14 +46,14 @@ const demands = [
     quantitydemanded: 25,
   },
   {
-    client: 'Matts BBQ and Foot Massage',
+    client: 'Matts BBQ',
     curriculum: 'Cooking',
     needby: Date.now(),
     quantitydemanded: 25,
   },
   {
-    client: 'Matts BBQ and Foot Massage',
-    curriculum: 'Foot Massaging',
+    client: 'Matts BBQ',
+    curriculum: 'BBQ Making?',
     needby: Date.now(),
     quantitydemanded: 25,
   },

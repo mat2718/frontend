@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from '../../../types'
+
+import { RootStackParamList } from '../../../types';
+
 import { StackNavigationProp } from '@react-navigation/stack';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
@@ -27,6 +29,7 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
         {/** Add batch button */}
         <TouchableOpacity
           style={buttonStyles.buttonContainer}
+          testID='button'
           onPress={() => navigation.navigate('AddEditBatch')}
         >
           <Text style={buttonStyles.buttonText}>Add Batch</Text>

@@ -1,10 +1,23 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Batches, { data } from '.';
+import BatchesListHeader from '../../Components/batches/BatchesListHeader';
 import { FlatList, TouchableOpacity } from 'react-native';
 import Header from '../../components/batches/Header';
 
 let wrapper: any;
+
+const mockNavigate = jest.fn();
+jest.mock('@react-navigation/native', () => {
+  return {
+    ...jest.requireActual('@react-navigation/native'),
+    useNavigation: () => {
+      return {
+        navigate: mockNavigate,
+      };
+    },
+  };
+});
 
 describe('Batches', () => {
   beforeEach(() => {
@@ -35,6 +48,21 @@ describe('Batches', () => {
     expect(listData).toEqual(data);
   });
 
+  /** tests the navigate button */
+  it('pressing the button navigates to new screen', () => {
+    let wrap = shallow(
+      <BatchesListHeader
+        selectedFilter='any'
+        setSelectedFilter={() => {
+          null;
+        }}
+      />
+    );
+    let button = wrap.find({ testID: 'button' }).last();
+    button.invoke('onPress')();
+    expect(mockNavigate).toHaveBeenCalledWith('AddEditBatch');
+  });
+
   it('should be pressed', () => {
     const shouldBePressed = wrapper.find(TouchableOpacity).at(0);
 
@@ -46,5 +74,3 @@ describe('Batches', () => {
     expect(myEventHandler).toHaveBeenCalled();
   });
 });
-
-// yeet

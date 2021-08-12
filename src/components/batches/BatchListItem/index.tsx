@@ -30,6 +30,7 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
     /** Structures and displays the data from the FlatList */
     <TouchableOpacity
       style={listStyles.listItemContainer}
+      testID='button'
       onPress={() => {
         navigation.navigate('ViewBatch', props);
       }}
