@@ -25,8 +25,8 @@ jobs:
       run:  npm run test 'src/components/batches/BatchListItem/BatchListItem.test.tsx'
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
-      # with: 
-        # projectBaseDir: "<rootDir>/src/**/*.ts"
+      with: 
+        projectBaseDir: "/home/runner/work/frontend/frontend"
         # workDir: 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
