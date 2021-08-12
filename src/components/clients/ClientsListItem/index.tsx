@@ -36,13 +36,13 @@ const ClientsListItem: React.FC<IProps> = (props: IProps) => {
       quantitydemanded: 25,
     },
     {
-      client: 'Matts BBQ and Foot Massage',
+      client: 'Matts BBQ',
       curriculum: 'Cooking',
       needby: Date.now(),
       quantitydemanded: 25,
     },
     {
-      client: 'Matts BBQ and Foot Massage',
+      client: 'Matts BBQ',
       curriculum: 'Foot Massaging',
       needby: Date.now(),
       quantitydemanded: 25,

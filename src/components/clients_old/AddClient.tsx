@@ -6,9 +6,9 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import GlobalStyles from '../../../assets/constants/GlobalStyles';
-import colors from '../../../assets/constants/colors';
-import Header from '../Header/Header';
+import GlobalStyles from '../../assets/constants/GlobalStyles';
+import colors from '../../assets/constants/colors';
+
 
 const newClient = (newClientID: string, newClientName: string) => {
   console.log(newClientID + newClientName);

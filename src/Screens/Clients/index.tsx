@@ -5,7 +5,7 @@ import ClientsListHeader from '../../components/clients/ClientsListHeader';
 import ClientsListItem from '../../components/clients/ClientsListItem';
 
 /** Mock Data - PreRedux */
-export const data = ['Cognizant', 'Revature', 'Matts BBQ and Foot Massage'];
+export const data = ['Cognizant', 'Revature', 'Matts BBQ'];
 
 /** Basis for Entire Batch Screen */
 const Clients: React.FC = () => {

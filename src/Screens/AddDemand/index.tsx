@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
   View,
   Text,
   TextInput,
-  Platform,
   StyleSheet,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import Header from '../../components/batches/Header';
 import { Picker } from '@react-native-picker/picker';
@@ -19,40 +19,22 @@ import {
   colors,
   buttonStyles,
 } from '../../styles';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-interface PropsI {
-  route: {
-    params?: {
-      batchId: number;
-      curriculum: string;
-      trainer: string;
-      associates: number;
-      startDate: any;
-      endDate: any;
-    };
-  };
-}
+
 
 /** Mock data for curriculum */
 const dataCurricula = ['React Native/Cloud Native', 'Java', 'Python'];
 
-/** Mock data for trainer */
-const dataTrainer = ['Robert Connell', 'Matthew Otto', 'Red Oral'];
-
-/** Main component screen */
-const AddEditBatch: React.FC<PropsI> = ({ route }) => {
-  /** States for Picker */
+const AddDemand: React.FC  = ({route}) => {
+  /** Navigation for going back a screen */
+  const navigation = useNavigation();
   const [selectedFilter, setSelectedFilter] = React.useState('all');
   const [isStartPickerShow, setIsStartPickerShow] = React.useState(false);
-  /** States for Date Picker */
   const [startDate, setStartDate] = React.useState(new Date(Date.now()));
   const [endDate, setEndDate] = React.useState(new Date(Date.now()));
   const [isEndPickerShow, setIsEndPickerShow] = React.useState(false);
-  /** Navigation for going back a screen */
-  const navigation = useNavigation();
-
   /** Input listener for Start Date Picker */
   const onStartChange = (e: any, val: any) => {
     if (val) {
@@ -64,16 +46,6 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
     }
   };
 
-  /** Input listener for End Date Picker */
-  const onEndChange = (e: any, val: any) => {
-    if (val) {
-      setEndDate(val);
-      setIsEndPickerShow(false);
-    } else {
-      setEndDate(new Date(Date.now()));
-      setIsEndPickerShow(false);
-    }
-  };
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
@@ -88,22 +60,23 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
           }}
         >
           {/** Heading text */}
-          <Text style={textStyles.heading}>
-            {route.params ? 'Edit Batch' : 'Add Batch'}
-          </Text>
+          <Text style={textStyles.heading}>Add a Demand</Text>
           {/** Add/Edit */}
           <TouchableOpacity
-            testID='goBackButton'
             style={buttonStyles.buttonContainer}
-            onPress={() => navigation.goBack()}
+            onPress={() => navigation.navigate('AddDemand')}
           >
             <Text style={buttonStyles.buttonText}>Add</Text>
           </TouchableOpacity>
         </View>
         {/** Form view */}
-        <View>
-          {/** Curriculum  */}
-          <Text style={inputStyles.inputLabelText}>Curriculum</Text>
+       
+        <View style={{ flexDirection: 'column' }}>
+          <Text style={inputStyles.inputLabelText}>Current Client </Text>
+          <Text style={inputStyles.textInput} >{route.params.client}</Text>
+        </View>
+        {/** Curriculum  */}
+        <Text style={inputStyles.inputLabelText}>Curriculum</Text>
           {/** Picker Container */}
           <View style={inputStyles.pickerContainer}>
             <Picker
@@ -119,38 +92,16 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
               })}
             </Picker>
           </View>
-          {/** Trainer */}
-          <Text style={inputStyles.inputLabelText}>Trainer</Text>
-          <View style={inputStyles.pickerContainer}>
-            <Picker
-              selectedValue={selectedFilter}
-              mode='dropdown'
-              onValueChange={(itemValue: any, itemIndex: any) =>
-                setSelectedFilter(itemValue)
-              }
-              style={{ width: '100%', height: 50 }}
-            >
-              {dataTrainer.map((curr) => {
-                return <Picker.Item label={curr} value={curr} key={curr} />;
-              })}
-            </Picker>
-          </View>
-          {/** Associates */}
-          <View style={{ flexDirection: 'column' }}>
-            <Text style={inputStyles.inputLabelText}>Size</Text>
-            <TextInput style={inputStyles.textInput} keyboardType='numeric' />
-          </View>
-          {/** Bottom Inputs Container */}
-          <View
-            style={{
-              flexDirection: 'row',
-              flex: 1,
-              justifyContent: 'space-between',
-            }}
-          >
+      
+        <View style={{ flexDirection: 'column' }}>
+          <Text style={inputStyles.inputLabelText}>Enter # of Associates Needed </Text>
+          <TextInput style={inputStyles.textInput} keyboardType='numeric' />
+        </View>
+        
+        
             {/** Start Date */}
             <View style={{ flexDirection: 'column' }}>
-              <Text style={inputStyles.inputLabelText}>Start Date</Text>
+              <Text style={inputStyles.inputLabelText}>Select Date Needed By</Text>
               <TouchableOpacity
                 style={styles.dateView}
                 onPress={() => setIsStartPickerShow(true)}
@@ -183,43 +134,11 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
               />
             )}
 
-            <View style={{ flexDirection: 'column' }}>
-              <Text style={inputStyles.inputLabelText}>End Date</Text>
-              <TouchableOpacity
-                style={styles.dateView}
-                onPress={() => setIsEndPickerShow(true)}
-              >
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name='calendar-export'
-                    size={20}
-                    color={colors.darkGray}
-                  />
-                  <Text style={styles.dateText}>{endDate.toDateString()}</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            {/* The date picker */}
-            {isEndPickerShow && (
-              <DateTimePicker
-                value={endDate}
-                mode={'date'}
-                display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                onChange={onEndChange}
-                style={styles.datePicker}
-              />
-            )}
-          </View>
-        </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
+
 
 const styles = StyleSheet.create({
   datePicker: {
@@ -254,4 +173,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddEditBatch;
+export default AddDemand;
