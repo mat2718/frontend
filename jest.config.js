@@ -5,13 +5,21 @@ module.exports = {
     addConfig(withEnzyme(require('jest-expo/android/jest-preset'))),
   ],
   collectCoverage: true,
-  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx,js,jsx}'],
+  collectCoverageFrom: [
+    // '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/components/batches/BatchListItem/BatchListItem.test.tsx',
+    // C:\Users\Bigmo\Revature\Perfect-Personnel-Placement\frontend\src\components\Clients\__tests__\AddClient.test.js
+  ],
+  coveragePathIgnorePatterns: [
+    '**/__tests__/**/*.[jt]s?(x)'
+  ],
   coverageDirectory: 'coverage',
-  coverageThreshold: {
-    global: {
-      statements: 70,
-    },
-  },
+  testResultsProcessor: 'jest-sonar-reporter',
+  // coverageThreshold: {
+  //   global: {
+  //     statements: 70,
+  //   },
+  // },
 }
 
 
@@ -52,10 +60,9 @@ function addConfig(config) {
   
   // comment this out if you want to test all files
   config.testMatch = [
-    '<rootDir>/src/Screens/Curricula/Curricula.test.tsx',
-    '<rootDir>/src/Screens/AddEditCurriculum/AddEditCurriculum.test.tsx',
-    '<rootDir>/src/components/curricula/CurriculaListHeader/CurriculaListHeader.test.tsx',
-    '<rootDir>/src/components/curricula/ExpandableList/ExpandableList.test.tsx'
+    // '<rootDir>/src/components/Clients/__tests__/AddClient.test.js',
+    '<rootDir>/src/components/batches/BatchListItem/BatchListItem.test.tsx'
+
   ];
 
   // third-party libraries that throw errors
@@ -78,6 +85,7 @@ function addConfig(config) {
     'react-native-calendars',
     'react-native-swipe-gestures',
     'react-native-reanimated',
+    'react-native-calendar-picker',
     'expo-font',
     'expo-asset',
     'expo-constants',
