@@ -12,7 +12,6 @@ import Header from '../../components/batches/Header';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { buttonStyles, inputStyles, screenStyles, textStyles } from '../../styles';
-import Navigation from '../../Navigation';
 import { useNavigation } from '@react-navigation/native';
 
 interface IProps {
@@ -32,7 +31,7 @@ interface IProps {
 /** code complexity is above the threshold here according to sonarlint, might need to modularize parts of this */
 const AddEditCurriculum: React.FC<IProps> = ({ route }) => {
   const navigation = useNavigation();
-  const [text, setText] = useState('');
+  
   const [createdBy, setCreatedBy] = useState('');
   const [modifiedBy, setModifiedBy] = useState('')
   const [batches, setBatches] = useState('');
@@ -104,6 +103,7 @@ const AddEditCurriculum: React.FC<IProps> = ({ route }) => {
               <TouchableOpacity
                 style={styles.btnContainer}
                 onPress={showPicker}
+                testID='pickerBtn'
               >
                 <Text style={styles.buttonText2}>
                   <MaterialCommunityIcons
