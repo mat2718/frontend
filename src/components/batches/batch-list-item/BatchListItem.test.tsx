@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { BarChart } from 'react-native-chart-kit';
-import BatchListItem from './';
+import BatchListItem from '.';
 import { TouchableOpacity } from 'react-native';
 
 let wrapper: any;

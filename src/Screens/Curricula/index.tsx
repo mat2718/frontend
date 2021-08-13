@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { FlatList } from 'react-native';
-import { ExpandableList } from '../../components/curricula/ExpandableList';
+import { ExpandableList } from '../../components/curricula/expandable-list';
 import { Transitioning, Transition } from 'react-native-reanimated';
-import CurriculaListHeader from '../../components/curricula/CurriculaListHeader';
+import CurriculaListHeader from '../../components/curricula/curricula-list-header';
 import { screenStyles } from '../../styles';
 
 //mock data for flatlist

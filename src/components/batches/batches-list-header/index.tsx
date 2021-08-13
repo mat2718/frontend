@@ -4,7 +4,7 @@ import { RootStackParamList } from '../../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import BatchStats from '../BatchStats';
+import BatchStats from '../batch-stats';
 import { screenStyles, textStyles, buttonStyles } from '../../../styles';
 
 /** We pass the filter state from the Batches screen to this component */

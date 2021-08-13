@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Clients, { data } from '.';
 import { FlatList } from 'react-native';
-import Header from '../../components/batches/Header';
+import Header from '../../components/batches/header';
 
 let wrapper: any;
 

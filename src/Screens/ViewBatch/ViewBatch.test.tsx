@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { mount } from 'enzyme';
-import Header from '../../components/batches/Header';
+import Header from '../../components/batches/header';
 import ViewBatch from '.';
 
 let wrapper: any;

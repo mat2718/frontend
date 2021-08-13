@@ -9,7 +9,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import Header from '../../components/batches/Header';
+import Header from '../../components/batches/header';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {

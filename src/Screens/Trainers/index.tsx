@@ -11,9 +11,9 @@ import
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
-import TrainerListHeader from '../../components/trainers/TrainerListHeader';
+import TrainerListHeader from '../../components/trainers/trainer-list-header';
 import { screenStyles, listStyles } from '../../styles';
-import TrainersListItem from '../../components/trainers/TrainersListItem';
+import TrainersListItem from '../../components/trainers/trainers-list-item';
 import ITrainer from '../../Entities/Trainer';
 /**
  * Authors: Joab Smith and Imran Ilyas

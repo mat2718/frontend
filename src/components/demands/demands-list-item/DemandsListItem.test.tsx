@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import DemandsListItem from './';
+import DemandsListItem from '.';
 import { TouchableOpacity } from 'react-native';
 
 let wrapper: any;

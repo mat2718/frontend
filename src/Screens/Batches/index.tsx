@@ -1,8 +1,8 @@
 import React from 'react';
 import { SafeAreaView, FlatList } from 'react-native';
-import BatchListItem from '../../components/batches/BatchListItem';
+import BatchListItem from '../../components/batches/batch-list-item';
 import { screenStyles } from '../../styles';
-import BatchesListHeader from '../../components/batches/BatchesListHeader';
+import BatchesListHeader from '../../components/batches/batches-list-header';
 
 /** Mock Data - PreRedux */
 export const data = [

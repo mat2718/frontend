@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import TrainerListItem from './';
+import TrainerListItem from '.';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ITrainer from '../../../Entities/Trainer';

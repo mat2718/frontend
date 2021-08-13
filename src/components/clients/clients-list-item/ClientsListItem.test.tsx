@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import ClientsListItem from './';
+import ClientsListItem from '.';
 import { TouchableOpacity } from 'react-native';
 
 let wrapper: any;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Header from '../../components/batches/Header';
+import Header from '../../components/batches/header';
 import AddEditCurriculum from '.'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { TextInput } from 'react-native';

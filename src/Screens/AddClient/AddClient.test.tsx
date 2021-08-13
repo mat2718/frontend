@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { FlatList, TouchableOpacity } from 'react-native';
-import Header from '../../components/batches/Header';
+import Header from '../../components/batches/header';
 import AddClient from '.';
 
 let wrapper: any;

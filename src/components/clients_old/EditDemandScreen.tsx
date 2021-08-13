@@ -12,7 +12,7 @@ import GlobalStyles from '../../assets/constants/GlobalStyles';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import CalendarPicker from 'react-native-calendar-picker';
-import Header from '../Header/index';
+import Header from '../header/index';
 import CurriculumList from './CurriculumList';
 import { TextInput } from 'react-native-gesture-handler';
 import IDemand from '../../assets/models/Demand';
