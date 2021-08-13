@@ -4,18 +4,18 @@ import {
 } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 import React from 'react';
-import ViewBatch from '../../Screens/ViewBatch';
+import ViewBatch from '../../screens/view-batch';
 import Navigation from '..';
-import AddEditBatch from '../../Screens/AddEditBatch';
-import Curricula from '../../Screens/Curricula';
-import AddEditCurriculum from '../../Screens/AddEditCurriculum';
-import AddClient from '../../Screens/AddClient';
-import CreateTrainer from '../../Screens/CreateTrainer';
-import ViewEditTrainer from '../../Screens/ViewEditTrainer';
-import ViewClient from '../../Screens/ViewClient';
-import Diagram from '../../Screens/Diagram';
-import AddDemand from '../../Screens/AddDemand';
-import EditDemand from '../../Screens/EditDemand';
+import AddEditBatch from '../../screens/add-edit-batch';
+import Curricula from '../../screens/curricula';
+import AddEditCurriculum from '../../screens/add-edit-curriculum';
+import AddClient from '../../screens/add-client';
+import CreateTrainer from '../../screens/create-trainer';
+import ViewEditTrainer from '../../screens/view-edit-trainer';
+import ViewClient from '../../screens/view-client';
+import Diagram from '../../screens/diagram';
+import AddDemand from '../../screens/add-demand';
+import EditDemand from '../../screens/edit-demand';
 //see what happens
 //please import your screen and put in your screen in components-kai
 const Stack = createStackNavigator<RootStackParamList>();
