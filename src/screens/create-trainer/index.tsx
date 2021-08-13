@@ -95,21 +95,10 @@ const CreateTrainer: React.FC = () =>
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    //justifyContent: 'center',
-  },
-
   header: {
     margin: '2%',
     fontSize: 30,
     textAlign: 'center',
-  },
-
-  fieldRow: {
-    flex: 1,
-    width: '100%',
-    flexDirection: 'row',
   },
 
   label: {
