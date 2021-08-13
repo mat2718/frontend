@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -69,7 +69,7 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
-
+  
   /** Render item for Demands list */
   const renderItem = ({ item }: { item: any }) => {
     return (
