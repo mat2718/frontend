@@ -11,6 +11,13 @@ interface PropsI {
   setTrainerArr: (trainers:ITrainer[]) => void;
 }
 
+/**
+ * Main Trainerlist Header
+ * @param
+ * @returns
+ * @author Joab Smith and Imran Ilyas
+ */
+
 const TrainerListHeader: React.FC<PropsI> = (props: PropsI) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
@@ -47,31 +54,8 @@ const TrainerListHeader: React.FC<PropsI> = (props: PropsI) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginBottom: 20,
-  },
   searchBar: {
     height: '20%',
-  },
-  flatlist: {
-    flex: 1,
-  },
-  header: {
-    fontSize: 24,
-  },
-  add: {
-    height: '8%',
-    alignSelf: 'flex-start',
-    backgroundColor: '#F26925',
-    borderRadius: 100,
-    padding: '4%',
-    justifyContent: 'center',
-    //margin: '10%',
-  },
-  addText: {
-    //textAlign: 'center',
-    color: 'white',
   },
 });
 

@@ -5,6 +5,11 @@ import IDemand from "../entities/demand";
 import ISkill from "../entities/skill";
 import ITrainer from "../entities/Trainer";
 
+/**
+ * Store - holds the state of the application
+ * @author Joab Smith
+ */
+
 export interface IAppState {
   skills: ISkill[];
   clients: IClient[];
