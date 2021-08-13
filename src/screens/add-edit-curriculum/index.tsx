@@ -1,17 +1,8 @@
 import React, { useState } from 'react';
-import {
-  View,
-  ScrollView,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Platform,
-  TextInput,
-} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Header from '../../components/batches/header';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { screenStyles, textStyles } from '../../styles';
+import { screenStyles } from '../../styles';
+import EditCurriculum from '../../components/curricula/edit-curriculum'
 
 interface IProps {
   route: {
@@ -31,46 +22,13 @@ interface IProps {
 const AddEditCurriculum: React.FC<IProps> = ({ route }) => {
   const [text, setText] = useState('');
 
-  const [isPickerShow, setIsPickerShow] = useState(false);
-  const [createdDate, setCreatedDate] = useState(new Date(Date.now()));
-  const [modifiedDate, setModifiedDate] = useState(new Date(Date.now()));
 
-  const showPicker = () => {
-    setIsPickerShow(true);
-  };
-
-  const onCreatedChange = (e: any, val: any) => {
-    if (val) {
-      setCreatedDate(val);
-      setIsPickerShow(false);
-    } else {
-      setCreatedDate(new Date(Date.now()));
-      setIsPickerShow(false);
-    }
-  };
-
-  const onModifiedChange = (e: any, val: any) => {
-    if (val) {
-      setModifiedDate(val);
-      setIsPickerShow(false);
-    } else {
-      setModifiedDate(new Date(Date.now()));
-      setIsPickerShow(false);
-    }
-  };
-
-  function convertDate(date: string | number | Date) {
-    function pad(s: string | number) {
-      return s < 10 ? '0' + s : s;
-    }
-    var d = new Date(date);
-    return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('-');
-  }
 
   /** Does it work? */
   return (
     <View style={screenStyles.safeAreaView}>
       <Header />
+      <EditCurriculum />
     </View>
   );
 };
