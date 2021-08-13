@@ -89,7 +89,7 @@ const EditCurriculum: React.FC = () => {
             testID='Name'
             onChangeText={setName}
             style={inputStyles.textInput}
-            >{name}</TextInput>
+            />
         </View>
 
         <View style={styles.form}>
