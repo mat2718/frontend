@@ -9,9 +9,10 @@ import
   View,
   Keyboard,
   TouchableWithoutFeedback,
+  SafeAreaView
 } from 'react-native';
 import ITrainer from '../../Entities/Trainer';
-import { inputStyles } from '../../styles';
+import { inputStyles, screenStyles, buttonStyles, textStyles } from '../../styles';
 
 /**
  * Authors: Joab Smith and Imran Ilyas
@@ -37,12 +38,29 @@ const CreateTrainer: React.FC = () =>
   };
 
   return (
+    <SafeAreaView style={screenStyles.safeAreaView}>
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
+      <View style={screenStyles.mainView}>
         {/* <Header/> */}
-        <Text style={styles.header}>Add a Trainer</Text>
-        <View style={styles.fieldRow}>
-          <View style={styles.fieldCols}>
+        <View
+          style={{
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            marginTop: 10,
+          }}
+        >
+          {/** Heading text */}
+          <Text style={textStyles.heading}>Add a Trainer</Text>
+          {/** Add/Edit */}
+          <TouchableOpacity
+            style={buttonStyles.buttonContainer}
+            onPress={() => submit()}
+          >
+            <Text style={buttonStyles.buttonText}>Submit</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={{ flexDirection: 'column' }}>
             <Text style={inputStyles.inputLabelText}>First Name:</Text>
             <TextInput
               style={inputStyles.textInput}
@@ -71,13 +89,9 @@ const CreateTrainer: React.FC = () =>
               {email}
             </TextInput>
           </View>
-        </View>
-
-        <TouchableOpacity style={styles.touchableStyle} onPress={submit}>
-          <Text style={styles.submit}>Submit</Text>
-        </TouchableOpacity>
       </View>
     </TouchableWithoutFeedback>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
