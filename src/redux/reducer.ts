@@ -1,4 +1,4 @@
-import { AppActions, IAppAction } from "./actions";
+import { AppActions, IAppAction } from "./actions/actions";
 import { IAppState, initialState } from "./state";
 
 export const Reducer = (
