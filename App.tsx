@@ -6,6 +6,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import * as Font from 'expo-font';
 import RootStackNavigator from './src/navigation/root-stack-navigator';
+import { createStore } from 'redux';
+import { Reducer } from './src/redux/reducer';
+import { Provider } from 'react-redux';
+
 
 const App = () => {
   const [fontsLoaded, setFonts] = useState(false);
@@ -13,6 +17,8 @@ const App = () => {
   useEffect(() => {
     loadFonts();
   });
+
+  const store = createStore(Reducer);
 
   const loadFonts = async () => {
     await Font.loadAsync({
@@ -32,6 +38,8 @@ const App = () => {
     );
   } else {
     return (
+      <Provider store={store}>
+
       <SafeAreaProvider style={styles.container}>
         <NavigationContainer>
           <PaperProvider theme={DefaultTheme}>
@@ -40,6 +48,7 @@ const App = () => {
           </PaperProvider>
         </NavigationContainer>
       </SafeAreaProvider>
+      </Provider>
     );
   }
 };
