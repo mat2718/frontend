@@ -1,5 +1,5 @@
 import IBatch from "../entities/batch";
-import ICirriculum from "../entities/curriculum";
+import ICurriculum from "../entities/curriculum";
 import IClient from "../entities/client";
 import IDemand from "../entities/demand";
 import ISkill from "../entities/skill";
@@ -9,7 +9,7 @@ export interface IAppState {
   skills: ISkill[];
   clients: IClient[];
   demands: IDemand[];
-  cirricula: ICirriculum[];
+  curricula: ICurriculum[];
   batches: IBatch[];
   trainers: ITrainer[];
 }
@@ -18,7 +18,7 @@ export const initialState: IAppState = {
   skills: [],
   clients: [],
   demands: [],
-  cirricula: [],
+  curricula: [],
   batches: [],
   trainers: [],
 };

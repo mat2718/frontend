@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -19,6 +19,7 @@ import {
   buttonStyles,
 } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
+import axios from '../../../axiosConfig'
 
 /** Mock data for curriculum */
 const dataCurricula = ['React Native/Cloud Native', 'Java', 'Python'];
@@ -28,6 +29,22 @@ const dataTrainer = ['Robert Connell', 'Matthew Otto', 'Red Oral'];
 const AddClient: React.FC = () => {
   /** Navigation for going back a screen */
   const navigation = useNavigation();
+  const[client, setClient]=useState("");
+
+  
+  
+ const addClient= ()=> {
+     axios.post('/client',{
+       clientname:client
+        }
+     ).then((res: any) => {
+       console.log(res); 
+            
+         });      
+ 
+       
+
+      }
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
@@ -46,7 +63,7 @@ const AddClient: React.FC = () => {
           {/** Add/Edit */}
           <TouchableOpacity
             style={buttonStyles.buttonContainer}
-            onPress={() => navigation.goBack()}
+            onPress={() => addClient() }
           >
             <Text style={buttonStyles.buttonText}>Add</Text>
           </TouchableOpacity>
@@ -55,7 +72,7 @@ const AddClient: React.FC = () => {
         {/** Client name */}
         <View style={{ flexDirection: 'column' }}>
           <Text style={inputStyles.inputLabelText}>Client name</Text>
-          <TextInput style={inputStyles.textInput} />
+          <TextInput style={inputStyles.textInput} onChangeText={setClient}/>
         </View>
       </ScrollView>
     </SafeAreaView>
