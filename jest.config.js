@@ -11,7 +11,7 @@ module.exports = {
     '!<rootDir>/src/screens/clients_old/**/*',
     '!<rootDir>/src/assets/**/*',
     '!<rootDir>/src/types.ts',
-    '!<rootDir>/src/entities',
+    '!<rootDir>/src/entities/*',
   ],
   coveragePathIgnorePatterns: [
     '**/__tests__/**/*.[jt]s?(x)',
