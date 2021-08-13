@@ -22,6 +22,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
+import ICurriculum from '../../entities/curriculum';
 
 
 
@@ -30,8 +31,9 @@ const dataCurricula = ['React Native/Cloud Native', 'Java', 'Python'];
 
 const AddDemand: React.FC  = ({route}) => {
   /** Navigation for going back a screen */
-  const [client, setClient]=useState(route.params.clientid)
+  const [client, setClient]=useState()
   const [howMany, setHowMany]=useState(0)
+  const [curriculum, setCurriculum]=useState<ICurriculum>()
   const navigation = useNavigation();
   const [selectedFilter, setSelectedFilter] = React.useState('all');
   const [isStartPickerShow, setIsStartPickerShow] = React.useState(false);
@@ -40,14 +42,8 @@ const AddDemand: React.FC  = ({route}) => {
   /** Input listener for Start Date Picker */
 
 
-  const AddDemand=()=>{
-    axios.post('/demand',{
-      clientid: client,
-      curriculumid: number,
-      needby: ,
-      quantitydemanded: howMany
-    })
-  }
+  const AddDemand=()=>{}
+    
 
 
 
