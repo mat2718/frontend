@@ -38,31 +38,32 @@ describe('AddEditCurriculum', () => {
   });
 
   //tests
-  it('should have labels and input fields', () => {
-    expect(wrapper.find('TextInput')).toHaveLength(4);
+  // it('should have labels and input fields', () => {
+  //   expect(wrapper.find('TextInput')).toHaveLength(4);
 
-    expect(wrapper.findWhere((node:any) => 
-    node.text().toLowerCase().includes('createdBy'))
-    ).toBeDefined();
+  //   expect(wrapper.findWhere((node:any) => 
+  //   node.text().toLowerCase().includes('createdBy'))
+  //   ).toBeDefined();
 
-    expect(wrapper.findWhere((node:any) => 
-    node.text().toLowerCase().includes('modifiedBy'))
-    ).toBeDefined();
+  //   expect(wrapper.findWhere((node:any) => 
+  //   node.text().toLowerCase().includes('modifiedBy'))
+  //   ).toBeDefined();
 
-    expect(wrapper.findWhere((node:any) => 
-    node.text().toLowerCase().includes('batches'))
-    ).toBeDefined();
+  //   expect(wrapper.findWhere((node:any) => 
+  //   node.text().toLowerCase().includes('batches'))
+  //   ).toBeDefined();
 
-    expect(wrapper.findWhere((node:any) => 
-    node.text().toLowerCase().includes('skills'))
-    ).toBeDefined();
-  });
+  //   expect(wrapper.findWhere((node:any) => 
+  //   node.text().toLowerCase().includes('skills'))
+  //   ).toBeDefined();
+  // });
 
-  it('onPress should run', () => {
-    const pickerBtn = wrapper.find({testID: 'pickerBtn'}).last();
-    pickerBtn.invoke('onPress')()
-    expect(wrapper.find(DateTimePicker).length).toBeGreaterThan(0)
-  });
+  // not yet implemented
+  // it('onPress should run', () => {
+  //   const pickerBtn = wrapper.find({testID: 'pickerBtn'}).last();
+  //   pickerBtn.invoke('onPress')()
+  //   expect(wrapper.find(DateTimePicker).length).toBeGreaterThan(0)
+  // });
 
   it('textInput can run onChange text', () => {
     wrapper.find(TextInput).forEach((node: any) => {
