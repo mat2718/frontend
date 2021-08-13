@@ -31,14 +31,14 @@ const EditCurriculum: React.FC = () => {
     const route = useRoute();
     const params = route.params as ICurriculum;
     const navigation = useNavigation();
-    const [name, setName] = useState(params.name); 
-    const [createdBy, setCreatedBy] = useState(params.createdBy);
-    const [modifiedBy, setModifiedBy] = useState(params.lastModifiedBy);
-    const [batches, setBatches] = useState(params.batches);
-    const [skills, setSkills] = useState(params.skills);
+    const [name, setName] = useState(curriculumData.name); 
+    const [createdBy, setCreatedBy] = useState(curriculumData.createdBy);
+    const [modifiedBy, setModifiedBy] = useState(curriculumData.lastModifiedBy);
+    const [batches, setBatches] = useState(curriculumData.batches.join(', '));
+    const [skills, setSkills] = useState(curriculumData.skills.join(', '));
     const [isPickerShow, setIsPickerShow] = useState(false);
-    const [createdDate, setCreatedDate] = useState(new Date(params.createdOn));
-    const [modifiedDate, setModifiedDate] = useState(new Date(params.lastModified));
+    const [createdDate, setCreatedDate] = useState(new Date(Date.now()));
+    const [modifiedDate, setModifiedDate] = useState(new Date(Date.now()));
   
     const showPicker = () => {
       setIsPickerShow(true);
@@ -63,14 +63,6 @@ const EditCurriculum: React.FC = () => {
         setIsPickerShow(false);
       }
     };
-  
-    function convertDate(date: string | number | Date) {
-      function pad(s: string | number) {
-        return s < 10 ? '0' + s : s;
-      }
-      var d = new Date(date);
-      return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('-');
-    }
 
     return (
     <ScrollView style={screenStyles.mainView}>
@@ -84,7 +76,7 @@ const EditCurriculum: React.FC = () => {
         <Text style={textStyles.heading}>Edit Curriculum</Text>
         <TouchableOpacity
             style={buttonStyles.buttonContainer}
-            onPress={() => navigation.navigate()}
+            onPress={() => navigation.goBack()}
         >
             <Text style={buttonStyles.buttonText}>Save</Text>
         </TouchableOpacity>
@@ -110,7 +102,7 @@ const EditCurriculum: React.FC = () => {
                     size={20}
                     color='#474C55'
                     />{'     '}
-                    {convertDate(createdDate)}</Text>
+                    {createdDate.toDateString()}</Text>
                 
             </TouchableOpacity>
             )}
@@ -147,7 +139,7 @@ const EditCurriculum: React.FC = () => {
                     size={20}
                     color='#474C55'
                 />{'     '}
-                {convertDate(modifiedDate)}
+                {modifiedDate.toDateString()}
                 </Text>
             </TouchableOpacity>
             )}
