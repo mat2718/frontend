@@ -5,7 +5,7 @@ import { AppActions } from './actions';
 /** Gets all skills from the backend */
 export const getAllSkills = async (dispatch: Dispatch) => {
   try {
-    const res = await axios.get('/skill');
+    const res = await axios.get('skill');
     dispatch({
       type: AppActions.UPDATE_SKILL,
       payload: res.data,
@@ -18,7 +18,7 @@ export const getAllSkills = async (dispatch: Dispatch) => {
 /** Gets one skill by id */
 export const getSkillById = (skillId: number) => async (dispatch: Dispatch) => {
   try {
-    const res = await axios.get(`/skill/id/${skillId}`);
+    const res = await axios.get(`skill/id/${skillId}`);
     dispatch({
       type: AppActions.UPDATE_SKILL,
       payload: res.data,
@@ -32,7 +32,7 @@ export const getSkillById = (skillId: number) => async (dispatch: Dispatch) => {
 export const getSkillByName =
   (skillName: string) => async (dispatch: Dispatch) => {
     try {
-      const res = await axios.get(`/skill/id/${skillName}`);
+      const res = await axios.get(`skill/id/${skillName}`);
       dispatch({
         type: AppActions.UPDATE_SKILL,
         payload: res.data,
@@ -45,8 +45,8 @@ export const getSkillByName =
 /** Creates a skill */
 export const addSkill = (skill: {}) => async (dispatch: Dispatch) => {
   try {
-    await axios.post(`/skill/${skill}`);
-    const res = await axios.get('/batch');
+    await axios.post(`skill`, skill);
+    const res = await axios.get('skill');
     dispatch({
       type: AppActions.UPDATE_SKILL,
       payload: res.data,
@@ -59,8 +59,8 @@ export const addSkill = (skill: {}) => async (dispatch: Dispatch) => {
 /** Deletes a skills */
 export const deleteSkill = (batchId: number) => async (dispatch: Dispatch) => {
   try {
-    await axios.delete(`/skill/id/${batchId}`);
-    const res = await axios.get('/batch');
+    await axios.delete(`skill/id/${batchId}`);
+    const res = await axios.get('skill');
     dispatch({
       type: AppActions.UPDATE_SKILL,
       payload: res.data,
