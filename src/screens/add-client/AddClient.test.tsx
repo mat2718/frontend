@@ -4,6 +4,18 @@ import { FlatList, TouchableOpacity } from 'react-native';
 import Header from '../../components/batches/header';
 import AddClient from '.';
 
+const mockGoBack = jest.fn();
+jest.mock('@react-navigation/native', () => {
+  return ({
+    __esModule: true,
+    useNavigation: () => {
+      return ({
+        goBack: mockGoBack,
+      }) 
+    },
+  });
+});
+
 let wrapper: any;
 
 describe('Batches', () => {
@@ -25,7 +37,12 @@ describe('Batches', () => {
 
   // tests the add button
   it('should be pressed', () => {
-    const shouldBePressed = wrapper.find(TouchableOpacity).at(0);
+    const shouldBePressed = wrapper
+      .find(TouchableOpacity)
+      .findWhere( (node:any) => 
+        node.props().hasOwnProperty('onPress')
+      )
+      .last();
 
     const myEventHandler = jest.spyOn(shouldBePressed.props(), 'onPress');
 

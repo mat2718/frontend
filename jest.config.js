@@ -5,11 +5,17 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
-    //'<rootDir>/src/components/batches/batch-list-item/BatchListItem.test.tsx',
-    // C:\Users\Bigmo\Revature\Perfect-Personnel-Placement\frontend\src\components\Clients\__tests__\AddClient.test.js
+    '<rootDir>/src/**/*/batches/**/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/**/*.test.*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/components/clients_old/**/*',
+    '!<rootDir>/src/screens/clients_old/**/*',
+    '!<rootDir>/src/assets/**/*',
+    '!<rootDir>/src/types.ts',
+    '!<rootDir>/src/entities',
   ],
   coveragePathIgnorePatterns: [
-    '**/__tests__/**/*.[jt]s?(x)'
+    '**/__tests__/**/*.[jt]s?(x)',
+    '**/*/clients_old/**/*',
   ],
   coverageDirectory: 'coverage',
   coverageThreshold: {
@@ -54,12 +60,15 @@ function addConfig(config) {
   // add extra setup file
   config.setupFilesAfterEnv.push('<rootDir>/__tests__/setup.js');
 
-  // comment this out if you want to test all files
-
-  config.testMatch = [
-    '<rootDir>/src/screens/diagram/Diagram.test.tsx',
+  config.testPathIgnorePatterns = [
+    '/clients_old/',
+    '<rootDir>/__tests__/testExample.test.js',
   ];
 
+  /* comment this out if you want to test all files */
+  // config.testMatch = [
+  //   '<rootDir>/src/screens/view-edit-trainer/**/*.test.[jt]s?(x)',
+  // ];
 
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization

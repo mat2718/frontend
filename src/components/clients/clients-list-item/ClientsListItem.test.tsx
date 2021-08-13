@@ -3,6 +3,18 @@ import { mount } from 'enzyme';
 import ClientsListItem from '.';
 import { TouchableOpacity } from 'react-native';
 
+const mockNavigate = jest.fn();
+jest.mock('@react-navigation/native', () => {
+  return ({
+    __esModule: true,
+    useNavigation: () => {
+      return ({
+        navigate: mockNavigate,
+      }) 
+    },
+  });
+});
+
 let wrapper: any;
 
 describe('Batches', () => {

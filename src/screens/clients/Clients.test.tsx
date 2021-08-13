@@ -4,6 +4,20 @@ import Clients, { data } from '.';
 import { FlatList } from 'react-native';
 import Header from '../../components/batches/header';
 
+const mockNavigate = jest.fn();
+const mockGoBack = jest.fn();
+jest.mock('@react-navigation/native', () => {
+  return ({
+    __esModule: true,
+    useNavigation: () => {
+      return ({
+        navigate: mockNavigate,
+        goBack: mockGoBack,
+      });
+    },
+  });
+});
+
 let wrapper: any;
 
 describe('Batches', () => {

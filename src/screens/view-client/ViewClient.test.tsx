@@ -4,6 +4,20 @@ import { mount } from 'enzyme';
 import Header from '../../components/batches/header';
 import ViewClient from '.';
 
+const mockNavigate = jest.fn();
+const mockGoBack = jest.fn();
+jest.mock('@react-navigation/native', () => {
+  return ({
+    ...jest.requireActual('@react-navigation/native'),
+    useNavigation: () => {
+      return ({
+        navigate: mockNavigate,
+        goBack: mockGoBack,
+      });
+    },
+  });
+});
+
 let wrapper: any;
 
 describe('Batches', () => {
@@ -32,7 +46,12 @@ describe('Batches', () => {
 
   /** tests the edit batch button */
   it('should be pressed', () => {
-    const shouldBePressed = wrapper.find(TouchableOpacity).at(0);
+    const shouldBePressed = wrapper
+      .find(TouchableOpacity)
+      .findWhere( (node:any) => 
+        node.props().hasOwnProperty('onPress')
+      )
+      .last()
 
     const myEventHandler = jest.spyOn(shouldBePressed.props(), 'onPress');
 

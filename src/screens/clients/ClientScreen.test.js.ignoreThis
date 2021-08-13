@@ -7,6 +7,20 @@ import * as React from 'react';
 import ClientList from '../../Components/Clients/ClientList';
 import DemandList from '../../Components/Clients/DemandList';
 
+const mockNavigate = jest.fn();
+const mockGoBack = jest.fn();
+jest.mock('@react-navigation/native', () => {
+  return ({
+    __esModule: true,
+    useNavigation: () => {
+      return ({
+        navigate: mockNavigate,
+        goBack: mockGoBack,
+      });
+    },
+  });
+});
+
 let wrapper;
 describe('testing client screen',()=>{
 

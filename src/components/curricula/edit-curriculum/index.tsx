@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+// import DateTimePicker from '@react-native-community/datetimepicker'
+// import { View, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 
 const EditCurriculum: React.FC = () => {
-    return (
-        
-    )
+    return (<></>);
 }
 
-<ScrollView style={screenStyles.mainView}>
+{/* <ScrollView style={screenStyles.mainView}>
 <View
   style={{
     justifyContent: 'space-between',
@@ -110,4 +110,4 @@ const EditCurriculum: React.FC = () => {
       onChangeText={(skillsText) => setText(skillsText)}
       style={styles.input}
     />
-  </View>
+  </View> */}

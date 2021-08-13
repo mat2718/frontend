@@ -2,7 +2,19 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { FlatList, TouchableOpacity } from 'react-native';
 import Curricula, { DATA } from '.';
-import { ExpandableList } from '../../Components/curricula/ExpandableList';
+import { ExpandableList } from '../../components/curricula/expandable-list';
+
+const mockNavigate = jest.fn();
+jest.mock('@react-navigation/native' , () => {
+  return ({
+    ...jest.requireActual('@react-navigation/native'),
+    useNavigation: () => {
+      return ({
+        navigate: mockNavigate,
+      })
+    },
+  });
+});
 
 describe('Curricula', () => {
   let wrapper: any;
@@ -36,7 +48,15 @@ describe('Curricula', () => {
 
   it('Should react on press', () => {
     const onPressEvent = jest.fn();
-    const wrap =  shallow(<ExpandableList item={[]} onPress={onPressEvent}/>);
+    const wrap =  shallow(<ExpandableList item={{batches: ['a','b'], skills: ['c','d']}} onPress={onPressEvent}/>);
+    wrap
+      .find(TouchableOpacity)
+      .findWhere( (node:any) => 
+        node.props().hasOwnProperty('onPress') 
+      )
+      .forEach( (node:any) => {
+        node.invoke('onPress')();
+      })
     expect(onPressEvent.mock.calls.length).toBe(1);
   });
 });
