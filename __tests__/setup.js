@@ -5,4 +5,5 @@
 //    otherwise show for every test
 //==============================================================================
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
-jest.mock('@react-navigation/native');
+jest.mock('react-native-reanimated/lib/reanimated2/NativeReanimated');
+jest.mock('react-native-reanimated/lib/reanimated2/WorkletEventHandler');

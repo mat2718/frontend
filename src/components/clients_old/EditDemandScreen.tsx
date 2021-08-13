@@ -8,15 +8,15 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import GlobalStyles from '../../../assets/constants/GlobalStyles';
+import GlobalStyles from '../../assets/constants/GlobalStyles';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import CalendarPicker from 'react-native-calendar-picker';
-import Header from '../Header/Header';
+import Header from '../header/index';
 import CurriculumList from './CurriculumList';
 import { TextInput } from 'react-native-gesture-handler';
-import IDemand from '../../../assets/models/Demand';
-import colors from '../../../assets/constants/colors';
+import IDemand from '../../assets/models/Demand';
+import colors from '../../assets/constants/colors';
 
 import moment from 'moment';
 

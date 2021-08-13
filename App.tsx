@@ -5,7 +5,12 @@ import { StyleSheet, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import * as Font from 'expo-font';
-import RootStackNavigator from './src/Navigation/RootStackNavigator';
+import RootStackNavigator from './src/navigation/root-stack-navigator';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
+import { Reducer } from './src/redux/reducer';
+import { Provider } from 'react-redux';
 
 const App = () => {
   const [fontsLoaded, setFonts] = useState(false);
@@ -13,6 +18,11 @@ const App = () => {
   useEffect(() => {
     loadFonts();
   });
+
+  const store = createStore(
+    Reducer,
+    composeWithDevTools(applyMiddleware(thunk))
+  );
 
   const loadFonts = async () => {
     await Font.loadAsync({
@@ -32,14 +42,16 @@ const App = () => {
     );
   } else {
     return (
-      <SafeAreaProvider style={styles.container}>
-        <NavigationContainer>
-          <PaperProvider theme={DefaultTheme}>
-            <StatusBar style='auto' />
-            <RootStackNavigator />
-          </PaperProvider>
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <Provider store={store}>
+        <SafeAreaProvider style={styles.container}>
+          <NavigationContainer>
+            <PaperProvider theme={DefaultTheme}>
+              <StatusBar style='auto' />
+              <RootStackNavigator />
+            </PaperProvider>
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </Provider>
     );
   }
 };
