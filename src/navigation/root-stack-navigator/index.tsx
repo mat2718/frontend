@@ -25,6 +25,7 @@ const RootStackNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        headerTitleAlign: 'center',
         ...TransitionPresets.SlideFromRightIOS,
       }}
     >
@@ -46,7 +47,7 @@ const RootStackNavigator = () => {
       <Stack.Screen name='AddEditCurriculum' component={AddEditCurriculum} />
       <Stack.Screen name='ViewClient' component={ViewClient} />
       <Stack.Screen name='AddClient' component={AddClient} />
-      <Stack.Screen name='Diagram' component={Diagram} options={{ headerShown: true }} />
+      <Stack.Screen name='Diagram' component={Diagram} options={{ headerShown: true}} />
       <Stack.Screen name='AddDemand' component={AddDemand} />
       <Stack.Screen name='EditDemand' component={EditDemand} />
       {/* <Stack.Screen name='Clients' component={ClientScreen} />
