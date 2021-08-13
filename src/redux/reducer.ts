@@ -1,4 +1,4 @@
-import { AppActions, IAppAction } from "./actions";
+import { AppActions, IAppAction } from "./actions/actions";
 import { IAppState, initialState } from "./state";
 
 export const Reducer = (
@@ -10,8 +10,8 @@ export const Reducer = (
     case AppActions.UPDATE_BATCH:
       newState.batches = action.payload.batches;
       return newState;
-    case AppActions.UPDATE_CIRRICULA:
-      newState.cirricula = action.payload.cirricula;
+    case AppActions.UPDATE_CURRICULA:
+      newState.curricula = action.payload.curricula;
       return newState;
     case AppActions.UPDATE_CLIENT:
       newState.clients = action.payload.clients;
