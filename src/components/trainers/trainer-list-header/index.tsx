@@ -5,10 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import { textStyles, buttonStyles, screenStyles } from '../../../styles';
+import ITrainer from '../../../entities/Trainer';
 
 interface PropsI {
-  setTrainerArr: any;
-  trainerArray: any;
+  setTrainerArr: (trainers:ITrainer[]) => void;
 }
 
 const TrainerListHeader: React.FC<PropsI> = (props: PropsI) => {
