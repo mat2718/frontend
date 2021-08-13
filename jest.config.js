@@ -4,8 +4,8 @@ module.exports = {
   projects: [addConfig(withEnzyme(require('jest-expo/android/jest-preset')))],
   collectCoverage: true,
   collectCoverageFrom: [
-    // '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
-    '<rootDir>/src/components/batches/BatchListItem/BatchListItem.test.tsx',
+    '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
+    //'<rootDir>/src/components/batches/batch-list-item/BatchListItem.test.tsx',
     // C:\Users\Bigmo\Revature\Perfect-Personnel-Placement\frontend\src\components\Clients\__tests__\AddClient.test.js
   ],
   coveragePathIgnorePatterns: [
@@ -57,7 +57,7 @@ function addConfig(config) {
   // comment this out if you want to test all files
 
   config.testMatch = [
-    '<rootDir>/src/Screens/Diagram/Diagram.test.tsx',
+    '<rootDir>/src/screens/diagram/Diagram.test.tsx',
   ];
 
 
