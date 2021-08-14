@@ -9,9 +9,11 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
 import Header from '../../components/batches/header';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import axios from '../../../axiosConfig';
 import {
   screenStyles,
   textStyles,
@@ -21,37 +23,41 @@ import {
 } from '../../styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
-
-interface PropsI {
-  route: {
-    params?: {
-      batchId: number;
-      curriculum: string;
-      trainer: string;
-      associates: number;
-      startDate: any;
-      endDate: any;
-    };
-  };
-}
-
-/** Mock data for curriculum */
-const dataCurricula = ['React Native/Cloud Native', 'Java', 'Python'];
-
-/** Mock data for trainer */
-const dataTrainer = ['Robert Connell', 'Matthew Otto', 'Red Oral'];
+import { addBatch } from '../../redux/actions/batch-actions';
 
 /** Main component screen */
-const AddEditBatch: React.FC<PropsI> = ({ route }) => {
-  /** States for Picker */
-  const [selectedFilter, setSelectedFilter] = React.useState('all');
+const AddEditBatch: React.FC = () => {
+  /** States for inputs (listeners) */
+  const [curriculumValue, setCurriculumValue] = React.useState(0);
+  const [trainerValue, setTrainerValue] = React.useState(0);
   const [isStartPickerShow, setIsStartPickerShow] = React.useState(false);
+  const [batchSizeValue, setBatchSizeValue] = React.useState(0);
   /** States for Date Picker */
   const [startDate, setStartDate] = React.useState(new Date(Date.now()));
   const [endDate, setEndDate] = React.useState(new Date(Date.now()));
   const [isEndPickerShow, setIsEndPickerShow] = React.useState(false);
+  /** States for trainer and curricula list */
+  const [curricula, setCurricula] = React.useState([]);
+  const [trainers, setTrainers] = React.useState([]);
   /** Navigation for going back a screen */
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  /** Get all curricula */
+  const getAllCurricula = async () => {
+    await axios.get(`curriculum`).then((item) => setCurricula(item.data));
+  };
+
+  /** Get all trainers */
+  const getAllTrainers = async () => {
+    await axios.get(`trainer`).then((item) => setTrainers(item.data));
+  };
+
+  /** Fetch data */
+  React.useEffect(() => {
+    getAllCurricula();
+    getAllTrainers();
+  }, []);
 
   /** Input listener for Start Date Picker */
   const onStartChange = (e: any, val: any) => {
@@ -75,6 +81,22 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
     }
   };
 
+  /** Add batch function */
+  const AddBatch = () => {
+    dispatch(
+      addBatch({
+        trainerId: trainerValue,
+        curriculumId: curriculumValue,
+        batchSize: batchSizeValue,
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+        clientId: null,
+      })
+    );
+
+    navigation.goBack();
+  };
+
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
       <Header />
@@ -88,14 +110,12 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
           }}
         >
           {/** Heading text */}
-          <Text style={textStyles.heading}>
-            {route.params ? 'Edit Batch' : 'Add Batch'}
-          </Text>
+          <Text style={textStyles.heading}>Add a Batch</Text>
           {/** Add/Edit */}
           <TouchableOpacity
             testID='goBackButton'
             style={buttonStyles.buttonContainer}
-            onPress={() => navigation.goBack()}
+            onPress={() => AddBatch()}
           >
             <Text style={buttonStyles.buttonText}>Add</Text>
           </TouchableOpacity>
@@ -107,38 +127,62 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
           {/** Picker Container */}
           <View style={inputStyles.pickerContainer}>
             <Picker
-              selectedValue={selectedFilter}
+              selectedValue={curriculumValue}
               mode='dropdown'
               onValueChange={(itemValue: any, itemIndex: any) =>
-                setSelectedFilter(itemValue)
+                setCurriculumValue(itemValue)
               }
               style={{ width: '100%', height: 50 }}
             >
-              {dataCurricula.map((curr) => {
-                return <Picker.Item label={curr} value={curr} key={curr} />;
-              })}
+              {curricula.map(
+                (curr: { curriculumname: string; curriculumid: number }) => {
+                  return (
+                    <Picker.Item
+                      label={curr.curriculumname}
+                      value={curr.curriculumid}
+                      key={curr.curriculumname}
+                    />
+                  );
+                }
+              )}
             </Picker>
           </View>
           {/** Trainer */}
           <Text style={inputStyles.inputLabelText}>Trainer</Text>
           <View style={inputStyles.pickerContainer}>
             <Picker
-              selectedValue={selectedFilter}
+              selectedValue={trainerValue}
               mode='dropdown'
               onValueChange={(itemValue: any, itemIndex: any) =>
-                setSelectedFilter(itemValue)
+                setTrainerValue(itemValue)
               }
               style={{ width: '100%', height: 50 }}
             >
-              {dataTrainer.map((curr) => {
-                return <Picker.Item label={curr} value={curr} key={curr} />;
-              })}
+              {trainers.map(
+                (trainer: {
+                  trainerfirst: string;
+                  trainerlast: string;
+                  trainerid: number;
+                }) => {
+                  return (
+                    <Picker.Item
+                      label={trainer.trainerfirst + ' ' + trainer.trainerlast}
+                      value={trainer.trainerid}
+                      key={trainer.trainerfirst + ' ' + trainer.trainerlast}
+                    />
+                  );
+                }
+              )}
             </Picker>
           </View>
-          {/** Associates */}
+          {/** Batch Size */}
           <View style={{ flexDirection: 'column' }}>
             <Text style={inputStyles.inputLabelText}>Size</Text>
-            <TextInput style={inputStyles.textInput} keyboardType='numeric' />
+            <TextInput
+              style={inputStyles.textInput}
+              keyboardType='numeric'
+              onChangeText={(value) => setBatchSizeValue(Number(value))}
+            />
           </View>
           {/** Bottom Inputs Container */}
           <View

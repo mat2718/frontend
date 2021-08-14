@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { Calendar } from 'react-native-calendars';
 import { ProgressChart } from 'react-native-chart-kit';
 import { useNavigation } from '@react-navigation/native';
@@ -21,16 +22,17 @@ import {
   buttonStyles,
   colors,
 } from '../../styles';
+import { deleteBatch } from '../../redux/actions/batch-actions';
 
 interface PropsI {
   route: {
     params: {
-      associate: number;
+      batchSize: number;
       batchId: number;
       curriculum: string;
       trainer: string;
-      startDate: number;
-      endDate: number;
+      startDate: string;
+      endDate: string;
     };
   };
 }
@@ -40,13 +42,16 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 
+  const dispatch = useDispatch();
+
   /** Date variables for the calendar component */
   const currentDate = new Date(Date.now()).toISOString().slice(0, 10);
-  const startDate = new Date(route.params.startDate).toISOString().slice(0, 10);
-  const endDate = new Date(route.params.endDate).toISOString().slice(0, 10);
-  const progress =
-    (Date.now() - route.params.startDate) /
-    (route.params.endDate - route.params.startDate);
+  const startDate = new Date(route.params.startDate).toString().slice(0, 10);
+  const endDate = new Date(route.params.endDate).toString().slice(0, 10);
+
+  const startTime = new Date(route.params.startDate).getTime();
+  const endTime = new Date(route.params.endDate).getTime();
+  const progress = (Date.now() - startTime) / (endTime - startTime);
 
   /** Data for progress ring */
   const data = {
@@ -66,6 +71,12 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
     useShadowColorFromDataset: false, // optional
   };
 
+  /** Delete batch function */
+  const deleteBatchPress = () => {
+    dispatch(deleteBatch(route.params.batchId));
+    navigation.goBack();
+  };
+
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
       <Header />
@@ -79,7 +90,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
                 batchId: route.params.batchId,
                 curriculum: route.params.curriculum,
                 trainer: route.params.trainer,
-                associates: route.params.associate,
+                associates: route.params.batchSize,
                 startDate: route.params.startDate,
                 endDate: route.params.endDate,
               })
@@ -87,7 +98,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
             style={{ flexDirection: 'row', alignItems: 'center', flex: 0.75 }}
           >
             <Text style={textStyles.heading}>
-              {route.params.batchId + ' ' + route.params.curriculum + ' '}
+              {route.params.curriculum}
               <MaterialCommunityIcons
                 name='pencil'
                 size={20}
@@ -102,16 +113,15 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
             <Text style={buttonStyles.buttonText}>Confirm</Text>
           </TouchableOpacity>
         </View>
-        {route.params.startDate < Date.now() &&
-        route.params.endDate > Date.now() ? (
+        {startTime < Date.now() && endTime > Date.now() ? (
           <View style={[badgesStyles.badge, { backgroundColor: '#f26925' }]}>
             <Text style={badgesStyles.badgeText}>Active</Text>
           </View>
-        ) : route.params.endDate < Date.now() ? (
+        ) : startTime < Date.now() ? (
           <View style={[badgesStyles.badge, { backgroundColor: '#25F269' }]}>
             <Text style={badgesStyles.badgeText}>Completed</Text>
           </View>
-        ) : route.params.startDate > Date.now() ? (
+        ) : endTime > Date.now() ? (
           <View style={[badgesStyles.badge, { backgroundColor: '#474C55' }]}>
             <Text style={badgesStyles.badgeText}>Upcoming</Text>
           </View>
@@ -138,7 +148,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
               style={{ marginRight: 5 }}
             />
             <Text style={textStyles.regular}>
-              {route.params.associate} Associates
+              {route.params.batchSize} Associates
             </Text>
           </View>
           {/**SubBody: Start and End Date */}
@@ -194,7 +204,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
         </View>
         <TouchableOpacity
           style={styles.deleteButton}
-          onPress={() => navigation.goBack()}
+          onPress={() => deleteBatchPress()}
         >
           <Text style={styles.deleteButtonText}>
             Delete {route.params.batchId + ' ' + route.params.curriculum}

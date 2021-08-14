@@ -1,55 +1,37 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { SafeAreaView, FlatList } from 'react-native';
 import BatchListItem from '../../components/batches/batch-list-item';
 import { screenStyles } from '../../styles';
 import BatchesListHeader from '../../components/batches/batches-list-header';
-
-/** Mock Data - PreRedux */
-export const data = [
-  {
-    associate: 25,
-    batchId: 2106,
-    curriculum: 'Cloud Native',
-    trainer: 'Robert Connell',
-    startDate: 1622505600000,
-    endDate: 1627776000000,
-  },
-  {
-    associate: 25,
-    batchId: 2172,
-    curriculum: 'React Native',
-    trainer: 'Matthew Otto',
-    startDate: 1627862400000,
-    endDate: 1633046400000,
-  },
-  {
-    associate: 25,
-    batchId: 2132,
-    curriculum: 'React',
-    trainer: 'Red Oral',
-    startDate: 1633132800000,
-    endDate: 1638316800000,
-  },
-];
+import { RootStore } from '../../../App';
+import { getAllBatches } from '../../redux/actions/batch-actions';
 
 /** Basis for Entire Batch Screen */
 const Batches: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = React.useState('all');
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(getAllBatches());
+  }, []);
 
   /** Main item to render for the FlatList */
   const renderItem = ({ item }: { item: any }) => {
     return (
       <BatchListItem
-        associate={item.associate}
-        batchId={item.batchId}
-        curriculum={item.curriculum}
-        trainer={item.trainer}
-        startDate={item.startDate}
-        endDate={item.endDate}
+        batchId={item.batchid}
+        batchSize={item.batchsize}
+        curriculumId={item.curriculumid}
+        trainerId={item.trainerid}
+        startDate={item.startdate}
+        endDate={item.enddate}
       />
     );
   };
 
+  /** get batches from state */
+  const batches = useSelector((state: RootStore) => state.batches);
   /** Main return statement */
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
@@ -58,20 +40,28 @@ const Batches: React.FC = () => {
        */}
 
       <FlatList
-        data={
-          selectedFilter === 'active'
-            ? data.filter(
-                (date) =>
-                  date.startDate < Date.now() && date.endDate > Date.now()
-              )
-            : selectedFilter === 'upcoming'
-            ? data.filter((date) => date.startDate > Date.now())
-            : selectedFilter === 'completed'
-            ? data.filter((date) => date.endDate < Date.now())
-            : data
-        }
+        data={(selectedFilter === 'active'
+          ? batches.filter(
+              (date) =>
+                new Date(date.startdate).getTime() < Date.now() &&
+                new Date(date.enddate).getTime() > Date.now()
+            )
+          : selectedFilter === 'upcoming'
+          ? batches.filter(
+              (date) => new Date(date.startdate).getTime() > Date.now()
+            )
+          : selectedFilter === 'completed'
+          ? batches.filter(
+              (date) => new Date(date.enddate).getTime() < Date.now()
+            )
+          : batches
+        ).sort((a, b) => {
+          return (
+            new Date(a.startdate).getTime() - new Date(b.startdate).getTime()
+          );
+        })}
         renderItem={renderItem}
-        keyExtractor={(item) => item.curriculum}
+        keyExtractor={(item) => item.batchid.toString()}
         ListHeaderComponent={() => (
           <BatchesListHeader
             selectedFilter={selectedFilter}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -23,33 +23,37 @@ import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
 
-
-
 /** Mock data for curriculum */
 const dataCurricula = ['React Native/Cloud Native', 'Java', 'Python'];
 
-const AddDemand: React.FC  = ({route}) => {
+interface PropsI {
+  route: {
+    params: {
+      clientid: number;
+      client: string;
+    };
+  };
+}
+
+const AddDemand: React.FC<PropsI> = ({ route }) => {
   /** Navigation for going back a screen */
-  const [client, setClient]=useState(route.params.clientid)
-  const [howMany, setHowMany]=useState(0)
+  const [client, setClient] = useState(route.params.clientid);
+  const [howMany, setHowMany] = useState(0);
   const navigation = useNavigation();
   const [selectedFilter, setSelectedFilter] = React.useState('all');
   const [isStartPickerShow, setIsStartPickerShow] = React.useState(false);
   const [startDate, setStartDate] = React.useState(new Date(Date.now()));
- 
+
   /** Input listener for Start Date Picker */
 
-
-  const AddDemand=()=>{
-    axios.post('/demand',{
+  const AddDemand = () => {
+    axios.post('/demand', {
       clientid: client,
-      curriculumid: number,
-      needby: ,
-      quantitydemanded: howMany
-    })
-  }
-
-
+      curriculumid: 0,
+      needby: Date.now(),
+      quantitydemanded: howMany,
+    });
+  };
 
   const onStartChange = (e: any, val: any) => {
     if (val) {
@@ -60,7 +64,6 @@ const AddDemand: React.FC  = ({route}) => {
       setIsStartPickerShow(false);
     }
   };
-
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
@@ -85,75 +88,72 @@ const AddDemand: React.FC  = ({route}) => {
           </TouchableOpacity>
         </View>
         {/** Form view */}
-       
+
         <View style={{ flexDirection: 'column' }}>
           <Text style={inputStyles.inputLabelText}>Current Client </Text>
-          <Text style={inputStyles.textInput} >{route.params.client}</Text>
+          <Text style={inputStyles.textInput}>{route.params.client}</Text>
         </View>
         {/** Curriculum  */}
         <Text style={inputStyles.inputLabelText}>Curriculum</Text>
-          {/** Picker Container */}
-          <View style={inputStyles.pickerContainer}>
-            <Picker
-              selectedValue={selectedFilter}
-              mode='dropdown'
-              onValueChange={(itemValue: any, itemIndex: any) =>
-                setSelectedFilter(itemValue)
-              }
-              style={{ width: '100%', height: 50 }}
-            >
-              {dataCurricula.map((curr) => {
-                return <Picker.Item label={curr} value={curr} key={curr} />;
-              })}
-            </Picker>
-          </View>
-      
+        {/** Picker Container */}
+        <View style={inputStyles.pickerContainer}>
+          <Picker
+            selectedValue={selectedFilter}
+            mode='dropdown'
+            onValueChange={(itemValue: any, itemIndex: any) =>
+              setSelectedFilter(itemValue)
+            }
+            style={{ width: '100%', height: 50 }}
+          >
+            {dataCurricula.map((curr) => {
+              return <Picker.Item label={curr} value={curr} key={curr} />;
+            })}
+          </Picker>
+        </View>
+
         <View style={{ flexDirection: 'column' }}>
-          <Text style={inputStyles.inputLabelText}>Enter # of Associates Needed </Text>
+          <Text style={inputStyles.inputLabelText}>
+            Enter # of Associates Needed{' '}
+          </Text>
           <TextInput style={inputStyles.textInput} keyboardType='numeric' />
         </View>
-        
-        
-            {/** Start Date */}
-            <View style={{ flexDirection: 'column' }}>
-              <Text style={inputStyles.inputLabelText}>Select Date Needed By</Text>
-              <TouchableOpacity
-                style={styles.dateView}
-                onPress={() => setIsStartPickerShow(true)}
-              >
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name='calendar-import'
-                    size={20}
-                    color={colors.darkGray}
-                  />
-                  <Text style={styles.dateText}>
-                    {startDate.toDateString()}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            {/* The date picker */}
-            {isStartPickerShow && (
-              <DateTimePicker
-                value={startDate}
-                mode={'date'}
-                display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                onChange={onStartChange}
-                style={styles.datePicker}
-              />
-            )}
 
+        {/** Start Date */}
+        <View style={{ flexDirection: 'column' }}>
+          <Text style={inputStyles.inputLabelText}>Select Date Needed By</Text>
+          <TouchableOpacity
+            style={styles.dateView}
+            onPress={() => setIsStartPickerShow(true)}
+          >
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            >
+              <MaterialCommunityIcons
+                name='calendar-import'
+                size={20}
+                color={colors.darkGray}
+              />
+              <Text style={styles.dateText}>{startDate.toDateString()}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        {/* The date picker */}
+        {isStartPickerShow && (
+          <DateTimePicker
+            value={startDate}
+            mode={'date'}
+            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+            onChange={onStartChange}
+            style={styles.datePicker}
+          />
+        )}
       </ScrollView>
     </SafeAreaView>
   );
 };
-
 
 const styles = StyleSheet.create({
   datePicker: {
