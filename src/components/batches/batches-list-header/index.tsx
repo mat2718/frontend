@@ -13,8 +13,8 @@ interface IProps {
   batches: {
     batchsize: number;
     batchid: number;
-    curriculum: string;
-    trainer: string;
+    curriculumid: number;
+    trainerid: number;
     startdate: string;
     enddate: string;
   }[];
@@ -28,7 +28,11 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
   const navigation = useNavigation<mainScreenProp>();
 
   /** Get trainers */
-  const [trainers, setTrainers] = React.useState([]);
+  const [trainers, setTrainers] = React.useState([
+    {
+      trainerid: 0,
+    },
+  ]);
   const getTrainers = async () => {
     await axios.get('trainer').then((res) => setTrainers(res.data));
   };
@@ -47,9 +51,9 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
     (date) =>
       new Date(date.startdate).getTime() < Date.now() &&
       new Date(date.enddate).getTime() > Date.now()
-  ).length;
-  const inactiveTrainers = trainers.length - activeBatches;
-
+  );
+  const inactiveTrainers = trainers.length - activeBatches.length;
+  console.log(inactiveTrainers);
   return (
     <View style={screenStyles.mainView}>
       {/** Screen title */}
@@ -70,8 +74,8 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
         <BatchStats
           data={[
             plannedBatches,
-            activeBatches,
-            activeBatches,
+            activeBatches.length,
+            activeBatches.length,
             inactiveTrainers,
           ]}
         />
