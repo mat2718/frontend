@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import Header from '../../components/batches/header';
-import { screenStyles } from '../../styles';
-import EditCurriculum from '../../components/curricula/edit-curriculum'
+import { buttonStyles, screenStyles, textStyles } from '../../styles';
+import AddCurriculum from '../../components/curricula/add-curriculum';
+import { useNavigation } from '@react-navigation/native';
+import { useEffect } from 'react';
+import { PostCurriculum } from '../../redux/actions/curriculum-actions';
+import { useDispatch } from 'react-redux';
+
+/**
+ * Add Curriculum Screen- allows for addition of a curriculum
+ * @returns {React.FC} -React Functional Component
+ * @param {IProps} - params array that consists name, created on and by
+ */
 
 interface IProps {
   route: {
@@ -16,19 +26,49 @@ interface IProps {
       batches: any;
     };
   };
+  
+  newCurriculum: {
+    name: string;
+    createdBy: string;    
+    createdOn: string;
+    skills: number[];
+  };
 }
 
+
 /** code complexity is above the threshold here according to sonarlint, might need to modularize parts of this */
-const AddEditCurriculum: React.FC<IProps> = ({ route }) => {
-  const [text, setText] = useState('');
+const AddEditCurriculum: React.FC<IProps> = (props: IProps) => {
+  const navigation = useNavigation();  
+  const dispatch = useDispatch()
 
-
+  //post Curriculum function for add-curriculum screen
+  const postCurriculum = () => {
+    dispatch(PostCurriculum(props.newCurriculum));
+    navigation.goBack();
+  }
 
   /** Does it work? */
   return (
     <View style={screenStyles.safeAreaView}>
       <Header />
-      <EditCurriculum />
+      <ScrollView style={screenStyles.mainView}>
+        <View
+          style={{
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              marginTop: 10,
+          }}
+          >
+          <Text style={textStyles.heading}>Add Curriculum</Text>
+          <TouchableOpacity
+              style={buttonStyles.buttonContainer}
+              onPress={postCurriculum}
+          >
+              <Text style={buttonStyles.buttonText}>Save</Text>
+          </TouchableOpacity>
+        </View>
+        <AddCurriculum />
+      </ScrollView>
     </View>
   );
 };

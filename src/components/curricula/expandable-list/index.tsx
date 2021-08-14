@@ -5,13 +5,29 @@ import { RootStackParamList } from '../../../types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { buttonStyles, listStyles } from '../../../styles';
-
+import ICurriculum from '../../../entities/curriculum';
+import { DeleteCurriculum } from '../../../redux/actions/curriculum-actions';
 interface IProps {
-  item: any;
+  curriculum: ICurriculum;
   onPress: any;
 }
 
-export const ExpandableList: React.FC<IProps> = ({ item, onPress }) => {
+/**
+ * Curriculum Expandable Flatlist- sub component of Curricula screen displaying list of curricula
+ * @param {IProps} interface- properties of curriculum entity and onPress event
+ * @returns {React.FC} - React component returning a list of curricula
+ * @author Hannah Mulato
+ */
+
+export const ExpandableList: React.FC<IProps> = ({ curriculum, onPress }) => {
+  //Navigation initialization
+  type curriculaScreenProp = StackNavigationProp<
+    RootStackParamList,
+    'Main'
+  >;
+  const navigation = useNavigation<curriculaScreenProp>();
+
+  //State for expansion of each curriculum view
   const [expanded, setExpanded] = useState(false);
   const [icon, setIcon] = useState(
     <MaterialCommunityIcons
@@ -21,14 +37,8 @@ export const ExpandableList: React.FC<IProps> = ({ item, onPress }) => {
       style={styles.icon}
     />
   );
-
-  /** Navigation stuff */
-  type CurriculaScreenProp = StackNavigationProp<
-    RootStackParamList,
-    'Curricula'
-  >;
-  const navigation = useNavigation<CurriculaScreenProp>();
-
+  
+  //onPress event allowing for icon change and expanding transition
   const onCurriculumPress = () => {
     onPress();
     setExpanded(!expanded);
@@ -55,44 +65,37 @@ export const ExpandableList: React.FC<IProps> = ({ item, onPress }) => {
     }
   };
 
-  const batches = item.batches.join(', ');
-  const skills = item.skills.join(', ');
-
   return (
     <TouchableOpacity
       style={listStyles.listItemContainer}
       onPress={onCurriculumPress}
     >
       <View style={{ flexDirection: 'row' }}>
-        <Text style={listStyles.heading}>{item.name}</Text>
+        <Text style={listStyles.heading}>{curriculum.curriculumname}</Text>
         {icon}
       </View>
       <View style={styles.textContainer}>
         <Text style={listStyles.subHeading}>Created On: </Text>
-        <Text style={listStyles.textRegular}>{item.createdOn}</Text>
+        <Text style={listStyles.textRegular}>{curriculum.createdOn}</Text>
       </View>
       <View style={styles.textContainer}>
         <Text style={listStyles.subHeading}>Created By: </Text>
-        <Text style={listStyles.textRegular}>{item.createdBy}</Text>
+        <Text style={listStyles.textRegular}>{curriculum.createdBy}</Text>
       </View>
 
       {expanded && (
         <>
           <View style={styles.textContainer}>
             <Text style={listStyles.subHeading}>Last Modified On: </Text>
-            <Text style={listStyles.textRegular}>{item.lastModified}</Text>
+            <Text style={listStyles.textRegular}>{curriculum.modifiedOn}</Text>
           </View>
           <View style={styles.textContainer}>
             <Text style={listStyles.subHeading}>Last Modified By: </Text>
-            <Text style={listStyles.textRegular}>{item.lastModifiedBy}</Text>
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={listStyles.subHeading}>Batches: </Text>
-            <Text style={listStyles.textRegular}>{batches}</Text>
+            <Text style={listStyles.textRegular}>{curriculum.modifiedBy}</Text>
           </View>
           <View style={styles.textContainer}>
             <Text style={listStyles.subHeading}>Skills: </Text>
-            <Text style={listStyles.textRegular}>{skills}</Text>
+            <Text style={listStyles.textRegular}>{curriculum.skillIdArr}</Text>
           </View>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
@@ -103,9 +106,7 @@ export const ExpandableList: React.FC<IProps> = ({ item, onPress }) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={buttonStyles.buttonCompactContainer}
-              onPress={() => {
-                /** must define a function here */
-              }}
+              onPress={() => {DeleteCurriculum(curriculum)}}
             >
               <Text style={buttonStyles.buttonText}>Delete</Text>
             </TouchableOpacity>

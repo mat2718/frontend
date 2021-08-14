@@ -43,8 +43,8 @@ const AddDemand: React.FC  = ({route}) => {
   const AddDemand=()=>{
     axios.post('/demand',{
       clientid: client,
-      curriculumid: number,
-      needby: ,
+      // curriculumid: curriculumid,
+      // needby: needby,
       quantitydemanded: howMany
     })
   }
