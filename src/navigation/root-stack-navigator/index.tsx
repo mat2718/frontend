@@ -6,7 +6,8 @@ import { RootStackParamList } from '../../types';
 import React from 'react';
 import ViewBatch from '../../screens/view-batch';
 import Navigation from '..';
-import AddEditBatch from '../../screens/add-edit-batch';
+import AddBatch from '../../screens/add-batch';
+import EditBatch from '../../screens/edit-batch';
 import Curricula from '../../screens/curricula';
 import AddEditCurriculum from '../../screens/add-edit-curriculum';
 import AddClient from '../../screens/add-client';
@@ -56,11 +57,25 @@ const RootStackNavigator = () => {
         }}
       />
       <Stack.Screen
-        name='AddEditBatch'
-        component={AddEditBatch}
+        name='AddBatch'
+        component={AddBatch}
         options={{
           headerShown: true,
           title: 'Add a Batch',
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            fontFamily: 'FuturaBook',
+            fontWeight: '700',
+            color: colors.darkGray,
+          },
+        }}
+      />
+      <Stack.Screen
+        name='EditBatch'
+        component={EditBatch}
+        options={{
+          headerShown: true,
+          title: 'Edit Batch',
           headerTitleAlign: 'left',
           headerTitleStyle: {
             fontFamily: 'FuturaBook',

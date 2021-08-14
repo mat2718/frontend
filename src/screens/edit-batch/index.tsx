@@ -22,18 +22,39 @@ import {
 } from '../../styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
-import { addBatch } from '../../redux/actions/batch-actions';
+import { updateBatch } from '../../redux/actions/batch-actions';
+
+interface PropsI {
+  route: {
+    params: {
+      batchid: number;
+      curriculumid: number;
+      trainerid: number;
+      batchsize: number;
+      startdate: string;
+      enddate: string;
+    };
+  };
+}
 
 /** Main component screen */
-const AddEditBatch: React.FC = () => {
+const EditBatch: React.FC<PropsI> = ({ route }) => {
   /** States for inputs (listeners) */
-  const [curriculumValue, setCurriculumValue] = React.useState(0);
-  const [trainerValue, setTrainerValue] = React.useState(0);
+  const [curriculumValue, setCurriculumValue] = React.useState(
+    route.params.curriculumid
+  );
+  const [trainerValue, setTrainerValue] = React.useState(
+    route.params.trainerid
+  );
   const [isStartPickerShow, setIsStartPickerShow] = React.useState(false);
-  const [batchSizeValue, setBatchSizeValue] = React.useState(0);
+  const [batchSizeValue, setBatchSizeValue] = React.useState(
+    route.params.batchsize
+  );
   /** States for Date Picker */
-  const [startDate, setStartDate] = React.useState(new Date(Date.now()));
-  const [endDate, setEndDate] = React.useState(new Date(Date.now()));
+  const [startDate, setStartDate] = React.useState(
+    new Date(route.params.startdate)
+  );
+  const [endDate, setEndDate] = React.useState(new Date(route.params.enddate));
   const [isEndPickerShow, setIsEndPickerShow] = React.useState(false);
   /** States for trainer and curricula list */
   const [curricula, setCurricula] = React.useState([]);
@@ -81,9 +102,10 @@ const AddEditBatch: React.FC = () => {
   };
 
   /** Add batch function */
-  const AddBatch = () => {
+  const UpdateExistingBatch = () => {
     dispatch(
-      addBatch({
+      updateBatch({
+        batchId: route.params.batchid,
         trainerId: trainerValue,
         curriculumId: curriculumValue,
         batchSize: batchSizeValue,
@@ -108,12 +130,12 @@ const AddEditBatch: React.FC = () => {
           }}
         >
           {/** Heading text */}
-          <Text style={textStyles.heading}>Add a Batch</Text>
+          <Text style={textStyles.heading}>Edit Batch</Text>
           {/** Add/Edit */}
           <TouchableOpacity
             testID='goBackButton'
             style={buttonStyles.buttonContainer}
-            onPress={() => AddBatch()}
+            onPress={() => UpdateExistingBatch()}
           >
             <Text style={buttonStyles.buttonText}>Add</Text>
           </TouchableOpacity>
@@ -177,6 +199,7 @@ const AddEditBatch: React.FC = () => {
           <View style={{ flexDirection: 'column' }}>
             <Text style={inputStyles.inputLabelText}>Size</Text>
             <TextInput
+              defaultValue={batchSizeValue.toString()}
               style={inputStyles.textInput}
               keyboardType='numeric'
               onChangeText={(value) => setBatchSizeValue(Number(value))}
@@ -296,4 +319,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddEditBatch;
+export default EditBatch;

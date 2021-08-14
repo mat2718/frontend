@@ -53,7 +53,6 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
       new Date(date.enddate).getTime() > Date.now()
   );
   const inactiveTrainers = trainers.length - activeBatches.length;
-  console.log(inactiveTrainers);
   return (
     <View style={screenStyles.mainView}>
       {/** Screen title */}
@@ -63,7 +62,7 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
         {/** Add batch button */}
         <TouchableOpacity
           style={buttonStyles.buttonContainer}
-          onPress={() => navigation.navigate('AddEditBatch')}
+          onPress={() => navigation.navigate('AddBatch')}
         >
           <Text style={buttonStyles.buttonText}>Add Batch</Text>
         </TouchableOpacity>

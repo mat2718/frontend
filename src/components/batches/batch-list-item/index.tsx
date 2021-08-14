@@ -24,7 +24,11 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
   const [curriculum, setCurriculum] = React.useState({
     curriculumname: '',
   });
-  const [trainer, setTrainer] = React.useState('');
+  const [trainer, setTrainer] = React.useState({
+    trainerid: 0,
+    trainerfirst: '',
+    trainerlast: '',
+  });
 
   /** getCurriculum */
   const getCurriculum = async () => {
@@ -37,9 +41,7 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
   const getTrainer = async () => {
     await axios
       .get(`trainer/id/${props.trainerId}`)
-      .then((item) =>
-        setTrainer(item.data[0].trainerfirst + ' ' + item.data[0].trainerlast)
-      );
+      .then((item) => setTrainer(item.data[0]));
   };
 
   /** set curriculum and uh trainer */
@@ -94,7 +96,9 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
         {/** End of date checker */}
       </View>
 
-      <Text style={listStyles.subHeading}>{trainer}</Text>
+      <Text style={listStyles.subHeading}>
+        {trainer.trainerfirst + ' ' + trainer.trainerlast}
+      </Text>
       <Text style={listStyles.textRegular}>
         {new Date(props.startDate).toDateString() +
           '\nto ' +

@@ -32,7 +32,11 @@ interface PropsI {
         curriculumname: string;
         skillidarr: [];
       };
-      trainer: string;
+      trainer: {
+        trainerid: number;
+        trainerfirst: string;
+        trainerlast: string;
+      };
       startDate: string;
       endDate: string;
     };
@@ -84,13 +88,13 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
           {/** Touchable that takes us to the edit batch screen when clicking on the title */}
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('AddEditBatch', {
-                batchId: route.params.batchId,
-                curriculum: route.params.curriculum,
-                trainer: route.params.trainer,
-                associates: route.params.batchSize,
-                startDate: route.params.startDate,
-                endDate: route.params.endDate,
+              navigation.navigate('EditBatch', {
+                batchid: route.params.batchId,
+                batchsize: route.params.batchSize,
+                trainerid: route.params.trainer.trainerid,
+                curriculumid: route.params.curriculum,
+                startdate: route.params.startDate,
+                enddate: route.params.endDate,
               })
             }
             style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}
@@ -131,7 +135,11 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
             color={colors.darkGray}
             style={{ marginRight: 5 }}
           />
-          <Text style={textStyles.regular}>{route.params.trainer}</Text>
+          <Text style={textStyles.regular}>
+            {route.params.trainer.trainerfirst +
+              ' ' +
+              route.params.trainer.trainerlast}
+          </Text>
         </View>
 
         {/**Body: Batch information */}

@@ -55,6 +55,20 @@ export const addBatch = (batch: {}) => async (dispatch: Dispatch) => {
   }
 };
 
+/** Update a batch */
+export const updateBatch = (batch: {}) => async (dispatch: Dispatch) => {
+  try {
+    await axios.put(`batch`, batch);
+    const res = await axios.get('batch');
+    dispatch({
+      type: AppActions.UPDATE_BATCH,
+      payload: { batches: res.data },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 /** Deletes a batch */
 export const deleteBatch = (batchId: number) => async (dispatch: Dispatch) => {
   try {

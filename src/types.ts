@@ -7,7 +7,8 @@ export type RootDrawerParamList = {
 export type RootStackParamList = {
   Main: any;
   ViewBatch: any;
-  AddEditBatch: any;
+  AddBatch: any;
+  EditBatch: any;
   AddTrainer: any;
   ViewEditTrainer: any;
   Clients: any;
