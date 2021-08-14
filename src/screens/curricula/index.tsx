@@ -17,7 +17,12 @@ import ICurriculum from '../../entities/curriculum';
 
 const Curricula: React.FC = () => {
   //get all curricula from the store and send it as props
-  const [curriculum, setCurriculum] = useState<ICurriculum[]>([])
+  const curriculum = useSelector((state: IAppState) => state.curricula);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+     dispatch(GetAllCurricula())
+   }, [])
   
   //initialize a transitioning effect for a card
   const transitionRef = useRef<any>(null);
@@ -27,9 +32,9 @@ const Curricula: React.FC = () => {
     transitionRef.current.animateNextTransition();
   };
 
-  const renderItem = ({ item }: { item: ICurriculum }) => {
+  const renderItem = ({item}: {item: ICurriculum}) => {
     return(
-       <ExpandableList curriculum={item}  onPress={onPress} />
+       <ExpandableList curriculum={item} onPress={onPress} />
     );
   };
 
@@ -44,7 +49,7 @@ const Curricula: React.FC = () => {
       {/**List of Curriculums */}
       <FlatList
         data={curriculum}
-        keyExtractor={(item) => item.curriculumname}
+        keyExtractor={(item) => `${item.curriculumid}`}
         renderItem={renderItem}
         ListHeaderComponent={CurriculaListHeader}
       />

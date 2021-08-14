@@ -5,8 +5,8 @@ import { RootStackParamList } from '../../../types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { buttonStyles, listStyles } from '../../../styles';
-import ICurriculum from '../../../entities/curriculum';
 import { DeleteCurriculum } from '../../../redux/actions/curriculum-actions';
+import ICurriculum from '../../../entities/curriculum';
 interface IProps {
   curriculum: ICurriculum;
   onPress: any;
@@ -37,6 +37,9 @@ export const ExpandableList: React.FC<IProps> = ({ curriculum, onPress }) => {
       style={styles.icon}
     />
   );
+
+  let createdDate = new Date(curriculum.createdon).toDateString();
+  let modifiedDate = new Date(curriculum.lastmodified).toDateString();
   
   //onPress event allowing for icon change and expanding transition
   const onCurriculumPress = () => {
@@ -76,26 +79,26 @@ export const ExpandableList: React.FC<IProps> = ({ curriculum, onPress }) => {
       </View>
       <View style={styles.textContainer}>
         <Text style={listStyles.subHeading}>Created On: </Text>
-        <Text style={listStyles.textRegular}>{curriculum.createdOn}</Text>
+        <Text style={listStyles.textRegular}>{createdDate}</Text>
       </View>
       <View style={styles.textContainer}>
         <Text style={listStyles.subHeading}>Created By: </Text>
-        <Text style={listStyles.textRegular}>{curriculum.createdBy}</Text>
+        <Text style={listStyles.textRegular}>{curriculum.createdby}</Text>
       </View>
 
       {expanded && (
         <>
           <View style={styles.textContainer}>
             <Text style={listStyles.subHeading}>Last Modified On: </Text>
-            <Text style={listStyles.textRegular}>{curriculum.modifiedOn}</Text>
+            <Text style={listStyles.textRegular}>{modifiedDate}</Text>
           </View>
           <View style={styles.textContainer}>
             <Text style={listStyles.subHeading}>Last Modified By: </Text>
-            <Text style={listStyles.textRegular}>{curriculum.modifiedBy}</Text>
+            <Text style={listStyles.textRegular}>{curriculum.lastmodifiedby}</Text>
           </View>
           <View style={styles.textContainer}>
             <Text style={listStyles.subHeading}>Skills: </Text>
-            <Text style={listStyles.textRegular}>{curriculum.skillIdArr}</Text>
+            <Text style={listStyles.textRegular}>{curriculum.skillnamearr}</Text>
           </View>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
