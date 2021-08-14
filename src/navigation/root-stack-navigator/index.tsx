@@ -20,6 +20,7 @@ import EditDemand from '../../screens/edit-demand';
 import { colors } from '../../styles';
 import { useDispatch } from 'react-redux';
 import { getAllBatches } from '../../redux/actions/batch-actions';
+import { getAllClients } from '../../redux/actions/client-actions';
 
 //see what happens
 //please import your screen and put in your screen in components-kai
@@ -31,6 +32,7 @@ const RootStackNavigator = () => {
   /** Load in db data and store in the redux state */
   React.useEffect(() => {
     dispatch(getAllBatches());
+    dispatch(getAllClients());
   }, []);
 
   return (

@@ -3,12 +3,12 @@ import { Dispatch } from 'redux';
 import { AppActions } from './actions';
 
 /** Gets all clients  */
-export const getAllClients = async (dispatch: Dispatch) => {
+export const getAllClients = () => async (dispatch: Dispatch) => {
   try {
     const res = await axios.get('/client');
     dispatch({
       type: AppActions.UPDATE_CLIENT,
-      payload: res.data,
+      payload: { clients: res.data },
     });
   } catch (e) {
     console.log(e);
@@ -18,9 +18,8 @@ export const getAllClients = async (dispatch: Dispatch) => {
 export const getClientByName =
   (clientName: string) => async (dispatch: Dispatch) => {
     try {
-      const res = await axios.get(`client/name/${clientName}`);      
-     return (res.data)
-      
+      const res = await axios.get(`client/name/${clientName}`);
+      return res.data;
     } catch (e) {
       console.log(e);
     }
@@ -29,24 +28,21 @@ export const getClientByName =
 export const getClientByID =
   (clientID: number) => async (dispatch: Dispatch) => {
     try {
-      const res = await axios.get(`client/id/${clientID}`);     
-       return (res.data)
-      
+      const res = await axios.get(`client/id/${clientID}`);
+      return res.data;
     } catch (e) {
       console.log(e);
     }
   };
-  
-/** adds a client */
-export const addClient = 
-(client:string) => async (dispatch: Dispatch) => {
-    try {
-       const res =await axios.post('client',{
-          clientname:client});
-       return(res.data)
 
-          
-       `` }catch (e) {
-              console.log(e)
-          }
-        };
+/** adds a client */
+export const addClient = (client: string) => async (dispatch: Dispatch) => {
+  try {
+    const res = await axios.post('client', {
+      clientname: client,
+    });
+    return res.data``;
+  } catch (e) {
+    console.log(e);
+  }
+};
