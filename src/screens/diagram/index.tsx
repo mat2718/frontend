@@ -10,8 +10,12 @@ import {
 import { screenStyles, textStyles, buttonStyles } from '../../styles';
 import { LineChart } from 'react-native-chart-kit';
 import { Picker } from '@react-native-picker/picker';
-import axios from 'axios';
-
+import { getAllDemand, getDemandByDate } from '../../redux/actions/demand-actions';
+import { useSelector, useDispatch } from "react-redux";
+import { IAppState } from '../../redux/state';
+import { GetAllCurricula } from '../../redux/actions/curriculum-actions';
+import  axios from 'axios';
+import moment from 'moment';
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -73,47 +77,63 @@ const chartConfig = {
   }
 
   //will use this later to see if overflow or underflow of client's demand
-  const negOrPost = () => {
-    // if(clientDemand - supply > 0){
-    //   return "Missing"
-    // } else {
-    //   return "Overflow by"
-    // }
-  }
 
   const Diagram: React.FC = () => {
+    const allDemands = useSelector((state: IAppState) => state.demands);
     const [currCurriculum, setCurriculum] = useState('All Curriculum');
     const [demandData, setDemandData] = useState('Demand');
     const [supplyData, setSupplyData] = useState('Supply');
-
+    const [yearDemand, setYearDemand] = useState(0);
+    const [yearSupply, setYearSupply] = useState(0);
+    
 
     const date = new Date();
     const start = new Date(date.getFullYear(), date.getMonth(), 1);
     const end = new Date(date.getFullYear(), date.getMonth(), 1);
     const startDate = new Date(start.setMonth(start.getMonth() - 6)).toISOString().substring(0,10);
     const endDate = new Date(end.setMonth(end.getMonth() + 6)).toISOString().substring(0,10);
-    
-    const demandGetter = async() => {
-      await axios.get(`https://dcox0bl0me.execute-api.us-east-1.amazonaws.com/Prod/demand`).then(resp => {
-        console.log(resp);
-        setDemandData(resp.data)}).catch(error=> console.log(error.response.data));
-    }
-
-    const batchesGetter = async() => {
-      await axios.get(`https://dcox0bl0me.execute-api.us-east-1.amazonaws.com/Prod/batch`).then(resp => {
-        console.log(resp);
-        setSupplyData(resp.data)}).catch(error=> console.log(error.response.data));
-    }
 
     useEffect(() => {
-      demandGetter();
-      batchesGetter();
+      setDemandData(getDemandByDate(startDate, endDate))
+      setSupplyData(GetAllCurricula());
+      // setDemandData(getAllBatches());
+      // batchGetter()
     }, [currCurriculum]);
+
+    const filterDataByMonth = () => {
+      
+    };
+
+    const differenceView = () => {
+      const result = yearDemand - yearSupply;
+      if(result < 0){
+        return (
+            <View style={styles.resultNumbers}>
+              <Text style={styles.statText}>UNDER</Text>
+              <Text style={styles.statText}>{result}</Text>
+            </View>
+        )
+      } else if (result === 0){
+        return (
+            <View style={styles.resultNumbers}>
+              <Text style={styles.statText}>MEET</Text>
+              <Text style={styles.statText}>{result}</Text>
+            </View>
+        )
+      } else {
+        return (
+            <View style={styles.resultNumbers}>
+              <Text style={styles.statText}>OVERFLOW</Text>
+              <Text style={styles.statText}>{result}</Text>
+            </View>
+        )
+      }
+    }
     
     return (
       <View style={screenStyles.mainView}>
         <Button title="Console log DemandState" onPress={() => console.log(demandData)}/>
-        <Button title="Console log SupplyState" onPress={() => console.log(demandData)}/>
+        <Button title="Console log SupplyState" onPress={() => console.log(supplyData)}/>
         <View style={screenStyles.titleContainer}>
 
           <Text style={textStyles.subHeading}>
@@ -158,10 +178,7 @@ const chartConfig = {
               <Text style={styles.statText}>15</Text>
             </View>
               
-            <View style={styles.resultNumbers}>
-              <Text style={styles.statText}>MISSING</Text>
-              <Text style={styles.statText}>5</Text>
-            </View>
+            {differenceView()}
           </View>
         </View>
 

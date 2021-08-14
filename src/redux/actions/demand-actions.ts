@@ -2,48 +2,28 @@ import axios from "../../../axiosConfig";
 import { Dispatch } from "redux";
 import IDemand from "../../entities/Demand";
 import { AppActions, IAppAction } from "./actions";
-import { IAppState } from "../state";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 export const getAllDemand = () => async (dispatch: Dispatch<IAppAction>) => {
   try {
-    await axios.get('demand').then((response) => {
-      const demands = response.data;
-
-      dispatch({
+    const res = await axios.get('demand')
+    dispatch({
         type: AppActions.UPDATE_DEMAND,
-        payload:{
-          skills: [],
-          clients: [],
-          batches: [],
-          cirricula: [],
-          demands,
-          trainers: [],
-        }
-      });
-      return "Retrieved all Client Demands"
+        payload: res.data
     });
+    return "Retrieved all Client Demands"
   } catch(error){
     return error.response.data;
   }
 };
 
-export const addDemand = (demand: IDemand) => async (dispatch: Dispatch<IAppAction>) => {
-  const demands: IDemand[] = useSelector((state:IAppState) => { return state.demands })
+export const addDemand = (demand: IDemand) => async () => {
   try {
     await axios.post('demand', demand);
-    demands.push(demand);
-    dispatch({
-      type: AppActions.UPDATE_TRAINER,
-      payload: {
-        skills: [],
-        clients: [],
-        batches: [],
-        cirricula: [],
-        demands,
-        trainers: []
-      },
-    });
+    (() => {
+      const dispatcher = useDispatch()
+      dispatcher(getAllDemand());
+    })();
     return `${demand.clientId}'s demand has been added`;
   } catch (error) {
     return error.response.data;
@@ -52,43 +32,48 @@ export const addDemand = (demand: IDemand) => async (dispatch: Dispatch<IAppActi
 
 export const getDemandById = (demandId: number) => async (dispatch: Dispatch<IAppAction>) => {
   try {
-    return await axios.get(`demand/id/${demandId}`);
+    const res = await axios.get(`demand/id/${demandId}`);
+    return res.data;
   } catch (error) {
     return error.response.data;
-  };
+  }
 };
 
-export const getDemandByDate = (startDate: string, endDate: string) => async (dispatch: Dispatch<IAppAction>) => {
+export const getDemandByDate = (startDate: string, endDate: string) => async() => {
   try {
-    return await axios.get(`demand/date/${startDate}/${endDate}`)
+    const res = await axios.get(`demand/date/${startDate}/${endDate}`)
+    return res.data;
   } catch(error){
     return error.response.data;
-  };
+  }
 };
 
 export const getDemandByCurrId = (curriculumId: number) => async(dispatch: Dispatch<IAppAction>) => {
   try {
-    return await axios.get(`demand/curriculum/${curriculumId}`)
+    const res = await axios.get(`demand/curriculum/${curriculumId}`)
+    return res.data;
   } catch(error){
     return error.response.data;
   }
 };
 
-export const getDemandByCurrIdAndDate = (curriculumId: number, startDate:string, endDate:string) => async(dispatch: Dispatch<IAppAction>) => {
+export const getDemandByCurrIdAndDate = (curriculumId: number, startDate:string, endDate:string) => async() => {
   try {
-    return await axios.get(`demand/curriculum/${curriculumId}/${startDate}/${endDate}`)
+    const res = await axios.get(`demand/curriculum/${curriculumId}/${startDate}/${endDate}`)
+    return res.data;
   } catch(error){
     return error.response.data;
   }
-}
+};
 
-export const getDemandByClientId = (clientId: number) => async (dispatch: Dispatch<IAppAction>) => {
+export const getDemandByClientId = (clientId: number) => async () => {
   try {
-    return await axios.get(`demand/client/${clientId}`)
+    const res = await axios.get(`demand/client/${clientId}`)
+    return res.data;
   } catch(error){
     return error.response.data;
   }
-}
+};
 
 
 
