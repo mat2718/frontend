@@ -23,6 +23,7 @@ const Batches: React.FC = () => {
         trainerId={item.trainerid}
         startDate={item.startdate}
         endDate={item.enddate}
+        confirmed={item.confirmed}
       />
     );
   };

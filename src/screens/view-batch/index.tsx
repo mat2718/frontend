@@ -21,6 +21,7 @@ import {
   colors,
 } from '../../styles';
 import { deleteBatch } from '../../redux/actions/batch-actions';
+import BatchesSkillsListItem from '../../components/batches/batches-skills-list-item';
 
 interface PropsI {
   route: {
@@ -30,7 +31,12 @@ interface PropsI {
       curriculum: {
         curriculumid: number;
         curriculumname: string;
-        skillidarr: [];
+        skillIdArr: [
+          {
+            skillid: number;
+            curriculumid: number;
+          }
+        ];
       };
       trainer: {
         trainerid: number;
@@ -39,13 +45,12 @@ interface PropsI {
       };
       startDate: string;
       endDate: string;
+      confirmed: boolean;
     };
   };
 }
 
 const ViewBatch: React.FC<PropsI> = ({ route }) => {
-  /** curriculum */
-
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
@@ -80,6 +85,11 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
     navigation.goBack();
   };
 
+  /** Render item for flat list */
+  const renderItem = ({ item }: { item: any }) => {
+    return <BatchesSkillsListItem skillid={item.skillid} />;
+  };
+
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
       <View style={screenStyles.mainView}>
@@ -110,9 +120,20 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
           </TouchableOpacity>
 
           {/** Confirm Button */}
-          <TouchableOpacity style={buttonStyles.buttonContainer}>
-            <Text style={buttonStyles.buttonText}>Confirm</Text>
-          </TouchableOpacity>
+          {route.params.confirmed ? (
+            <TouchableOpacity
+              style={buttonStyles.buttonDisabled}
+              disabled={true}
+            >
+              <Text style={buttonStyles.buttonDisabledText}>
+                Confirmed <MaterialCommunityIcons name='check' size={18} />
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity style={buttonStyles.buttonContainer}>
+              <Text style={buttonStyles.buttonText}>Confirm</Text>
+            </TouchableOpacity>
+          )}
         </View>
         {startTime < Date.now() && endTime > Date.now() ? (
           <View style={[badgesStyles.badge, { backgroundColor: '#f26925' }]}>
@@ -178,17 +199,12 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
         >
           <Text style={textStyles.subHeading}>Skills</Text>
         </View>
-        {/**Calendar: Marked Start and End Dates */}
+
+        {/** Skills list **/}
         <FlatList
-          data={route.params.curriculum.skillidarr}
-          renderItem={({ item }: { item: any }) => {
-            return (
-              <View>
-                <Text>{item}</Text>
-              </View>
-            );
-          }}
-          keyExtractor={(item: any) => item}
+          data={route.params.curriculum.skillIdArr}
+          renderItem={renderItem}
+          keyExtractor={(item: any) => item.skillid.toString()}
           style={{
             backgroundColor: colors.white,
             marginTop: 10,

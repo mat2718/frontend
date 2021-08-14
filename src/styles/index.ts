@@ -149,6 +149,23 @@ export const buttonStyles = StyleSheet.create({
     fontFamily: 'FuturaBook',
     fontWeight: '700',
   },
+
+  buttonDisabled: {
+    justifyContent: 'center',
+    height: 35,
+    width: 125,
+    padding: 10,
+    backgroundColor: '#25F269',
+    borderRadius: 50,
+    marginLeft: 10,
+  },
+
+  buttonDisabledText: {
+    color: colors.darkGray,
+    alignSelf: 'center',
+    fontFamily: 'FuturaBook',
+    fontWeight: '700',
+  },
 });
 
 /** List Item Styles */

@@ -13,6 +13,7 @@ interface IProps {
   trainerId: number;
   startDate: string;
   endDate: string;
+  confirmed: boolean;
 }
 
 const BatchListItem: React.FC<IProps> = (props: IProps) => {
@@ -74,6 +75,7 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
           endDate: props.endDate,
           curriculum: curriculum,
           trainer: trainer,
+          confirmed: props.confirmed,
         });
       }}
     >

@@ -5,7 +5,12 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import BatchStats from '../batch-stats';
-import { screenStyles, textStyles, buttonStyles } from '../../../styles';
+import {
+  screenStyles,
+  textStyles,
+  buttonStyles,
+  colors,
+} from '../../../styles';
 import axios from '../../../../axiosConfig';
 
 /** We pass the filter state from the Batches screen to this component */
@@ -91,11 +96,12 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
         {/** Picker filter for the FlatList */}
         <Picker
           selectedValue={props.selectedFilter}
+          mode='dropdown'
           onValueChange={(itemValue: any, itemIndex: any) =>
             props.setSelectedFilter(itemValue)
           }
           style={{ height: 50, width: 50 }}
-          itemStyle={textStyles.subHeading}
+          itemStyle={{ color: colors.screenBg }}
         >
           <Picker.Item label='All Batches' value='all' />
           <Picker.Item label='Active Batches' value='active' />
