@@ -10,7 +10,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import Header from '../../components/batches/header';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from '../../../axiosConfig';
@@ -99,7 +98,6 @@ const AddEditBatch: React.FC = () => {
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
-      <Header />
       <ScrollView style={screenStyles.mainView}>
         {/** Heading and button */}
         <View

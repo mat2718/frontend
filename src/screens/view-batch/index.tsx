@@ -3,17 +3,15 @@ import {
   View,
   Text,
   SafeAreaView,
-  ScrollView,
+  FlatList,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { Calendar } from 'react-native-calendars';
+import { useDispatch } from 'react-redux';
 import { ProgressChart } from 'react-native-chart-kit';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
-import Header from '../../components/batches/header';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   badgesStyles,
@@ -29,7 +27,11 @@ interface PropsI {
     params: {
       batchSize: number;
       batchId: number;
-      curriculum: string;
+      curriculum: {
+        curriculumid: number;
+        curriculumname: string;
+        skillidarr: [];
+      };
       trainer: string;
       startDate: string;
       endDate: string;
@@ -38,17 +40,14 @@ interface PropsI {
 }
 
 const ViewBatch: React.FC<PropsI> = ({ route }) => {
+  /** curriculum */
+
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
-
   const dispatch = useDispatch();
 
-  /** Date variables for the calendar component */
-  const currentDate = new Date(Date.now()).toISOString().slice(0, 10);
-  const startDate = new Date(route.params.startDate).toString().slice(0, 10);
-  const endDate = new Date(route.params.endDate).toString().slice(0, 10);
-
+  /** Dates for badge and prgoress ring */
   const startTime = new Date(route.params.startDate).getTime();
   const endTime = new Date(route.params.endDate).getTime();
   const progress = (Date.now() - startTime) / (endTime - startTime);
@@ -79,8 +78,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
-      <Header />
-      <ScrollView style={screenStyles.mainView}>
+      <View style={screenStyles.mainView}>
         {/**Title: Curriculum */}
         <View style={screenStyles.titleContainer}>
           {/** Touchable that takes us to the edit batch screen when clicking on the title */}
@@ -95,15 +93,14 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
                 endDate: route.params.endDate,
               })
             }
-            style={{ flexDirection: 'row', alignItems: 'center', flex: 0.75 }}
+            style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}
           >
             <Text style={textStyles.heading}>
-              {route.params.curriculum}
+              {route.params.curriculum.curriculumname + ' '}
               <MaterialCommunityIcons
                 name='pencil'
                 size={20}
                 color={colors.darkGray}
-                style={{ paddingLeft: 5 }}
               />
             </Text>
           </TouchableOpacity>
@@ -131,7 +128,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
           <MaterialCommunityIcons
             name='account-outline'
             size={16}
-            color='#222'
+            color={colors.darkGray}
             style={{ marginRight: 5 }}
           />
           <Text style={textStyles.regular}>{route.params.trainer}</Text>
@@ -144,7 +141,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
             <MaterialCommunityIcons
               name='account-group-outline'
               size={16}
-              color='#222'
+              color={colors.darkGray}
               style={{ marginRight: 5 }}
             />
             <Text style={textStyles.regular}>
@@ -156,7 +153,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
             <MaterialCommunityIcons
               name='calendar'
               size={16}
-              color='#222'
+              color={colors.darkGray}
               style={{ marginRight: 5 }}
             />
             <Text style={textStyles.regular}>
@@ -166,34 +163,46 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
             </Text>
           </View>
         </View>
-
-        {/**Calendar: Marked Start and End Dates */}
-        <View style={styles.calendarView}>
-          <Calendar
-            current={currentDate}
-            minDate={startDate}
-            maxDate={endDate}
-            markedDates={{
-              [startDate]: {
-                selected: true,
-                marked: true,
-                selectedColor: '#F26925',
-              },
-              [endDate]: {
-                selected: true,
-                marked: true,
-                selectedColor: '#F26925',
-              },
-            }}
-          />
+        <View
+          style={{
+            marginTop: 20,
+          }}
+        >
+          <Text style={textStyles.subHeading}>Skills</Text>
         </View>
+        {/**Calendar: Marked Start and End Dates */}
+        <FlatList
+          data={route.params.curriculum.skillidarr}
+          renderItem={({ item }: { item: any }) => {
+            return (
+              <View>
+                <Text>{item}</Text>
+              </View>
+            );
+          }}
+          keyExtractor={(item: any) => item}
+          style={{
+            backgroundColor: colors.white,
+            marginTop: 10,
+            borderRadius: 15,
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+          }}
+        />
+
         {/** Progress Ring */}
         <View style={styles.progressRingView}>
           <ProgressChart
             data={data}
             width={50}
             height={40}
-            strokeWidth={10}
+            strokeWidth={8}
             radius={12}
             chartConfig={chartConfig}
             hideLegend={true}
@@ -206,11 +215,9 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
           style={styles.deleteButton}
           onPress={() => deleteBatchPress()}
         >
-          <Text style={styles.deleteButtonText}>
-            Delete {route.params.batchId + ' ' + route.params.curriculum}
-          </Text>
+          <Text style={styles.deleteButtonText}>Delete Batch</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };

@@ -16,11 +16,22 @@ import ViewClient from '../../screens/view-client';
 import Diagram from '../../screens/diagram';
 import AddDemand from '../../screens/add-demand';
 import EditDemand from '../../screens/edit-demand';
+import { colors } from '../../styles';
+import { useDispatch } from 'react-redux';
+import { getAllBatches } from '../../redux/actions/batch-actions';
+
 //see what happens
 //please import your screen and put in your screen in components-kai
 const Stack = createStackNavigator<RootStackParamList>();
 
 const RootStackNavigator = () => {
+  const dispatch = useDispatch();
+
+  /** Load in db data and store in the redux state */
+  React.useEffect(() => {
+    dispatch(getAllBatches());
+  }, []);
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -30,8 +41,34 @@ const RootStackNavigator = () => {
       }}
     >
       <Stack.Screen name='Main' component={Navigation} />
-      <Stack.Screen name='ViewBatch' component={ViewBatch} />
-      <Stack.Screen name='AddEditBatch' component={AddEditBatch} />
+      <Stack.Screen
+        name='ViewBatch'
+        component={ViewBatch}
+        options={{
+          headerShown: true,
+          title: 'Batch',
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            fontFamily: 'FuturaBook',
+            fontWeight: '700',
+            color: colors.darkGray,
+          },
+        }}
+      />
+      <Stack.Screen
+        name='AddEditBatch'
+        component={AddEditBatch}
+        options={{
+          headerShown: true,
+          title: 'Add a Batch',
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            fontFamily: 'FuturaBook',
+            fontWeight: '700',
+            color: colors.darkGray,
+          },
+        }}
+      />
       <Stack.Screen
         name='AddTrainer'
         component={CreateTrainer}
@@ -47,7 +84,11 @@ const RootStackNavigator = () => {
       <Stack.Screen name='AddEditCurriculum' component={AddEditCurriculum} />
       <Stack.Screen name='ViewClient' component={ViewClient} />
       <Stack.Screen name='AddClient' component={AddClient} />
-      <Stack.Screen name='Diagram' component={Diagram} options={{ headerShown: true}} />
+      <Stack.Screen
+        name='Diagram'
+        component={Diagram}
+        options={{ headerShown: true }}
+      />
       <Stack.Screen name='AddDemand' component={AddDemand} />
       <Stack.Screen name='EditDemand' component={EditDemand} />
       {/* <Stack.Screen name='Clients' component={ClientScreen} />

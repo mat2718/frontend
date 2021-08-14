@@ -21,14 +21,16 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
   const navigation = useNavigation<mainScreenProp>();
 
   /** Get trainer and curriculum */
-  const [curriculum, setCurriculum] = React.useState('');
+  const [curriculum, setCurriculum] = React.useState({
+    curriculumname: '',
+  });
   const [trainer, setTrainer] = React.useState('');
 
   /** getCurriculum */
   const getCurriculum = async () => {
     await axios
       .get(`curriculum/id/${props.curriculumId}`)
-      .then((item) => setCurriculum(item.data[0].curriculumname));
+      .then((item) => setCurriculum(item.data[0]));
   };
 
   /** getCurriculum */
@@ -74,7 +76,7 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
       }}
     >
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Text style={listStyles.heading}>{curriculum}</Text>
+        <Text style={listStyles.heading}>{curriculum.curriculumname}</Text>
         {/* * Checks current date and start/end date of batch and applies tag based on status */}
         {startDate < Date.now() && endDate > Date.now() ? (
           <View style={[badgesStyles.badge, { backgroundColor: '#f26925' }]}>

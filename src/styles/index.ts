@@ -24,8 +24,8 @@ export const screenStyles = StyleSheet.create({
 
   /** The view under your safeareaview, ideally a scrollview for screens without a flatlist **/
   mainView: {
-    padding: 25,
     flex: 1,
+    padding: 25,
   },
 
   /** Since screen titles have a button next to it, we need to wrap both the text and button in a view with this style */

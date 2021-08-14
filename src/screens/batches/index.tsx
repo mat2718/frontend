@@ -10,11 +10,8 @@ import { getAllBatches } from '../../redux/actions/batch-actions';
 /** Basis for Entire Batch Screen */
 const Batches: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = React.useState('all');
+  const [isFetching, setIsFetching] = React.useState(false);
   const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(getAllBatches());
-  }, []);
 
   /** Main item to render for the FlatList */
   const renderItem = ({ item }: { item: any }) => {
@@ -28,6 +25,16 @@ const Batches: React.FC = () => {
         endDate={item.enddate}
       />
     );
+  };
+
+  const fetchData = () => {
+    dispatch(getAllBatches());
+    setIsFetching(false);
+  };
+
+  const onRefresh = () => {
+    setIsFetching(true);
+    fetchData();
   };
 
   /** get batches from state */
@@ -60,10 +67,13 @@ const Batches: React.FC = () => {
             new Date(a.startdate).getTime() - new Date(b.startdate).getTime()
           );
         })}
+        onRefresh={onRefresh}
+        refreshing={isFetching}
         renderItem={renderItem}
         keyExtractor={(item) => item.batchid.toString()}
         ListHeaderComponent={() => (
           <BatchesListHeader
+            batches={batches as []}
             selectedFilter={selectedFilter}
             setSelectedFilter={setSelectedFilter}
           />

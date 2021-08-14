@@ -6,9 +6,18 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import BatchStats from '../batch-stats';
 import { screenStyles, textStyles, buttonStyles } from '../../../styles';
+import axios from '../../../../axiosConfig';
 
 /** We pass the filter state from the Batches screen to this component */
 interface IProps {
+  batches: {
+    batchsize: number;
+    batchid: number;
+    curriculum: string;
+    trainer: string;
+    startdate: string;
+    enddate: string;
+  }[];
   selectedFilter: any;
   setSelectedFilter: any;
 }
@@ -17,6 +26,29 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
+
+  /** Get trainers */
+  const [trainers, setTrainers] = React.useState([]);
+  const getTrainers = async () => {
+    await axios.get('trainer').then((res) => setTrainers(res.data));
+  };
+
+  React.useEffect(() => {
+    getTrainers();
+
+    return function cleanup() {
+      setTrainers([]);
+    };
+  }, []);
+
+  /** Planned and active batches */
+  const plannedBatches = props.batches.length;
+  const activeBatches = props.batches.filter(
+    (date) =>
+      new Date(date.startdate).getTime() < Date.now() &&
+      new Date(date.enddate).getTime() > Date.now()
+  ).length;
+  const inactiveTrainers = trainers.length - activeBatches;
 
   return (
     <View style={screenStyles.mainView}>
@@ -35,7 +67,14 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
 
       {/** Gantt Chart */}
       <View style={styles.plannedBatchesTable}>
-        <BatchStats data={[47, 7, 10, 20]} />
+        <BatchStats
+          data={[
+            plannedBatches,
+            activeBatches,
+            activeBatches,
+            inactiveTrainers,
+          ]}
+        />
       </View>
 
       {/** FlatList title text */}
@@ -53,6 +92,7 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
             props.setSelectedFilter(itemValue)
           }
           style={{ height: 50, width: 50 }}
+          itemStyle={textStyles.subHeading}
         >
           <Picker.Item label='All Batches' value='all' />
           <Picker.Item label='Active Batches' value='active' />
