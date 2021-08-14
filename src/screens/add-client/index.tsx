@@ -20,6 +20,8 @@ import {
 } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import axios from '../../../axiosConfig'
+import { useDispatch, useSelector } from 'react-redux';
+import { addClient } from '../../redux/actions/client-actions';
 
 /** Mock data for curriculum */
 const dataCurricula = ['React Native/Cloud Native', 'Java', 'Python'];
@@ -30,21 +32,14 @@ const AddClient: React.FC = () => {
   /** Navigation for going back a screen */
   const navigation = useNavigation();
   const[client, setClient]=useState("");
-
+  const dispatch=useDispatch()
+  const addOneClient =()=>{
+    dispatch(addClient({clientName:client}))
+    console.log(client);
+  }
   
   
- const addClient= ()=> {
-     axios.post('/client',{
-       clientname:client
-        }
-     ).then((res: any) => {
-       console.log(res); 
-            
-         });      
  
-       
-
-      }
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
@@ -63,7 +58,8 @@ const AddClient: React.FC = () => {
           {/** Add/Edit */}
           <TouchableOpacity
             style={buttonStyles.buttonContainer}
-            onPress={() => addClient() }
+            onPress={() => addOneClient()
+             }
           >
             <Text style={buttonStyles.buttonText}>Add</Text>
           </TouchableOpacity>
