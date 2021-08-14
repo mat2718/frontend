@@ -13,43 +13,43 @@ interface IProps
   trainer: ITrainer
 }
 
+/**
+ * Trainer FlatList - a sub-component of the Main Trainer Screen that displays a list of trainers
+ * @param {IProps} interface - properties of the entity trainer 
+ * @returns {React.FC} - React Component that returns a flatlist of trainers
+ * @author Joab Smith and Imran Ilyas
+ */
+
 const TrainersListItem: React.FC<IProps> = (props: IProps) =>
 {
-  /** Navigation stuff */
+  // Navigation setup
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
   const [selectedFilter, setSelectedFilter] = React.useState('');
 
+  // Delete Trainer Action Handler call
   const deleteTrainer = (trainer: ITrainer) =>
   {
     console.log('Delete');
     //Update Redux
     //Axios Request
   }
-const editTrainer = () => {
-  navigation.navigate('ViewEditTrainer', props.trainer);
-}
 
-
-// itemValue, itemIndex) =>
-//               {
-//                 setSelectedFilter(itemValue);
-//                 if (selectedFilter === 'Edit') {
-//                   navigation.navigate('ViewEditTrainer', props.trainer);
-//                 } else if (selectedFilter === 'Delete') {
-//                   deleteTrainer(props.trainer);
-//                 }
-//               }   
+  // Navigate to Edit Trainer page
+  const editTrainer = () => {
+    navigation.navigate('ViewEditTrainer', props.trainer);
+  }
 
   return (
-    /** Individual Trainer Touchable */
-    /** Structures and displays the data from the FlatList */
+    // Structures and displays the data from the FlatList
     <View style={listStyles.listItemContainer}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Text style={listStyles.heading}>{props.trainer.trainerfirst + ' ' + props.trainer.trainerlast}</Text>
+        {/* Dropdown for selecting edit or delete trainer */}
         <Picker
             mode='dropdown'
             selectedValue={selectedFilter}
+            // Will need to extract the ternary because it is a code smell
           onValueChange={(itemValue, itemIndex) => {
             itemValue === 'Edit' ? navigation.navigate('ViewEditTrainer', props.trainer) :
             itemValue === 'Delete' ? deleteTrainer(props.trainer) : null
