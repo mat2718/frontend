@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import ITrainer from '../../Entities/Trainer';
 import { updateTrainer } from '../../redux/actions/trainers-actions';
 import { inputStyles, screenStyles, buttonStyles, textStyles } from '../../styles';
+import Toast from 'react-native-toast-message';
 
 /**
  * Edit Trainer Screen - displays the edit screen for a specific trainer
@@ -34,8 +35,14 @@ const ViewEditTrainer: React.FC = () =>
       trainerid: params.trainerid
     }
     dispatch(updateTrainer(newTrainer));
-
-    console.log('Update');
+    // Display message upon updating a trainer
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Updated Trainer!',
+      text2: `You have successfully updated trainer: ${newTrainer.trainerfirst} ${newTrainer.trainerlast}`,
+      topOffset: 50,
+    })
   };
 
   return (
