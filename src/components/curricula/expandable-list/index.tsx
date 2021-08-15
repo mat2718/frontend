@@ -20,13 +20,6 @@ interface IProps {
  */
 
 export const ExpandableList: React.FC<IProps> = ({ curriculum, onPress }) => {
-  //Navigation initialization
-  type curriculaScreenProp = StackNavigationProp<
-    RootStackParamList,
-    'Main'
-  >;
-  const navigation = useNavigation<curriculaScreenProp>();
-
   //State for expansion of each curriculum view
   const [expanded, setExpanded] = useState(false);
   const [icon, setIcon] = useState(
@@ -37,9 +30,11 @@ export const ExpandableList: React.FC<IProps> = ({ curriculum, onPress }) => {
       style={styles.icon}
     />
   );
-
+  
+  //variables for more understandable data strings
   let createdDate = new Date(curriculum.createdon).toDateString();
   let modifiedDate = new Date(curriculum.lastmodified).toDateString();
+  let skillsarr = curriculum.skillnamearr.join(', ');
   
   //onPress event allowing for icon change and expanding transition
   const onCurriculumPress = () => {
@@ -98,21 +93,7 @@ export const ExpandableList: React.FC<IProps> = ({ curriculum, onPress }) => {
           </View>
           <View style={styles.textContainer}>
             <Text style={listStyles.subHeading}>Skills: </Text>
-            <Text style={listStyles.textRegular}>{curriculum.skillnamearr}</Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={buttonStyles.buttonCompactOutlineContainer}
-              onPress={() => navigation.navigate('AddEditCurriculum')}
-            >
-              <Text style={buttonStyles.buttonSecondaryText}>Edit</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={buttonStyles.buttonCompactContainer}
-              onPress={() => {DeleteCurriculum(curriculum)}}
-            >
-              <Text style={buttonStyles.buttonText}>Delete</Text>
-            </TouchableOpacity>
+            <Text style={listStyles.textRegular}>{skillsarr}</Text>
           </View>
         </>
       )}

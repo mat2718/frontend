@@ -79,7 +79,7 @@ export const PostCurriculum = (curriculum: ICurriculum) => async (
  */
 export const DeleteCurriculum = (curriculum: ICurriculum) => async () => {
   try {
-    await axios.delete(`curriculum/id/${curriculum.curriculumId}`);
+    await axios.delete(`curriculum/id/${curriculum.curriculumid}`);
     (() => {
       const dispatcher = useDispatch();
       dispatcher(GetAllCurricula());

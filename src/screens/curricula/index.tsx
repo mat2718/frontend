@@ -32,13 +32,12 @@ const Curricula: React.FC = () => {
     transitionRef.current.animateNextTransition();
   };
 
+  //rendering each 'card' for each curriculum
   const renderItem = ({item}: {item: ICurriculum}) => {
     return(
        <ExpandableList curriculum={item} onPress={onPress} />
     );
   };
-
-  //const navigation = useNavigation();
 
   return (
     <Transitioning.View

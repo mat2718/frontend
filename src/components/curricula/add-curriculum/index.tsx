@@ -4,32 +4,33 @@ import React, { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { TextInput, View, Text, TouchableOpacity, Platform, StyleSheet } from 'react-native';
 import { inputStyles, colors } from '../../../styles';
+import MultiSelect from 'react-native-multiple-select';
+import ISkill from '../../../entities/skill';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getAllSkills, getSkillById } from '../../../redux/actions/skill-actions';
+import { IAppState } from '../../../redux/state';
 
-interface ICurriculum {
-    batches: [];
-    createdBy: string;
-    createdOn: string;
-    id: number;
-    lastModified: string;
-    lastModifiedBy: string;
-    name: string;
-    skills: [];
-}
 
 const AddCurriculum: React.FC = () => {
-    const route = useRoute();
-    const params = route.params as ICurriculum;
-    const navigation = useNavigation();
     const [name, setName] = useState(''); 
     const [createdBy, setCreatedBy] = useState('');
-    const [skills, setSkills] = useState<string[]>([]);
+    
     const [isPickerShow, setIsPickerShow] = useState(false);
     const [createdDate, setCreatedDate] = useState(new Date(Date.now()));
+    
+    const [skills, setSkills] = useState<ISkill[]>([]);
+    const dispatch = useDispatch();
+    const skillArr = useSelector((state: IAppState) => state.skills)
 
-    const onChangeSkills = (id: string[]) => {
-      setSkills(id);
-    } 
+    useEffect(() => {
+      dispatch(getAllSkills())
+    }, []);
   
+    const onSkillChange = (skills: any) => {
+      setSkills(skills);
+    }
+
     const showPicker = () => {
       setIsPickerShow(true);
     };
@@ -58,8 +59,20 @@ const AddCurriculum: React.FC = () => {
             />
         </View>
 
-        <View style={styles.form2}>
+        <View style={styles.form}>
+          <View style={{marginBottom: 10}}>
             <Text style={inputStyles.inputLabelText}>Skills:</Text>
+          </View>
+            <MultiSelect
+            hideTags
+            items={skillArr}
+            uniqueKey="skillname"
+            displayKey="skillname"
+            onSelectedItemsChange={(skills: any) => onSkillChange(skills)}
+            styleDropdownMenuSubsection={inputStyles.pickerContainer}
+            submitButtonColor={colors.orange}
+            submitButtonText="Done"
+            />
         </View>
 
         <View style={styles.form}>
@@ -96,7 +109,6 @@ const AddCurriculum: React.FC = () => {
             style={inputStyles.textInput}
             />
         </View>
-        
 
     </View>
     )
@@ -114,12 +126,6 @@ const styles = StyleSheet.create({
   form: {
     flex: 1,
     width: '100%',
-    alignContent: 'center',
-    justifyContent: 'center',
-  },
-  form2: {
-    flex: 1,
-    width: '97%',
     alignContent: 'center',
     justifyContent: 'center',
   }
