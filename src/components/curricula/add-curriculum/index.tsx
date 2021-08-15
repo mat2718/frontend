@@ -19,7 +19,7 @@ const AddCurriculum: React.FC = () => {
     const [isPickerShow, setIsPickerShow] = useState(false);
     const [createdDate, setCreatedDate] = useState(new Date(Date.now()));
     
-    const [skills, setSkills] = useState<ISkill[]>([]);
+    const [skills, setSkills] = useState([])
     const dispatch = useDispatch();
     const skillArr = useSelector((state: IAppState) => state.skills)
 
@@ -28,7 +28,8 @@ const AddCurriculum: React.FC = () => {
     }, []);
   
     const onSkillChange = (skills: any) => {
-      setSkills(skills);
+      setSkills({skills});
+      console.log(skills)
     }
 
     const showPicker = () => {
@@ -47,7 +48,7 @@ const AddCurriculum: React.FC = () => {
 
 
     return (
-      <View style={{marginTop: 20}}>
+      <View style={{marginTop: 10}}>
         {/**Form View */}
         <View style={styles.form}>
             <Text style={inputStyles.inputLabelText}>Name:</Text>
@@ -64,11 +65,18 @@ const AddCurriculum: React.FC = () => {
             <Text style={inputStyles.inputLabelText}>Skills:</Text>
           </View>
             <MultiSelect
-            hideTags
+            hideTags={false}
             items={skillArr}
-            uniqueKey="skillname"
+            uniqueKey="skillid"
             displayKey="skillname"
             onSelectedItemsChange={(skills: any) => onSkillChange(skills)}
+            selectedItems={skills}
+            selectedItemTextColor={colors.blue}
+            selectText="  Choose Skills"
+            searchInputPlaceholderText="Search Skills..."
+            fontFamily="FuturaBook"
+            fontSize={12}
+            tagBorderColor={colors.blue}
             styleDropdownMenuSubsection={inputStyles.pickerContainer}
             submitButtonColor={colors.orange}
             submitButtonText="Done"
@@ -124,10 +132,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   form: {
-    flex: 1,
     width: '100%',
-    alignContent: 'center',
-    justifyContent: 'center',
+    marginTop: 5, 
+    marginBottom: 5
   }
 })
 

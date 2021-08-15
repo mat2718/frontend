@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView, KeyboardAvoidingViewBase } from 'react-native';
 import Header from '../../components/batches/header';
 import { buttonStyles, screenStyles, textStyles } from '../../styles';
 import AddCurriculum from '../../components/curricula/add-curriculum';
@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { PostCurriculum } from '../../redux/actions/curriculum-actions';
 import { useDispatch } from 'react-redux';
+import { RootStackParamList } from '../../types';
 
 /**
  * Add Curriculum Screen- allows for addition of a curriculum
@@ -38,7 +39,7 @@ interface IProps {
 
 /** code complexity is above the threshold here according to sonarlint, might need to modularize parts of this */
 const AddEditCurriculum: React.FC<IProps> = (props: IProps) => {
-  const navigation = useNavigation();  
+  const navigation = useNavigation<RootStackParamList>();  
   const dispatch = useDispatch()
 
   //post Curriculum function for add-curriculum screen
@@ -51,14 +52,8 @@ const AddEditCurriculum: React.FC<IProps> = (props: IProps) => {
   return (
     <View style={screenStyles.safeAreaView}>
       <Header />
-      <ScrollView style={screenStyles.mainView}>
-        <View
-          style={{
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              marginTop: 10,
-          }}
-          >
+      <View style={screenStyles.mainView}>
+      <View style={screenStyles.titleContainer}>
           <Text style={textStyles.heading}>Add Curriculum</Text>
           <TouchableOpacity
               style={buttonStyles.buttonContainer}
@@ -68,7 +63,7 @@ const AddEditCurriculum: React.FC<IProps> = (props: IProps) => {
           </TouchableOpacity>
         </View>
         <AddCurriculum />
-      </ScrollView>
+        </View>
     </View>
   );
 };

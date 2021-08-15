@@ -17,7 +17,6 @@ export const GetAllCurricula = () => async (dispatch: Dispatch<IAppAction>) => {
   try {
     await axios.get("curriculum").then((res) => {
       const curricula: ICurriculum[] = res.data;
-      console.log("response", res.data, curricula);
       dispatch({
       type: AppActions.UPDATE_CURRICULA,
       payload: {
@@ -52,7 +51,13 @@ export const GetCurriculum = (id: number) => async () => {
 };
 
 //api call to post a new curriculum
-export const PostCurriculum = (curriculum: ICurriculum) => async (
+export const PostCurriculum = (
+  curriculum: {
+    name: string;
+    createdBy: string;    
+    createdOn: string;
+    skills: number[];
+}) => async (
   dispatch: Dispatch<IAppAction>
 ) => {
   try {
@@ -61,12 +66,7 @@ export const PostCurriculum = (curriculum: ICurriculum) => async (
       const dispatcher = useDispatch();
       dispatcher(GetAllCurricula());
     })();
-    return `${curriculum.curriculumname} has been added.`
-    // const res = await axios.get('/curriculum');
-    // dispatch({
-    //     type: AppActions.UPDATE_CURRICULA,
-    //     payload: res.data
-    // });
+    return `${curriculum.name} has been added.`
   } catch (err) {
     console.log(err);
   }
