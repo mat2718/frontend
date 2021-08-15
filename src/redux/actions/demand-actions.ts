@@ -43,15 +43,16 @@ export const getDemandByDate = (startDate: string, endDate: string) => async() =
   try {
     const res = await axios.get(`demand/date/${startDate}/${endDate}`)
     return res.data;
-  } catch(error){
+  } catch (error){
     return error.response.data;
   }
 };
 
 export const getDemandByCurrId = (curriculumId: number) => async(dispatch: Dispatch<IAppAction>) => {
   try {
-    const res = await axios.get(`demand/curriculum/${curriculumId}`)
-    return res.data;
+    await axios.get(`demand/curriculum/${curriculumId}`).then((res) => {
+      return res.data;
+    })
   } catch(error){
     return error.response.data;
   }
