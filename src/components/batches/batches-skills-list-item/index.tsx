@@ -1,14 +1,21 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { listStyles, colors } from '../../../styles';
-import { getSkillById } from '../../../redux/actions/skill-actions';
 
-interface PropsI {
+/**
+ * Batch Skills List Item - the component the batches skuill list uses to render on renderItem()
+ * @param {IProps} interface - includes skillname for the batch to be rendered on a flatlist
+ * @returns {React.FC} - React Component for the ViewBatch skills FlatList
+ * @author Oriel Red Oral
+ */
+
+interface IProps {
   skillname: string;
 }
 
-const BatchesSkillsListItem: React.FC<PropsI> = (props: PropsI) => {
+const BatchesSkillsListItem: React.FC<IProps> = (props: IProps) => {
   return (
+    /** Literally just renders the skill name with fancy padding */
     <View style={styles.listItemContainer}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View>
@@ -19,6 +26,7 @@ const BatchesSkillsListItem: React.FC<PropsI> = (props: PropsI) => {
   );
 };
 
+/** Local StyleSheet */
 const styles = StyleSheet.create({
   listItemContainer: {
     padding: 20,

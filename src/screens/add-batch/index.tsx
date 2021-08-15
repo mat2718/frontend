@@ -24,6 +24,12 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useNavigation } from '@react-navigation/native';
 import { addBatch } from '../../redux/actions/batch-actions';
 
+/**
+ * Add Batch - the component for adding a new batch to the database
+ * @returns {React.FC} - entire screen for adding a new batch
+ * @author Matthew Otto and Oriel Red Oral
+ */
+
 /** Main component screen */
 const AddBatch: React.FC = () => {
   /** States for inputs (listeners) */
@@ -56,6 +62,11 @@ const AddBatch: React.FC = () => {
   React.useEffect(() => {
     getAllCurricula();
     getAllTrainers();
+
+    return function cleanup() {
+      setCurricula([]);
+      setTrainers([]);
+    };
   }, []);
 
   /** Input listener for Start Date Picker */
@@ -111,7 +122,7 @@ const AddBatch: React.FC = () => {
           <Text style={textStyles.heading}>Add a Batch</Text>
           {/** Add/Edit */}
           <TouchableOpacity
-            testID='goBackButton'
+            testID='addBatchButton'
             style={buttonStyles.buttonContainer}
             onPress={() => AddNewBatch()}
           >
@@ -263,6 +274,7 @@ const AddBatch: React.FC = () => {
   );
 };
 
+/** Local StyleSheet */
 const styles = StyleSheet.create({
   datePicker: {
     width: 320,

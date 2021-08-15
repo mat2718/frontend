@@ -3,12 +3,12 @@ import { Dispatch } from 'redux';
 import { AppActions } from './actions';
 
 /** Gets all skills from the backend */
-export const getAllSkills = async (dispatch: Dispatch) => {
+export const getAllSkills = () => async (dispatch: Dispatch) => {
   try {
     const res = await axios.get('skill');
     dispatch({
       type: AppActions.UPDATE_SKILL,
-      payload: res.data,
+      payload: { skills: res.data },
     });
   } catch (e) {
     console.log(e);
@@ -32,7 +32,7 @@ export const getSkillByName =
       const res = await axios.get(`skill/id/${skillName}`);
       dispatch({
         type: AppActions.UPDATE_SKILL,
-        payload: res.data,
+        payload: { skills: res.data },
       });
     } catch (e) {
       console.log(e);
@@ -46,7 +46,7 @@ export const addSkill = (skill: {}) => async (dispatch: Dispatch) => {
     const res = await axios.get('skill');
     dispatch({
       type: AppActions.UPDATE_SKILL,
-      payload: res.data,
+      payload: { skills: res.data },
     });
   } catch (e) {
     console.log(e);
@@ -54,13 +54,13 @@ export const addSkill = (skill: {}) => async (dispatch: Dispatch) => {
 };
 
 /** Deletes a skills */
-export const deleteSkill = (batchId: number) => async (dispatch: Dispatch) => {
+export const deleteSkill = (skillId: number) => async (dispatch: Dispatch) => {
   try {
-    await axios.delete(`skill/id/${batchId}`);
+    await axios.delete(`skill/id/${skillId}`);
     const res = await axios.get('skill');
     dispatch({
       type: AppActions.UPDATE_SKILL,
-      payload: res.data,
+      payload: { skills: res.data },
     });
   } catch (e) {
     console.log(e);

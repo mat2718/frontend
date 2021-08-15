@@ -7,7 +7,8 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import { addClient } from '../../redux/actions/client-actions';
+import Header from '../../components/batches/header';
+import { addSkill } from '../../redux/actions/skill-actions';
 import { useDispatch } from 'react-redux';
 import {
   screenStyles,
@@ -17,17 +18,17 @@ import {
 } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 
-const AddClient: React.FC = () => {
+const AddSkill: React.FC = () => {
   /** Navigation for going back a screen */
   const navigation = useNavigation();
-  const [client, setClient] = useState('');
+  const [skill, setSkill] = useState('');
 
   const dispatch = useDispatch();
 
   const addClientClick = () => {
     dispatch(
-      addClient({
-        clientName: client,
+      addSkill({
+        skillName: skill,
       })
     );
 
@@ -46,7 +47,7 @@ const AddClient: React.FC = () => {
           }}
         >
           {/** Heading text */}
-          <Text style={textStyles.heading}>Add a Client</Text>
+          <Text style={textStyles.heading}>Add a Skill</Text>
           {/** Add/Edit */}
           <TouchableOpacity
             style={buttonStyles.buttonContainer}
@@ -58,12 +59,12 @@ const AddClient: React.FC = () => {
         {/** Form view */}
         {/** Client name */}
         <View style={{ flexDirection: 'column' }}>
-          <Text style={inputStyles.inputLabelText}>Client name</Text>
-          <TextInput style={inputStyles.textInput} onChangeText={setClient} />
+          <Text style={inputStyles.inputLabelText}>Skill name</Text>
+          <TextInput style={inputStyles.textInput} onChangeText={setSkill} />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default AddClient;
+export default AddSkill;

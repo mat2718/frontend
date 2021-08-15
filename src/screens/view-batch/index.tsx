@@ -7,7 +7,6 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
 import { ProgressChart } from 'react-native-chart-kit';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
@@ -20,8 +19,15 @@ import {
   buttonStyles,
   colors,
 } from '../../styles';
-import { deleteBatch } from '../../redux/actions/batch-actions';
 import BatchesSkillsListItem from '../../components/batches/batches-skills-list-item';
+import ConfirmDialog from '../../components/confirm-dialog';
+
+/**
+ * View Batch - main component for the view batch screen
+ * @param {IProps} interface - interface for component properties, includes batch, trainer, and curriculum information
+ * @returns {React.FC} - main screen for viewing a batch when a batch is clicked on the list
+ * @author Matthew Otto and Oriel Red Oral
+ */
 
 interface PropsI {
   route: {
@@ -49,9 +55,13 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
-  const dispatch = useDispatch();
 
-  /** Dates for badge and prgoress ring */
+  /** States for confirmBox */
+  const [visible, setVisible] = React.useState(false);
+  const [dialogType, setDialogType] = React.useState('');
+  const [payload, setPayload] = React.useState(route.params.batchId);
+
+  /** Dates for badge and progress ring */
   const startTime = new Date(route.params.startDate).getTime();
   const endTime = new Date(route.params.endDate).getTime();
   const progress = (Date.now() - startTime) / (endTime - startTime);
@@ -74,13 +84,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
     useShadowColorFromDataset: false, // optional
   };
 
-  /** Delete batch function */
-  const deleteBatchPress = () => {
-    dispatch(deleteBatch(route.params.batchId));
-    navigation.goBack();
-  };
-
-  /** Render item for flat list */
+  /** Render item for flatlist */
   const renderItem = ({ item }: { item: any }) => {
     return <BatchesSkillsListItem skillname={item} />;
   };
@@ -92,6 +96,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
         <View style={screenStyles.titleContainer}>
           {/** Touchable that takes us to the edit batch screen when clicking on the title */}
           <TouchableOpacity
+            testID='editButton'
             onPress={() =>
               navigation.navigate('EditBatch', {
                 batchid: route.params.batchId,
@@ -125,7 +130,13 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
               </Text>
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity style={buttonStyles.buttonContainer}>
+            <TouchableOpacity
+              style={buttonStyles.buttonContainer}
+              onPress={() => {
+                setDialogType('confirmBatch');
+                setVisible(true);
+              }}
+            >
               <Text style={buttonStyles.buttonText}>Confirm</Text>
             </TouchableOpacity>
           )}
@@ -232,15 +243,25 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
         </View>
         <TouchableOpacity
           style={styles.deleteButton}
-          onPress={() => deleteBatchPress()}
+          onPress={() => {
+            setDialogType('deleteBatch');
+            setVisible(true);
+          }}
         >
           <Text style={styles.deleteButtonText}>Delete Batch</Text>
         </TouchableOpacity>
+        <ConfirmDialog
+          type={dialogType}
+          setVisible={setVisible}
+          visible={visible}
+          payload={payload}
+        />
       </View>
     </SafeAreaView>
   );
 };
 
+/** Local StyleSheet */
 const styles = StyleSheet.create({
   calendarView: {
     marginTop: 20,

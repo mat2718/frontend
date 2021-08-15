@@ -23,6 +23,7 @@ export type RootStackParamList = {
   Trainers: any;
   Diagram: any;
   Skills: any;
+  AddSkill: any;
   Calendar: any;
   EditClient: any;
   AddClient: any;

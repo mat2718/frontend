@@ -37,6 +37,10 @@ const DemandsListItem: React.FC<IProps> = (props: IProps) => {
 
   React.useEffect(() => {
     fetchCurriculum();
+
+    return function cleanup() {
+      setCurriculum([]);
+    };
   }, []);
 
   return (
