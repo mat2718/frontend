@@ -1,11 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
 import { deleteBatch, confirmBatch } from '../../redux/actions/batch-actions';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { colors } from '../../styles';
 
 /**
  * Confirm Dialog - the component that pops up when we need to confirm an action
@@ -56,8 +57,20 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
                 </Paragraph>
               </Dialog.Content>
               <Dialog.Actions>
-                <Button onPress={hideDialog}>No</Button>
-                <Button onPress={confirmConfirmBatch}>Yes</Button>
+                <Button
+                  onPress={hideDialog}
+                  style={styles.button}
+                  color={colors.darkGray}
+                >
+                  No
+                </Button>
+                <Button
+                  onPress={confirmConfirmBatch}
+                  style={styles.button}
+                  color={colors.orange}
+                >
+                  Yes
+                </Button>
               </Dialog.Actions>
             </Dialog>
           </Portal>
@@ -76,8 +89,20 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
                 </Paragraph>
               </Dialog.Content>
               <Dialog.Actions>
-                <Button onPress={hideDialog}>No</Button>
-                <Button onPress={confirmDelete}>Yes</Button>
+                <Button
+                  onPress={hideDialog}
+                  style={styles.button}
+                  color={colors.darkGray}
+                >
+                  No
+                </Button>
+                <Button
+                  onPress={confirmDelete}
+                  style={styles.button}
+                  color={colors.orange}
+                >
+                  Yes
+                </Button>
               </Dialog.Actions>
             </Dialog>
           </Portal>
@@ -104,5 +129,12 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
       );
   }
 };
+
+/** Local StyleSheet */
+const styles = StyleSheet.create({
+  button: {
+    padding: 5,
+  },
+});
 
 export default ConfirmDialog;
