@@ -6,7 +6,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import { listStyles, colors } from '../../../styles';
 import ITrainer from '../../../Entities/Trainer';
-import { useState } from 'react';
+import Toast from 'react-native-toast-message';
+import { useDispatch } from 'react-redux';
 
 interface IProps
 {
@@ -26,18 +27,20 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
   const [selectedFilter, setSelectedFilter] = React.useState('');
+  
+  const dispatch = useDispatch();
 
   // Delete Trainer Action Handler call
   const deleteTrainer = (trainer: ITrainer) =>
   {
-    console.log('Delete');
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: 'You have deleted a trainer.'
+    })
     //Update Redux
     //Axios Request
-  }
-
-  // Navigate to Edit Trainer page
-  const editTrainer = () => {
-    navigation.navigate('ViewEditTrainer', props.trainer);
   }
 
   return (
@@ -49,10 +52,15 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
         <Picker
             mode='dropdown'
             selectedValue={selectedFilter}
-            // Will need to extract the ternary because it is a code smell
           onValueChange={(itemValue, itemIndex) => {
-            itemValue === 'Edit' ? navigation.navigate('ViewEditTrainer', props.trainer) :
-            itemValue === 'Delete' ? deleteTrainer(props.trainer) : null
+            // Navigate to Edit Trainer screen
+            if(itemValue === 'Edit') {
+              navigation.navigate('ViewEditTrainer', props.trainer)
+             }
+            // Delete Trainer 
+            else if (itemValue === 'Delete') {
+               deleteTrainer(props.trainer)
+            }
           }}
             style={{ width: 50 }}
         >
