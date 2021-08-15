@@ -31,7 +31,8 @@ export const getBatchById = (itemId: number) => async (dispatch: Dispatch) => {
 /** Confirms a batch */
 export const confirmBatch = (batchId: number) => async (dispatch: Dispatch) => {
   try {
-    const res = await axios.patch(`batch/id/${batchId}`);
+    await axios.patch(`batch/id/${batchId}`);
+    const res = await axios.get('batch');
     dispatch({
       type: AppActions.UPDATE_BATCH,
       payload: { batches: res.data },
@@ -46,6 +47,7 @@ export const addBatch = (batch: {}) => async (dispatch: Dispatch) => {
   try {
     await axios.post(`batch`, batch);
     const res = await axios.get('batch');
+
     dispatch({
       type: AppActions.UPDATE_BATCH,
       payload: { batches: res.data },

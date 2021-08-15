@@ -20,7 +20,7 @@ import {
   buttonStyles,
   colors,
 } from '../../styles';
-import { deleteBatch } from '../../redux/actions/batch-actions';
+import { deleteBatch, confirmBatch } from '../../redux/actions/batch-actions';
 import BatchesSkillsListItem from '../../components/batches/batches-skills-list-item';
 
 /**
@@ -87,6 +87,11 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
     navigation.goBack();
   };
 
+  /** Confirm batch function */
+  const confirmConfirmBatch = () => {
+    dispatch(confirmBatch(route.params.batchId));
+  };
+
   /** Render item for flatlist */
   const renderItem = ({ item }: { item: any }) => {
     return <BatchesSkillsListItem skillname={item} />;
@@ -133,7 +138,10 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
               </Text>
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity style={buttonStyles.buttonContainer}>
+            <TouchableOpacity
+              style={buttonStyles.buttonContainer}
+              onPress={confirmConfirmBatch}
+            >
               <Text style={buttonStyles.buttonText}>Confirm</Text>
             </TouchableOpacity>
           )}
