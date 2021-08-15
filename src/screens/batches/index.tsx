@@ -7,6 +7,12 @@ import BatchesListHeader from '../../components/batches/batches-list-header';
 import { RootStore } from '../../../App';
 import { getAllBatches } from '../../redux/actions/batch-actions';
 
+/**
+ * Batches - the main component that is called in the bottom tab nav for batches
+ * @returns {React.FC} - React Component for the Batches tab
+ * @author Matthew Otto and Oriel Red Oral
+ */
+
 /** Basis for Entire Batch Screen */
 const Batches: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = React.useState('all');
@@ -28,11 +34,13 @@ const Batches: React.FC = () => {
     );
   };
 
+  /** fetch updated data for refresh function */
   const fetchData = () => {
     dispatch(getAllBatches());
     setIsFetching(false);
   };
 
+  /** refresh function for flatlist */
   const onRefresh = () => {
     setIsFetching(true);
     fetchData();
@@ -46,7 +54,6 @@ const Batches: React.FC = () => {
       {/** List of batches
        * Takes in the picker filter value and updates accordingly
        */}
-
       <FlatList
         data={(selectedFilter === 'active'
           ? batches.filter(

@@ -42,6 +42,7 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
     await axios.get('trainer').then((res) => setTrainers(res.data));
   };
 
+  /** Run the get trainers function once */
   React.useEffect(() => {
     getTrainers();
 
@@ -57,7 +58,9 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
       new Date(date.startdate).getTime() < Date.now() &&
       new Date(date.enddate).getTime() > Date.now()
   );
+  /** Get inactive trainers (active trainers will be the same as active batches) */
   const inactiveTrainers = trainers.length - activeBatches.length;
+
   return (
     <View style={screenStyles.mainView}>
       {/** Screen title */}
@@ -66,6 +69,7 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
 
         {/** Add batch button */}
         <TouchableOpacity
+          testID='button'
           style={buttonStyles.buttonContainer}
           onPress={() => navigation.navigate('AddBatch')}
         >
@@ -113,6 +117,7 @@ const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
   );
 };
 
+/** Local StyleSheet */
 const styles = StyleSheet.create({
   plannedBatchesTable: {
     justifyContent: 'center',

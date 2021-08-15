@@ -23,6 +23,13 @@ import {
 import { deleteBatch } from '../../redux/actions/batch-actions';
 import BatchesSkillsListItem from '../../components/batches/batches-skills-list-item';
 
+/**
+ * View Batch - main component for the view batch screen
+ * @param {IProps} interface - interface for component properties, includes batch, trainer, and curriculum information
+ * @returns {React.FC} - main screen for viewing a batch when a batch is clicked on the list
+ * @author Matthew Otto and Oriel Red Oral
+ */
+
 interface PropsI {
   route: {
     params: {
@@ -75,12 +82,12 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
   };
 
   /** Delete batch function */
-  const deleteBatchPress = () => {
+  const confirmDelete = () => {
     dispatch(deleteBatch(route.params.batchId));
     navigation.goBack();
   };
 
-  /** Render item for flat list */
+  /** Render item for flatlist */
   const renderItem = ({ item }: { item: any }) => {
     return <BatchesSkillsListItem skillname={item} />;
   };
@@ -92,6 +99,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
         <View style={screenStyles.titleContainer}>
           {/** Touchable that takes us to the edit batch screen when clicking on the title */}
           <TouchableOpacity
+            testID='editButton'
             onPress={() =>
               navigation.navigate('EditBatch', {
                 batchid: route.params.batchId,
@@ -230,10 +238,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
             {progress < 1 ? (data.data[0] * 100).toFixed(0) : 100}% Complete
           </Text>
         </View>
-        <TouchableOpacity
-          style={styles.deleteButton}
-          onPress={() => deleteBatchPress()}
-        >
+        <TouchableOpacity style={styles.deleteButton} onPress={confirmDelete}>
           <Text style={styles.deleteButtonText}>Delete Batch</Text>
         </TouchableOpacity>
       </View>
@@ -241,6 +246,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
   );
 };
 
+/** Local StyleSheet */
 const styles = StyleSheet.create({
   calendarView: {
     marginTop: 20,

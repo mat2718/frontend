@@ -6,6 +6,13 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import { listStyles, badgesStyles } from '../../../styles';
 
+/**
+ * Batch List Item - the component the batches list uses to render on renderItem()
+ * @param {IProps} interface - includes information for a batch to be rendered on a flatlist
+ * @returns {React.FC} - React Component for the Batches FlatList, navigates to ViewBatch
+ * @author Matthew Otto and Oriel Red Oral
+ */
+
 interface IProps {
   batchId: number;
   batchSize: number;
@@ -34,7 +41,7 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
   /** getCurriculum */
   const getCurriculum = async () => {
     await axios
-      .get(`curriculum/id/2`)
+      .get(`curriculum/id/${props.curriculumId}`)
       .then((item) => setCurriculum(item.data[0]));
   };
 
@@ -78,6 +85,7 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
         });
       }}
     >
+      {/** Badge */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Text style={listStyles.heading}>{curriculum.curriculumname}</Text>
         {/* * Checks current date and start/end date of batch and applies tag based on status */}
@@ -97,9 +105,11 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
         {/** End of date checker */}
       </View>
 
+      {/** Trainer name */}
       <Text style={listStyles.subHeading}>
         {trainer.trainerfirst + ' ' + trainer.trainerlast}
       </Text>
+      {/** Start and end date */}
       <Text style={listStyles.textRegular}>
         {new Date(props.startDate).toDateString() +
           '\nto ' +

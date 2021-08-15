@@ -24,6 +24,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useNavigation } from '@react-navigation/native';
 import { updateBatch } from '../../redux/actions/batch-actions';
 
+/**
+ * Edit Batch - the component for editing a batch
+ * @param {IProps} interface - includes information of batch that is to be edited
+ * @returns {React.FC} - React Component for the edit batch screen
+ * @author Matthew Otto and Oriel Red Oral
+ */
+
 interface PropsI {
   route: {
     params: {
@@ -133,7 +140,7 @@ const EditBatch: React.FC<PropsI> = ({ route }) => {
           <Text style={textStyles.heading}>Edit Batch</Text>
           {/** Add/Edit */}
           <TouchableOpacity
-            testID='goBackButton'
+            testID='editButton'
             style={buttonStyles.buttonContainer}
             onPress={() => UpdateExistingBatch()}
           >
@@ -286,6 +293,7 @@ const EditBatch: React.FC<PropsI> = ({ route }) => {
   );
 };
 
+/** Local StyleSheet */
 const styles = StyleSheet.create({
   datePicker: {
     width: 320,

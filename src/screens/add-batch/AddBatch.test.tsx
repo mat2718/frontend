@@ -1,10 +1,16 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import { mount, shallow } from 'enzyme';
-import Header from '../../components/batches/header';
-import AddEditBatch from '.';
+import { mount } from 'enzyme';
+import AddBatch from '.';
 
+/**
+ * Add Batch Test - test file for the AddBatch screen
+ * @author Matthew Otto and Oriel Red Oral
+ */
+
+/** wrapper for mounting */
 let wrapper: any;
+
+/** mock react navigation */
 const mockBack = jest.fn();
 const mockNavigate = jest.fn();
 jest.mock('@react-navigation/native', () => {
@@ -19,55 +25,26 @@ jest.mock('@react-navigation/native', () => {
   };
 });
 
+/** mock function for addnewbatch */
+const AddNewBatch = () => {
+  return null;
+};
+
+/** test suite */
 describe('Batches', () => {
   beforeEach(() => {
-    wrapper = mount(
-      <AddEditBatch
-        route={{
-          params: {
-            associates: 25,
-            batchId: 0,
-            curriculum: 'Cloud Native',
-            trainer: 'Robert Connell',
-            startDate: 1622505600000,
-            endDate: 1627776000000,
-          },
-        }}
-      />
-    );
+    wrapper = mount(<AddBatch />);
   });
 
-  //tests if the component is there
+  /** tests if the component is there */
   it('should be there', () => {
     expect(wrapper).not.toBe(undefined);
   });
 
-  // tests if the header is defined
-  it('should display the header', () => {
-    const shouldBeHeader = wrapper.find(Header);
-    expect(shouldBeHeader).toBeDefined();
+  /** Tests the add button, this is probably not the right way to do it */
+  it('pressing the button navigates to new screen', () => {
+    let button = wrapper.find({ testID: 'addButton' }).last();
+    button.invoke('onPress')();
+    expect(mockNavigate).toHaveBeenCalledWith(() => AddNewBatch());
   });
-
-  // /** tests the navigate button */
-  // it('pressing the button navigates to new screen', () => {
-  //   let wrap = shallow(
-  //     <AddEditBatch
-  //       route={{
-  //         params: {
-  //           associates: 25,
-  //           batchId: 0,
-  //           curriculum: 'Cloud Native',
-  //           trainer: 'Robert Connell',
-  //           startDate: 1622505600000,
-  //           endDate: 1627776000000,
-  //         },
-  //       }}
-  //     />
-  //   );
-  //   let button = wrap.find({ testID: 'goBackButton' }).last();
-  //   button.invoke('onPress')();
-  //   expect(mockBack).
-  //   });
 });
-
-// yeet
