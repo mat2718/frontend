@@ -7,6 +7,13 @@ import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 
+/**
+ * Confirm Dialog - the component that pops up when we need to confirm an action
+ * @param {IProps} interface - includes the action type, visibility state, setVisible state, and the payload (id needed for functions)
+ * @returns {React.FC} - React Component for the edit batch screen
+ * @author Oriel Red Oral
+ */
+
 interface IProps {
   type: string;
   visible: boolean;
@@ -15,10 +22,13 @@ interface IProps {
 }
 
 const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
-  const hideDialog = () => props.setVisible(false);
+  /** Navigation and dispatch hook */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
   const dispatch = useDispatch();
+
+  /** Hide dialog function */
+  const hideDialog = () => props.setVisible(false);
 
   /** Delete batch function */
   const confirmDelete = () => {
@@ -33,6 +43,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
   };
 
   switch (props.type) {
+    /** Confirm Batch Dialog */
     case 'confirmBatch':
       return (
         <View>
@@ -52,6 +63,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
           </Portal>
         </View>
       );
+    /** Delete Batch Dialog */
     case 'deleteBatch':
       return (
         <View>
@@ -71,6 +83,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
           </Portal>
         </View>
       );
+    /** Default Dialog */
     default:
       return (
         <View>
