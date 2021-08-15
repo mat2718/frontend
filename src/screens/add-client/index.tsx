@@ -7,7 +7,6 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import Header from '../../components/batches/header';
 import { addClient } from '../../redux/actions/client-actions';
 import { useDispatch } from 'react-redux';
 import {
@@ -17,7 +16,6 @@ import {
   buttonStyles,
 } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
-import axios from '../../../axiosConfig';
 
 const AddClient: React.FC = () => {
   /** Navigation for going back a screen */
@@ -38,7 +36,6 @@ const AddClient: React.FC = () => {
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
-      <Header />
       <ScrollView style={screenStyles.mainView}>
         {/** Heading and button */}
         <View

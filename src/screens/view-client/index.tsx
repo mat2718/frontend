@@ -10,7 +10,6 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
-import Header from '../../components/batches/header';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { screenStyles, textStyles, buttonStyles, colors } from '../../styles';
 import { FlatList } from 'react-native-gesture-handler';
@@ -49,7 +48,6 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
-      <Header />
       <View style={screenStyles.mainView}>
         {/**Title: Curriculum */}
         <View style={screenStyles.titleContainer}>

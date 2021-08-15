@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import Header from '../../components/batches/header';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
@@ -87,7 +86,6 @@ const AddDemand: React.FC<PropsI> = ({ route }) => {
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
-      <Header />
       <ScrollView style={screenStyles.mainView}>
         {/** Heading and button */}
         <View
@@ -189,7 +187,6 @@ const styles = StyleSheet.create({
   datePicker: {
     width: 320,
     height: 260,
-    display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
@@ -197,7 +194,9 @@ const styles = StyleSheet.create({
   dateView: {
     alignSelf: 'center',
     justifyContent: 'center',
-    padding: 15,
+    alignItems: 'flex-start',
+    width: '95%',
+    padding: 10,
     height: 45,
     shadowColor: '#000',
     shadowOffset: {
