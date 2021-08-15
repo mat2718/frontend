@@ -210,15 +210,9 @@ export const listStyles = StyleSheet.create({
   },
 
   subHeading: {
-<<<<<<< HEAD
-    fontFamily: "FuturaBook",
-    fontWeight: "700",
-    fontSize: 12,
-=======
     fontFamily: 'FuturaBook',
     fontWeight: '700',
     fontSize: 14,
->>>>>>> 35e63a36562ee15337adb94d16173196063b75e3
     color: colors.darkGray,
   },
 

@@ -8,11 +8,7 @@ export const getAllClients = () => async (dispatch: Dispatch) => {
     const res = await axios.get('client');
     dispatch({
       type: AppActions.UPDATE_CLIENT,
-<<<<<<< HEAD
-      payload:{clients: res.data},
-=======
       payload: { clients: res.data },
->>>>>>> 35e63a36562ee15337adb94d16173196063b75e3
     });
   } catch (e) {
     console.log(e);
@@ -38,22 +34,6 @@ export const getClientByID =
       console.log(e);
     }
   };
-<<<<<<< HEAD
-  
-/** adds a client */
-export const addClient = 
-(client:{}) => async (dispatch: Dispatch) => {
-    try {
-      await axios.post('client',
-          client);
-       const res = await axios.get('client');
-       dispatch({
-        type: AppActions.UPDATE_CLIENT,
-        payload:{clients: res.data},
-      });
-          return(res.data)
-=======
->>>>>>> 35e63a36562ee15337adb94d16173196063b75e3
 
 /** adds a client */
 export const addClient = (client: {}) => async (dispatch: Dispatch) => {

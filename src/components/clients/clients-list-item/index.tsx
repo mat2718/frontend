@@ -4,12 +4,9 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import { listStyles } from '../../../styles';
-<<<<<<< HEAD
 import { useDispatch } from 'react-redux';
 import { getAllClients } from '../../../redux/actions/client-actions';
-=======
 import { getDemandByClientId } from '../../../redux/actions/demand-actions';
->>>>>>> 35e63a36562ee15337adb94d16173196063b75e3
 
 interface IProps {
   clientname: string;

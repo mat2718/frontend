@@ -17,33 +17,11 @@ import {
   buttonStyles,
 } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
-<<<<<<< HEAD
-import axios from '../../../axiosConfig'
-import { useDispatch, useSelector } from 'react-redux';
-import { addClient } from '../../redux/actions/client-actions';
-
-/** Mock data for curriculum */
-const dataCurricula = ['React Native/Cloud Native', 'Java', 'Python'];
-/** Mock data for trainer */
-const dataTrainer = ['Robert Connell', 'Matthew Otto', 'Red Oral'];
-=======
 import axios from '../../../axiosConfig';
->>>>>>> 35e63a36562ee15337adb94d16173196063b75e3
 
 const AddClient: React.FC = () => {
   /** Navigation for going back a screen */
   const navigation = useNavigation();
-<<<<<<< HEAD
-  const[client, setClient]=useState("");
-  const dispatch=useDispatch()
-  const addOneClient =()=>{
-    dispatch(addClient({clientName:client}))
-    console.log(client);
-  }
-  
-  
- 
-=======
   const [client, setClient] = useState('');
 
   const dispatch = useDispatch();
@@ -57,7 +35,6 @@ const AddClient: React.FC = () => {
 
     navigation.goBack();
   };
->>>>>>> 35e63a36562ee15337adb94d16173196063b75e3
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
@@ -76,12 +53,7 @@ const AddClient: React.FC = () => {
           {/** Add/Edit */}
           <TouchableOpacity
             style={buttonStyles.buttonContainer}
-<<<<<<< HEAD
-            onPress={() => addOneClient()
-             }
-=======
             onPress={() => addClientClick()}
->>>>>>> 35e63a36562ee15337adb94d16173196063b75e3
           >
             <Text style={buttonStyles.buttonText}>Add</Text>
           </TouchableOpacity>

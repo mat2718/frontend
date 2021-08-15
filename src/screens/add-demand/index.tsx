@@ -21,15 +21,6 @@ import {
 } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-<<<<<<< HEAD
-import axios from 'axios';
-import ICurriculum from '../../entities/curriculum';
-
-
-
-/** Mock data for curriculum */
-const dataCurricula = ['React Native/Cloud Native', 'Java', 'Python'];
-=======
 import { useDispatch } from 'react-redux';
 import axios from '../../../axiosConfig';
 import { addDemand } from '../../redux/actions/demand-actions';
@@ -42,32 +33,9 @@ interface PropsI {
     };
   };
 }
->>>>>>> 35e63a36562ee15337adb94d16173196063b75e3
 
 const AddDemand: React.FC<PropsI> = ({ route }) => {
   /** Navigation for going back a screen */
-<<<<<<< HEAD
-  const [client, setClient]=useState()
-  const [howMany, setHowMany]=useState(0)
-  const [curriculum, setCurriculum]=useState<ICurriculum>()
-  const navigation = useNavigation();
-  const [selectedFilter, setSelectedFilter] = React.useState('all');
-  const [isStartPickerShow, setIsStartPickerShow] = React.useState(false);
-  const [startDate, setStartDate] = React.useState(new Date(Date.now()));
- 
-  /** Input listener for Start Date Picker */
-
-
-  // const AddDemand=()=>{
-  //   axios.post('/demand',{
-  //     clientid: client,
-  //     curriculumid: number,
-  //     needby: ,
-  //     quantitydemanded: howMany
-  //   })
-  // }
-
-=======
   const [howMany, setHowMany] = useState(0);
   const [curricula, setCurricula] = React.useState([
     {
@@ -80,7 +48,6 @@ const AddDemand: React.FC<PropsI> = ({ route }) => {
   );
   const [isStartPickerShow, setIsStartPickerShow] = React.useState(false);
   const [startDate, setStartDate] = React.useState(new Date(Date.now()));
->>>>>>> 35e63a36562ee15337adb94d16173196063b75e3
 
   /** Dispatch and navigation hooks */
   const dispatch = useDispatch();
