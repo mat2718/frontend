@@ -60,11 +60,11 @@ export const DrawerContent: React.FC = () => {
             <DrawerItem
               labelStyle={styles.label}
               icon={({ color, size }) => (
-                <Icon name='calendar-check-outline' color={color} size={size} />
+                <Icon name='book-outline' color={color} size={size} />
               )}
-              label='Calendar'
+              label='Skills'
               onPress={() => {
-                navigation.navigate('Calendar');
+                navigation.navigate('Skills');
               }}
             />
           </Drawer.Section>

@@ -1,4 +1,4 @@
 export default interface ISkill {
-  skillName: string;
-  skillId: number;
+  skillname: string;
+  skillid: number;
 }

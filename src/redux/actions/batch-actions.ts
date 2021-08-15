@@ -3,12 +3,12 @@ import { Dispatch } from 'redux';
 import { AppActions } from './actions';
 
 /** Gets all batches from the backend */
-export const getAllBatches = async (dispatch: Dispatch) => {
+export const getAllBatches = () => async (dispatch: Dispatch) => {
   try {
     const res = await axios.get('batch');
     dispatch({
       type: AppActions.UPDATE_BATCH,
-      payload: res.data,
+      payload: { batches: res.data },
     });
   } catch (e) {
     console.log(e);
@@ -21,7 +21,7 @@ export const getBatchById = (itemId: number) => async (dispatch: Dispatch) => {
     const res = await axios.get(`batch/id/${itemId}`);
     dispatch({
       type: AppActions.UPDATE_BATCH,
-      payload: res.data,
+      payload: { batches: res.data },
     });
   } catch (e) {
     console.log(e);
@@ -31,10 +31,11 @@ export const getBatchById = (itemId: number) => async (dispatch: Dispatch) => {
 /** Confirms a batch */
 export const confirmBatch = (batchId: number) => async (dispatch: Dispatch) => {
   try {
-    const res = await axios.patch(`batch/id/${batchId}`);
+    await axios.patch(`batch/id/${batchId}`);
+    const res = await axios.get('batch');
     dispatch({
       type: AppActions.UPDATE_BATCH,
-      payload: res.data,
+      payload: { batches: res.data },
     });
   } catch (e) {
     console.log(e);
@@ -46,9 +47,24 @@ export const addBatch = (batch: {}) => async (dispatch: Dispatch) => {
   try {
     await axios.post(`batch`, batch);
     const res = await axios.get('batch');
+
     dispatch({
       type: AppActions.UPDATE_BATCH,
-      payload: res.data,
+      payload: { batches: res.data },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+/** Update a batch */
+export const updateBatch = (batch: {}) => async (dispatch: Dispatch) => {
+  try {
+    await axios.put(`batch`, batch);
+    const res = await axios.get('batch');
+    dispatch({
+      type: AppActions.UPDATE_BATCH,
+      payload: { batches: res.data },
     });
   } catch (e) {
     console.log(e);
@@ -62,7 +78,7 @@ export const deleteBatch = (batchId: number) => async (dispatch: Dispatch) => {
     const res = await axios.get('batch');
     dispatch({
       type: AppActions.UPDATE_BATCH,
-      payload: res.data,
+      payload: { batches: res.data },
     });
   } catch (e) {
     console.log(e);
