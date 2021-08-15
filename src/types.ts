@@ -1,9 +1,14 @@
-//any for now, please change it to intake expected prop parameters
-//can change and add screen names too - Kai
+/**
+ * Navigation Types - a list of types for each screen
+ * @author Kaiyip Ho
+ */
+
+//Drawer Navigation Type
 export type RootDrawerParamList = {
   DrawerRoot: any;
 };
 
+//Stack Navigation Type List
 export type RootStackParamList = {
   Main: any;
   ViewBatch: any;
@@ -24,6 +29,7 @@ export type RootStackParamList = {
   EditDemand: any;
 };
 
+//Tab Navigation Type List
 export type RootTabParamList = {
   Home: any;
   Home2: any;

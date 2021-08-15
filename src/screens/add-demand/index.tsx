@@ -42,8 +42,16 @@ const AddDemand: React.FC  = ({route}) => {
   /** Input listener for Start Date Picker */
 
 
-  const AddDemand=()=>{}
-    
+
+  const AddDemand=()=>{
+    // axios.post('/demand',{
+    //   clientid: client,
+    //   curriculumid: number,
+    //   needby: string,
+    //   quantitydemanded: howMany
+    // })
+  }
+
 
 
 

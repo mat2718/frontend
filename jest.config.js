@@ -67,7 +67,7 @@ function addConfig(config) {
 
   /* comment this out if you want to test all files */
   config.testMatch = [
-    '<rootDir>/src/screens/view-edit-trainer/**/*.test.[jt]s?(x)',
+    '<rootDir>/src/screens/create*/*.test.[jt]s?(x)',
   ];
 
   // third-party libraries that throw errors
