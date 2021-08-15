@@ -34,7 +34,7 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
   /** getCurriculum */
   const getCurriculum = async () => {
     await axios
-      .get(`curriculum/id/${props.curriculumId}`)
+      .get(`curriculum/id/2`)
       .then((item) => setCurriculum(item.data[0]));
   };
 
@@ -62,7 +62,6 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
 
   return (
     /** Individual Batch Touchable */
-
     /** Structures and displays the data from the FlatList */
     <TouchableOpacity
       style={listStyles.listItemContainer}

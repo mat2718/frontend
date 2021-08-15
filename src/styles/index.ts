@@ -155,9 +155,17 @@ export const buttonStyles = StyleSheet.create({
     height: 35,
     width: 125,
     padding: 10,
-    backgroundColor: '#25F269',
+    backgroundColor: colors.white,
     borderRadius: 50,
     marginLeft: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 
   buttonDisabledText: {

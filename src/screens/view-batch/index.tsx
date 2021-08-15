@@ -31,12 +31,7 @@ interface PropsI {
       curriculum: {
         curriculumid: number;
         curriculumname: string;
-        skillIdArr: [
-          {
-            skillid: number;
-            curriculumid: number;
-          }
-        ];
+        skillnamearr: [];
       };
       trainer: {
         trainerid: number;
@@ -87,7 +82,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
 
   /** Render item for flat list */
   const renderItem = ({ item }: { item: any }) => {
-    return <BatchesSkillsListItem skillid={item.skillid} />;
+    return <BatchesSkillsListItem skillname={item} />;
   };
 
   return (
@@ -202,9 +197,9 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
 
         {/** Skills list **/}
         <FlatList
-          data={route.params.curriculum.skillIdArr}
+          data={route.params.curriculum.skillnamearr}
           renderItem={renderItem}
-          keyExtractor={(item: any) => item.skillid.toString()}
+          keyExtractor={(item: any) => item}
           style={{
             backgroundColor: colors.white,
             marginTop: 10,

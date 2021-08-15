@@ -21,6 +21,7 @@ import { colors } from '../../styles';
 import { useDispatch } from 'react-redux';
 import { getAllBatches } from '../../redux/actions/batch-actions';
 import { getAllClients } from '../../redux/actions/client-actions';
+import { GetAllCurricula } from '../../redux/actions/curriculum-actions';
 
 //see what happens
 //please import your screen and put in your screen in components-kai
@@ -33,7 +34,8 @@ const RootStackNavigator = () => {
   React.useEffect(() => {
     dispatch(getAllBatches());
     dispatch(getAllClients());
-  }, []);
+    dispatch(GetAllCurricula());
+  }, [dispatch]);
 
   return (
     <Stack.Navigator

@@ -21,39 +21,46 @@ import {
 } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import axios from 'axios';
-
-/** Mock data for curriculum */
-const dataCurricula = ['React Native/Cloud Native', 'Java', 'Python'];
+import { useDispatch } from 'react-redux';
+import axios from '../../../axiosConfig';
+import { addDemand } from '../../redux/actions/demand-actions';
 
 interface PropsI {
   route: {
     params: {
       clientid: number;
-      client: string;
+      clientname: string;
     };
   };
 }
 
 const AddDemand: React.FC<PropsI> = ({ route }) => {
   /** Navigation for going back a screen */
-  const [client, setClient] = useState(route.params.clientid);
   const [howMany, setHowMany] = useState(0);
-  const navigation = useNavigation();
-  const [selectedFilter, setSelectedFilter] = React.useState('all');
+  const [curricula, setCurricula] = React.useState([
+    {
+      curriculumname: '',
+      curriculumid: 0,
+    },
+  ]);
+  const [curriculaValue, setCurriculaValue] = React.useState(
+    curricula[0].curriculumid
+  );
   const [isStartPickerShow, setIsStartPickerShow] = React.useState(false);
   const [startDate, setStartDate] = React.useState(new Date(Date.now()));
 
-  /** Input listener for Start Date Picker */
+  /** Dispatch and navigation hooks */
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
-  const AddDemand = () => {
-    axios.post('/demand', {
-      clientid: client,
-      curriculumid: 0,
-      needby: Date.now(),
-      quantitydemanded: howMany,
-    });
+  /** Get all curricula */
+  const getAllCurricula = async () => {
+    await axios.get(`curriculum`).then((item) => setCurricula(item.data));
   };
+  /** Run get all curricula function */
+  React.useEffect(() => {
+    getAllCurricula();
+  }, []);
 
   const onStartChange = (e: any, val: any) => {
     if (val) {
@@ -63,6 +70,19 @@ const AddDemand: React.FC<PropsI> = ({ route }) => {
       setStartDate(new Date(Date.now()));
       setIsStartPickerShow(false);
     }
+  };
+
+  const addDemandClick = () => {
+    dispatch(
+      addDemand({
+        clientid: route.params.clientid,
+        curriculumid: curriculaValue,
+        needby: startDate.toISOString(),
+        quantitydemanded: howMany,
+      })
+    );
+
+    navigation.goBack();
   };
 
   return (
@@ -82,31 +102,37 @@ const AddDemand: React.FC<PropsI> = ({ route }) => {
           {/** Add/Edit */}
           <TouchableOpacity
             style={buttonStyles.buttonContainer}
-            onPress={() => navigation.navigate('AddDemand')}
+            onPress={() => addDemandClick()}
           >
             <Text style={buttonStyles.buttonText}>Add</Text>
           </TouchableOpacity>
         </View>
         {/** Form view */}
-
+        {/** Current client */}
         <View style={{ flexDirection: 'column' }}>
           <Text style={inputStyles.inputLabelText}>Current Client </Text>
-          <Text style={inputStyles.textInput}>{route.params.client}</Text>
+          <Text style={inputStyles.textInput}>{route.params.clientname}</Text>
         </View>
         {/** Curriculum  */}
         <Text style={inputStyles.inputLabelText}>Curriculum</Text>
         {/** Picker Container */}
         <View style={inputStyles.pickerContainer}>
           <Picker
-            selectedValue={selectedFilter}
+            selectedValue={curriculaValue}
             mode='dropdown'
             onValueChange={(itemValue: any, itemIndex: any) =>
-              setSelectedFilter(itemValue)
+              setCurriculaValue(itemValue)
             }
             style={{ width: '100%', height: 50 }}
           >
-            {dataCurricula.map((curr) => {
-              return <Picker.Item label={curr} value={curr} key={curr} />;
+            {curricula.map((curr) => {
+              return (
+                <Picker.Item
+                  label={curr.curriculumname}
+                  value={curr.curriculumid}
+                  key={curr.curriculumid}
+                />
+              );
             })}
           </Picker>
         </View>
@@ -115,7 +141,11 @@ const AddDemand: React.FC<PropsI> = ({ route }) => {
           <Text style={inputStyles.inputLabelText}>
             Enter # of Associates Needed{' '}
           </Text>
-          <TextInput style={inputStyles.textInput} keyboardType='numeric' />
+          <TextInput
+            style={inputStyles.textInput}
+            keyboardType='numeric'
+            onChangeText={(value) => setHowMany(Number(value))}
+          />
         </View>
 
         {/** Start Date */}

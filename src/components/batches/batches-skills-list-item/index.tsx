@@ -4,36 +4,15 @@ import { listStyles, colors } from '../../../styles';
 import { getSkillById } from '../../../redux/actions/skill-actions';
 
 interface PropsI {
-  skillid: number;
+  skillname: string;
 }
 
 const BatchesSkillsListItem: React.FC<PropsI> = (props: PropsI) => {
-  /** State for setting the skill name from id */
-  const [skill, setSkill] = React.useState([
-    {
-      skillname: '',
-    },
-  ]);
-
-  /** Get skills using id */
-  async function fetchSkills() {
-    setSkill(await getSkillById(props.skillid));
-  }
-
-  /** Run fetch skills function, cleanup after unmounting */
-  React.useEffect(() => {
-    fetchSkills();
-
-    return function cleanup() {
-      setSkill([]);
-    };
-  }, []);
-
   return (
     <View style={styles.listItemContainer}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View>
-          <Text style={listStyles.heading}>{skill[0].skillname}</Text>
+          <Text style={listStyles.heading}>{props.skillname}</Text>
         </View>
       </View>
     </View>

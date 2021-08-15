@@ -25,30 +25,24 @@ export const getAllDemand = () => async (dispatch: Dispatch<IAppAction>) => {
   }
 };
 
-export const addDemand =
-  (demand: IDemand) => async (dispatch: Dispatch<IAppAction>) => {
-    const demands: IDemand[] = useSelector((state: IAppState) => {
-      return state.demands;
+export const addDemand = (demand: {}) => async (dispatch: Dispatch) => {
+  try {
+    console.log(demand);
+    await axios.post('demand', demand);
+    const res = await axios.get('demand');
+    dispatch({
+      type: AppActions.UPDATE_DEMAND,
+      payload: {
+        type: AppActions.UPDATE_DEMAND,
+        payload: { demands: res.data },
+      },
     });
-    try {
-      await axios.post('demand', demand);
-      demands.push(demand);
-      dispatch({
-        type: AppActions.UPDATE_TRAINER,
-        payload: {
-          skills: [],
-          clients: [],
-          batches: [],
-          curricula: [],
-          demands,
-          trainers: [],
-        },
-      });
-      return `${demand.clientId}'s demand has been added`;
-    } catch (error) {
-      return error.response.data;
-    }
-  };
+
+    return 'Demand has been added';
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getDemandById =
   (demandId: number) => async (dispatch: Dispatch<IAppAction>) => {

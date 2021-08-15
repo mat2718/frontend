@@ -36,10 +36,13 @@ export const getClientByID =
   };
 
 /** adds a client */
-export const addClient = (client: string) => async (dispatch: Dispatch) => {
+export const addClient = (client: {}) => async (dispatch: Dispatch) => {
   try {
-    const res = await axios.post('client', {
-      clientname: client,
+    await axios.post('client', client);
+    const res = await axios.get('client');
+    dispatch({
+      type: AppActions.UPDATE_CLIENT,
+      payload: { clients: res.data },
     });
     return res.data``;
   } catch (e) {

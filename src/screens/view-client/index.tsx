@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -110,15 +110,6 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
             keyExtractor={(item) => item.demandid.toString()}
           />
         </View>
-        {/** Delete button */}
-        <TouchableOpacity
-          style={styles.deleteButton}
-          onPress={() => navigation.goBack()}
-        >
-          <Text style={styles.deleteButtonText}>
-            Delete {route.params.clientname}
-          </Text>
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
