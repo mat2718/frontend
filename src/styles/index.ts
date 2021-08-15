@@ -26,6 +26,7 @@ export const screenStyles = StyleSheet.create({
 
   // The view under your safeareaview, ideally a scrollview for screens without a flatlist
   mainView: {
+    flex: 1,
     padding: 25,
   },
 
@@ -151,6 +152,31 @@ export const buttonStyles = StyleSheet.create({
     fontFamily: "FuturaBook",
     fontWeight: "700",
   },
+
+  buttonDisabled: {
+    justifyContent: 'center',
+    height: 35,
+    width: 125,
+    padding: 10,
+    backgroundColor: colors.white,
+    borderRadius: 50,
+    marginLeft: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+
+  buttonDisabledText: {
+    color: colors.darkGray,
+    alignSelf: 'center',
+    fontFamily: 'FuturaBook',
+    fontWeight: '700',
+  },
 });
 
 // List Item Styles
@@ -184,9 +210,15 @@ export const listStyles = StyleSheet.create({
   },
 
   subHeading: {
+<<<<<<< HEAD
     fontFamily: "FuturaBook",
     fontWeight: "700",
     fontSize: 12,
+=======
+    fontFamily: 'FuturaBook',
+    fontWeight: '700',
+    fontSize: 14,
+>>>>>>> 35e63a36562ee15337adb94d16173196063b75e3
     color: colors.darkGray,
   },
 

@@ -12,6 +12,8 @@ import { createStore, applyMiddleware } from 'redux';
 import { Reducer } from './src/redux/reducer';
 import { Provider } from 'react-redux';
 
+export type RootStore = ReturnType<typeof Reducer>;
+
 const App = () => {
   const [fontsLoaded, setFonts] = useState(false);
 

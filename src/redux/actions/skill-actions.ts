@@ -16,13 +16,10 @@ export const getAllSkills = async (dispatch: Dispatch) => {
 };
 
 /** Gets one skill by id */
-export const getSkillById = (skillId: number) => async (dispatch: Dispatch) => {
+export const getSkillById = async (skillId: number) => {
   try {
     const res = await axios.get(`skill/id/${skillId}`);
-    dispatch({
-      type: AppActions.UPDATE_SKILL,
-      payload: res.data,
-    });
+    return res.data;
   } catch (e) {
     console.log(e);
   }
