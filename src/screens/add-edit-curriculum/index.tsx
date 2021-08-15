@@ -1,112 +1,187 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, ScrollView, KeyboardAvoidingViewBase } from 'react-native';
-import Header from '../../components/batches/header';
-import { buttonStyles, screenStyles, textStyles } from '../../styles';
-import AddCurriculum from '../../components/curricula/add-curriculum';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Platform } from 'react-native';
+import { buttonStyles, colors, inputStyles, screenStyles, textStyles } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
-import { useEffect } from 'react';
 import { PostCurriculum } from '../../redux/actions/curriculum-actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootStackParamList } from '../../types';
+import { IAppState } from '../../redux/state';
+import Toast from 'react-native-toast-message';
+import ISkill from '../../entities/skill';
+import MultiSelect from 'react-native-multiple-select';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 /**
  * Add Curriculum Screen- allows for addition of a curriculum
- * @returns {React.FC} -React Functional Component
- * @param {IProps} - params array that consists name, created on and by
+ * @returns {React.FC} - React Component that will add a curriculum to the database once saved
+ * @author Hannah Mulato
  */
 
-interface IProps {
-  route: {
-    params?: {
-      curriculumName: string;
-      createdOn: any;
-      modifiedOn: any;
-      createdBy: string;
-      modifiedBy: string;
-      skills: any;
-      batches: any;
-    };
-  };
-  
-  newCurriculum: {
-    name: string;
-    createdBy: string;    
-    createdOn: string;
-    skills: number[];
-  };
-}
 
+const AddEditCurriculum: React.FC = () => {
+  //initializing states for each input field
+  const [name, setName] = useState(''); 
+  const [createdBy, setCreatedBy] = useState('');
+  const [isPickerShow, setIsPickerShow] = useState(false);
+  const [createdDate, setCreatedDate] = useState(new Date(Date.now()));
+  const [skills, setSkills] = useState([]);
 
-/** code complexity is above the threshold here according to sonarlint, might need to modularize parts of this */
-const AddEditCurriculum: React.FC<IProps> = (props: IProps) => {
-  /** Does it work? */
+  //get all skills from database for multi-select picker input
+  const skillArr = useSelector((state: IAppState) => state.skills);
+
+  //initializing navigation and dispatch
+  const navigation = useNavigation<RootStackParamList>();  
+  const dispatch = useDispatch()
+
+  //post Curriculum function for add-curriculum screen
+  const postCurriculum = () => {
+    const newCurriculum = {
+        curriculumname: name,
+        createdby: createdBy,
+        createdon: createdDate.toISOString(),
+        skillIdArr: skills
+    }
+    const json = JSON.stringify(newCurriculum);
+
+    if(newCurriculum.createdby && newCurriculum.createdon && newCurriculum.curriculumname && newCurriculum.skillIdArr) {
+      dispatch(PostCurriculum(json));
+      //add a scuccess toast for each filled in input
+      Toast.show({
+        type: 'success',
+        position: 'top',
+        text1: 'Success!',
+        text2: `Curriculum: ${newCurriculum.curriculumname} has been added.`
+      })
+      navigation.navigate('AddEditCurriculum');
+      //fail toast for non-filled inputs
+    } else {
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Error',
+        text2:`You have failed to fill in all the required fields below.`
+      })
+    }
+
+    
+  }
+
+  const onSkillChange = (skills: ISkill) => {
+    setSkills(skills);
+  }
+
+  const showPicker = () => {
+    setIsPickerShow(true);
+  };
+
+  const onCreatedChange = (e: any, val: any) => {
+    if (val) {
+      setCreatedDate(val);
+      setIsPickerShow(false);
+    } else {
+      setCreatedDate(new Date(Date.now()));
+      setIsPickerShow(false);
+    }
+  };
+
   return (
     <View style={screenStyles.safeAreaView}>
       <View style={screenStyles.mainView}>
-        <AddCurriculum />
+        
+        <View style={screenStyles.titleContainer}>
+          <Text style={textStyles.heading}>Add Curriculum</Text>
+          <TouchableOpacity
+              style={buttonStyles.buttonContainer}
+              onPress={postCurriculum}
+          >
+              <Text style={buttonStyles.buttonText}>Save</Text>
+          </TouchableOpacity>
         </View>
+
+        <View style={{marginTop: 10}}>
+          {/**Form View */}
+          <View style={styles.form}>
+              <Text style={inputStyles.inputLabelText}>Name:</Text>
+              <TextInput
+              testID='Name'
+              onChangeText={name => setName(name)}
+              value={name}
+              style={inputStyles.textInput}
+              />
+          </View>
+
+          <View style={styles.form}>
+              <Text style={inputStyles.inputLabelText}>Created By:</Text>
+              <TextInput
+              value={createdBy}
+              onChangeText={(createdByText) => setCreatedBy(createdByText)}
+              style={inputStyles.textInput}
+              />
+          </View>
+
+          <View style={styles.form}>
+            <View style={{marginBottom: 10}}>
+              <Text style={inputStyles.inputLabelText}>Skills:</Text>
+            </View>
+              <MultiSelect
+              hideTags={false}
+              items={skillArr}
+              uniqueKey="skillid"
+              displayKey="skillname"
+              onSelectedItemsChange={(skills: any) => onSkillChange(skills)}
+              selectedItems={skills}
+              selectedItemTextColor={colors.blue}
+              tagTextColor={colors.white}
+              selectText="  Choose skills"
+              searchInputPlaceholderText="Search Skills..."
+              selectedItemFontFamily="FuturaBook"
+              itemFontFamily="FuturaBook"
+              fontFamily="FuturaBook"
+              fontSize={12}
+              tagBorderColor={colors.orange}
+              tagContainerStyle={{backgroundColor: colors.orange}}
+              styleDropdownMenuSubsection={inputStyles.pickerContainer}
+              tagRemoveIconColor={colors.white}
+              submitButtonColor={colors.orange}
+              submitButtonText="Done"
+              styleSelectorContainer={{borderRadius: 30}}
+              styleListContainer={{borderRadius: 30}}
+              />
+          </View>
+
+          <View style={styles.form}>
+              <Text style={inputStyles.inputLabelText}>Created On:</Text>
+              {!isPickerShow && (
+              <TouchableOpacity onPress={showPicker}>
+                  <Text style={inputStyles.textInput}>
+                      <MaterialCommunityIcons
+                      name='calendar-edit'
+                      size={20}
+                      color='#474C55'
+                      />{'     '}
+                      {createdDate.toDateString()}</Text>
+                  
+              </TouchableOpacity>
+              )}
+
+              {isPickerShow && (
+              <DateTimePicker
+                  value={createdDate}
+                  mode={'date'}
+                  display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                  onChange={onCreatedChange}
+                  style={styles.datePicker}
+              />
+              )}
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-    margin: 10,
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.75,
-    shadowRadius: 4,
-    elevation: 8,
-  },
-  title: {
-    margin: 10,
-    marginTop: 20,
-    fontFamily: 'FuturaBold',
-    fontSize: 22,
-  },
-  input: {
-    margin: 10,
-    borderRadius: 50,
-    marginHorizontal: 10,
-    padding: 10,
-    paddingHorizontal: 'auto',
-  },
-  saveBtnContainer: {
-    alignSelf: 'flex-end',
-    paddingVertical: 2,
-    paddingHorizontal: 10,
-    backgroundColor: '#F26925',
-    borderRadius: 50,
-    marginHorizontal: 10,
-  },
-  saveBtn: {
-    padding: 10,
-    color: '#fff',
-    fontSize: 15,
-    fontFamily: 'FuturaBold',
-    justifyContent: 'center',
-  },
-  btnContainer: {
-    marginTop: 5,
-    justifyContent: 'center',
-  },
-  buttonText2: {
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    color: '#FFF',
-    fontSize: 15,
-    fontFamily: 'FuturaBook',
-    backgroundColor: '#72A4C2',
-    borderRadius: 50,
-  },
   // This only works on iOS
   datePicker: {
     width: 320,
@@ -115,16 +190,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
-  txtContainer: {
-    alignSelf: 'flex-start',
-    marginLeft: 5,
-    marginTop: 10,
-    paddingVertical: 10,
-    color: '#474C55',
-    fontSize: 15,
-    fontFamily: 'FuturaBold',
-    borderRadius: 50,
-  },
+  form: {
+    width: '100%',
+    marginTop: 5, 
+    marginBottom: 5
+  }
 });
 
 export default AddEditCurriculum;

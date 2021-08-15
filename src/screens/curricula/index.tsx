@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FlatList } from 'react-native';
 import { ExpandableList } from '../../components/curricula/expandable-list';
 import { Transitioning, Transition } from 'react-native-reanimated';
 import CurriculaListHeader from '../../components/curricula/curricula-list-header';
 import { screenStyles } from '../../styles';
-import { GetAllCurricula } from '../../redux/actions/curriculum-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from '../../redux/state';
 import ICurriculum from '../../entities/curriculum';
+import { GetAllCurricula } from '../../redux/actions/curriculum-actions';
 
 /**
  * Main Screen for Curricula - shows information for all curricula
@@ -19,11 +19,8 @@ const Curricula: React.FC = () => {
   //get all curricula from the store and send it as props
   const curriculum = useSelector((state: IAppState) => state.curricula);
   const dispatch = useDispatch();
-  
-  useEffect(() => {
-     dispatch(GetAllCurricula())
-   }, [])
-  
+  const [isFetching, setIsFetching] = useState(false);
+
   //initialize a transitioning effect for a card
   const transitionRef = useRef<any>(null);
   const transition = <Transition.Change interpolation='easeInOut' />;
@@ -39,6 +36,17 @@ const Curricula: React.FC = () => {
     );
   };
 
+  //fetch updated data for refresh
+  const fetchData = () => {
+    dispatch(GetAllCurricula());
+    setIsFetching(false);
+  }
+  //refresh function for flatlist
+  const onRefresh = () => {
+    setIsFetching(true);
+    fetchData();
+  }
+
   return (
     <Transitioning.View
       ref={transitionRef}
@@ -51,6 +59,8 @@ const Curricula: React.FC = () => {
         keyExtractor={(item) => `${item.curriculumid}`}
         renderItem={renderItem}
         ListHeaderComponent={CurriculaListHeader}
+        onRefresh={onRefresh}
+        refreshing={isFetching}
       />
     </Transitioning.View>
   );
