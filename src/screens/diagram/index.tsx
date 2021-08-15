@@ -16,18 +16,7 @@ import { IAppState } from '../../redux/state';
 import { GetAllCurricula } from '../../redux/actions/curriculum-actions';
 import moment from 'moment';
 
-const screenWidth = Dimensions.get("window").width;
 
-const chartConfig = {
-    backgroundGradientFrom: '#ffffff',
-    backgroundGradientFromOpacity: 0,
-    backgroundGradientTo: '#ffffff',
-    backgroundGradientToOpacity: 0.5,
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-    strokeWidth: 2, // optional, default 3
-    useShadowColorFromDataset: true, // optional
-    fromZero:true,
-  };
 
   const fakeDataGen = () => {
     let dataArr = [];
@@ -53,7 +42,7 @@ const chartConfig = {
   //   strokeWidth: 2
   // }
 
-  const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
   //calls for +6 and -6 from date.now then sort - kai with BE 
   const renderData = () => {
@@ -84,20 +73,33 @@ const chartConfig = {
     const [yearDemand, setYearDemand] = useState(0);
     const [yearSupply, setYearSupply] = useState(0);
 
+    const screenWidth = Dimensions.get("window").width;
+
+    const chartConfig = {
+    backgroundGradientFrom: '#ffffff',
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientTo: '#ffffff',
+    backgroundGradientToOpacity: 0.5,
+    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+    strokeWidth: 2, // optional, default 3
+    useShadowColorFromDataset: true, // optional
+    fromZero:true,
+    };
+
     const date = new Date();
     const start = moment(new Date()).format("YYYY-MM-01");
     const startDate = moment(moment(start).subtract(6,"M")).format("YYYY-MM-01");
     const endDate = moment(moment(start).add(6,"M")).format("YYYY-MM-01")
 
-
     useEffect(() => {
       // let data = getDemandByCurrIdAndDate(2,"2021-11-01", "2021-12-21");
       // getDemandById(20).then(res => setDemandData(res))
-      // getDemandByDate(startDate, endDate).then((res) => setDemandData(res))
+      getDemandByDate(startDate, endDate).then((res) => setDemandData(res))
       // setDemandData(getDemandByDate(startDate, endDate))
       ;
-    }, []);
+    }, [currCurriculum]);
 
+    //modular picker for when we get full Curriculum
     const renderPickerItems = () => {
       const array = ["JavaScript", "Java", "React Native", "C++"];
 
@@ -109,10 +111,39 @@ const chartConfig = {
       ))
     }
 
-    const filterDataByMonth = () => {
-      const date = new Date();
-      let newDate = moment(date).format('YYYY-MM-01')
-      console.log(moment(moment(newDate).add(12, "M")).format('YYYY-MM-01'));
+    //renders the label months we need to see -6 and +6 months for the graph
+    const renderLabel = () => {
+      let labels = [];
+      let month = date.getMonth() - 6; //number
+      let counter = 13;
+
+      while(counter){
+        month = month % 12
+        labels.push(months[month++])
+        counter--;
+      }
+      return labels;
+    }
+
+
+    const filterDemandDataByMonth = () => {
+      let demandObj = {};
+      let month = moment(moment(start).subtract(6,"M")).format("YYYY-MM");
+      let counter = 13;
+
+      while(counter){
+        demandObj[month] = 0
+        month = moment(moment(month).add(1, "M")).format("YYYY-MM");
+        counter--;
+      }
+  
+      for(const data of demandData){
+        const key = moment(data.needby).format("YYYY-MM");
+        console.log(key, data.quantitydemanded)
+        demandObj[key] += data.quantitydemanded;
+        ;
+      };
+      return((demandObj));
     };
 
     const differenceView = () => {
@@ -143,8 +174,8 @@ const chartConfig = {
     
     return (
       <View style={screenStyles.mainView}>
-        <Button title="Console log DemandState" onPress={() => console.log(demandData)}/>
-        <Button title="Console log SupplyState" onPress={() => console.log(supplyData)}/>
+        <Button title="Console log DemandState" onPress={() => console.log(moment(demandData[15].needby).format("YYYY-MM-DD"))}/>
+        <Button title="Console log SupplyState" onPress={() => console.log(filterDemandDataByMonth())}/>
         <View style={screenStyles.titleContainer}>
 
           <Text style={textStyles.subHeading}>
