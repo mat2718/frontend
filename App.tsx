@@ -13,6 +13,8 @@ import { Reducer } from './src/redux/reducer';
 import { Provider } from 'react-redux';
 import Toast from 'react-native-toast-message';
 
+export type RootStore = ReturnType<typeof Reducer>;
+
 const App = () => {
   const [fontsLoaded, setFonts] = useState(false);
 

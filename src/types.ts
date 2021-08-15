@@ -12,7 +12,8 @@ export type RootDrawerParamList = {
 export type RootStackParamList = {
   Main: any;
   ViewBatch: any;
-  AddEditBatch: any;
+  AddBatch: any;
+  EditBatch: any;
   AddTrainer: any;
   ViewEditTrainer: any;
   Clients: any;
@@ -22,6 +23,7 @@ export type RootStackParamList = {
   Trainers: any;
   Diagram: any;
   Skills: any;
+  AddSkill: any;
   Calendar: any;
   EditClient: any;
   AddClient: any;

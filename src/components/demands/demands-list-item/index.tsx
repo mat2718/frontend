@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
-
+import { useDispatch } from 'react-redux';
 import { RootStackParamList } from '../../../types';
-
 import { listStyles, colors } from '../../../styles';
 import { Picker } from '@react-native-picker/picker';
+import axios from '../../../../axiosConfig';
 
 interface IProps {
-  curriculum: string;
+  curriculumid: number;
   needby: number;
   quantitydemanded: number;
 }
@@ -19,11 +19,29 @@ const DemandsListItem: React.FC<IProps> = (props: IProps) => {
 
   /** States for Picker */
   const [selectedFilter, setSelectedFilter] = React.useState();
+  const [curriculum, setCurriculum] = React.useState([
+    {
+      curriculumname: '',
+    },
+  ]);
 
   /**
    * Touchable Link to contain individual Batch information.
    * Will lead to Individual Batch information
    */
+
+  const fetchCurriculum = async () => {
+    const res = await axios.get(`curriculum/id/${props.curriculumid}`);
+    setCurriculum(res.data);
+  };
+
+  React.useEffect(() => {
+    fetchCurriculum();
+
+    return function cleanup() {
+      setCurriculum([]);
+    };
+  }, []);
 
   return (
     /** Individual Batch Touchable */
@@ -32,7 +50,9 @@ const DemandsListItem: React.FC<IProps> = (props: IProps) => {
     <View style={styles.listItemContainer}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View>
-          <Text style={listStyles.subHeading}>{props.curriculum}</Text>
+          <Text style={listStyles.subHeading}>
+            {curriculum[0].curriculumname}
+          </Text>
           <Text style={listStyles.textRegular}>
             {props.quantitydemanded +
               ' needed by ' +

@@ -1,8 +1,8 @@
-import axios from "../../../axiosConfig";
-import ICurriculum from "../../entities/curriculum";
+import axios from '../../../axiosConfig';
+import ICurriculum from '../../entities/curriculum';
 import { AppActions, IAppAction } from './actions';
-import { AxiosResponse } from "axios";
-import { useDispatch } from "react-redux";
+import { AxiosResponse } from 'axios';
+import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 
 /**
@@ -15,20 +15,20 @@ import { Dispatch } from 'redux';
 //api call for getting all curricula
 export const GetAllCurricula = () => async (dispatch: Dispatch<IAppAction>) => {
   try {
-    await axios.get("curriculum").then((res) => {
+    await axios.get('curriculum').then((res) => {
       const curricula: ICurriculum[] = res.data;
       dispatch({
-      type: AppActions.UPDATE_CURRICULA,
-      payload: {
-        skills:[],
-        clients:[],
-        batches: [],
-        demands: [],
-        trainers: [],
-        curricula
-        }
+        type: AppActions.UPDATE_CURRICULA,
+        payload: {
+          skills: [],
+          clients: [],
+          batches: [],
+          demands: [],
+          trainers: [],
+          curricula,
+        },
       });
-      return "Retrieved curricula";
+      return 'Retrieved curricula';
     });
   } catch (err) {
     console.log(err);
@@ -51,26 +51,25 @@ export const GetCurriculum = (id: number) => async () => {
 };
 
 //api call to post a new curriculum
-export const PostCurriculum = (
-  curriculum: {
+export const PostCurriculum =
+  (curriculum: {
     name: string;
-    createdBy: string;    
+    createdBy: string;
     createdOn: string;
     skills: number[];
-}) => async (
-  dispatch: Dispatch<IAppAction>
-) => {
-  try {
-    await axios.post("curriculum", curriculum);
-    (() => {
-      const dispatcher = useDispatch();
-      dispatcher(GetAllCurricula());
-    })();
-    return `${curriculum.name} has been added.`
-  } catch (err) {
-    console.log(err);
-  }
-};
+  }) =>
+  async (dispatch: Dispatch<IAppAction>) => {
+    try {
+      await axios.post('curriculum', curriculum);
+      (() => {
+        const dispatcher = useDispatch();
+        dispatcher(GetAllCurricula());
+      })();
+      return `${curriculum.name} has been added.`;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
 /**api call for deleting a specific curriculum by ID
  *
@@ -83,9 +82,9 @@ export const DeleteCurriculum = (curriculum: ICurriculum) => async () => {
     (() => {
       const dispatcher = useDispatch();
       dispatcher(GetAllCurricula());
-    })()
+    })();
     GetAllCurricula();
-    return "Curriculum has been deleted.";
+    return 'Curriculum has been deleted.';
   } catch (err) {
     console.log(err);
   }
