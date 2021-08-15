@@ -11,7 +11,7 @@ interface IProps {
   setSelectedFilter: any;
 }
 
-const ClientsListHeader: React.FC<IProps> = (props: IProps) => {
+const SkillsListHeader: React.FC<IProps> = (props: IProps) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
@@ -20,18 +20,18 @@ const ClientsListHeader: React.FC<IProps> = (props: IProps) => {
     <View style={screenStyles.mainView}>
       {/** Screen title */}
       <View style={screenStyles.titleContainer}>
-        <Text style={textStyles.heading}>Clients</Text>
+        <Text style={textStyles.heading}>Skills</Text>
 
         {/** Add batch button */}
         <TouchableOpacity
           style={buttonStyles.buttonContainer}
-          onPress={() => navigation.navigate('AddClient')}
+          onPress={() => navigation.navigate('AddSkill')}
         >
-          <Text style={buttonStyles.buttonText}>Add Client</Text>
+          <Text style={buttonStyles.buttonText}>Add Skill</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
 
-export default ClientsListHeader;
+export default SkillsListHeader;

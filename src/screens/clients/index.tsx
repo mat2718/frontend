@@ -11,9 +11,6 @@ export const data = ['Cognizant', 'Revature', 'Matts BBQ'];
 
 /** Basis for Entire Batch Screen */
 const Clients: React.FC = () => {
-  /** Dispatch */
-  const dispatch = useDispatch();
-
   /** Main item to render for the FlatList */
   const renderItem = ({ item }: { item: any }) => {
     return (
