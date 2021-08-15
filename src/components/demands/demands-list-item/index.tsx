@@ -57,7 +57,7 @@ const DemandsListItem: React.FC<IProps> = (props: IProps) => {
         </View>
         {/** Dropdown menu */}
         <View>
-          <Picker
+          {/* <Picker
             mode='dropdown'
             selectedValue={selectedFilter}
             onValueChange={(itemValue, itemIndex) =>
@@ -67,7 +67,7 @@ const DemandsListItem: React.FC<IProps> = (props: IProps) => {
           >
             <Picker.Item label='Edit demand' value='edit' />
             <Picker.Item label='Delete demand' value='delete' />
-          </Picker>
+          </Picker> */}
         </View>
       </View>
     </View>
