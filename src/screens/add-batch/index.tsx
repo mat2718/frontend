@@ -62,6 +62,11 @@ const AddBatch: React.FC = () => {
   React.useEffect(() => {
     getAllCurricula();
     getAllTrainers();
+
+    return function cleanup() {
+      setCurricula([]);
+      setTrainers([]);
+    };
   }, []);
 
   /** Input listener for Start Date Picker */

@@ -59,6 +59,10 @@ const AddDemand: React.FC<PropsI> = ({ route }) => {
   /** Run get all curricula function */
   React.useEffect(() => {
     getAllCurricula();
+
+    return function cleanup() {
+      setCurricula([]);
+    };
   }, []);
 
   const onStartChange = (e: any, val: any) => {

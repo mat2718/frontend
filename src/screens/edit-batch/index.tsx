@@ -84,6 +84,11 @@ const EditBatch: React.FC<PropsI> = ({ route }) => {
   React.useEffect(() => {
     getAllCurricula();
     getAllTrainers();
+
+    return function cleanup() {
+      setCurricula([]);
+      setTrainers([]);
+    };
   }, []);
 
   /** Input listener for Start Date Picker */

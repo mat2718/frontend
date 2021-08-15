@@ -56,6 +56,18 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
   React.useEffect(() => {
     getCurriculum();
     getTrainer();
+
+    return function cleanup() {
+      setCurriculum({
+        curriculumname: '',
+      });
+
+      setTrainer({
+        trainerid: 0,
+        trainerfirst: '',
+        trainerlast: '',
+      });
+    };
   }, []);
 
   /** Dates */
