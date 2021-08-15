@@ -39,29 +39,10 @@ interface IProps {
 
 /** code complexity is above the threshold here according to sonarlint, might need to modularize parts of this */
 const AddEditCurriculum: React.FC<IProps> = (props: IProps) => {
-  const navigation = useNavigation<RootStackParamList>();  
-  const dispatch = useDispatch()
-
-  //post Curriculum function for add-curriculum screen
-  const postCurriculum = () => {
-    dispatch(PostCurriculum(props.newCurriculum));
-    navigation.goBack();
-  }
-
   /** Does it work? */
   return (
     <View style={screenStyles.safeAreaView}>
-      <Header />
       <View style={screenStyles.mainView}>
-      <View style={screenStyles.titleContainer}>
-          <Text style={textStyles.heading}>Add Curriculum</Text>
-          <TouchableOpacity
-              style={buttonStyles.buttonContainer}
-              onPress={postCurriculum}
-          >
-              <Text style={buttonStyles.buttonText}>Save</Text>
-          </TouchableOpacity>
-        </View>
         <AddCurriculum />
         </View>
     </View>

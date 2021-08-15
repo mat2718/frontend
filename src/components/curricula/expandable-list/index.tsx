@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import { buttonStyles, listStyles } from '../../../styles';
-import { DeleteCurriculum } from '../../../redux/actions/curriculum-actions';
+import { colors, listStyles } from '../../../styles';
 import ICurriculum from '../../../entities/curriculum';
 interface IProps {
   curriculum: ICurriculum;
@@ -93,7 +90,8 @@ export const ExpandableList: React.FC<IProps> = ({ curriculum, onPress }) => {
           </View>
           <View style={styles.textContainer}>
             <Text style={listStyles.subHeading}>Skills: </Text>
-            <Text style={listStyles.textRegular}>{skillsarr}</Text>
+            <Text style={styles.textRegular}>{skillsarr}</Text>
+
           </View>
         </>
       )}
@@ -102,78 +100,21 @@ export const ExpandableList: React.FC<IProps> = ({ curriculum, onPress }) => {
 };
 
 const styles = StyleSheet.create({
-  wrap: {
-    flex: 1,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-    margin: 10,
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.75,
-    shadowRadius: 4,
-    elevation: 8,
-  },
-  container: { flexDirection: 'row' },
   textContainer: {
     flexDirection: 'row',
     paddingVertical: 2,
-  },
-  details: { margin: 10 },
-  curriculumName: {
-    fontSize: 20,
-    color: '#474C55',
-    fontFamily: 'FuturaBold',
-    alignSelf: 'flex-start',
-  },
-  text: {
-    opacity: 0.7,
-    flexDirection: 'row',
-    paddingVertical: 2,
-    fontFamily: 'FuturaBook',
-    fontSize: 15,
   },
   icon: {
     alignSelf: 'flex-end',
     marginLeft: 'auto',
     marginRight: 0,
   },
-  title2: {
-    fontSize: 18,
-    alignSelf: 'flex-start',
-    fontWeight: 'bold',
-    color: '#474C55',
+  textRegular: {
+    fontSize: 12,
+    color: colors.darkGray,
     fontFamily: 'FuturaBook',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    alignSelf: 'flex-end',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-  },
-  button: {
-    alignSelf: 'flex-end',
-    paddingVertical: 2,
-    paddingHorizontal: 5,
-    backgroundColor: '#72A4C2',
-    borderRadius: 50,
-  },
-  buttonText: {
-    padding: 10,
-    color: '#fff',
-    fontSize: 15,
-    fontFamily: 'FuturaBold',
-  },
-  deleteButton: {
-    alignSelf: 'flex-end',
-    paddingVertical: 2,
-    paddingHorizontal: 5,
-    backgroundColor: '#F26925',
-    borderRadius: 50,
-    marginLeft: 10,
+    fontWeight: '700',
+    flexWrap: 'wrap',
+    flex: 1 
   },
 });
