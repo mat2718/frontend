@@ -4,7 +4,7 @@ import IDemand from "../../entities/Demand";
 import { AppActions, IAppAction } from "./actions";
 import { useSelector, useDispatch } from "react-redux";
 
-export const getAllDemand = () => async (dispatch: Dispatch<IAppAction>) => {
+export const getAllDemand = () => async(dispatch: Dispatch<IAppAction>) => {
   try {
     const res = await axios.get('demand')
     dispatch({
@@ -17,7 +17,7 @@ export const getAllDemand = () => async (dispatch: Dispatch<IAppAction>) => {
   }
 };
 
-export const addDemand = (demand: IDemand) => async () => {
+export const addDemand = (demand: IDemand) => async() => {
   try {
     await axios.post('demand', demand);
     (() => {
@@ -30,7 +30,7 @@ export const addDemand = (demand: IDemand) => async () => {
   }
 };
 
-export const getDemandById = (demandId: number) => async (dispatch: Dispatch<IAppAction>) => {
+export const getDemandById = async (demandId: number) => {
   try {
     const res = await axios.get(`demand/id/${demandId}`);
     return res.data;
@@ -39,7 +39,7 @@ export const getDemandById = (demandId: number) => async (dispatch: Dispatch<IAp
   }
 };
 
-export const getDemandByDate = (startDate: string, endDate: string) => async() => {
+export const getDemandByDate = async(startDate: string, endDate: string) => {
   try {
     const res = await axios.get(`demand/date/${startDate}/${endDate}`)
     return res.data;
@@ -48,17 +48,16 @@ export const getDemandByDate = (startDate: string, endDate: string) => async() =
   }
 };
 
-export const getDemandByCurrId = (curriculumId: number) => async(dispatch: Dispatch<IAppAction>) => {
+export const getDemandByCurrId = async(curriculumId: number) => {
   try {
-    await axios.get(`demand/curriculum/${curriculumId}`).then((res) => {
-      return res.data;
-    })
+    const res = await axios.get(`demand/curriculum/${curriculumId}`);
+    return res.data;
   } catch(error){
     return error.response.data;
   }
 };
 
-export const getDemandByCurrIdAndDate = (curriculumId: number, startDate:string, endDate:string) => async() => {
+export const getDemandByCurrIdAndDate = async(curriculumId: number, startDate:string, endDate:string) => {
   try {
     const res = await axios.get(`demand/curriculum/${curriculumId}/${startDate}/${endDate}`)
     return res.data;
@@ -67,7 +66,7 @@ export const getDemandByCurrIdAndDate = (curriculumId: number, startDate:string,
   }
 };
 
-export const getDemandByClientId = (clientId: number) => async () => {
+export const getDemandByClientId = async (clientId: number) => {
   try {
     const res = await axios.get(`demand/client/${clientId}`)
     return res.data;

@@ -10,11 +10,10 @@ import {
 import { screenStyles, textStyles, buttonStyles } from '../../styles';
 import { LineChart } from 'react-native-chart-kit';
 import { Picker } from '@react-native-picker/picker';
-import { getAllDemand, getDemandByDate, getDemandByCurrIdAndDate } from '../../redux/actions/demand-actions';
+import { getAllDemand, getDemandByDate, getDemandByCurrIdAndDate, getDemandByCurrId, getDemandByClientId, getDemandById} from '../../redux/actions/demand-actions';
 import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from '../../redux/state';
 import { GetAllCurricula } from '../../redux/actions/curriculum-actions';
-import axios from 'axios';
 import moment from 'moment';
 
 const screenWidth = Dimensions.get("window").width;
@@ -75,33 +74,45 @@ const chartConfig = {
   legend: ["Client Demand","Associate Supply"] // optional
     };
   }
-
-  //will use this later to see if overflow or underflow of client's demand
+  
 
   const Diagram: React.FC = () => {
+    // const allCurricula = useSelector((state) => state.curricula)
     const [currCurriculum, setCurriculum] = useState('All Curriculum');
     const [demandData, setDemandData] = useState([]);
     const [supplyData, setSupplyData] = useState('Supply');
     const [yearDemand, setYearDemand] = useState(0);
     const [yearSupply, setYearSupply] = useState(0);
-    const dispatch = useDispatch();
 
     const date = new Date();
-    const start = new Date(date.getFullYear(), date.getMonth(), 1);
-    const end = new Date(date.getFullYear(), date.getMonth(), 1);
-    const startDate = new Date(start.setMonth(start.getMonth() - 6)).toISOString().substring(0,10);
-    const endDate = new Date(end.setMonth(end.getMonth() + 6)).toISOString().substring(0,10);
+    const start = moment(new Date()).format("YYYY-MM-01");
+    const startDate = moment(moment(start).subtract(6,"M")).format("YYYY-MM-01");
+    const endDate = moment(moment(start).add(6,"M")).format("YYYY-MM-01")
 
 
     useEffect(() => {
       // let data = getDemandByCurrIdAndDate(2,"2021-11-01", "2021-12-21");
-      let data = getDemandByDate(startDate, endDate)
-      setDemandData(data);
-    }, [currCurriculum]);
+      // getDemandById(20).then(res => setDemandData(res))
+      // getDemandByDate(startDate, endDate).then((res) => setDemandData(res))
+      // setDemandData(getDemandByDate(startDate, endDate))
+      ;
+    }, []);
+
+    const renderPickerItems = () => {
+      const array = ["JavaScript", "Java", "React Native", "C++"];
+
+      return array.map((item, index) => (
+            <Picker.Item
+              key={index}
+              label={item}
+            />
+      ))
+    }
 
     const filterDataByMonth = () => {
-      let dataArr = getDemandByDate(startDate, endDate);
-      console.log(dataArr);
+      const date = new Date();
+      let newDate = moment(date).format('YYYY-MM-01')
+      console.log(moment(moment(newDate).add(12, "M")).format('YYYY-MM-01'));
     };
 
     const differenceView = () => {
@@ -145,10 +156,7 @@ const chartConfig = {
           onValueChange={(currCurriculum: string) => setCurriculum(currCurriculum)}
           style={{ height: 50, width: 50,  }}
         >
-          <Picker.Item label='All Curriculum' value='All Curriculum' />
-          <Picker.Item label='JavaScript' value='JavaScript' />
-          <Picker.Item label='Java' value='Java' />
-          <Picker.Item label='Python' value='Python' />
+          {renderPickerItems()}
         </Picker>
         </View>
 
