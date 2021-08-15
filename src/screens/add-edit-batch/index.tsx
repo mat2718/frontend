@@ -78,7 +78,7 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
       <Header />
-      <ScrollView style={screenStyles.mainView}>
+      <View style={screenStyles.mainView}>
         {/** Heading and button */}
         <View
           style={{
@@ -216,7 +216,7 @@ const AddEditBatch: React.FC<PropsI> = ({ route }) => {
             )}
           </View>
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
