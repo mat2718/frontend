@@ -96,7 +96,7 @@ const EditDemand: React.FC  = ({route}) => {
       
         <View style={{ flexDirection: 'column' }}>
           <Text style={inputStyles.inputLabelText}>Enter # of Associates Needed </Text>
-          <TextInput style={inputStyles.textInput} keyboardType='numeric' placeholder={route.params.client}/>
+          <TextInput style={inputStyles.textInput} keyboardType='numeric' />
         </View>
         
         

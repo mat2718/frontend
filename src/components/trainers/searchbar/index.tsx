@@ -2,29 +2,61 @@ import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useDispatch, useSelector } from 'react-redux';
+import ITrainer from '../../../entities/Trainer';
+import { getAllTrainers } from '../../../redux/actions/trainers-actions';
+import { IAppState } from '../../../redux/state';
 /**
- * Authors: Joab Smith and Imran Ilyas
+ * Search Bar Component - a header component on the Main Trainer Screen using for filtering trainers
+ * @param {IProps} interface - sets the properties of a trainer
+ * @returns {React.FC} - displays a dropdown, textinput for a searchbar, and an icon for searching
+ * @author Joab Smith and Imran Ilyas
  **/
-interface ITrainer {
-  name: string;
-}
+
 interface IProps {
   setTrainer: (trainerArr: ITrainer[]) => void;
 }
+
 const SearchBar: React.FC<IProps> = (props: IProps) => {
-  const [search, setSearch] = useState(''); // Search text
-  const [selectedValue, setSelectedValue] = useState('Search By'); //Search catagory
+  // hooks for the searchbar and the dropdown
+  const [search, setSearch] = useState('');
+  const [selectedValue, setSelectedValue] = useState('Search By');
+
+  const dispatch = useDispatch();
+  // Action for handling the trainer when searching
+  const trainers:ITrainer[] = useSelector((state: IAppState) =>
+  {
+    return state.trainers;
+  })
+  
+  // Searches for trainers upon press and filters depending on the case
   const searched = () => {
-    //call all trainers
+    // Call all trainers
+    dispatch(getAllTrainers());
     switch (selectedValue) {
       case 'ALL':
+        props.setTrainer(trainers);
+        break;
       case 'Fname':
+        props.setTrainer(trainers.filter((trainer) =>
+         trainer.trainerfirst.startsWith(search)
+        )
+        );
+        break;
       case 'Lname':
+        props.setTrainer(trainers.filter((trainer) =>
+         trainer.trainerlast.startsWith(search)
+        ));
+        break;
+      default:
+        props.setTrainer(trainers);
+
     }
   };
   return (
     <View style={styles.container}>
       <View style={styles.row}>
+        {/* Dropdown */}
         <Picker
           selectedValue={selectedValue}
           style={styles.dropdown}
@@ -32,14 +64,13 @@ const SearchBar: React.FC<IProps> = (props: IProps) => {
             setSelectedValue(itemValue);
           }}
         >
+          {/* Dropdown items */}
+          <Picker.Item label='ALL' value='All' />
           <Picker.Item label='First Name' value='Fname' />
           <Picker.Item label='Last Name' value='Lname' />
-          <Picker.Item label='ALL' value='All' />
         </Picker>
-
-        {/* </View>
-            <View style={styles.row}> */}
-
+        
+        {/* Input for Searchbar */}
         <TextInput
           style={styles.searchBar}
           placeholder='Search Trainers'
@@ -47,7 +78,7 @@ const SearchBar: React.FC<IProps> = (props: IProps) => {
         >
           {search}
         </TextInput>
-        {/* <SearchIcon style = {styles.searchIcon}/> */}
+        {/* Search Icon */}
         <TouchableOpacity onPress={searched}>
           <MaterialCommunityIcons name='magnify' color={'grey'} size={30} />
         </TouchableOpacity>
@@ -72,7 +103,6 @@ const styles = StyleSheet.create({
   searchBar: {
     width: '49%',
   },
-  searchIcon: {},
 });
 
 export default SearchBar;
