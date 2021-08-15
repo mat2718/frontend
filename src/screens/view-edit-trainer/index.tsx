@@ -1,38 +1,43 @@
 import { useRoute } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Text, TextInput, SafeAreaView, ScrollView } from 'react-native';
+import { useDispatch } from 'react-redux';
 import ITrainer from '../../Entities/Trainer';
+import { updateTrainer } from '../../redux/actions/trainers-actions';
 import { inputStyles, screenStyles, buttonStyles, textStyles } from '../../styles';
+
 /**
- * Authors: Joab Smith and Imran Ilyas
- **/
-const fillertrainer = {
-  FirstName: 'John',
-  LastName: 'Doe',
-  Email: 'johndoe@hotmail.com',
-};
-interface IProps
+ * Edit Trainer Screen - displays the edit screen for a specific trainer
+ * @returns {React.FC} - React component that allows the user to submit changes to a trainers information
+ * @author Joab Smith and Imran Ilyas
+ */
+
+const ViewEditTrainer: React.FC = () =>
 {
-
-}
-
-const ViewEditTrainer: React.FC<IProps> = (props: IProps) =>
-{
-
+  // Routing to pass Trainer information as parameters
   const route = useRoute();
   const params = route.params as ITrainer;
-  // console.log(params);
-  const [trainer, setTrainer] = useState(fillertrainer);
+  
+  // hooks for textinput
   const [firstName, setFirstName] = useState(params.trainerfirst);
   const [lastName, setLastName] = useState(params.trainerlast);
   const [email, setEmail] = useState(params.email);
+  const dispatch = useDispatch();
 
+  // Axios request to update a trainer's information upon press
   const update = () =>
   {
-    //update redux 
-    //axios
+    const newTrainer: ITrainer = {
+      trainerfirst: firstName,
+      trainerlast: lastName,
+      email: email,
+      trainerid: params.trainerid
+    }
+    dispatch(updateTrainer(newTrainer));
+
     console.log('Update');
   };
+
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -47,7 +52,7 @@ const ViewEditTrainer: React.FC<IProps> = (props: IProps) =>
         >
           {/** Heading text */}
           <Text style={textStyles.heading}>Edit Trainer</Text>
-          {/** Add/Edit */}
+          {/** Update */}
           <TouchableOpacity
             style={buttonStyles.buttonContainer}
             onPress={() => update()}
@@ -81,7 +86,6 @@ const ViewEditTrainer: React.FC<IProps> = (props: IProps) =>
             <Text style={inputStyles.inputLabelText}>Email:</Text>
             <TextInput
               style={inputStyles.textInput}
-              selection={{ start: 1 }}
               testID='Email'
               placeholder='Email'
               onChangeText={setEmail}
@@ -92,86 +96,7 @@ const ViewEditTrainer: React.FC<IProps> = (props: IProps) =>
         </View>
       </TouchableWithoutFeedback>
     </SafeAreaView>
-    // <View style = {styles.container}>
-    //   <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={screenStyles.safeAreaView}>
-    //     <View >
-    //       <Text style={styles.header}>Edit Trainer</Text>
-
-    //       <View style={styles.fieldCols}>
-    //       {/* <View style={styles.fieldRow}> */}
-    //         
-
-    //       </View>
-
-    //       {/* </View> */}
-    //       <TouchableOpacity style={styles.touchableStyle} onPress={update}>
-    //         <Text style={styles.submit}>Update</Text>
-    //       </TouchableOpacity>
-    //     </View>
-    //   </TouchableWithoutFeedback>
-      
-    // </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-    marginVertical: '10%',
-    marginHorizontal: '2%',
-  },
-
-  header: {
-    
-    margin: '2%',
-    fontSize: 30,
-    textAlign: 'center',
-  },
-
-  fieldRow: {
-    //flex: 1,
-    width: '100%',
-    flexDirection: 'row',
-  },
-
-  label: {
-    fontSize: 20,
-    width: '30%',
-    paddingVertical: '10%',
-    textAlign: 'right',
-    //alignSelf: 'flex-end'
-  },
-
-  input: {
-    // flexDirection: 'row',
-    width: '70%',
-    fontSize: 20,
-    //paddingVertical: '10%',
-    textAlign: 'center',
-  },
-
-  fieldCols: {
-    flex: 1,
-    width: '100%',
-    //alignContent: 'space-between',
-    alignContent: 'center',
-    justifyContent: 'center',
-  },
-
-  touchableStyle: {
-    backgroundColor: '#F26925',
-    alignSelf: 'center',
-    borderRadius: 100,
-    margin: '10%',
-  },
-
-  submit: {
-    color: 'white',
-    fontSize: 20,
-    padding: '4%',
-    textAlign: 'center',
-  },
-});
 
 export default ViewEditTrainer;

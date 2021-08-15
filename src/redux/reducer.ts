@@ -1,6 +1,13 @@
 import { AppActions, IAppAction } from "./actions/actions";
 import { IAppState, initialState } from "./state";
 
+/**
+ * Reducers - determines changes to the application's state based on the actions
+ * @param {IAppState, IAppAction} interface - properties of states and of actions
+ * @returns {state} - state change depending on the case
+ * @author Joab Smith
+ */
+
 export const Reducer = (
   state: IAppState = initialState,
   action: IAppAction
