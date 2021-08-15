@@ -8,7 +8,7 @@ import MultiSelect from 'react-native-multiple-select';
 import ISkill from '../../../entities/skill';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getAllSkills, getSkillById } from '../../../redux/actions/skill-actions';
+import { getAllSkills } from '../../../redux/actions/skill-actions';
 import { IAppState } from '../../../redux/state';
 
 
@@ -73,7 +73,7 @@ const AddCurriculum: React.FC = () => {
             selectedItems={skills}
             selectedItemTextColor={colors.blue}
             tagTextColor={colors.darkGray}
-            selectText="  Choose Skills"
+            selectText="  Choose skills"
             searchInputPlaceholderText="Search Skills..."
             fontFamily="FuturaBook"
             fontSize={12}
