@@ -149,7 +149,7 @@ const EditBatch: React.FC<PropsI> = ({ route }) => {
             style={buttonStyles.buttonContainer}
             onPress={() => UpdateExistingBatch()}
           >
-            <Text style={buttonStyles.buttonText}>Add</Text>
+            <Text style={buttonStyles.buttonText}>Edit</Text>
           </TouchableOpacity>
         </View>
         {/** Form view */}

@@ -7,7 +7,6 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
 import { ProgressChart } from 'react-native-chart-kit';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
@@ -20,8 +19,8 @@ import {
   buttonStyles,
   colors,
 } from '../../styles';
-import { deleteBatch, confirmBatch } from '../../redux/actions/batch-actions';
 import BatchesSkillsListItem from '../../components/batches/batches-skills-list-item';
+import ConfirmDialog from '../../components/confirm-dialog';
 
 /**
  * View Batch - main component for the view batch screen
@@ -56,9 +55,13 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
-  const dispatch = useDispatch();
 
-  /** Dates for badge and prgoress ring */
+  /** States for confirmBox */
+  const [visible, setVisible] = React.useState(false);
+  const [dialogType, setDialogType] = React.useState('');
+  const [payload, setPayload] = React.useState(route.params.batchId);
+
+  /** Dates for badge and progress ring */
   const startTime = new Date(route.params.startDate).getTime();
   const endTime = new Date(route.params.endDate).getTime();
   const progress = (Date.now() - startTime) / (endTime - startTime);
@@ -79,17 +82,6 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
     strokeWidth: 2, // optional, default 3
     barPercentage: 0.5,
     useShadowColorFromDataset: false, // optional
-  };
-
-  /** Delete batch function */
-  const confirmDelete = () => {
-    dispatch(deleteBatch(route.params.batchId));
-    navigation.goBack();
-  };
-
-  /** Confirm batch function */
-  const confirmConfirmBatch = () => {
-    dispatch(confirmBatch(route.params.batchId));
   };
 
   /** Render item for flatlist */
@@ -140,7 +132,10 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
           ) : (
             <TouchableOpacity
               style={buttonStyles.buttonContainer}
-              onPress={confirmConfirmBatch}
+              onPress={() => {
+                setDialogType('confirmBatch');
+                setVisible(true);
+              }}
             >
               <Text style={buttonStyles.buttonText}>Confirm</Text>
             </TouchableOpacity>
@@ -246,9 +241,21 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
             {progress < 1 ? (data.data[0] * 100).toFixed(0) : 100}% Complete
           </Text>
         </View>
-        <TouchableOpacity style={styles.deleteButton} onPress={confirmDelete}>
+        <TouchableOpacity
+          style={styles.deleteButton}
+          onPress={() => {
+            setDialogType('deleteBatch');
+            setVisible(true);
+          }}
+        >
           <Text style={styles.deleteButtonText}>Delete Batch</Text>
         </TouchableOpacity>
+        <ConfirmDialog
+          type={dialogType}
+          setVisible={setVisible}
+          visible={visible}
+          payload={payload}
+        />
       </View>
     </SafeAreaView>
   );
