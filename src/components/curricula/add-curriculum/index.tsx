@@ -19,7 +19,7 @@ const AddCurriculum: React.FC = () => {
     const [isPickerShow, setIsPickerShow] = useState(false);
     const [createdDate, setCreatedDate] = useState(new Date(Date.now()));
     
-    const [skills, setSkills] = useState([])
+    const [skills, setSkills] = useState<ISkill[]>([])
     const dispatch = useDispatch();
     const skillArr = useSelector((state: IAppState) => state.skills)
 
@@ -27,8 +27,8 @@ const AddCurriculum: React.FC = () => {
       dispatch(getAllSkills())
     }, []);
   
-    const onSkillChange = (skills: any) => {
-      setSkills({skills});
+    const onSkillChange = (skills: ISkill) => {
+      setSkills(skills);
       console.log(skills)
     }
 
@@ -72,6 +72,7 @@ const AddCurriculum: React.FC = () => {
             onSelectedItemsChange={(skills: any) => onSkillChange(skills)}
             selectedItems={skills}
             selectedItemTextColor={colors.blue}
+            tagTextColor={colors.darkGray}
             selectText="  Choose Skills"
             searchInputPlaceholderText="Search Skills..."
             fontFamily="FuturaBook"
