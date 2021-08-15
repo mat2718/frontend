@@ -25,6 +25,7 @@ import { getAllBatches } from '../../redux/actions/batch-actions';
 import { getAllClients } from '../../redux/actions/client-actions';
 import { GetAllCurricula } from '../../redux/actions/curriculum-actions';
 import { getAllSkills } from '../../redux/actions/skill-actions';
+import { getAllTrainers } from '../../redux/actions/trainers-actions';
 
 //see what happens
 //please import your screen and put in your screen in components-kai
@@ -36,6 +37,7 @@ const RootStackNavigator = () => {
   /** Load in db data and store in the redux state */
   React.useEffect(() => {
     dispatch(getAllBatches());
+    dispatch(getAllTrainers());
     dispatch(getAllClients());
     dispatch(GetAllCurricula());
     dispatch(getAllSkills());
