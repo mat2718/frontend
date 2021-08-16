@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity, Dimensions, Button,
-} from 'react-native';
+import {View,Text,StyleSheet,Dimensions, Button} from 'react-native';
 import { screenStyles, textStyles, buttonStyles } from '../../styles';
 import { LineChart } from 'react-native-chart-kit';
 import { Picker } from '@react-native-picker/picker';
 import { getAllDemand, getDemandByDate, getDemandByCurrIdAndDate, getDemandByCurrId, getDemandByClientId, getDemandById} from '../../redux/actions/demand-actions';
 import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from '../../redux/state';
-import { GetAllCurricula } from '../../redux/actions/curriculum-actions';
-import axios from 'axios';
 import moment from 'moment';
 
 
@@ -53,7 +44,7 @@ import moment from 'moment';
   
 
   const Diagram: React.FC = () => {
-    // const allCurricula = useSelector((state) => state.curricula)
+    const allCurricula = useSelector((state: IAppState) => state.curricula)
     const [currCurriculum, setCurriculum] = useState('All Curriculum');
     const [demandData, setDemandData] = useState([]);
     const [supplyData, setSupplyData] = useState('Supply');
