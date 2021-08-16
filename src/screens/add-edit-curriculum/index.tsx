@@ -44,6 +44,7 @@ const AddEditCurriculum: React.FC<IProps> = (props: IProps) => {
 
   //post Curriculum function for add-curriculum screen
   const postCurriculum = () => {
+
     dispatch(PostCurriculum(props.newCurriculum));
     navigation.goBack();
   }
@@ -51,7 +52,6 @@ const AddEditCurriculum: React.FC<IProps> = (props: IProps) => {
   /** Does it work? */
   return (
     <View style={screenStyles.safeAreaView}>
-      <Header />
       <View style={screenStyles.mainView}>
       <View style={screenStyles.titleContainer}>
           <Text style={textStyles.heading}>Add Curriculum</Text>

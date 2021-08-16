@@ -19,6 +19,7 @@ const MainTrainer: React.FC<ITrainer> = () =>
   const trainers:ITrainer[] = useSelector((state: IAppState) => state.trainers);
   const [sortedTrainer, setSortedTrainer] = useState<ITrainer[]>(trainers)
 
+  // Returns the header which consists of the Search Bar and the Add Trainer Button
   const header = () =>
   {
     return (<TrainerListHeader setTrainerArr={setSortedTrainer}/>)

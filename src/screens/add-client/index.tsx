@@ -16,6 +16,7 @@ import {
   buttonStyles,
 } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
 const AddClient: React.FC = () => {
   /** Navigation for going back a screen */
@@ -25,13 +26,30 @@ const AddClient: React.FC = () => {
   const dispatch = useDispatch();
 
   const addClientClick = () => {
-    dispatch(
-      addClient({
-        clientName: client,
+    if(client) {
+      dispatch(
+        addClient({
+          clientName: client,
+        })
+      );
+      Toast.show({
+        type: 'success',
+        position: 'top',
+        text1: 'Success!',
+        text2: `${client} has been added to the Client List.`,
+        topOffset: 50,
       })
-    );
-
-    navigation.goBack();
+      navigation.goBack();
+    }
+    else{
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Invalid Client',
+        text2: 'The required Client Name field is empty.',
+        topOffset: 50,
+      })
+    }
   };
 
   return (
