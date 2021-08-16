@@ -6,7 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../../App';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -20,9 +21,6 @@ interface PropsI {
     params: {
       clientid: number;
       clientname: string;
-      demands: {
-        clientid: 0;
-      }[];
     };
   };
 }
@@ -45,6 +43,14 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
       />
     );
   };
+
+  /** Get demands */
+  const demandsState = useSelector((state: RootStore) => state.demands).sort(
+    (a, b) => b.quantitydemanded - a.quantitydemanded
+  );
+  const demands = demandsState.filter(
+    (demand) => demand.clientid === route.params.clientid
+  );
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
@@ -72,9 +78,7 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
             color='#222'
             style={{ marginRight: 5 }}
           />
-          <Text style={textStyles.regular}>
-            {route.params.demands.length + ' demands'}
-          </Text>
+          <Text style={textStyles.regular}>{demands.length + ' demands'}</Text>
         </View>
 
         <View
@@ -103,7 +107,7 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
           }}
         >
           <FlatList
-            data={route.params.demands}
+            data={demands}
             renderItem={renderItem}
             keyExtractor={(item) => item.demandid.toString()}
           />

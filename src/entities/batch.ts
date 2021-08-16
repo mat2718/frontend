@@ -6,4 +6,5 @@ export default interface IBatch {
   trainerid: number | null;
   clientid: number | null;
   batchid: number;
+  confirmed: boolean;
 }

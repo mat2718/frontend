@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import { listStyles, badgesStyles } from '../../../styles';
+import { RootStore } from '../../../../App';
+import { useSelector } from 'react-redux';
 
 /**
  * Batch List Item - the component the batches list uses to render on renderItem()
@@ -28,47 +30,17 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 
-  /** Get trainer and curriculum */
-  const [curriculum, setCurriculum] = React.useState({
-    curriculumname: '',
-  });
-  const [trainer, setTrainer] = React.useState({
-    trainerid: 0,
-    trainerfirst: '',
-    trainerlast: '',
-  });
+  /** Get curriculum and uh trainer */
+  const curriculumState = useSelector((state: RootStore) => state.curricula);
+  const trainerState = useSelector((state: RootStore) => state.trainers);
 
-  /** getCurriculum */
-  const getCurriculum = async () => {
-    await axios
-      .get(`curriculum/id/${props.curriculumId}`)
-      .then((item) => setCurriculum(item.data[0]));
-  };
-
-  /** getCurriculum */
-  const getTrainer = async () => {
-    await axios
-      .get(`trainer/id/${props.trainerId}`)
-      .then((item) => setTrainer(item.data[0]));
-  };
-
-  /** set curriculum and uh trainer */
-  React.useEffect(() => {
-    getCurriculum();
-    getTrainer();
-
-    return function cleanup() {
-      setCurriculum({
-        curriculumname: '',
-      });
-
-      setTrainer({
-        trainerid: 0,
-        trainerfirst: '',
-        trainerlast: '',
-      });
-    };
-  }, []);
+  /** Set curriculum and trainer  */
+  const curriculum = curriculumState.find(
+    (item) => item.curriculumid === props.curriculumId
+  );
+  const trainer = trainerState.find(
+    (item) => item.trainerid === props.trainerId
+  );
 
   /** Dates */
   const startDate = new Date(props.startDate).getTime();
@@ -88,18 +60,17 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
       onPress={() => {
         navigation.navigate('ViewBatch', {
           batchId: props.batchId,
-          batchSize: props.batchSize,
-          startDate: props.startDate,
-          endDate: props.endDate,
-          curriculum: curriculum,
-          trainer: trainer,
-          confirmed: props.confirmed,
+          curriculum: {
+            curriculumId: curriculum?.curriculumid,
+            skillnamearr: curriculum?.skillnamearr,
+          },
+          trainerId: props.trainerId,
         });
       }}
     >
       {/** Badge */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Text style={listStyles.heading}>{curriculum.curriculumname}</Text>
+        <Text style={listStyles.heading}>{curriculum?.curriculumname}</Text>
         {/* * Checks current date and start/end date of batch and applies tag based on status */}
         {startDate < Date.now() && endDate > Date.now() ? (
           <View style={[badgesStyles.badge, { backgroundColor: '#f26925' }]}>
@@ -119,7 +90,7 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
 
       {/** Trainer name */}
       <Text style={listStyles.subHeading}>
-        {trainer.trainerfirst + ' ' + trainer.trainerlast}
+        {trainer?.trainerfirst + ' ' + trainer?.trainerlast}
       </Text>
       {/** Start and end date */}
       <Text style={listStyles.textRegular}>

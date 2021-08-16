@@ -94,35 +94,25 @@ const AddBatch: React.FC = () => {
 
   /** Add batch function */
   const AddNewBatch = () => {
-    if(curriculumValue && trainerValue && batchSizeValue) {
-      dispatch(
-        addBatch({
-          trainerId: trainerValue,
-          curriculumId: curriculumValue,
-          batchSize: batchSizeValue,
-          startDate: startDate.toISOString(),
-          endDate: endDate.toISOString(),
-          clientId: null,
-        })
-      );
-      Toast.show({
-        type: 'success',
-        position: 'top',
-        text1: 'Success!',
-        text2: `${trainerValue} has been assigned to a new batch.`,
-        topOffset: 50,
+    dispatch(
+      addBatch({
+        trainerId: trainerValue,
+        curriculumId: curriculumValue,
+        batchSize: batchSizeValue,
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+        clientId: null,
       })
-      navigation.goBack();
-    }
-    else{
-      Toast.show({
-        type: 'error',
-        position: 'top',
-        text1: 'Invalid Batch',
-        text2: 'One or more of the required fields are empty.',
-        topOffset: 50,
-      })
-    }
+    );
+
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: `Batch has been added!`,
+      topOffset: 125,
+    });
+    navigation.goBack();
   };
 
   return (

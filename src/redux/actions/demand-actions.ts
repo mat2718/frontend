@@ -14,6 +14,7 @@ export const getAllDemand = () => async (dispatch: Dispatch<IAppAction>) => {
         skills: [],
         clients: [],
         batches: [],
+        onebatch: [],
         curricula: [],
         demands: res.data,
         trainers: [],
@@ -25,24 +26,29 @@ export const getAllDemand = () => async (dispatch: Dispatch<IAppAction>) => {
   }
 };
 
-export const addDemand = (demand: {}) => async (dispatch: Dispatch) => {
-  try {
-    console.log(demand);
-    await axios.post('demand', demand);
-    const res = await axios.get('demand');
-    dispatch({
-      type: AppActions.UPDATE_DEMAND,
-      payload: {
+export const addDemand =
+  (demand: {}) => async (dispatch: Dispatch<IAppAction>) => {
+    try {
+      await axios.post('demand', demand);
+      const res = await axios.get('demand');
+      dispatch({
         type: AppActions.UPDATE_DEMAND,
-        payload: { demands: res.data },
-      },
-    });
+        payload: {
+          skills: [],
+          clients: [],
+          batches: [],
+          onebatch: [],
+          curricula: [],
+          demands: res.data,
+          trainers: [],
+        },
+      });
 
-    return 'Demand has been added';
-  } catch (error) {
-    console.log(error);
-  }
-};
+      return 'Demand has been added';
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 export const getDemandById =
   (demandId: number) => async (dispatch: Dispatch<IAppAction>) => {

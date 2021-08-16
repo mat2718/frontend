@@ -23,6 +23,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useDispatch } from 'react-redux';
 import axios from '../../../axiosConfig';
 import { addDemand } from '../../redux/actions/demand-actions';
+import Toast from 'react-native-toast-message';
 
 interface PropsI {
   route: {
@@ -84,7 +85,13 @@ const AddDemand: React.FC<PropsI> = ({ route }) => {
         quantitydemanded: howMany,
       })
     );
-
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: `Demand has been added!`,
+      topOffset: 125,
+    });
     navigation.goBack();
   };
 
