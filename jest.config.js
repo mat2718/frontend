@@ -6,17 +6,17 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
     '<rootDir>/src/**/*/batches/**/*.{ts,tsx,js,jsx}',
-    '!<rootDir>/src/**/*.test.*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/**/*.test.{ts,tsx,js,jsx}',
     '!<rootDir>/src/components/clients_old/**/*',
     '!<rootDir>/src/screens/clients-old/**/*',
-    '!<rootDir>/src/assets/**/*',
-    '!<rootDir>/src/types.ts',
+    // '!<rootDir>/src/assets/**/*',
+    // '!<rootDir>/src/types.ts',
     '!<rootDir>/src/entities/*',
   ],
-  coveragePathIgnorePatterns: [
-    '**/__tests__/**/*.[jt]s?(x)',
-    '**/*/clients_old/**/*',
-  ],
+  // coveragePathIgnorePatterns: [
+  //   '**/__tests__/**/*.[jt]s?(x)',
+  //   '**/*/clients_old/**/*',
+  // ],
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
@@ -34,14 +34,31 @@ module.exports = {
  * @returns array with a single string element
  */
 function returnTransformIgnorePatterns(ignoreThese) {
+  const defaultIgnore = [
+    'react-native',
+    '@react-native-community',
+    'expo(nent)?',
+    '@expo(nent)?/.*',
+    'react-navigation',
+    '@react-navigation/.*',
+    '@unimodules/.*',
+    'unimodules',
+    'sentry-expo',
+    'native-base',
+    'react-native-svg',
+  ];
+  const allLibraries = [
+    ...defaultIgnore,
+    ...ignoreThese,
+  ];
   const start = 'node_modules/(?!(jest-)?(';
   const end = ')/)';
   let str = start;
-  for (const i in ignoreThese) {
+  for (const i in allLibraries) {
     if (+i === 0) {
-      str += `${ignoreThese[i]}`;
+      str += `${allLibraries[i]}`;
     } else {
-      str += `|${ignoreThese[i]}`;
+      str += `|${allLibraries[i]}`;
     }
   }
   str += end;
@@ -66,24 +83,13 @@ function addConfig(config) {
   ];
 
   /* comment this out if you want to test all files */
-  // config.testMatch = [
-  //   '<rootDir>/src/screens/view-edit-trainer/**/*.test.[jt]s?(x)',
-  // ];
+  config.testMatch = [
+    '<rootDir>/src/components/batches/**/*.test.[jt]s?(x)',
+  ];
 
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
   const ignoreThese = [
-    'react-native',
-    '@react-native-community',
-    'expo(nent)?',
-    '@expo(nent)?/.*',
-    'react-navigation',
-    '@react-navigation/.*',
-    '@unimodules/.*',
-    'unimodules',
-    'sentry-expo',
-    'native-base',
-    'react-native-svg',
     '@react-native-picker',
     'react-native-picker-select',
     'react-native-chart-kit',

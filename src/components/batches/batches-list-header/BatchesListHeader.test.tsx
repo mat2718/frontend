@@ -48,7 +48,12 @@ describe('Batches', () => {
 
   /** Tests the add button */
   it('pressing the button navigates to new screen', () => {
-    let button = wrapper.find({ testID: 'button' }).last();
+    let button = wrapper
+      .find({ testID: 'button' })
+      .findWhere( (node:any) => 
+        node.props().hasOwnProperty('onPress') 
+      );
+    button = button.length ? button.last() : button;
     button.invoke('onPress')();
     expect(mockNavigate).toHaveBeenCalledWith('AddBatch');
   });
