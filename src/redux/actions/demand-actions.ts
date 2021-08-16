@@ -45,40 +45,42 @@ export const addDemand = (demand: {}) => async (dispatch: Dispatch) => {
 };
 
 export const getDemandById =
-  (demandId: number) => async (dispatch: Dispatch<IAppAction>) => {
+  async (demandId: number) => {
     try {
-      return await axios.get(`demand/id/${demandId}`);
+      const res = await axios.get(`demand/id/${demandId}`);
+      return res.data;
     } catch (error) {
       return error.response.data;
     }
   };
 
 export const getDemandByDate =
-  (startDate: string, endDate: string) =>
-  async (dispatch: Dispatch<IAppAction>) => {
+  async (startDate: string, endDate: string) => {
     try {
-      return await axios.get(`demand/date/${startDate}/${endDate}`);
+      const res = await axios.get(`demand/date/${startDate}/${endDate}`);
+      return res.data;
     } catch (error) {
       return error.response.data;
     }
   };
 
 export const getDemandByCurrId =
-  (curriculumId: number) => async (dispatch: Dispatch<IAppAction>) => {
+  async (curriculumId: number) => {
     try {
-      return await axios.get(`demand/curriculum/${curriculumId}`);
+      const res = await axios.get(`demand/curriculum/${curriculumId}`);
+      return res.data;
     } catch (error) {
       return error.response.data;
     }
   };
 
 export const getDemandByCurrIdAndDate =
-  (curriculumId: number, startDate: string, endDate: string) =>
-  async (dispatch: Dispatch<IAppAction>) => {
+  async (curriculumId: number, startDate: string, endDate: string) => {
     try {
-      return await axios.get(
+      const res = await axios.get(
         `demand/curriculum/${curriculumId}/${startDate}/${endDate}`
       );
+      return res.data;
     } catch (error) {
       return error.response.data;
     }
