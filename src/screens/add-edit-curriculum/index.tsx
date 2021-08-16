@@ -36,39 +36,15 @@ const AddEditCurriculum: React.FC = () => {
 
   //post Curriculum function for add-curriculum screen
   const postCurriculum = () => {
-    const newCurriculum = {
-        curriculumname: name,
-        createdby: createdBy,
-        createdon: createdDate.toISOString(),
-        skillIdArr: skills
-    }
-    const json = JSON.stringify(newCurriculum);
-
-    if(newCurriculum.createdby && newCurriculum.createdon && newCurriculum.curriculumname && newCurriculum.skillIdArr) {
-      dispatch(PostCurriculum(json));
-      //add a success toast for each filled in input
-      Toast.show({
-        type: 'success',
-        position: 'top',
-        text1: 'Success!',
-        text2: `Curriculum: ${newCurriculum.curriculumname} has been added.`
-      })
-      navigation.navigate('Curricula');
-      //fail toast for non-filled inputs
-    } else {
-      Toast.show({
-        type: 'error',
-        position: 'top',
-        text1: 'Error',
-        text2:`You have failed to fill in all the required fields below.`
-      })
-    }
-
-    
-  }
-
-  const onSkillChange = (skills: ISkill) => {
-    setSkills(skills);
+    dispatch(PostCurriculum(props.newCurriculum));
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: 'A Curriculum has been added to the Curricula List.',
+      topOffset: 50
+    })
+    navigation.goBack();
   }
 
   const showPicker = () => {
