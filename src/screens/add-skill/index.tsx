@@ -7,7 +7,6 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import Header from '../../components/batches/header';
 import { addSkill } from '../../redux/actions/skill-actions';
 import { useDispatch } from 'react-redux';
 import {
@@ -17,6 +16,13 @@ import {
   buttonStyles,
 } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
+
+/**
+ * Add Skill - main screen for adding a new skill
+ * @returns {React.FC} - the screen for adding a new skill
+ * @author Oriel Red Oral
+ */
 
 const AddSkill: React.FC = () => {
   /** Navigation for going back a screen */
@@ -31,7 +37,13 @@ const AddSkill: React.FC = () => {
         skillName: skill,
       })
     );
-
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: `Skill has been added!`,
+      topOffset: 125,
+    });
     navigation.goBack();
   };
 
@@ -57,7 +69,7 @@ const AddSkill: React.FC = () => {
           </TouchableOpacity>
         </View>
         {/** Form view */}
-        {/** Client name */}
+        {/** Skill name */}
         <View style={{ flexDirection: 'column' }}>
           <Text style={inputStyles.inputLabelText}>Skill name</Text>
           <TextInput style={inputStyles.textInput} onChangeText={setSkill} />

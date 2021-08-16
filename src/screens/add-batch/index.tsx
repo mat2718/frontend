@@ -23,6 +23,7 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import { addBatch } from '../../redux/actions/batch-actions';
+import Toast from 'react-native-toast-message';
 
 /**
  * Add Batch - the component for adding a new batch to the database
@@ -104,6 +105,13 @@ const AddBatch: React.FC = () => {
       })
     );
 
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: `Batch has been added!`,
+      topOffset: 125,
+    });
     navigation.goBack();
   };
 
