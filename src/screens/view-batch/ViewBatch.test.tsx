@@ -32,21 +32,12 @@ describe('Batches', () => {
       <ViewBatch
         route={{
           params: {
-            batchSize: 20,
-            batchId: 1,
             curriculum: {
-              curriculumid: 1,
-              curriculumname: 'curr',
+              curriculumId: 0,
               skillnamearr: [],
             },
-            trainer: {
-              trainerid: 1,
-              trainerfirst: 'some',
-              trainerlast: 'guy',
-            },
-            startDate: 'start date lol',
-            endDate: 'end date lol',
-            confirmed: true,
+            trainerId: 1,
+            batchId: 1,
           },
         }}
       />
