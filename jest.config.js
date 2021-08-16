@@ -67,7 +67,7 @@ function addConfig(config) {
 
   /* comment this out if you want to test all files */
   config.testMatch = [
-    '<rootDir>/src/screens/create*/*.test.[jt]s?(x)',
+    '<rootDir>/src/components/trainers/**/*.test.[jt]s?(x)',
   ];
 
   // third-party libraries that throw errors
@@ -94,6 +94,7 @@ function addConfig(config) {
     'expo-font',
     'expo-asset',
     'expo-constants',
+    'react-native-toast-message'
   ];
 
   console.log(

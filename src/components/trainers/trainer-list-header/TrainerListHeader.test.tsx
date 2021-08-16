@@ -3,6 +3,11 @@ import { mount } from 'enzyme';
 import { TouchableOpacity } from 'react-native';
 import TrainerListHeader from '.';
 import { useNavigation } from '@react-navigation/native';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import { Reducer } from '../../../redux/reducer';
 
 
 const mockNavigate = jest.fn();
@@ -23,15 +28,22 @@ const setSelectedFilter = (filter: string) => {
 };
 
 describe('TrainerListHeader', () => {
-  beforeEach(() => {
-    wrapper = mount(
+  beforeEach(() =>
+  {
+    const mockStore = createStore(
+      Reducer,
+      composeWithDevTools(applyMiddleware(thunk))
+    );
+    
+      wrapper = mount(
+        <Provider store={mockStore}>
       <TrainerListHeader
         setTrainerArr={() => {
           /** function here??? */
         }}
-        trainerArray={['Hi', 'Hello']}
-      />
-    );
+        />
+        </Provider>);
+    
   });
 
   /** tests if the component is there */

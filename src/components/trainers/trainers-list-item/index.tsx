@@ -8,6 +8,7 @@ import { listStyles, colors } from '../../../styles';
 import ITrainer from '../../../Entities/Trainer';
 import Toast from 'react-native-toast-message';
 import { useDispatch } from 'react-redux';
+import { deleteATrainer } from '../../../redux/actions/trainers-actions';
 
 interface IProps
 {
@@ -33,6 +34,7 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
   // Delete Trainer Action Handler call
   const deleteTrainer = (trainer: ITrainer) =>
   {
+    dispatch(deleteATrainer(trainer));
     Toast.show({
       type: 'success',
       position: 'top',
