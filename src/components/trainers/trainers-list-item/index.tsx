@@ -6,53 +6,61 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import { listStyles, colors } from '../../../styles';
 import ITrainer from '../../../Entities/Trainer';
-import { useState } from 'react';
+import Toast from 'react-native-toast-message';
+import { useDispatch } from 'react-redux';
 
 interface IProps
 {
   trainer: ITrainer
 }
 
+/**
+ * Trainer FlatList - a sub-component of the Main Trainer Screen that displays a list of trainers
+ * @param {IProps} interface - properties of the entity trainer 
+ * @returns {React.FC} - React Component that returns a flatlist of trainers
+ * @author Joab Smith and Imran Ilyas
+ */
+
 const TrainersListItem: React.FC<IProps> = (props: IProps) =>
 {
-  /** Navigation stuff */
+  // Navigation setup
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
   const [selectedFilter, setSelectedFilter] = React.useState('');
+  
+  const dispatch = useDispatch();
 
+  // Delete Trainer Action Handler call
   const deleteTrainer = (trainer: ITrainer) =>
   {
-    console.log('Delete');
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: 'You have deleted a trainer.'
+    })
     //Update Redux
     //Axios Request
   }
-const editTrainer = () => {
-  navigation.navigate('ViewEditTrainer', props.trainer);
-}
-
-
-// itemValue, itemIndex) =>
-//               {
-//                 setSelectedFilter(itemValue);
-//                 if (selectedFilter === 'Edit') {
-//                   navigation.navigate('ViewEditTrainer', props.trainer);
-//                 } else if (selectedFilter === 'Delete') {
-//                   deleteTrainer(props.trainer);
-//                 }
-//               }   
 
   return (
-    /** Individual Trainer Touchable */
-    /** Structures and displays the data from the FlatList */
+    // Structures and displays the data from the FlatList
     <View style={listStyles.listItemContainer}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Text style={listStyles.heading}>{props.trainer.trainerfirst + ' ' + props.trainer.trainerlast}</Text>
+        {/* Dropdown for selecting edit or delete trainer */}
         <Picker
             mode='dropdown'
             selectedValue={selectedFilter}
           onValueChange={(itemValue, itemIndex) => {
-            itemValue === 'Edit' ? navigation.navigate('ViewEditTrainer', props.trainer) :
-            itemValue === 'Delete' ? deleteTrainer(props.trainer) : null
+            // Navigate to Edit Trainer screen
+            if(itemValue === 'Edit') {
+              navigation.navigate('ViewEditTrainer', props.trainer)
+             }
+            // Delete Trainer 
+            else if (itemValue === 'Delete') {
+               deleteTrainer(props.trainer)
+            }
           }}
             style={{ width: 50 }}
         >

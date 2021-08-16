@@ -1,6 +1,12 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Image, View } from 'react-native';
 
+/**
+ * Loading Splash Screen - a splash screen
+ * @returns {React.FC} - displays the Revature logo during the loading of the application
+ * @author Kaiyip Ho
+ */
+
 const SplashScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>

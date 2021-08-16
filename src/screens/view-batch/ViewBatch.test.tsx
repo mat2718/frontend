@@ -1,69 +1,74 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
 import { mount } from 'enzyme';
-import Header from '../../components/batches/header';
 import ViewBatch from '.';
 
+/**
+ * View Batch Test - test file for the ViewBatch screen
+ * @author Matthew Otto and Oriel Red Oral
+ */
+
+/** wrapper for mounting */
 let wrapper: any;
 
+/** mock react navigation */
 const mockNavigate = jest.fn();
 const mockGoBack = jest.fn();
-jest.mock('@react-navigation/native' , () => {
-  return ({
+jest.mock('@react-navigation/native', () => {
+  return {
     ...jest.requireActual('@react-navigation/native'),
     useNavigation: () => {
-      return ({
+      return {
         navigate: mockNavigate,
         goBack: mockGoBack,
-      })
+      };
     },
-  });
+  };
 });
 
+/** test suite */
 describe('Batches', () => {
   beforeEach(() => {
     wrapper = mount(
       <ViewBatch
         route={{
           params: {
-            associate: 25,
-            batchId: 0,
-            curriculum: 'Cloud Native',
-            trainer: 'Robert Connell',
-            startDate: 1622505600000,
-            endDate: 1627776000000,
+            batchSize: 20,
+            batchId: 1,
+            curriculum: {
+              curriculumid: 1,
+              curriculumname: 'curr',
+              skillnamearr: [],
+            },
+            trainer: {
+              trainerid: 1,
+              trainerfirst: 'some',
+              trainerlast: 'guy',
+            },
+            startDate: 'start date lol',
+            endDate: 'end date lol',
+            confirmed: true,
           },
         }}
       />
     );
   });
 
-  //tests if the component is there
+  /** tests if the component is there */
   it('should be there', () => {
     expect(wrapper).not.toBe(undefined);
   });
 
-  // tests if the header is defined
-  it('should display the header', () => {
-    const shouldBeHeader = wrapper.find(Header);
-    expect(shouldBeHeader).toBeDefined();
-  });
-
-  /** tests the edit batch button */
-  it('should be pressed', () => {
-    const shouldBePressed = wrapper
-      .find(TouchableOpacity)
-      .findWhere( (node:any) => 
-        node.props().hasOwnProperty('onPress')
-      )
-      .last();
-    const myEventHandler = jest.spyOn(shouldBePressed.props(), 'onPress');
-
-    const actualEventHandler = shouldBePressed.prop('onPress');
-    actualEventHandler();
-
-    expect(myEventHandler).toHaveBeenCalled();
+  /** Tests the edit batch button */
+  it('pressing the button navigates to new screen', () => {
+    let button = wrapper.find({ testID: 'editButton' }).last();
+    button.invoke('onPress')();
+    expect(mockNavigate).toHaveBeenCalledWith('EditBatch', {
+      batchid: 1,
+      batchsize: 20,
+      trainerid: 1,
+      curriculumid: 1,
+      startdate: 'start date lol',
+      enddate: 'end date lol',
+    });
   });
 });
-
-// yeet
