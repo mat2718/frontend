@@ -1,11 +1,18 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import { Text } from 'react-native';
+import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
 import BatchListItem from '.';
 
 /**
  * Batch List Item Test - test file for the BatchistItemComponent
  * @author Matthew Otto and Oriel Red Oral
  */
+
+/** Wrapper for mounting */
+let wrapper: any;
 
 /** Mock react navigation */
 const mockBack = jest.fn();
@@ -21,32 +28,55 @@ jest.mock('@react-navigation/native', () => {
     },
   };
 });
-/** Wrapper for mounting */
-let wrapper: any;
 
+/** mockProps for this component */
 const mockProps = {
-  batchId: 0,
-  batchSize: 25,
-  startDate: 'start date lol',
-  endDate: 'end date lol',
-  curriculum: 0,
-  trainer: 0,
-  confirmed: true,
+  batchId: 1,
+  batchSize: 20,
+  curriculumId: 1,
+  trainerId: 1,
+  startDate: new Date(Date.now()).toISOString(),
+  endDate: new Date(Date.now()).toISOString(),
+  confirmed: false,
 };
 
+/** testState */
+let curriculumState = [
+  {
+    curriculumid: 1,
+    createdby: '2106RNCN',
+    createdon: '2021-08-09T00:00:00.000Z',
+    lastmodified: '2021-08-09T00:00:00.000Z',
+    lastmodifiedby: '2106RNCN',
+    curriculumname: 'React Native Cloud Native',
+    skillidarr: [1],
+    skillnamearr: ['JavaScript'],
+  },
+];
+
+/** testState */
+let trainerState = [
+  {
+    trainerid: 1,
+    email: 'Matt.oberlin@yahoo.com',
+    trainerfirst: 'Matt',
+    trainerlast: 'Oberlin',
+  },
+];
+
+/** mockStore */
+let mockStore = configureStore([thunk])({
+  trainers: trainerState,
+  curricula: curriculumState,
+});
+
 /** Test suite */
-describe('Batches', () => {
+describe('BatchListItem', () => {
   beforeEach(() => {
     wrapper = mount(
-      <BatchListItem
-        batchSize={20}
-        batchId={0}
-        curriculumId={1}
-        trainerId={1}
-        startDate='2021-10-11T00:00:00.000Z'
-        endDate='2021-10-11T00:00:00.000Z'
-        confirmed={true}
-      />
+      <Provider store={mockStore}>
+        <BatchListItem {...mockProps} />
+      </Provider>
     );
   });
 
@@ -57,8 +87,87 @@ describe('Batches', () => {
 
   /** Tests the navigate button */
   it('pressing the button navigates to new screen', () => {
-    let button = wrapper.find({ testID: 'button' }).last();
+    let button = wrapper
+      .find({ testID: 'viewBatchButton' })
+      .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
+      .last();
     button.invoke('onPress')();
-    expect(mockNavigate).toHaveBeenCalledWith('ViewBatch', mockProps);
+    expect(mockNavigate).toHaveBeenCalled();
+  });
+
+  /** Tests the useSelector for curriculum */
+  it('should test the curriculum state from redux', () => {
+    expect(
+      wrapper
+        .find(Text)
+        .someWhere((node: any) =>
+          node.text().includes(curriculumState[0].curriculumname)
+        )
+    ).toBeTruthy();
+  });
+
+  /** Tests the useSelector for trainers */
+  it('should test the trainers state from redux', () => {
+    expect(
+      wrapper
+        .find(Text)
+        .someWhere((node: any) =>
+          node.text().includes(trainerState[0].trainerfirst)
+        )
+    ).toBeTruthy();
+  });
+
+  /** Tests if the upcoming badge shows */
+  it('tests if the upcoming badge shows', () => {
+    const active = mount(
+      <Provider store={mockStore}>
+        <BatchListItem
+          batchId={1}
+          batchSize={20}
+          curriculumId={1}
+          trainerId={1}
+          startDate={new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()}
+          endDate={new Date(Date.now() + 24 * 60 * 60 * 2000).toISOString()}
+          confirmed={false}
+        />
+      </Provider>
+    );
+    expect(active).toBeTruthy();
+  });
+
+  /** Tests if the active badge shows */
+  it('tests if the active badge shows', () => {
+    const active = mount(
+      <Provider store={mockStore}>
+        <BatchListItem
+          batchId={1}
+          batchSize={20}
+          curriculumId={1}
+          trainerId={1}
+          startDate={new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()}
+          endDate={new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()}
+          confirmed={false}
+        />
+      </Provider>
+    );
+    expect(active).toBeTruthy();
+  });
+
+  /** Tests if the completed badge shows */
+  it('tests if the completed badge shows', () => {
+    const active = mount(
+      <Provider store={mockStore}>
+        <BatchListItem
+          batchId={1}
+          batchSize={20}
+          curriculumId={1}
+          trainerId={1}
+          startDate={new Date(Date.now() + 24 * 60 * 60 - 2000).toISOString()}
+          endDate={new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()}
+          confirmed={false}
+        />
+      </Provider>
+    );
+    expect(active).toBeTruthy();
   });
 });

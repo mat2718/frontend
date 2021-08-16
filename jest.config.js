@@ -4,8 +4,12 @@ module.exports = {
   projects: [addConfig(withEnzyme(require('jest-expo/android/jest-preset')))],
   collectCoverage: true,
   collectCoverageFrom: [
-    '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
-    '<rootDir>/src/**/*/batches/**/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/**/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/components/batches/**/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/screens/batches/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/screens/add-batch/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/screens/edit-batch/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/screens/view-batch/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/**/*.test.*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/components/clients_old/**/*',
     '!<rootDir>/src/screens/clients-old/**/*',
@@ -24,7 +28,6 @@ module.exports = {
     },
   },
 };
-
 
 /**
  * Returns an array with a single string that tells Babel to ignore uncompiled
@@ -67,7 +70,12 @@ function addConfig(config) {
 
   /* comment this out if you want to test all files */
   config.testMatch = [
-    '<rootDir>/src/screens/create*/*.test.[jt]s?(x)',
+    '<rootDir>/src/screens/view-batch/*.test.[jt]s?(x)',
+    // '<rootDir>/src/components/batches/**/*.test.[jt]s?(x)',
+    // '<rootDir>/src/screens/add-batch/*.test.[jt]s?(x)',
+    // '<rootDir>/src/screens/edit-batch/*.test.[jt]s?(x)',
+    // '<rootDir>/src/screens/view-batch/*.test.[jt]s?(x)',
+    // '!<rootDir>/src/screens/batches/**/*.test.[jt]s?(x)',
   ];
 
   // third-party libraries that throw errors
@@ -94,6 +102,8 @@ function addConfig(config) {
     'expo-font',
     'expo-asset',
     'expo-constants',
+    'react-native-iphone-x-helper',
+    'react-native-toast-message',
   ];
 
   console.log(
