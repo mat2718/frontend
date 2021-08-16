@@ -12,7 +12,6 @@ interface IProps {
 
 const DemandsListItem: React.FC<IProps> = (props: IProps) => {
   /** States for Picker */
-  const [selectedFilter, setSelectedFilter] = React.useState();
   const [curriculum, setCurriculum] = React.useState([
     {
       curriculumname: '',
@@ -52,20 +51,6 @@ const DemandsListItem: React.FC<IProps> = (props: IProps) => {
               ' needed by ' +
               new Date(props.needby).toDateString()}
           </Text>
-        </View>
-        {/** Dropdown menu */}
-        <View>
-          <Picker
-            mode='dropdown'
-            selectedValue={selectedFilter}
-            onValueChange={(itemValue, itemIndex) =>
-              setSelectedFilter(itemValue)
-            }
-            style={{ width: 50 }}
-          >
-            <Picker.Item label='Edit demand' value='edit' />
-            <Picker.Item label='Delete demand' value='delete' />
-          </Picker>
         </View>
       </View>
     </View>

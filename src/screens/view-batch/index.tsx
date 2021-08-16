@@ -51,6 +51,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
     batchId: route.params.batchId,
     trainerId: route.params.trainerId,
     curriculumId: route.params.curriculum.curriculumId,
+    skillId: 0,
   };
 
   /** Navigation stuff */
@@ -228,7 +229,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
 
         {/** Skills list **/}
         <FlatList
-          data={batch[0].skillnamearr}
+          data={batch[0].skillnamearr.sort((a, b) => (a > b ? 1 : -1))}
           renderItem={renderItem}
           keyExtractor={(item: any) => item}
           style={{

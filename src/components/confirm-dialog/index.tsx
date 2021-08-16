@@ -51,6 +51,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
     navigation.goBack();
   };
 
+  /** Delete skill function */
   const confirmDeleteSkill = () => {
     dispatch(deleteSkill(props.payload.skillId));
     Toast.show({

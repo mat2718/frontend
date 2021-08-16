@@ -45,7 +45,9 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
   };
 
   /** Get demands */
-  const demandsState = useSelector((state: RootStore) => state.demands);
+  const demandsState = useSelector((state: RootStore) => state.demands).sort(
+    (a, b) => b.quantitydemanded - a.quantitydemanded
+  );
   const demands = demandsState.filter(
     (demand) => demand.clientid === route.params.clientid
   );
