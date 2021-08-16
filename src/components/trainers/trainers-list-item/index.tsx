@@ -9,6 +9,7 @@ import ITrainer from '../../../Entities/Trainer';
 import Toast from 'react-native-toast-message';
 import { useDispatch } from 'react-redux';
 import { deleteATrainer } from '../../../redux/actions/trainers-actions';
+import ConfirmDialog from '../../confirm-dialog';
 
 interface IProps
 {
@@ -28,7 +29,10 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
   const [selectedFilter, setSelectedFilter] = React.useState('');
-  
+  const [visible, setVisible] = React.useState(false);
+  const [dialogType, setDialogType] = React.useState('');
+  const [payload, setPayload] = React.useState(props.trainer.trainerid);
+
   const dispatch = useDispatch();
 
   // Delete Trainer Action Handler call
@@ -39,7 +43,8 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
       type: 'success',
       position: 'top',
       text1: 'Success!',
-      text2: 'You have deleted a trainer.'
+      text2: 'You have deleted a trainer.',
+      topOffset: 50,
     })
     //Update Redux
     //Axios Request
@@ -72,6 +77,12 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
         </Picker>
       </View>
       <Text style={listStyles.textRegular}>{'Email: ' + props.trainer.email}</Text>
+      <ConfirmDialog
+          type={dialogType}
+          setVisible={setVisible}
+          visible={visible}
+          payload={payload}
+        />
       </View>
   );
 };
