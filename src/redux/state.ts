@@ -38,6 +38,7 @@ export const initialState: IAppState = {
       clientid: 0,
       batchid: 0,
       confirmed: false,
+      skillnamearr: [],
     },
   ],
   trainers: [],

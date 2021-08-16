@@ -1,8 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { useDispatch } from 'react-redux';
-import { RootStackParamList } from '../../../types';
 import { listStyles, colors } from '../../../styles';
 import { Picker } from '@react-native-picker/picker';
 import axios from '../../../../axiosConfig';
@@ -14,9 +11,6 @@ interface IProps {
 }
 
 const DemandsListItem: React.FC<IProps> = (props: IProps) => {
-  /** Navigation stuff */
-  type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
-
   /** States for Picker */
   const [selectedFilter, setSelectedFilter] = React.useState();
   const [curriculum, setCurriculum] = React.useState([

@@ -4,7 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import { listStyles } from '../../../styles';
-import { getDemandByClientId } from '../../../redux/actions/demand-actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootStore } from '../../../../App';
 
 interface IProps {
   clientname: string;
@@ -15,23 +16,14 @@ interface IClientList {
   clientname: string;
 }
 const ClientsListItem: React.FC<IProps> = (props: IProps) => {
-  const [demands, setDemands] = React.useState([{}]);
-
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 
-  const fetchDemands = async () => {
-    setDemands(await getDemandByClientId(props.clientid));
-  };
-
-  React.useEffect(() => {
-    fetchDemands();
-
-    return function cleanup() {
-      setDemands([]);
-    };
-  }, []);
+  const demandsState = useSelector((state: RootStore) => state.demands);
+  const demands = demandsState.filter(
+    (demand) => demand.clientid === props.clientid
+  );
 
   /**
    * Touchable Link to contain individual Batch information.
@@ -47,7 +39,6 @@ const ClientsListItem: React.FC<IProps> = (props: IProps) => {
         navigation.navigate('ViewClient', {
           clientid: props.clientid,
           clientname: props.clientname,
-          demands: demands,
         });
       }}
     >
