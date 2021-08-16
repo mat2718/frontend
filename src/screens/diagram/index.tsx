@@ -1,13 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import {View,Text,StyleSheet,Dimensions, Button} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity, Dimensions, Button,
+} from 'react-native';
 import { screenStyles, textStyles, buttonStyles } from '../../styles';
 import { LineChart } from 'react-native-chart-kit';
 import { Picker } from '@react-native-picker/picker';
-import { getAllDemand, getDemandByDate, getDemandByCurrIdAndDate, getDemandByCurrId, getDemandByClientId, getDemandById} from '../../redux/actions/demand-actions';
-import { useSelector, useDispatch } from "react-redux";
-import { IAppState } from '../../redux/state';
-import moment from 'moment';
+import axios from 'axios';
 
+
+const screenWidth = Dimensions.get("window").width;
+
+const chartConfig = {
+    backgroundGradientFrom: '#ffffff',
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientTo: '#ffffff',
+    backgroundGradientToOpacity: 0.5,
+    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+    strokeWidth: 2, // optional, default 3
+    useShadowColorFromDataset: true, // optional
+    fromZero:true,
+  };
 
   const fakeDataGen = () => {
     let dataArr = [];
@@ -19,8 +36,21 @@ import moment from 'moment';
     }
     return dataArr;
   }
-  
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  // kai to use later when we have redux to get data on curricula and associates
+
+  // let clientData = {
+  //   data: fakeDataGen(),
+  //   color: (opacity = 5) => `rgba(242, 105, 38, ${opacity})`,
+  //   strokeWidth: 2
+  // }
+
+  // let revData = {
+  //   data: fakeDataGen(),
+  //   color: (opacity = 1) => `rgba(115, 165, 194, ${opacity})`,
+  //   strokeWidth: 2
+  // }
+
+  const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
   //calls for +6 and -6 from date.now then sort - kai with BE 
   const renderData = () => {
@@ -41,118 +71,49 @@ import moment from 'moment';
   legend: ["Client Demand","Associate Supply"] // optional
     };
   }
-  
+
+  //will use this later to see if overflow or underflow of client's demand
+  const negOrPost = () => {
+    // if(clientDemand - supply > 0){
+    //   return "Missing"
+    // } else {
+    //   return "Overflow by"
+    // }
+  }
 
   const Diagram: React.FC = () => {
-    const allCurricula = useSelector((state: IAppState) => state.curricula)
     const [currCurriculum, setCurriculum] = useState('All Curriculum');
-    const [demandData, setDemandData] = useState([]);
+    const [demandData, setDemandData] = useState('Demand');
     const [supplyData, setSupplyData] = useState('Supply');
-    const [yearDemand, setYearDemand] = useState(0);
-    const [yearSupply, setYearSupply] = useState(0);
 
-    const screenWidth = Dimensions.get("window").width;
-
-    const chartConfig = {
-    backgroundGradientFrom: '#ffffff',
-    backgroundGradientFromOpacity: 0,
-    backgroundGradientTo: '#ffffff',
-    backgroundGradientToOpacity: 0.5,
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-    strokeWidth: 2, // optional, default 3
-    useShadowColorFromDataset: true, // optional
-    fromZero:true,
-    };
 
     const date = new Date();
-    const start = moment(new Date()).format("YYYY-MM-01");
-    const startDate = moment(moment(start).subtract(6,"M")).format("YYYY-MM-01");
-    const endDate = moment(moment(start).add(6,"M")).format("YYYY-MM-01")
+    const start = new Date(date.getFullYear(), date.getMonth(), 1);
+    const end = new Date(date.getFullYear(), date.getMonth(), 1);
+    const startDate = new Date(start.setMonth(start.getMonth() - 6)).toISOString().substring(0,10);
+    const endDate = new Date(end.setMonth(end.getMonth() + 6)).toISOString().substring(0,10);
+    
+    const demandGetter = async() => {
+      await axios.get(`https://dcox0bl0me.execute-api.us-east-1.amazonaws.com/Prod/demand`).then(resp => {
+        console.log(resp);
+        setDemandData(resp.data)}).catch(error=> console.log(error.response.data));
+    }
+
+    const batchesGetter = async() => {
+      await axios.get(`https://dcox0bl0me.execute-api.us-east-1.amazonaws.com/Prod/batch`).then(resp => {
+        console.log(resp);
+        setSupplyData(resp.data)}).catch(error=> console.log(error.response.data));
+    }
 
     useEffect(() => {
-      // getDemandById(20).then(res => setDemandData(res))
-      getDemandByDate(startDate, endDate).then((res) => setDemandData(res))
-
-      ;
-    }, []);
-
-    //modular picker for when we get full Curriculum
-    const renderPickerItems = () => {
-      const array = ["JavaScript", "Java", "React Native", "C++"];
-
-      return array.map((item, index) => (
-            <Picker.Item
-              key={index}
-              label={item}
-            />
-      ))
-    }
-
-    //renders the label months we need to see -6 and +6 months for the graph
-    const renderLabel = () => {
-      let labels = [];
-      let month = date.getMonth() - 6; //number
-      let counter = 13;
-
-      while(counter){
-        month = month % 12
-        labels.push(months[month++])
-        counter--;
-      }
-      return labels;
-    }
-
-
-    const filterDemandDataByMonth = () => {
-      let demandObj = {};
-      let month = moment(moment(start).subtract(6,"M")).format("YYYY-MM");
-      let counter = 13;
-
-      while(counter){
-        demandObj[month] = 0
-        month = moment(moment(month).add(1, "M")).format("YYYY-MM");
-        counter--;
-      }
-  
-      for(const data of demandData){
-        const key = moment(data.needby).format("YYYY-MM");
-        console.log(key, data.quantitydemanded)
-        demandObj[key] += data.quantitydemanded;
-        ;
-      };
-      return((demandObj));
-    };
-
-    const differenceView = () => {
-      const result = yearDemand - yearSupply;
-      if(result < 0){
-        return (
-            <View style={styles.resultNumbers}>
-              <Text style={styles.statText}>UNDER</Text>
-              <Text style={styles.statText}>{result}</Text>
-            </View>
-        )
-      } else if (result === 0){
-        return (
-            <View style={styles.resultNumbers}>
-              <Text style={styles.statText}>MEET</Text>
-              <Text style={styles.statText}>{result}</Text>
-            </View>
-        )
-      } else {
-        return (
-            <View style={styles.resultNumbers}>
-              <Text style={styles.statText}>OVERFLOW</Text>
-              <Text style={styles.statText}>{result}</Text>
-            </View>
-        )
-      }
-    }
+      demandGetter();
+      batchesGetter();
+    }, [currCurriculum]);
     
     return (
       <View style={screenStyles.mainView}>
         <Button title="Console log DemandState" onPress={() => console.log(demandData)}/>
-        <Button title="Console log SupplyState" onPress={() => console.log(filterDemandDataByMonth())}/>
+        <Button title="Console log SupplyState" onPress={() => console.log(demandData)}/>
         <View style={screenStyles.titleContainer}>
 
           <Text style={textStyles.subHeading}>
@@ -164,7 +125,10 @@ import moment from 'moment';
           onValueChange={(currCurriculum: string) => setCurriculum(currCurriculum)}
           style={{ height: 50, width: 50,  }}
         >
-          {renderPickerItems()}
+          <Picker.Item label='All Curriculum' value='All Curriculum' />
+          <Picker.Item label='JavaScript' value='JavaScript' />
+          <Picker.Item label='Java' value='Java' />
+          <Picker.Item label='Python' value='Python' />
         </Picker>
         </View>
 
@@ -194,7 +158,10 @@ import moment from 'moment';
               <Text style={styles.statText}>15</Text>
             </View>
               
-            {differenceView()}
+            <View style={styles.resultNumbers}>
+              <Text style={styles.statText}>MISSING</Text>
+              <Text style={styles.statText}>5</Text>
+            </View>
           </View>
         </View>
 

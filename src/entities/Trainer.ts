@@ -1,5 +1,5 @@
 interface ITrainer {
-  trainerId: number;
+  trainerid: number;
   email: string;
   trainerfirst: string;
   trainerlast: string;
