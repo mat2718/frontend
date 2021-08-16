@@ -75,7 +75,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
       type: 'success',
       position: 'top',
       text1: 'Success!',
-      text2: `Skill has been deleted!`,
+      text2: `Batch has been confirmed!`,
       topOffset: 125,
     });
     hideDialog();
