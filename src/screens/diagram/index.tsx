@@ -14,8 +14,8 @@ import { getAllDemand, getDemandByDate, getDemandByCurrIdAndDate, getDemandByCur
 import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from '../../redux/state';
 import { GetAllCurricula } from '../../redux/actions/curriculum-actions';
+import axios from 'axios';
 import moment from 'moment';
-
 
 
   const fakeDataGen = () => {
@@ -28,20 +28,7 @@ import moment from 'moment';
     }
     return dataArr;
   }
-  // kai to use later when we have redux to get data on curricula and associates
-
-  // let clientData = {
-  //   data: fakeDataGen(),
-  //   color: (opacity = 5) => `rgba(242, 105, 38, ${opacity})`,
-  //   strokeWidth: 2
-  // }
-
-  // let revData = {
-  //   data: fakeDataGen(),
-  //   color: (opacity = 1) => `rgba(115, 165, 194, ${opacity})`,
-  //   strokeWidth: 2
-  // }
-
+  
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
   //calls for +6 and -6 from date.now then sort - kai with BE 
@@ -92,12 +79,11 @@ import moment from 'moment';
     const endDate = moment(moment(start).add(6,"M")).format("YYYY-MM-01")
 
     useEffect(() => {
-      // let data = getDemandByCurrIdAndDate(2,"2021-11-01", "2021-12-21");
       // getDemandById(20).then(res => setDemandData(res))
       getDemandByDate(startDate, endDate).then((res) => setDemandData(res))
-      // setDemandData(getDemandByDate(startDate, endDate))
+
       ;
-    }, [currCurriculum]);
+    }, []);
 
     //modular picker for when we get full Curriculum
     const renderPickerItems = () => {
@@ -174,7 +160,7 @@ import moment from 'moment';
     
     return (
       <View style={screenStyles.mainView}>
-        <Button title="Console log DemandState" onPress={() => console.log(moment(demandData[15].needby).format("YYYY-MM-DD"))}/>
+        <Button title="Console log DemandState" onPress={() => console.log(demandData)}/>
         <Button title="Console log SupplyState" onPress={() => console.log(filterDemandDataByMonth())}/>
         <View style={screenStyles.titleContainer}>
 
