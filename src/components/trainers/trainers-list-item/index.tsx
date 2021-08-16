@@ -38,7 +38,10 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
   // Delete Trainer Action Handler call
   const deleteTrainer = (trainer: ITrainer) =>
   {
-    dispatch(deleteATrainer(trainer));
+    setDialogType('deleteBatch');
+    setVisible(true);
+    
+    //dispatch(deleteATrainer(trainer));
     Toast.show({
       type: 'success',
       position: 'top',

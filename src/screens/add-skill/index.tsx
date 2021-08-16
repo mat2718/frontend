@@ -17,6 +17,13 @@ import {
   buttonStyles,
 } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
+
+/**
+ * Add Skill Screen - displays a screen where the user can add a skill to the database
+ * @returns {React.FC} - React component for adding skills
+ * @author Oriel Red Oral and Imran Ilyas
+ */
 
 const AddSkill: React.FC = () => {
   /** Navigation for going back a screen */
@@ -26,13 +33,37 @@ const AddSkill: React.FC = () => {
   const dispatch = useDispatch();
 
   const addClientClick = () => {
-    dispatch(
-      addSkill({
-        skillName: skill,
+    const newSkill = {
+      skill: skill
+    }
+    // ensure field is not empty
+    if(newSkill.skill) {
+      dispatch(
+        addSkill({
+          skillName: skill,
+        })
+      );
+      // positive toast message
+      Toast.show({
+        type: 'success',
+        position: 'top',
+        text1: 'Success!',
+        text2: `${newSkill.skill} has been added to the Skill List.`,
+        topOffset: 50,
       })
-    );
-
-    navigation.goBack();
+      // return to Main Skills screen
+      navigation.goBack();
+    }
+    else{
+      // negative toast message
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Invalid Skill',
+        text2: 'The required field is empty.',
+        topOffset: 50,
+      })
+    }
   };
 
   return (
