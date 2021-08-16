@@ -80,7 +80,7 @@ export const updateTrainer = (trainer: ITrainer) => async (dispatch: any) => {
 };
 
 // Handler for getting a trainer by their first name
-export const getTrainerFName = (trainerName: string) => async () => {
+/*export const getTrainerFName = (trainerName: string) => async () => {
   try {
     const response: AxiosResponse = await axios.get(
       `trainer/firstname/${trainerName}`
@@ -112,3 +112,4 @@ export const getTrainerId = (trainerId: number) => async () => {
     return "Unable to retrieve trainer by ID: " + err;
   }
 };
+*/
