@@ -8,6 +8,7 @@ export default interface IOneBatch {
   clientid: number | null;
   batchid: number;
   confirmed: boolean;
+  skillnamearr: [];
 }
 
 export interface IBatchAxios {
@@ -21,5 +22,6 @@ export interface IBatchAxios {
     clientid: number | null;
     batchid: number;
     confirmed: boolean;
+    skillnamearr: [];
   }[];
 }

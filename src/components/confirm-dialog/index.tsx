@@ -19,7 +19,11 @@ interface IProps {
   type: string;
   visible: boolean;
   setVisible: any;
-  payload: number;
+  payload: {
+    batchId: number;
+    trainerId: number;
+    curriculumId: number;
+  };
 }
 
 const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
@@ -33,13 +37,19 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
 
   /** Delete batch function */
   const confirmDelete = () => {
-    dispatch(deleteBatch(props.payload));
+    dispatch(deleteBatch(props.payload.batchId));
     navigation.goBack();
   };
 
   /** Confirm batch function */
   const confirmConfirmBatch = () => {
-    dispatch(confirmBatch(props.payload));
+    dispatch(
+      confirmBatch(
+        props.payload.batchId,
+        props.payload.trainerId,
+        props.payload.curriculumId
+      )
+    );
     hideDialog();
   };
 

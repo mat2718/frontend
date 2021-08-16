@@ -46,6 +46,13 @@ interface PropsI {
 }
 
 const ViewBatch: React.FC<PropsI> = ({ route }) => {
+  /** Payload for the confirm dialog box */
+  const payload = {
+    batchId: route.params.batchId,
+    trainerId: route.params.trainerId,
+    curriculumId: route.params.curriculum.curriculumId,
+  };
+
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
@@ -72,11 +79,11 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
   /** Get batch information */
   const fetchBatch = () => {
     dispatch(
-      getBatchById({
-        batchId: route.params.batchId,
-        trainerId: route.params.trainerId,
-        curriculumId: route.params.curriculum.curriculumId,
-      })
+      getBatchById(
+        route.params.batchId,
+        route.params.trainerId,
+        route.params.curriculum.curriculumId
+      )
     );
   };
 
@@ -221,7 +228,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
 
         {/** Skills list **/}
         <FlatList
-          data={route.params.curriculum.skillnamearr}
+          data={batch[0].skillnamearr}
           renderItem={renderItem}
           keyExtractor={(item: any) => item}
           style={{
@@ -267,7 +274,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
           type={dialogType}
           setVisible={setVisible}
           visible={visible}
-          payload={route.params.batchId}
+          payload={payload}
         />
       </View>
     </SafeAreaView>
