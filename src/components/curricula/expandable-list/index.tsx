@@ -12,7 +12,7 @@ interface IProps {
 /**
  * Curriculum Expandable Flatlist- sub component of Curricula screen displaying list of curricula
  * @param {IProps} interface- properties of curriculum entity and onPress event
- * @returns {React.FC} - React component returning a list of curricula
+ * @returns {React.FC} - React component returning an expandable view of curricula
  * @author Hannah Mulato
  */
 

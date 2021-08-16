@@ -11,7 +11,7 @@ import { GetAllCurricula } from '../../redux/actions/curriculum-actions';
 
 /**
  * Main Screen for Curricula - shows information for all curricula
- * @returns {React.FC} - React Functional Component
+ * @returns {React.FC} - React functional component returning the flatlist of curricula
  * @author Hannah Mulato
  */
 

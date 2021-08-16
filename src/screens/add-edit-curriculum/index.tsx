@@ -46,14 +46,14 @@ const AddEditCurriculum: React.FC = () => {
 
     if(newCurriculum.createdby && newCurriculum.createdon && newCurriculum.curriculumname && newCurriculum.skillIdArr) {
       dispatch(PostCurriculum(json));
-      //add a scuccess toast for each filled in input
+      //add a success toast for each filled in input
       Toast.show({
         type: 'success',
         position: 'top',
         text1: 'Success!',
         text2: `Curriculum: ${newCurriculum.curriculumname} has been added.`
       })
-      navigation.navigate('AddEditCurriculum');
+      navigation.navigate('Curricula');
       //fail toast for non-filled inputs
     } else {
       Toast.show({
