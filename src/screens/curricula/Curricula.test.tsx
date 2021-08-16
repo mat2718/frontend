@@ -1,8 +1,11 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { FlatList, TouchableOpacity } from 'react-native';
-import Curricula, { DATA } from '.';
+import Curricula from '.';
 import { ExpandableList } from '../../components/curricula/expandable-list';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
 
 const mockNavigate = jest.fn();
 jest.mock('@react-navigation/native' , () => {
@@ -18,9 +21,27 @@ jest.mock('@react-navigation/native' , () => {
 
 describe('Curricula', () => {
   let wrapper: any;
+  const testState = {
+    testCurriculum: {
+      createdby: 'testCreator',
+      createdon: 'testDate',
+      lastmodified: 'testCreator',
+      lastmodifiedby: 'testDate',
+      curriculumname: 'test',
+      skillidarr: [0, 3, 2],
+      skillnamearr: ['test', 'test', 'test'],
+      curriculumid: 0,
+  }
+}
 
+  const mockStore = configureStore([thunk])(testState);
+  
   beforeEach(() => {
-    wrapper = mount(<Curricula />);
+    wrapper = mount(
+    <Provider store={mockStore}>
+      <Curricula />
+    </Provider>
+    );
   });
 
   //test if the component is working
@@ -36,7 +57,7 @@ describe('Curricula', () => {
 
   //test for flatlist holding data needed
   it('Flatlist should have data', () => {
-    const flatlistData = wrapper.find(FlatList).props(DATA);
+    const flatlistData = wrapper.find(FlatList);
     expect(flatlistData).toBeDefined();
   });
 
@@ -46,9 +67,13 @@ describe('Curricula', () => {
     expect(button).toBeDefined();
   });
 
+  //test to see if onRefresh event is invoked
+  it('Flatlist should respond to onRefresh event', () => {
+  })
+
   it('Should react on press', () => {
     const onPressEvent = jest.fn();
-    const wrap =  shallow(<ExpandableList item={{batches: ['a','b'], skills: ['c','d']}} onPress={onPressEvent}/>);
+    const wrap =  shallow(<ExpandableList curriculum={testState.testCurriculum} onPress={onPressEvent}/>);
     wrap
       .find(TouchableOpacity)
       .findWhere( (node:any) => 

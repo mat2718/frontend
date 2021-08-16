@@ -145,20 +145,19 @@ const RootStackNavigator = () => {
         }}
       />
       {/** add your view/addedit screens here */}
-      <Stack.Screen name='Curricula' component={Curricula} />
       <Stack.Screen 
-      name='AddEditCurriculum' 
-      component={AddEditCurriculum}
-      options={{
-        headerShown: true,
-        title: 'Add a Curriculum',
-        headerTitleAlign: 'left',
-        headerTitleStyle: {
-          fontFamily: 'FuturaBook',
-          fontWeight: '700',
-          color: colors.darkGray,
-        },
-      }}
+        name='AddEditCurriculum' 
+        component={AddEditCurriculum}
+        options={{
+          headerShown: true,
+          title: 'Add a Curriculum',
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            fontFamily: 'FuturaBook',
+            fontWeight: '700',
+            color: colors.darkGray,
+          },
+        }}
       />
       <Stack.Screen
         name='ViewClient'
