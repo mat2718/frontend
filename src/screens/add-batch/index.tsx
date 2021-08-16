@@ -94,26 +94,45 @@ const AddBatch: React.FC = () => {
 
   /** Add batch function */
   const AddNewBatch = () => {
-    dispatch(
-      addBatch({
-        trainerId: trainerValue,
-        curriculumId: curriculumValue,
-        batchSize: batchSizeValue,
-        startDate: startDate.toISOString(),
-        endDate: endDate.toISOString(),
-        clientId: null,
+    if(batchSizeValue && (startDate < endDate)) {
+      dispatch(
+        addBatch({
+          trainerId: trainerValue,
+          curriculumId: curriculumValue,
+          batchSize: batchSizeValue,
+          startDate: startDate.toISOString(),
+          endDate: endDate.toISOString(),
+          clientId: null,
+        })
+      );
+      Toast.show({
+        type: 'success',
+        position: 'top',
+        text1: 'Success!',
+        text2: `A new Batch has been added!`,
+        topOffset: 50,
+      });
+      navigation.goBack();
+    }
+    else if (!batchSizeValue) {
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Invalid Batch Size',
+        text2: 'The Batch Size Value is empty.',
+        topOffset: 50,
       })
-    );
-
-    Toast.show({
-      type: 'success',
-      position: 'top',
-      text1: 'Success!',
-      text2: `Batch has been added!`,
-      topOffset: 125,
-    });
-    navigation.goBack();
-  };
+    }
+    else if(startDate >= endDate) {
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Invalid Batch Date',
+        text2: 'The End Date is not greater than the Start Date',
+        topOffset: 50,
+      })
+    }
+  }
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>

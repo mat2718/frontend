@@ -38,10 +38,11 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
   // Delete Trainer Action Handler call
   const deleteTrainer = (trainer: ITrainer) =>
   {
-    setDialogType('deleteBatch');
-    setVisible(true);
+    // Will need to implement modal
+    // setDialogType('deleteBatch');
+    // setVisible(true);
     
-    //dispatch(deleteATrainer(trainer));
+    dispatch(deleteATrainer(trainer));
     Toast.show({
       type: 'success',
       position: 'top',
@@ -80,12 +81,12 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
         </Picker>
       </View>
       <Text style={listStyles.textRegular}>{'Email: ' + props.trainer.email}</Text>
-      <ConfirmDialog
+      {/* <ConfirmDialog
           type={dialogType}
           setVisible={setVisible}
           visible={visible}
           payload={payload}
-        />
+        /> */}
       </View>
   );
 };
