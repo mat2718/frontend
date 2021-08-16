@@ -25,24 +25,24 @@ import moment from 'moment';
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
   //calls for +6 and -6 from date.now then sort - kai with BE 
-  const renderData = () => {
-    return {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-  datasets: [
-    {
-      data: fakeDataGen(),
-      color: (opacity = 5) => `rgba(242, 105, 38, ${opacity})`, // optional
-      strokeWidth: 2 // optional
-    },
-    {
-      data: fakeDataGen(),
-      color: (opacity = 1) => `rgba(115, 165, 194, ${opacity})`, // optional
-      strokeWidth: 2 // optional
-    }
-  ],
-  legend: ["Client Demand","Associate Supply"] // optional
-    };
-  }
+  // const renderData = () => {
+  //   return {
+  // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  // datasets: [
+  //   {
+  //     data: fakeDataGen(),
+  //     color: (opacity = 5) => `rgba(242, 105, 38, ${opacity})`, // optional
+  //     strokeWidth: 2 // optional
+  //   },
+  //   {
+  //     data: fakeDataGen(),
+  //     color: (opacity = 1) => `rgba(115, 165, 194, ${opacity})`, // optional
+  //     strokeWidth: 2 // optional
+  //   }
+  // ],
+  // legend: ["Client Demand","Associate Supply"] // optional
+  //   };
+  // }
   
 
   const Diagram: React.FC = () => {
@@ -50,9 +50,6 @@ import moment from 'moment';
     const allBatches = useSelector((state: IAppState) => state.batches)
     const [currCurriculum, setCurriculum] = useState('All Curriculum');
     const [demandData, setDemandData] = useState([]);
-    const [supplyData, setSupplyData] = useState('Supply');
-    const [yearDemand, setYearDemand] = useState(0);
-    const [yearSupply, setYearSupply] = useState(0);
 
     const screenWidth = Dimensions.get("window").width;
 
@@ -73,36 +70,29 @@ import moment from 'moment';
     const endDate = moment(moment(start).add(6,"M")).format("YYYY-MM-01")
 
     useEffect(() => {
-      // if (currCurriculum === "All")
-      // getDemandById(20).then(res => setDemandData(res))
       getDemandByDate(startDate, endDate).then((res) => setDemandData(res))
       ;
     }, [currCurriculum]);
 
-    //modular picker for when we get full Curriculum
-    const renderPickerItems = () => {
-      let filteredArr = {};
-
-      for(let i = 0; i < allCurricula.length; i++){
-        if(!filteredArr[allCurricula[i].curriculumname]){
-          filteredArr[allCurricula[i].curriculumname] = allCurricula[i].curriculumid;
-        }
-      }
-      const pickerData = Object.keys(filteredArr);
-
-      let data: any = [];
-      getDemandByDate(startDate, endDate).then(res => data = res);
-      let curriculumNamesArr = data.map(obj => obj.curriculumid)
-      let uniqueNames = [...new Set(curriculumNamesArr)];
-      return pickerData.map((item, index) => (
-            <Picker.Item
-              key={index}
-              label={item}
-              value={item}
-            />
-      ))
+    
+    const renderData = () => {
+    return {
+  labels: renderLabel(),
+  datasets: [
+    {
+      data: filterDemandDataByMonth(),
+      color: (opacity = 5) => `rgba(242, 105, 38, ${opacity})`, // optional
+      strokeWidth: 2 // optional
+    },
+    {
+      data: filterSupplyDataByMonth(),
+      color: (opacity = 1) => `rgba(115, 165, 194, ${opacity})`, // optional
+      strokeWidth: 2 // optional
     }
-
+  ],
+  legend: ["Client Demand","Associate Supply"] // optional
+    };
+  }
     //renders the label months we need to see -6 and +6 months for the graph
     const renderLabel = () => {
       let labels = [];
@@ -132,7 +122,8 @@ import moment from 'moment';
         const key = moment(data.enddate).format("YYYY-MM");
         supplyObj[key] += data.batchsize;
       };
-      return Object.values(supplyObj);
+      const values:number[] = Object.values(supplyObj);
+      return values;
     };
 
     const filterDemandDataByMonth = () => {
@@ -151,14 +142,26 @@ import moment from 'moment';
         demandObj[key] += data.quantitydemanded;
         ;
       };
-      return((demandObj));
+      const values:number[] = Object.values(demandObj);
+      return values;
     };
 
+    const sumOf = (array:number[]) => {
+      let sum = 0;
+
+      for(const num of array){
+        sum += num;
+      }
+      return sum;
+    }
+
     const differenceView = () => {
-      const result = yearDemand - yearSupply;
+      let demand = sumOf(filterDemandDataByMonth());
+      let supply = sumOf(filterSupplyDataByMonth());
+      const result =  supply - demand;
       if(result < 0){
         return (
-            <View style={styles.resultNumbers}>
+            <View style={styles.badResultNumbers}>
               <Text style={styles.statText}>UNDER</Text>
               <Text style={styles.statText}>{result}</Text>
             </View>
@@ -182,22 +185,11 @@ import moment from 'moment';
     
     return (
       <View style={screenStyles.mainView}>
-        <Button title="Console log DemandState" onPress={() => console.log(demandData)}/>
-        <Button title="Console log SupplyState" onPress={() => console.log(filterSupplyDataByMonth())}/>
         <View style={screenStyles.titleContainer}>
 
           <Text style={textStyles.subHeading}>
-          {currCurriculum.charAt(0).toUpperCase() +
-            currCurriculum.slice(1)}{' '}
+          All Curriculum
         </Text>
-          <Picker
-          selectedValue={currCurriculum}
-          onValueChange={(currCurriculum: string) => setCurriculum(currCurriculum)}
-          style={{ height: 50, width: 50,}}
-        >
-          
-          {renderPickerItems()}
-        </Picker>
         </View>
 
         <View style={styles.progressRingView}>
@@ -218,12 +210,12 @@ import moment from 'moment';
 
             <View style={styles.numbers}>
               <Text style={styles.statText}>Number of Demanded</Text>
-              <Text style={styles.statText}>20</Text>
+              <Text style={styles.statText}>{sumOf(filterDemandDataByMonth())}</Text>
             </View>
               
             <View style={styles.numbers}>
               <Text style={styles.statText}>Number of Associates</Text>
-              <Text style={styles.statText}>15</Text>
+              <Text style={styles.statText}>{sumOf(filterSupplyDataByMonth())}</Text>
             </View>
               
             {differenceView()}
@@ -272,7 +264,14 @@ const styles = StyleSheet.create({
     padding:7,
     flexDirection:"row",
     justifyContent:'space-between',
-    backgroundColor:'#BC7A00', //red for neg, netural color for close and green for pass
+    backgroundColor:'#3B8300',
+    borderRadius: 25,
+  },
+  badResultNumbers:{
+    padding:7,
+    flexDirection:"row",
+    justifyContent:'space-between',
+    backgroundColor:'#F26925',
     borderRadius: 25,
   },
   progressRingView: {
