@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { PostCurriculum } from '../../redux/actions/curriculum-actions';
 import { useDispatch } from 'react-redux';
 import { RootStackParamList } from '../../types';
+import Toast from 'react-native-toast-message';
 
 /**
  * Add Curriculum Screen- allows for addition of a curriculum
@@ -45,13 +46,19 @@ const AddEditCurriculum: React.FC<IProps> = (props: IProps) => {
   //post Curriculum function for add-curriculum screen
   const postCurriculum = () => {
     dispatch(PostCurriculum(props.newCurriculum));
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: 'A Curriculum has been added to the Curricula List.',
+      topOffset: 50
+    })
     navigation.goBack();
   }
 
   /** Does it work? */
   return (
     <View style={screenStyles.safeAreaView}>
-      <Header />
       <View style={screenStyles.mainView}>
       <View style={screenStyles.titleContainer}>
           <Text style={textStyles.heading}>Add Curriculum</Text>

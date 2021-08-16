@@ -32,19 +32,30 @@ const AddSkill: React.FC = () => {
   const dispatch = useDispatch();
 
   const addClientClick = () => {
-    dispatch(
-      addSkill({
-        skillName: skill,
+    if(skill) {
+      dispatch(
+        addSkill({
+          skillName: skill,
+        })
+      );
+      Toast.show({
+        type: 'success',
+        position: 'top',
+        text1: 'Success!',
+        text2: `${skill} has been added to the Skill List!`,
+        topOffset: 50,
+      });
+      navigation.goBack();
+    }
+    else {
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Invalid Skill',
+        text2: 'The Skill Name field is empty.',
+        topOffset: 50,
       })
-    );
-    Toast.show({
-      type: 'success',
-      position: 'top',
-      text1: 'Success!',
-      text2: `Skill has been added!`,
-      topOffset: 125,
-    });
-    navigation.goBack();
+    }
   };
 
   return (
