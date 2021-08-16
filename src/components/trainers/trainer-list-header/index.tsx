@@ -5,25 +5,17 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import { textStyles, buttonStyles, screenStyles } from '../../../styles';
-import ITrainer from '../../../entities/Trainer';
 
-interface IProps {
-  setTrainerArr: (trainers:ITrainer[]) => void;
+interface PropsI {
+  setTrainerArr: any;
+  trainerArray: any;
 }
 
-/**
- * Main Trainerlist Header - displays the searchbar as well as the header and create trainer button
- * @param {IProps} interface - trainer array properties meant specifically for the searchbar
- * @returns {React.FC} - React Component for the Main Trainer Screen and has routing for the Add Trainer Screen
- * @author Joab Smith and Imran Ilyas
- */
-
-const TrainerListHeader: React.FC<IProps> = (props: IProps) => {
-  // Navigation setup
+const TrainerListHeader: React.FC<PropsI> = (props: PropsI) => {
+  /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 
-  // Navigate to AddTrainer upon press
   const addTrainer = () => {
     navigation.navigate('AddTrainer');
   };
@@ -39,7 +31,6 @@ const TrainerListHeader: React.FC<IProps> = (props: IProps) => {
           }}
         >
           <Text style={textStyles.heading}>Trainers</Text>
-          {/* Add Trainer Button */}
           <TouchableOpacity
             style={buttonStyles.buttonContainer}
             onPress={addTrainer}
@@ -47,7 +38,6 @@ const TrainerListHeader: React.FC<IProps> = (props: IProps) => {
             <Text style={buttonStyles.buttonText}>Add Trainer</Text>
           </TouchableOpacity>
         </View>
-        {/* Searchbar */}
         <View style={styles.searchBar}>
           <SearchBar setTrainer={props.setTrainerArr} />
         </View>
@@ -57,8 +47,31 @@ const TrainerListHeader: React.FC<IProps> = (props: IProps) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginBottom: 20,
+  },
   searchBar: {
     height: '20%',
+  },
+  flatlist: {
+    flex: 1,
+  },
+  header: {
+    fontSize: 24,
+  },
+  add: {
+    height: '8%',
+    alignSelf: 'flex-start',
+    backgroundColor: '#F26925',
+    borderRadius: 100,
+    padding: '4%',
+    justifyContent: 'center',
+    //margin: '10%',
+  },
+  addText: {
+    //textAlign: 'center',
+    color: 'white',
   },
 });
 

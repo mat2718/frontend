@@ -2,12 +2,12 @@ import IBatch from "./batch";
 import ISkill from "./skill";
 
 export default interface ICurriculum {
-  createdby: string;
-  createdon: string;
-  lastmodified: string;
-  lastmodifiedby: string;
+  createdBy: string;
+  createdOn: string;
+  modifiedBy: string;
+  modifiedOn: string;
   curriculumname: string;
-  skillidarr: [];
-  skillnamearr: [];
-  curriculumid: number;
+  skillIdArr: ISkill[];
+  batchArr: IBatch[];
+  curriculumId: number;
 }

@@ -1,37 +1,59 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import { listStyles } from '../../../styles';
-import { getDemandByClientId } from '../../../redux/actions/demand-actions';
 
 interface IProps {
-  clientname: string;
-  clientid: number;
+  client: string;
 }
-interface IClientList {
-  clientid: number;
-  clientname: string;
-}
-const ClientsListItem: React.FC<IProps> = (props: IProps) => {
-  const [demands, setDemands] = React.useState([{}]);
 
+const ClientsListItem: React.FC<IProps> = (props: IProps) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 
-  const fetchDemands = async () => {
-    setDemands(await getDemandByClientId(props.clientid));
-  };
-
-  React.useEffect(() => {
-    fetchDemands();
-
-    return function cleanup() {
-      setDemands([]);
-    };
-  }, []);
+  /** We must fetch demand data from the client id */
+  /** Mock data for now */
+  const demands = [
+    {
+      client: 'Revature',
+      curriculum: 'React',
+      needby: Date.now(),
+      quantitydemanded: 25,
+    },
+    {
+      client: 'Revature',
+      curriculum: 'React Native',
+      needby: Date.now(),
+      quantitydemanded: 25,
+    },
+    {
+      client: 'Revature',
+      curriculum: 'AWS',
+      needby: Date.now(),
+      quantitydemanded: 25,
+    },
+    {
+      client: 'Matts BBQ',
+      curriculum: 'Cooking',
+      needby: Date.now(),
+      quantitydemanded: 25,
+    },
+    {
+      client: 'Matts BBQ',
+      curriculum: 'Foot Massaging',
+      needby: Date.now(),
+      quantitydemanded: 25,
+    },
+    {
+      client: 'Cognizant',
+      curriculum: 'React',
+      needby: Date.now(),
+      quantitydemanded: 25,
+    },
+  ];
 
   /**
    * Touchable Link to contain individual Batch information.
@@ -44,15 +66,14 @@ const ClientsListItem: React.FC<IProps> = (props: IProps) => {
     <TouchableOpacity
       style={listStyles.listItemContainer}
       onPress={() => {
-        navigation.navigate('ViewClient', {
-          clientid: props.clientid,
-          clientname: props.clientname,
-          demands: demands,
-        });
+        navigation.navigate('ViewClient', props);
       }}
     >
-      <Text style={listStyles.heading}>{props.clientname}</Text>
-      <Text style={listStyles.textRegular}>{demands.length + ' demands'}</Text>
+      <Text style={listStyles.heading}>{props.client}</Text>
+      <Text style={listStyles.textRegular}>
+        {demands.filter((item) => item.client === props.client).length +
+          ' demands'}
+      </Text>
     </TouchableOpacity>
   );
 };

@@ -1,34 +1,15 @@
-import axios from '../../../axiosConfig';
-import ICurriculum from '../../entities/curriculum';
-import { AppActions, IAppAction } from './actions';
-import { AxiosResponse } from 'axios';
-import { useDispatch } from 'react-redux';
-import { Dispatch } from 'redux';
-
-/**
- * Handler for Curricula - Axios requests to database for curricula
- * @param {ICurriculum || IAppAction} interface - lists properties of curricula and expected payload
- * @returns {success || err} - a message confirming response of action
- * @author Hannah Mulato
- */
+import axios from "../../../axiosConfig";
+import { Dispatch } from "redux";
+import ICurriculum from "../../entities/curriculum";
+import { AppActions } from "./actions";
 
 //api call for getting all curricula
-export const GetAllCurricula = () => async (dispatch: Dispatch<IAppAction>) => {
+export const GetAllCurricula = () => async (dispatch: Dispatch) => {
   try {
-    await axios.get('curriculum').then((res) => {
-      const curricula: ICurriculum[] = res.data;
-      dispatch({
-        type: AppActions.UPDATE_CURRICULA,
-        payload: {
-          skills: [],
-          clients: [],
-          batches: [],
-          demands: [],
-          trainers: [],
-          curricula,
-        },
-      });
-      return 'Retrieved curricula';
+    const res = await axios.get("/curriculum");
+    dispatch({
+      type: AppActions.UPDATE_CURRICULA,
+      payload: res.data,
     });
   } catch (err) {
     console.log(err);
@@ -41,50 +22,50 @@ export const GetAllCurricula = () => async (dispatch: Dispatch<IAppAction>) => {
  *
  */
 
-export const GetCurriculum = (id: number) => async () => {
+export const GetCurriculum = (id: number) => async (dispatch: Dispatch) => {
   try {
-    const res: AxiosResponse = await axios.get(`curriculum/id/${id}`);
-    return res.data;
+    return await axios.get(`/curriculum/id/${id}`);
+    // dispatch({
+    //     type: AppActions.UPDATE_CURRICULA,
+    //     payload: res.data
+    // });
   } catch (err) {
     console.log(err);
   }
 };
 
 //api call to post a new curriculum
-export const PostCurriculum =
-  (curriculum: {
-    name: string;
-    createdBy: string;
-    createdOn: string;
-    skills: number[];
-  }) =>
-  async (dispatch: Dispatch<IAppAction>) => {
-    try {
-      await axios.post('curriculum', curriculum);
-      (() => {
-        const dispatcher = useDispatch();
-        dispatcher(GetAllCurricula());
-      })();
-      return `${curriculum.name} has been added.`;
-    } catch (err) {
-      console.log(err);
-    }
-  };
+export const PostCurriculum = (curriculum: {}) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    await axios.post("/curriculum", curriculum);
+    GetAllCurricula();
+    // const res = await axios.get('/curriculum');
+    // dispatch({
+    //     type: AppActions.UPDATE_CURRICULA,
+    //     payload: res.data
+    // });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 /**api call for deleting a specific curriculum by ID
  *
  * @param id
  *
  */
-export const DeleteCurriculum = (curriculum: ICurriculum) => async () => {
+export const DeleteCurriculum = (id: number) => async (dispatch: Dispatch) => {
   try {
-    await axios.delete(`curriculum/id/${curriculum.curriculumid}`);
-    (() => {
-      const dispatcher = useDispatch();
-      dispatcher(GetAllCurricula());
-    })();
+    await axios.delete(`/curriculum/id/${id}`);
     GetAllCurricula();
-    return 'Curriculum has been deleted.';
+    // const res = await axios.get('/curriculum');
+    // dispatch({
+    //     type: AppActions.UPDATE_CURRICULA,
+    //     payload: res.data
+    // })
+    return "Curriculum has been deleted.";
   } catch (err) {
     console.log(err);
   }

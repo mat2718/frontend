@@ -3,13 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
 import { badgesStyles } from '../../../styles';
 
-/**
- * Batch Stats - component that displays the barchart and stats for Batches
- * @param {IProps} interface - interface for component props, defines the data array that includes stats
- * @returns {React.FC} - React Component that shows Batch statistics
- * @author Matthew Otto and Oriel Red Oral
- */
-
+/**  Props that are needed to build the statistics */
 interface IProps {
   data: [
     plannedBatches: number,
@@ -110,7 +104,6 @@ const BatchStats: React.FC<IProps> = (props: IProps) => {
   );
 };
 
-/** Local StyleSheet */
 const styles = StyleSheet.create({
   statText: {
     paddingLeft: 5,

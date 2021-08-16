@@ -1,17 +1,12 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import Batches from '.';
-import { FlatList } from 'react-native';
+import { mount, shallow } from 'enzyme';
+import Batches, { data } from '.';
+import BatchesListHeader from '../../components/batches/batches-list-header';
+import { FlatList, TouchableOpacity } from 'react-native';
+import Header from '../../components/batches/header';
 
-/**
- * Batches Test  - main test file for the batches screen
- * @author Matthew Otto and Oriel Red Oral
- */
-
-/** wrapper for mounting */
 let wrapper: any;
 
-/** mock react navigation */
 const mockNavigate = jest.fn();
 jest.mock('@react-navigation/native', () => {
   return {
@@ -24,15 +19,21 @@ jest.mock('@react-navigation/native', () => {
   };
 });
 
-/** test suite */
 describe('Batches', () => {
   beforeEach(() => {
     wrapper = mount(<Batches />);
   });
 
-  /** tests if the component is there */
+  //tests if the component is there
   it('should be there', () => {
     expect(wrapper).not.toBe(undefined);
+  });
+
+  // tests if the header is defined
+  it('should display the header', () => {
+    const shouldBeHeader = wrapper.find(Header);
+    expect(shouldBeHeader).toBeDefined();
+    //expect(shouldBeHeader.length).toBeGreaterThan(0); would also work
   });
 
   // tests if the flatlist is defined
@@ -44,6 +45,32 @@ describe('Batches', () => {
   // tests if the flatlist holds the data we need
   it('should hold data', () => {
     const listData = wrapper.find(FlatList).props().data;
-    expect(listData.length).toBeGreaterThan(0);
+    expect(listData).toEqual(data);
+  });
+
+  /** tests the navigate button */
+  // it('pressing the button navigates to new screen', () => {
+  //   let wrap = shallow(
+  //     <BatchesListHeader
+  //       selectedFilter='any'
+  //       setSelectedFilter={() => {
+  //         null;
+  //       }}
+  //     />
+  //   );
+  //   let button = wrap.find({ testID: 'button' }).last();
+  //   button.invoke('onPress')();
+  //   expect(mockNavigate).toHaveBeenCalledWith('AddEditBatch');
+  // });
+
+  it('should be pressed', () => {
+    const shouldBePressed = wrapper.find(TouchableOpacity).at(0);
+
+    const myEventHandler = jest.spyOn(shouldBePressed.props(), 'onPress');
+
+    const actualEventHandler = shouldBePressed.prop('onPress');
+    actualEventHandler();
+
+    expect(myEventHandler).toHaveBeenCalled();
   });
 });

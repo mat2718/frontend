@@ -1,30 +1,57 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { FlatList } from 'react-native';
 import { ExpandableList } from '../../components/curricula/expandable-list';
 import { Transitioning, Transition } from 'react-native-reanimated';
 import CurriculaListHeader from '../../components/curricula/curricula-list-header';
 import { screenStyles } from '../../styles';
-import { GetAllCurricula } from '../../redux/actions/curriculum-actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { IAppState } from '../../redux/state';
-import ICurriculum from '../../entities/curriculum';
 
-/**
- * Main Screen for Curricula - shows information for all curricula
- * @returns {React.FC} - React Functional Component
- * @author Hannah Mulato
- */
+//mock data for flatlist
+export const DATA = [
+  {
+    batches: [7, 9, 3],
+    createdBy: 'First Creator',
+    createdOn: '2021-08-03',
+    id: 0,
+    lastModified: 'First Creator',
+    lastModifiedBy: '2021-08-03',
+    name: 'Curriculum 1',
+    skills: ['JS', 'TS', 'React', 'React-Native'],
+  },
+  {
+    batches: [1, 2, 3],
+    createdBy: 'Second Creator',
+    createdOn: '2021-08-03',
+    id: 0,
+    lastModified: 'Second Creator',
+    lastModifiedBy: '2021-08-03',
+    name: 'Curriculum 2',
+    skills: ['JS', 'TS', 'React', 'React-Native'],
+  },
+  {
+    batches: [3, 4, 6],
+    createdBy: 'Third Creator',
+    createdOn: '2021-08-04',
+    id: 0,
+    lastModified: 'Third Creator',
+    lastModifiedBy: '2021-08-05',
+    name: 'Curriculum 3',
+    skills: ['JS', 'TS', 'React', 'React-Native'],
+  },
+  {
+    batches: [3, 4, 6],
+    createdBy: 'Third Creator',
+    createdOn: '2018-08-16',
+    id: 0,
+    lastModified: 'Third Creator',
+    lastModifiedBy: '2021-08-05',
+    name: 'Curriculum 4',
+    skills: ['JS', 'TS', 'React', 'React-Native'],
+  },
+];
+
+
 
 const Curricula: React.FC = () => {
-  //get all curricula from the store and send it as props
-  const curriculum = useSelector((state: IAppState) => state.curricula);
-  const dispatch = useDispatch();
-  
-  useEffect(() => {
-     dispatch(GetAllCurricula())
-   }, [])
-  
-  //initialize a transitioning effect for a card
   const transitionRef = useRef<any>(null);
   const transition = <Transition.Change interpolation='easeInOut' />;
 
@@ -32,12 +59,11 @@ const Curricula: React.FC = () => {
     transitionRef.current.animateNextTransition();
   };
 
-  //rendering each 'card' for each curriculum
-  const renderItem = ({item}: {item: ICurriculum}) => {
-    return(
-       <ExpandableList curriculum={item} onPress={onPress} />
-    );
+  const renderItem = ({ item }: any) => {
+    return <ExpandableList item={item} onPress={onPress} />;
   };
+
+  //const navigation = useNavigation();
 
   return (
     <Transitioning.View
@@ -47,8 +73,8 @@ const Curricula: React.FC = () => {
     >
       {/**List of Curriculums */}
       <FlatList
-        data={curriculum}
-        keyExtractor={(item) => `${item.curriculumid}`}
+        data={DATA}
+        keyExtractor={(item, index) => `${item.name}${index}`}
         renderItem={renderItem}
         ListHeaderComponent={CurriculaListHeader}
       />

@@ -1,32 +1,31 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Header from '../../components/batches/header';
-import ViewBatch from '.';
+import AddEditBatch from '.';
 
 let wrapper: any;
-
+const mockBack = jest.fn();
 const mockNavigate = jest.fn();
-const mockGoBack = jest.fn();
-jest.mock('@react-navigation/native' , () => {
-  return ({
+jest.mock('@react-navigation/native', () => {
+  return {
     ...jest.requireActual('@react-navigation/native'),
     useNavigation: () => {
-      return ({
+      return {
+        goBack: mockBack,
         navigate: mockNavigate,
-        goBack: mockGoBack,
-      })
+      };
     },
-  });
+  };
 });
 
 describe('Batches', () => {
   beforeEach(() => {
     wrapper = mount(
-      <ViewBatch
+      <AddEditBatch
         route={{
           params: {
-            associate: 25,
+            associates: 25,
             batchId: 0,
             curriculum: 'Cloud Native',
             trainer: 'Robert Connell',
@@ -49,21 +48,26 @@ describe('Batches', () => {
     expect(shouldBeHeader).toBeDefined();
   });
 
-  /** tests the edit batch button */
-  it('should be pressed', () => {
-    const shouldBePressed = wrapper
-      .find(TouchableOpacity)
-      .findWhere( (node:any) => 
-        node.props().hasOwnProperty('onPress')
-      )
-      .last();
-    const myEventHandler = jest.spyOn(shouldBePressed.props(), 'onPress');
-
-    const actualEventHandler = shouldBePressed.prop('onPress');
-    actualEventHandler();
-
-    expect(myEventHandler).toHaveBeenCalled();
-  });
+  // /** tests the navigate button */
+  // it('pressing the button navigates to new screen', () => {
+  //   let wrap = shallow(
+  //     <AddEditBatch
+  //       route={{
+  //         params: {
+  //           associates: 25,
+  //           batchId: 0,
+  //           curriculum: 'Cloud Native',
+  //           trainer: 'Robert Connell',
+  //           startDate: 1622505600000,
+  //           endDate: 1627776000000,
+  //         },
+  //       }}
+  //     />
+  //   );
+  //   let button = wrap.find({ testID: 'goBackButton' }).last();
+  //   button.invoke('onPress')();
+  //   expect(mockBack).
+  //   });
 });
 
 // yeet

@@ -1,11 +1,9 @@
+/**
+ * GLOBAL STYLES
+ **/
 import { StyleSheet } from 'react-native';
 
-/**
- * Global Styles - React StyleSheet used throughout all components for design
- * @author Red Oral and Kaiyip Ho and Matthew Hanrahan
- **/
-
-// Main Color Palette
+/** Main Color Palette */
 export const colors = {
   screenBg: 'rgb(250,250,250)',
   white: 'rgb(255,255,255)',
@@ -16,22 +14,20 @@ export const colors = {
   blue: 'rgb(115,165,194)',
 };
 
-// <View> Styles
+/** View Styles */
 export const screenStyles = StyleSheet.create({
-  // Wrap your top-level in a safeareaview with this style
+  /** Wrap your top-level in a safeareaview with this style */
   safeAreaView: {
     backgroundColor: colors.screenBg,
     flex: 1,
   },
 
-  // The view under your safeareaview, ideally a scrollview for screens without a flatlist
+  /** The view under your safeareaview, ideally a scrollview for screens without a flatlist **/
   mainView: {
-    flex: 1,
     padding: 25,
   },
 
-  // Since screen titles have a button next to it,
-  // we need to wrap both the text and button in a view with this style
+  /** Since screen titles have a button next to it, we need to wrap both the text and button in a view with this style */
   titleContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -39,37 +35,37 @@ export const screenStyles = StyleSheet.create({
   },
 });
 
-// <Text> Styles
+/** Text Styles */
 export const textStyles = StyleSheet.create({
-  // Main title, as in the screen's title
+  /** Main title, as in your screen's title */
   heading: {
     fontSize: 24,
     color: colors.darkGray,
     fontFamily: 'FuturaBold',
   },
 
-  // Any additional text that you want as a header under the main screen's title
+  /** Any additional text that you want as a header under the main screen's title, use this style */
   subHeading: {
     fontSize: 20,
     fontFamily: 'FuturaBold',
     color: colors.darkGray,
   },
 
-  // Any normal text
+  /** Any normal text */
   regular: {
     color: colors.darkGray,
     fontFamily: 'FuturaBook',
     fontWeight: '700',
   },
 
-  // Any normal text but bold as well as font-family
+  /** Any normal text but bold */
   regularBold: {
     color: colors.darkGray,
     fontFamily: 'FuturaBold',
   },
 });
 
-// Input Styles
+/** Input Styles */
 export const inputStyles = StyleSheet.create({
   pickerContainer: {
     backgroundColor: colors.white,
@@ -106,7 +102,7 @@ export const inputStyles = StyleSheet.create({
   },
 });
 
-// Button Styles
+/** Button Styles */
 export const buttonStyles = StyleSheet.create({
   buttonContainer: {
     justifyContent: 'center',
@@ -152,34 +148,9 @@ export const buttonStyles = StyleSheet.create({
     fontFamily: 'FuturaBook',
     fontWeight: '700',
   },
-
-  buttonDisabled: {
-    justifyContent: 'center',
-    height: 35,
-    width: 125,
-    padding: 10,
-    backgroundColor: colors.white,
-    borderRadius: 50,
-    marginLeft: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-
-  buttonDisabledText: {
-    color: colors.darkGray,
-    alignSelf: 'center',
-    fontFamily: 'FuturaBook',
-    fontWeight: '700',
-  },
 });
 
-// List Item Styles
+/** List Item Styles */
 export const listStyles = StyleSheet.create({
   listItemContainer: {
     alignSelf: 'center',
@@ -212,7 +183,7 @@ export const listStyles = StyleSheet.create({
   subHeading: {
     fontFamily: 'FuturaBook',
     fontWeight: '700',
-    fontSize: 14,
+    fontSize: 12,
     color: colors.darkGray,
   },
 
@@ -224,9 +195,9 @@ export const listStyles = StyleSheet.create({
   },
 });
 
-// Badges Styles
+/** Badges Styles */
 export const badgesStyles = StyleSheet.create({
-  // Standard badge (ex: active, upcoming, completed badges)
+  /** Standard badge (ex: active, upcoming, completed badges) */
   badge: {
     width: 65,
     alignItems: 'center',
@@ -245,7 +216,7 @@ export const badgesStyles = StyleSheet.create({
     fontSize: 10,
   },
 
-  // Badge with legends (ex: planned batches badge)
+  /** Badge with legends (ex: planned batches badge) */
   legendBadge: {
     backgroundColor: colors.darkGray,
     width: 30,

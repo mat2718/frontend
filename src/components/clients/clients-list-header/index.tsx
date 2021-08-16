@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { screenStyles, textStyles, buttonStyles } from '../../../styles';
 
 /** We pass the filter state from the Batches screen to this component */
@@ -33,5 +33,19 @@ const ClientsListHeader: React.FC<IProps> = (props: IProps) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  plannedBatchesTable: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginBottom: 20,
+    marginTop: 20,
+    width: '90%',
+    backgroundColor: '#fafafa',
+    borderRadius: 25,
+  },
+});
 
 export default ClientsListHeader;

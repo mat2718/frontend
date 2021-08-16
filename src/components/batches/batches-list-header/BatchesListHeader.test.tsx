@@ -5,14 +5,14 @@ import BatchListHeader from '.';
 
 const mockNavigate = jest.fn();
 jest.mock('@react-navigation/native', () => {
-  return {
+  return ({
     __esModule: true,
     useNavigation: () => {
-      return {
+      return ({
         navigate: mockNavigate,
-      };
+      });
     },
-  };
+  });
 });
 
 let wrapper: any;
@@ -27,16 +27,6 @@ describe('Batches', () => {
       <BatchListHeader
         selectedFilter={selectedFilter}
         setSelectedFilter={setSelectedFilter}
-        batches={[
-          {
-            batchsize: 1,
-            batchid: 1,
-            curriculumid: 1,
-            trainerid: 1,
-            startdate: 'start date hehe',
-            enddate: 'end date hehe',
-          },
-        ]}
       />
     );
   });
@@ -46,10 +36,15 @@ describe('Batches', () => {
     expect(wrapper).not.toBe(undefined);
   });
 
-  /** Tests the add button */
-  it('pressing the button navigates to new screen', () => {
-    let button = wrapper.find({ testID: 'button' }).last();
-    button.invoke('onPress')();
-    expect(mockNavigate).toHaveBeenCalledWith('AddBatch');
+  /** tests the onpress when navigating */
+  it('should be pressed', () => {
+    const shouldBePressed = wrapper.find(TouchableOpacity).at(0);
+
+    const myEventHandler = jest.spyOn(shouldBePressed.props(), 'onPress');
+
+    const actualEventHandler = shouldBePressed.prop('onPress');
+    actualEventHandler();
+
+    expect(myEventHandler).toHaveBeenCalled();
   });
 });

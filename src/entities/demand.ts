@@ -1,6 +1,6 @@
 export default interface IDemand {
-  clientid: number;
-  curriculumid: number;
+  clientId: number;
+  curriculumId: number;
   needby: string;
   quantitydemanded: number;
   demandId: number;

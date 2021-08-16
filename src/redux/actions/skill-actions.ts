@@ -1,18 +1,14 @@
 import axios from '../../../axiosConfig';
 import { Dispatch } from 'redux';
-import { AppActions, IAppAction } from './actions';
-import ISkill from '../../entities/skill';
+import { AppActions } from './actions';
 
 /** Gets all skills from the backend */
-export const getAllSkills = () => async (dispatch: Dispatch) => {
+export const getAllSkills = async (dispatch: Dispatch) => {
   try {
-    await axios.get('skill').then((res) => {
-      const skills: ISkill[] = res.data;
-      console.log('response', res.data, skills);
-      dispatch({
-        type: AppActions.UPDATE_SKILL,
-        payload: { skills: res.data },
-      });
+    const res = await axios.get('skill');
+    dispatch({
+      type: AppActions.UPDATE_SKILL,
+      payload: res.data,
     });
   } catch (e) {
     console.log(e);
@@ -20,10 +16,13 @@ export const getAllSkills = () => async (dispatch: Dispatch) => {
 };
 
 /** Gets one skill by id */
-export const getSkillById = async (skillId: number) => {
+export const getSkillById = (skillId: number) => async (dispatch: Dispatch) => {
   try {
     const res = await axios.get(`skill/id/${skillId}`);
-    return res.data;
+    dispatch({
+      type: AppActions.UPDATE_SKILL,
+      payload: res.data,
+    });
   } catch (e) {
     console.log(e);
   }
@@ -36,7 +35,7 @@ export const getSkillByName =
       const res = await axios.get(`skill/id/${skillName}`);
       dispatch({
         type: AppActions.UPDATE_SKILL,
-        payload: { skills: res.data },
+        payload: res.data,
       });
     } catch (e) {
       console.log(e);
@@ -50,7 +49,7 @@ export const addSkill = (skill: {}) => async (dispatch: Dispatch) => {
     const res = await axios.get('skill');
     dispatch({
       type: AppActions.UPDATE_SKILL,
-      payload: { skills: res.data },
+      payload: res.data,
     });
   } catch (e) {
     console.log(e);
@@ -58,13 +57,13 @@ export const addSkill = (skill: {}) => async (dispatch: Dispatch) => {
 };
 
 /** Deletes a skills */
-export const deleteSkill = (skillId: number) => async (dispatch: Dispatch) => {
+export const deleteSkill = (batchId: number) => async (dispatch: Dispatch) => {
   try {
-    await axios.delete(`skill/id/${skillId}`);
+    await axios.delete(`skill/id/${batchId}`);
     const res = await axios.get('skill');
     dispatch({
       type: AppActions.UPDATE_SKILL,
-      payload: { skills: res.data },
+      payload: res.data,
     });
   } catch (e) {
     console.log(e);
