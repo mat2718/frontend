@@ -1,8 +1,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { FlatList, TouchableOpacity } from 'react-native';
 import BatchStats from '.';
 import { BarChart } from 'react-native-chart-kit';
+
+/**
+ * Batch Stats Test - test file for the BatchStats component
+ * @author Matthew Otto and Oriel Red Oral
+ */
 
 let wrapper: any;
 

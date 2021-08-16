@@ -11,6 +11,9 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import { Reducer } from './src/redux/reducer';
 import { Provider } from 'react-redux';
+import Toast from 'react-native-toast-message';
+
+export type RootStore = ReturnType<typeof Reducer>;
 
 const App = () => {
   const [fontsLoaded, setFonts] = useState(false);
@@ -48,6 +51,7 @@ const App = () => {
             <PaperProvider theme={DefaultTheme}>
               <StatusBar style='auto' />
               <RootStackNavigator />
+              <Toast ref={(ref) => Toast.setRef(ref)} />
             </PaperProvider>
           </NavigationContainer>
         </SafeAreaProvider>
