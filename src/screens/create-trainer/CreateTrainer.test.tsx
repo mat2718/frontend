@@ -1,45 +1,26 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import CreateTrainer from '.';
-import { initialState } from '../../redux/state';
-import axios from '../../../axiosConfig'
-import configureStore from 'redux-mock-store'
-import thunk from 'redux-thunk';
-import MockAdapter from 'axios-mock-adapter'
-import ITrainer from '../../entities/Trainer';
-import { Provider, useDispatch } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { Reducer } from '../../redux/reducer';
-
-jest.mock('react-redux', () => {
-  return ({
-    ...jest.requireActual('react-redux'),
-    useSelector: () => {
-      return jest.fn();
-    },
-    useDispatch: () => jest.fn(),
-  });
-});
-
-describe('Create Trainer', () =>
-{
-  // const TestState = initialState;
-  const mockStore = createStore(
-    Reducer,
-    composeWithDevTools(applyMiddleware(thunk))
-  );
-  const wrapper = mount(
-    <Provider store={mockStore}>
-      <CreateTrainer />
-    </Provider>);
+/**
+ * Authors: Joab Smith and Imran Ilyas
+ **/
+describe('Create Trainer', () => {
+  const wrapper = mount(/*wrapComponent(returnComponent(*/ <CreateTrainer />); //)
   const shallowWrapper = shallow(
-    // <Provider store={mockStore}>
-      <CreateTrainer />
-   );
+    /*wrapComponent(returnComponent(*/ <CreateTrainer />
+  ); //)
 
   it('Should contain all labels and Input fields', () => {
+    //firstname, lastname, email, id
     expect(wrapper.find('TextInput').length).toBeGreaterThan(0);
+    
+    // this text no longer exists, not sure if planned to implement later or not --Caleb
+    // expect(
+    //   shallowWrapper.findWhere((node) =>
+    //     node.text().toLowerCase().includes('id')
+    //   )
+    // ).toHaveLength(1);
+    
     expect(
       shallowWrapper.findWhere((node) =>
         node.text().toLowerCase().includes('first')
@@ -102,6 +83,13 @@ describe('Create Trainer', () =>
     expect(mockEventHandler).toBeCalled();
     expect(mockEventHandler).toBeCalledWith('Email@site.com');
 
+    // this placeholder no longer exists, not sure if planned to implement later or not --Caleb
+    // const inputID = shallowWrapper
+    //   .findWhere((node) => node.prop('placeholder') === 'ID Number')
+    //   .last()
+    //   .getElement();
+    // shallowInput = shallow(inputID);
+
     if (shallowInput.props().hasOwnProperty('onChangeText')) {
       shallowInput.setProps({ onChangeText: mockEventHandler });
       shallowInput.simulate('changeText', '12345');
@@ -116,8 +104,8 @@ describe('Create Trainer', () =>
       .findWhere((w) => w.text() === 'Submit')
       .first();
     const mockEventHandler = jest.spyOn(sub.props(), 'onPress');
+    // Enzyme usually allows wrapper.simulate() alternatively, but this doesn't support 'press' events.
     sub.props().onPress();
     expect(mockEventHandler).toHaveBeenCalled();
   });
-
 });

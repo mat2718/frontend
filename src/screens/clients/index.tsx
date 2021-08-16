@@ -3,8 +3,6 @@ import { SafeAreaView, FlatList } from 'react-native';
 import { screenStyles } from '../../styles';
 import ClientsListHeader from '../../components/clients/clients-list-header';
 import ClientsListItem from '../../components/clients/clients-list-item';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootStore } from '../../../App';
 
 /** Mock Data - PreRedux */
 export const data = ['Cognizant', 'Revature', 'Matts BBQ'];
@@ -13,13 +11,8 @@ export const data = ['Cognizant', 'Revature', 'Matts BBQ'];
 const Clients: React.FC = () => {
   /** Main item to render for the FlatList */
   const renderItem = ({ item }: { item: any }) => {
-    return (
-      <ClientsListItem clientname={item.clientname} clientid={item.clientid} />
-    );
+    return <ClientsListItem client={item} />;
   };
-
-  /** Get clients from store */
-  const clients = useSelector((state: RootStore) => state.clients);
 
   /** Main return statement */
   return (
@@ -29,9 +22,9 @@ const Clients: React.FC = () => {
        */}
 
       <FlatList
-        data={clients.sort((a, b) => (a > b ? 1 : -1))}
+        data={data.sort((a, b) => (a > b ? 1 : -1))}
         renderItem={renderItem}
-        keyExtractor={(item) => item.clientid.toString()}
+        keyExtractor={(item) => item}
         ListHeaderComponent={ClientsListHeader}
       />
     </SafeAreaView>

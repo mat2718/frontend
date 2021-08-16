@@ -5,6 +5,9 @@ import { useRoute } from '@react-navigation/native';
 import ITrainer from '../../Entities/Trainer';
 
 jest.mock('@react-navigation/native');
+/**
+ * Authors: Joab Smith and Imran Ilyas
+ **/
 describe('View/Edit Trainer', () =>
 {
   const trainer: ITrainer = {
@@ -19,14 +22,15 @@ describe('View/Edit Trainer', () =>
     } as ITrainer
   })
   const wrapper = mount(
-    <ViewEditTrainer />
-  );
+    /*wrapComponent(returnComponent(*/ <ViewEditTrainer />
+  ); //)
   const shallowWrapper = shallow(
-    <ViewEditTrainer />
-  );
+    /*wrapComponent(returnComponent(*/ <ViewEditTrainer />
+  ); //)
 
   it('Should contain all labels and Input fields', () =>
   {
+    //firstname, lastname, email
     expect(wrapper.find('TextInput')).toHaveLength(3);
 
     expect(
@@ -129,6 +133,7 @@ describe('View/Edit Trainer', () =>
       .findWhere((w) => w.text() === 'Update')
       .first();
     const mockEventHandler = jest.spyOn(sub.props(), 'onPress');
+    // Enzyme usually allows wrapper.simulate() alternatively, but this doesn't support 'press' events.
     sub.props().onPress();
     expect(mockEventHandler).toHaveBeenCalled();
   });

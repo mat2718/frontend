@@ -1,19 +1,13 @@
-/**
- * Navigation Types - a list of types for each screen
- * @author Kaiyip Ho
- */
-
-//Drawer Navigation Type
+//any for now, please change it to intake expected prop parameters
+//can change and add screen names too - Kai
 export type RootDrawerParamList = {
   DrawerRoot: any;
 };
 
-//Stack Navigation Type List
 export type RootStackParamList = {
   Main: any;
   ViewBatch: any;
-  AddBatch: any;
-  EditBatch: any;
+  AddEditBatch: any;
   AddTrainer: any;
   ViewEditTrainer: any;
   Clients: any;
@@ -23,7 +17,6 @@ export type RootStackParamList = {
   Trainers: any;
   Diagram: any;
   Skills: any;
-  AddSkill: any;
   Calendar: any;
   EditClient: any;
   AddClient: any;
@@ -31,7 +24,6 @@ export type RootStackParamList = {
   EditDemand: any;
 };
 
-//Tab Navigation Type List
 export type RootTabParamList = {
   Home: any;
   Home2: any;

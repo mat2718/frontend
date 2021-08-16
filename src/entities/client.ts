@@ -1,6 +1,6 @@
 interface IClient {
-  clientname: string;
-  clientid: number;
+  clientName: string;
+  clientId: number;
 }
 
 export default IClient;

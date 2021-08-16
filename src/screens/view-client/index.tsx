@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
+import Header from '../../components/batches/header';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { screenStyles, textStyles, buttonStyles, colors } from '../../styles';
 import { FlatList } from 'react-native-gesture-handler';
@@ -18,28 +19,62 @@ import DemandsListItem from '../../components/demands/demands-list-item';
 interface PropsI {
   route: {
     params: {
-      clientid: number;
-      clientname: string;
-      demands: {
-        clientid: 0;
-      }[];
+      client: string;
     };
   };
 }
 
 /** We must fetch demand data from the client id */
 /** Mock data for now */
+const demands = [
+  {
+    client: 'Revature',
+    curriculum: 'React',
+    needby: Date.now(),
+    quantitydemanded: 25,
+  },
+  {
+    client: 'Revature',
+    curriculum: 'React Native',
+    needby: Date.now(),
+    quantitydemanded: 25,
+  },
+  {
+    client: 'Revature',
+    curriculum: 'AWS',
+    needby: Date.now(),
+    quantitydemanded: 25,
+  },
+  {
+    client: 'Matts BBQ',
+    curriculum: 'Cooking',
+    needby: Date.now(),
+    quantitydemanded: 25,
+  },
+  {
+    client: 'Matts BBQ',
+    curriculum: 'BBQ Making?',
+    needby: Date.now(),
+    quantitydemanded: 25,
+  },
+  {
+    client: 'Cognizant',
+    curriculum: 'React',
+    needby: Date.now(),
+    quantitydemanded: 25,
+  },
+];
 
 const ViewClient: React.FC<PropsI> = ({ route }) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
-
+  
   /** Render item for Demands list */
   const renderItem = ({ item }: { item: any }) => {
     return (
       <DemandsListItem
-        curriculumid={item.curriculumid}
+        curriculum={item.curriculum}
         needby={item.needby}
         quantitydemanded={item.quantitydemanded}
       />
@@ -48,20 +83,16 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
+      <Header />
       <View style={screenStyles.mainView}>
         {/**Title: Curriculum */}
         <View style={screenStyles.titleContainer}>
           <View style={{ flex: 0.75 }}>
-            <Text style={textStyles.heading}>{route.params.clientname}</Text>
+            <Text style={textStyles.heading}>{route.params.client}</Text>
           </View>
           {/** Confirm Button */}
           <TouchableOpacity style={buttonStyles.buttonContainer}>
-            <Text
-              style={buttonStyles.buttonText}
-              onPress={() => navigation.navigate('AddDemand', route.params)}
-            >
-              Add Demand
-            </Text>
+            <Text style={buttonStyles.buttonText} onPress={() => navigation.navigate('AddDemand',route.params)}  >Add Demand</Text>
           </TouchableOpacity>
         </View>
         {/**Subtitle: Demands */}
@@ -73,7 +104,8 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
             style={{ marginRight: 5 }}
           />
           <Text style={textStyles.regular}>
-            {route.params.demands.length + ' demands'}
+            {demands.filter((item) => item.client === route.params.client)
+              .length + ' demands'}
           </Text>
         </View>
 
@@ -85,13 +117,14 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
           <Text style={textStyles.subHeading}>Demands</Text>
         </View>
         {/** Demands */}
-        <View
+        <FlatList
+          data={demands.filter((item) => item.client === route.params.client)}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.curriculum}
           style={{
-            flex: 1,
             backgroundColor: colors.white,
             marginTop: 10,
-            borderRadius: 25,
-            overflow: 'hidden',
+            borderRadius: 15,
             shadowColor: '#000',
             shadowOffset: {
               width: 0,
@@ -101,13 +134,17 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
             shadowRadius: 3.84,
             elevation: 5,
           }}
+        />
+
+        {/** Delete button */}
+        <TouchableOpacity
+          style={styles.deleteButton}
+          onPress={() => navigation.goBack()}
         >
-          <FlatList
-            data={route.params.demands}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.demandid.toString()}
-          />
-        </View>
+          <Text style={styles.deleteButtonText}>
+            Delete {route.params.client}
+          </Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
