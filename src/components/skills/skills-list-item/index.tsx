@@ -2,9 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { listStyles } from '../../../styles';
 import { Picker } from '@react-native-picker/picker';
-import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
-import { deleteSkill } from '../../../redux/actions/skill-actions';
-import { useDispatch } from 'react-redux';
+import ConfirmDialog from '../../../components/confirm-dialog';
 
 interface IProps {
   skillname: string;
@@ -15,14 +13,6 @@ const SkillsListItem: React.FC<IProps> = (props: IProps) => {
   /** States and functions for confirm delete dialog */
   const [visible, setVisible] = React.useState(false);
   const showDialog = () => setVisible(true);
-  const hideDialog = () => setVisible(false);
-
-  /** Hooks */
-  const dispatch = useDispatch();
-
-  const confirmDelete = () => {
-    dispatch(deleteSkill(props.skillid));
-  };
 
   return (
     /** Individual Clients Touchable */
@@ -43,23 +33,17 @@ const SkillsListItem: React.FC<IProps> = (props: IProps) => {
         </Picker>
       </View>
       {/** Confirm dialog */}
-      <View>
-        <Portal>
-          <Dialog visible={visible} onDismiss={hideDialog}>
-            <Dialog.Title>Confirm deletion</Dialog.Title>
-            <Dialog.Content>
-              <Paragraph>
-                {'Are you sure you want to delete ' + props.skillname + '?'}
-              </Paragraph>
-            </Dialog.Content>
-
-            <Dialog.Actions>
-              <Button onPress={hideDialog}>No</Button>
-              <Button onPress={confirmDelete}>Yes</Button>
-            </Dialog.Actions>
-          </Dialog>
-        </Portal>
-      </View>
+      <ConfirmDialog
+        type='deleteSkill'
+        visible={visible}
+        setVisible={setVisible}
+        payload={{
+          batchId: 0,
+          trainerId: 0,
+          curriculumId: 0,
+          skillId: props.skillid,
+        }}
+      />
     </View>
   );
 };

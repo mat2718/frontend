@@ -3,10 +3,12 @@ import { View, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
 import { deleteBatch, confirmBatch } from '../../redux/actions/batch-actions';
+import { deleteSkill } from '../../redux/actions/skill-actions';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { colors } from '../../styles';
+import Toast from 'react-native-toast-message';
 
 /**
  * Confirm Dialog - the component that pops up when we need to confirm an action
@@ -23,6 +25,7 @@ interface IProps {
     batchId: number;
     trainerId: number;
     curriculumId: number;
+    skillId: number;
   };
 }
 
@@ -36,9 +39,27 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
   const hideDialog = () => props.setVisible(false);
 
   /** Delete batch function */
-  const confirmDelete = () => {
+  const confirmDeleteBatch = () => {
     dispatch(deleteBatch(props.payload.batchId));
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: `Batch has been deleted!`,
+      topOffset: 125,
+    });
     navigation.goBack();
+  };
+
+  const confirmDeleteSkill = () => {
+    dispatch(deleteSkill(props.payload.skillId));
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: `Batch has been confirmed!`,
+      topOffset: 125,
+    });
   };
 
   /** Confirm batch function */
@@ -50,6 +71,13 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
         props.payload.curriculumId
       )
     );
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: `Skill has been deleted!`,
+      topOffset: 125,
+    });
     hideDialog();
   };
 
@@ -107,7 +135,38 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
                   No
                 </Button>
                 <Button
-                  onPress={confirmDelete}
+                  onPress={confirmDeleteBatch}
+                  style={styles.button}
+                  color={colors.orange}
+                >
+                  Yes
+                </Button>
+              </Dialog.Actions>
+            </Dialog>
+          </Portal>
+        </View>
+      );
+    case 'deleteSkill':
+      return (
+        <View>
+          <Portal>
+            <Dialog visible={props.visible} onDismiss={hideDialog}>
+              <Dialog.Title>Delete skill</Dialog.Title>
+              <Dialog.Content>
+                <Paragraph>
+                  Are you sure you want to delete this skill?
+                </Paragraph>
+              </Dialog.Content>
+              <Dialog.Actions>
+                <Button
+                  onPress={hideDialog}
+                  style={styles.button}
+                  color={colors.darkGray}
+                >
+                  No
+                </Button>
+                <Button
+                  onPress={confirmDeleteSkill}
                   style={styles.button}
                   color={colors.orange}
                 >

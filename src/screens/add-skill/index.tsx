@@ -7,7 +7,6 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import Header from '../../components/batches/header';
 import { addSkill } from '../../redux/actions/skill-actions';
 import { useDispatch } from 'react-redux';
 import {
@@ -17,6 +16,7 @@ import {
   buttonStyles,
 } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
 const AddSkill: React.FC = () => {
   /** Navigation for going back a screen */
@@ -31,7 +31,13 @@ const AddSkill: React.FC = () => {
         skillName: skill,
       })
     );
-
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: `Skill has been added!`,
+      topOffset: 125,
+    });
     navigation.goBack();
   };
 
