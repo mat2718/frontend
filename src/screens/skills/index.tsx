@@ -6,6 +6,12 @@ import SkillsListItem from '../../components/skills/skills-list-item';
 import { useSelector } from 'react-redux';
 import { RootStore } from '../../../App';
 
+/**
+ * Skills - main screen that displays a list of skills
+ * @returns {React.FC} - entire screen with the list of skills
+ * @author Oriel Red Oral
+ */
+
 const Clients: React.FC = () => {
   /** Main item to render for the FlatList */
   const renderItem = ({ item }: { item: any }) => {

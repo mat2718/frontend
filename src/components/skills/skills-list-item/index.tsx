@@ -4,6 +4,12 @@ import { listStyles } from '../../../styles';
 import { Picker } from '@react-native-picker/picker';
 import ConfirmDialog from '../../../components/confirm-dialog';
 
+/**
+ * Skill List Item - component that the skills flatlist uses as a renderItem
+ * @returns {React.FC} - the individual item for the skills list
+ * @author Oriel Red Oral
+ */
+
 interface IProps {
   skillname: string;
   skillid: number;

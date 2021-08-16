@@ -18,6 +18,12 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 
+/**
+ * Add Skill - main screen for adding a new skill
+ * @returns {React.FC} - the screen for adding a new skill
+ * @author Oriel Red Oral
+ */
+
 const AddSkill: React.FC = () => {
   /** Navigation for going back a screen */
   const navigation = useNavigation();
@@ -63,7 +69,7 @@ const AddSkill: React.FC = () => {
           </TouchableOpacity>
         </View>
         {/** Form view */}
-        {/** Client name */}
+        {/** Skill name */}
         <View style={{ flexDirection: 'column' }}>
           <Text style={inputStyles.inputLabelText}>Skill name</Text>
           <TextInput style={inputStyles.textInput} onChangeText={setSkill} />

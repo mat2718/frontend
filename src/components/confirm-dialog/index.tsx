@@ -82,6 +82,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
     hideDialog();
   };
 
+  /** Switch statement that checks the props type */
   switch (props.type) {
     /** Confirm Batch Dialog */
     case 'confirmBatch':
