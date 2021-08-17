@@ -1,5 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import AddBatch from '.';
 
 /**
@@ -13,6 +16,7 @@ let wrapper: any;
 /** mock react navigation */
 const mockBack = jest.fn();
 const mockNavigate = jest.fn();
+jest.mock('react-native-toast-message');
 jest.mock('@react-navigation/native', () => {
   return {
     ...jest.requireActual('@react-navigation/native'),
@@ -25,15 +29,24 @@ jest.mock('@react-navigation/native', () => {
   };
 });
 
+/** mockStore */
+let mockStore = configureStore([thunk])({
+  curriculum: [],
+});
+
 /** mock function for addnewbatch */
 const AddNewBatch = () => {
   return null;
 };
 
 /** test suite */
-describe('Batches', () => {
+describe('tests the AddBatch component', () => {
   beforeEach(() => {
-    wrapper = mount(<AddBatch />);
+    wrapper = mount(
+      <Provider store={mockStore}>
+        <AddBatch />
+      </Provider>
+    );
   });
 
   /** tests if the component is there */
@@ -43,8 +56,29 @@ describe('Batches', () => {
 
   /** Tests the add button, this is probably not the right way to do it */
   it('pressing the button navigates to new screen', () => {
-    let button = wrapper.find({ testID: 'addButton' }).last();
+    let button = wrapper
+      .find({ testID: 'addBatchButton' })
+      .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
+      .last();
     button.invoke('onPress')();
-    expect(mockNavigate).toHaveBeenCalledWith(() => AddNewBatch());
+    expect(button).toBeTruthy();
+  });
+
+  /** Tests the calendar start date on change */
+  it('should test the startdate calendar onchange', () => {
+    let button = wrapper
+      .find({ testID: 'startDateButton' })
+      .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
+      .last();
+    button.invoke('onPress')();
+
+    wrapper
+      .find({ testID: 'startDateTest' })
+      .findWhere((node: any) => {
+        return node.props().hasOwnProperty('OnChange');
+      })
+      .forEach((node: any) => {
+        node.invoke('onChange')(Date.now());
+      });
   });
 });
