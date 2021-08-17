@@ -67,6 +67,7 @@ describe('Curricula', () => {
     expect(button).toBeDefined();
   });
 
+  //test for render item
   it('Should react on press', () => {
     const onPressEvent = jest.fn();
     const wrap =  shallow(<ExpandableList curriculum={testState.testCurriculum} onPress={onPressEvent}/>);
@@ -79,5 +80,6 @@ describe('Curricula', () => {
         node.invoke('onPress')();
       })
     expect(onPressEvent.mock.calls.length).toBe(1);
+    expect(wrap.find(ExpandableList).length).toEqual(1);
   });
 });
