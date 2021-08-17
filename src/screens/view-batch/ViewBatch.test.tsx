@@ -1,9 +1,13 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import ViewBatch from './index';
+import { mount, shallow } from 'enzyme';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
+
+import ViewBatch from './index';
+
+jest.mock('react-native-vector-icons/MaterialCommunityIcons');
+jest.mock('react-native-chart-kit');
 
 /**
  * View Batch Test - test file for the ViewBatch screen
@@ -11,7 +15,7 @@ import { Provider } from 'react-redux';
  */
 
 /** wrapper for mounting */
-let wrapper: any;
+let wrapper:any;
 
 /** mock react navigation */
 const mockNavigate = jest.fn();
@@ -45,38 +49,41 @@ let batchesState = [
 /** mockStore */
 let mockStore = configureStore([thunk])({
   batches: batchesState,
+  onebatch: null,
 });
 
 /** mock dispatch */
 const mockDispatch = jest.fn();
 jest.mock('react-redux', () => ({
-  useSelector: jest.fn(),
   useDispatch: () => mockDispatch,
 }));
+
+const props = {
+  route: {
+    params: {
+      curriculum: {
+        curriculumId: 0,
+        skillnamearr: [],
+      },
+      trainerId: 1,
+      batchId: 1,
+    },
+  }
+}
 
 /** test suite */
 describe('Batches', () => {
   beforeEach(() => {
     wrapper = mount(
       <Provider store={mockStore}>
-        <ViewBatch
-          route={{
-            params: {
-              curriculum: {
-                curriculumId: 0,
-                skillnamearr: [],
-              },
-              trainerId: 1,
-              batchId: 1,
-            },
-          }}
-        />
+        <ViewBatch {...props} />
       </Provider>
     );
   });
 
   /** tests if the component is there */
   it('should be there', () => {
+    wrapper = mount( <Provider store={mockStore}> <ViewBatch {...props}/> </Provider>)
     expect(wrapper).not.toBe(undefined);
   });
 
@@ -87,7 +94,7 @@ describe('Batches', () => {
     expect(mockNavigate).toHaveBeenCalledWith('EditBatch', {
       batchid: 1,
       batchsize: 20,
-      trainerid: 1,
+      trainerId: 1,
       curriculumid: 1,
       startdate: 'start date lol',
       enddate: 'end date lol',

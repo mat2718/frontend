@@ -80,7 +80,7 @@ function addConfig(config) {
 
   /* comment this out if you want to test all files */
   config.testMatch = [
-    '<rootDir>/src/components/**/ViewBatch.test.[jt]s?(x)',
+    '<rootDir>/src/redux/**/reducer.test.[jt]s?(x)',
   ];
 
 
@@ -100,6 +100,7 @@ function addConfig(config) {
     '@expo',
     '@expo/vector-icons',
     'react-native-toast-message',
+    'react-native-chart-kit',
   ];
 
   console.log(
