@@ -4,6 +4,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import AddEditCurriculum from '.';
+import { TextInput } from 'react-native';
 
 const testState = {
     skills: {
@@ -13,6 +14,18 @@ const testState = {
 };
 const createMockStore = configureStore([thunk]);
 
+const mockGoBack = jest.fn();
+jest.mock('@react-navigation/native', () => {
+    return ({
+        ...jest.requireActual('@react-navigation/native'),
+        useNavigation: () => {
+            return({
+                goBack: mockGoBack,
+            })
+        }
+    })
+})
+
 const mockDispatch = jest.fn();
 jest.mock('react-redux', () => {
     return ({
@@ -21,7 +34,7 @@ jest.mock('react-redux', () => {
     });
 });
 
-describe('AddCurricula', () => {
+describe('AddEditCurriculum', () => {
     const wrapper = mount(
         <Provider store={createMockStore(testState)}>
             <AddEditCurriculum />
@@ -44,26 +57,30 @@ describe('AddCurricula', () => {
         expect(wrapper.find('TextInput').length).toBeGreaterThan(0);
 
         expect(shallowWrap.findWhere((node: any) => {
-            node.text().toLowerCase().includes('name');
+            return node.text().toLowerCase().includes('name');
         }));
 
         expect(shallowWrap.findWhere((node: any) => {
-            node.text().toLowerCase().includes('createdon');
+            return node.text().toLowerCase().includes('createdon');
         }));
 
         expect(shallowWrap.findWhere((node: any) => {
-            node.text().toLowerCase().includes('createdby');
+            return node.text().toLowerCase().includes('createdby');
         }));
 
         expect(shallowWrap.findWhere((node: any) => {
-            node.text().toLowerCase().includes('skills');
+            return node.text().toLowerCase().includes('skills');
         }));
     });
 
     //Test to see if states update on text input
     it('Component should update states with text input', () => {
-        const input = wrapper.findWhere((node: any) => {
-            node.prop('')
+        wrapper.find(TextInput)
+        .findWhere((node: any) => {
+            return node.props().hasOwnProperty('onChangeText')
+        })
+        .forEach((node: any) => {
+            node.invoke('onChangeText')('hello');
         })
     })
 })

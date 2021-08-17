@@ -54,7 +54,6 @@ const AddEditCurriculum: React.FC = () => {
       text1: 'Success!',
       text2: `Curriculum: ${newCurriculum.curriculumname} has been added.`
     })
-    navigation.navigate('Curricula');
     //fail toast for non-filled inputs
   } else {
     Toast.show({
