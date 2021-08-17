@@ -26,7 +26,6 @@ export const GetAllCurricula = () => async (dispatch: Dispatch<IAppAction>) => {
           batches: [],
           demands: [],
           trainers: [],
-          onebatch:[],
           curricula,
         },
       });
