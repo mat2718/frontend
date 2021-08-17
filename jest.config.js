@@ -25,7 +25,6 @@ module.exports = {
   },
 };
 
-
 /**
  * Returns an array with a single string that tells Babel to ignore uncompiled
  * third-party React Native libraries.
@@ -103,6 +102,7 @@ function addConfig(config) {
     'expo-constants',
     '@expo',
     '@expo/vector-icons',
+    'react-native-toast-message',
   ];
 
   console.log(

@@ -21,7 +21,7 @@ const setSelectedFilter = (filter: string) => {
   return filter;
 };
 
-describe('Batches', () => {
+describe('tests BatchesListHeader', () => {
   beforeEach(() => {
     wrapper = mount(
       <BatchListHeader
@@ -50,11 +50,16 @@ describe('Batches', () => {
   it('pressing the button navigates to new screen', () => {
     let button = wrapper
       .find({ testID: 'button' })
+<<<<<<< HEAD
       .findWhere( (node:any) => 
         node.props().hasOwnProperty('onPress') 
       );
     button = button.length ? button.last() : button;
+=======
+      .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
+      .last();
+>>>>>>> a1b5ce57aaf2b30a6a65812a47ea7132fc4ed4aa
     button.invoke('onPress')();
-    expect(mockNavigate).toHaveBeenCalledWith('AddBatch');
+    expect(mockNavigate).toHaveBeenCalled();
   });
 });

@@ -23,6 +23,7 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import { updateBatch } from '../../redux/actions/batch-actions';
+import Toast from 'react-native-toast-message';
 
 /**
  * Edit Batch - the component for editing a batch
@@ -127,6 +128,13 @@ const EditBatch: React.FC<PropsI> = ({ route }) => {
       })
     );
 
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: `Batch has been edited!`,
+      topOffset: 125,
+    });
     navigation.goBack();
   };
 

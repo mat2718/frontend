@@ -10,7 +10,7 @@ import { BarChart } from 'react-native-chart-kit';
 
 let wrapper: any;
 
-describe('Batches', () => {
+describe('tests BatchStats', () => {
   beforeEach(() => {
     wrapper = mount(<BatchStats data={[47, 7, 10, 20]} />);
   });

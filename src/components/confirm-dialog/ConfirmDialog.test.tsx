@@ -38,7 +38,12 @@ describe('tests the confirm dialog component', () => {
         setVisible={() => {
           return null;
         }}
-        payload={0}
+        payload={{
+          batchId: 0,
+          trainerId: 0,
+          curriculumId: 0,
+          skillId: 0,
+        }}
       />
     );
   });
