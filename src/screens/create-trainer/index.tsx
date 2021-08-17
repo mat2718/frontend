@@ -4,12 +4,12 @@ import
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   View,
   Keyboard,
   TouchableWithoutFeedback,
   SafeAreaView
 } from 'react-native';
+import Toast from 'react-native-toast-message';
 import { useDispatch } from 'react-redux';
 import ITrainer from '../../Entities/Trainer';
 import { addTrainer } from '../../redux/actions/trainers-actions';
@@ -23,13 +23,13 @@ import { inputStyles, screenStyles, buttonStyles, textStyles } from '../../style
 
 const CreateTrainer: React.FC = () =>
 {
-  //Textinput hooks
+  // Textinput hooks
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const dispatch = useDispatch();
 
-  //Calls Axios Request from Actions folder upon press
+  // Calls Axios Request from Actions folder upon press
   const submit = () =>
   {
     const newTrainer: ITrainer = {
@@ -38,10 +38,36 @@ const CreateTrainer: React.FC = () =>
       email: email,
       trainerid: 0
     }
-    //toast
-    dispatch(addTrainer(newTrainer));
-    console.log('Submit');
+    if(newTrainer.trainerfirst && newTrainer.trainerlast && newTrainer.email) {
+      dispatch(addTrainer(newTrainer));
+      // positive toast message if each field is filled in
+      Toast.show({
+        type: 'success',
+        position: 'top',
+        text1: 'Success!',
+        text2: `${newTrainer.trainerfirst} ${newTrainer.trainerlast} has been added!`,
+        topOffset: 50,
+      })
+      cleanUp();
+    }
+    else {
+      // negative toast message if one or more fields are empty
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Error',
+        text2: 'You have failed to fill in at least one of the required fields below.',
+        topOffset: 50,
+      })
+    }
   };
+
+  // Reset to initial state
+  const cleanUp = () => {
+    setEmail('');
+    setLastName('');
+    setFirstName('');
+  }
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>

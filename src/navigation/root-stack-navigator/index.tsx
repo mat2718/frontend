@@ -8,7 +8,6 @@ import ViewBatch from '../../screens/view-batch';
 import Navigation from '..';
 import AddBatch from '../../screens/add-batch';
 import EditBatch from '../../screens/edit-batch';
-import Curricula from '../../screens/curricula';
 import AddEditCurriculum from '../../screens/add-edit-curriculum';
 import AddClient from '../../screens/add-client';
 import CreateTrainer from '../../screens/create-trainer';
@@ -16,7 +15,6 @@ import ViewEditTrainer from '../../screens/view-edit-trainer';
 import ViewClient from '../../screens/view-client';
 import Diagram from '../../screens/diagram';
 import AddDemand from '../../screens/add-demand';
-import EditDemand from '../../screens/edit-demand';
 import Skills from '../../screens/skills';
 import AddSkill from '../../screens/add-skill';
 import { colors } from '../../styles';
@@ -25,6 +23,8 @@ import { getAllBatches } from '../../redux/actions/batch-actions';
 import { getAllClients } from '../../redux/actions/client-actions';
 import { GetAllCurricula } from '../../redux/actions/curriculum-actions';
 import { getAllSkills } from '../../redux/actions/skill-actions';
+import { getAllTrainers } from '../../redux/actions/trainers-actions';
+import { getAllDemand } from '../../redux/actions/demand-actions';
 
 //see what happens
 //please import your screen and put in your screen in components-kai
@@ -36,6 +36,8 @@ const RootStackNavigator = () => {
   /** Load in db data and store in the redux state */
   React.useEffect(() => {
     dispatch(getAllBatches());
+    dispatch(getAllTrainers());
+    dispatch(getAllDemand());
     dispatch(getAllClients());
     dispatch(GetAllCurricula());
     dispatch(getAllSkills());
@@ -95,7 +97,16 @@ const RootStackNavigator = () => {
       <Stack.Screen
         name='AddTrainer'
         component={CreateTrainer}
-        options={{ headerShown: true }}
+        options={{ 
+          headerShown: true,
+          title: 'Add a Trainer',
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            fontFamily: 'FuturaBook',
+            fontWeight: '700',
+            color: colors.darkGray,
+          },
+        }}
       />
       <Stack.Screen
         name='ViewEditTrainer'
@@ -132,8 +143,20 @@ const RootStackNavigator = () => {
         }}
       />
       {/** add your view/addedit screens here */}
-      <Stack.Screen name='Curricula' component={Curricula} />
-      <Stack.Screen name='AddEditCurriculum' component={AddEditCurriculum} />
+      <Stack.Screen 
+        name='AddEditCurriculum' 
+        component={AddEditCurriculum}
+        options={{
+          headerShown: true,
+          title: 'Add a Curriculum',
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            fontFamily: 'FuturaBook',
+            fontWeight: '700',
+            color: colors.darkGray,
+          },
+        }}
+      />
       <Stack.Screen
         name='ViewClient'
         component={ViewClient}
@@ -181,8 +204,8 @@ const RootStackNavigator = () => {
           },
         }}
       />
-      <Stack.Screen name='EditDemand' component={EditDemand} />
-      {/* <Stack.Screen name='Clients' component={ClientScreen} />
+      {/*<Stack.Screen name='EditDemand' component={EditDemand} />
+       <Stack.Screen name='Clients' component={ClientScreen} />
       <Stack.Screen name='EditClient' component={EditClient} />
       <Stack.Screen name='AddClient' component={AddClient} />
       

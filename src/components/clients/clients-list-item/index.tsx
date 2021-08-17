@@ -1,45 +1,26 @@
-import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import { listStyles } from '../../../styles';
-import { useDispatch } from 'react-redux';
-import { getAllClients } from '../../../redux/actions/client-actions';
-import { getDemandByClientId } from '../../../redux/actions/demand-actions';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../../../App';
 
 interface IProps {
   clientname: string;
   clientid: number;
 }
-interface IClientList{
-  clientid:number;
-  clientname:string;
-}
-const ClientsListItem: React.FC<IProps> = (props: IProps) => {
-  const [demands, setDemands] = React.useState([{}]);
 
+const ClientsListItem: React.FC<IProps> = (props: IProps) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 
-  const fetchDemands = async () => {
-    setDemands(await getDemandByClientId(props.clientid));
-  };
-
-  React.useEffect(() => {
-    fetchDemands();
-
-    return function cleanup() {
-      setDemands([]);
-    };
-  }, []);
-
-
-
-
-
-
+  const demandsState = useSelector((state: RootStore) => state.demands);
+  const demands = demandsState.filter(
+    (demand) => demand.clientid === props.clientid
+  );
 
   /**
    * Touchable Link to contain individual Batch information.
@@ -55,7 +36,6 @@ const ClientsListItem: React.FC<IProps> = (props: IProps) => {
         navigation.navigate('ViewClient', {
           clientid: props.clientid,
           clientname: props.clientname,
-          demands: demands,
         });
       }}
     >

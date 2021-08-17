@@ -6,7 +6,10 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../types';
 import { listStyles, colors } from '../../../styles';
 import ITrainer from '../../../Entities/Trainer';
-import { useState } from 'react';
+import Toast from 'react-native-toast-message';
+import { useDispatch } from 'react-redux';
+import { deleteATrainer } from '../../../redux/actions/trainers-actions';
+import ConfirmDialog from '../../confirm-dialog';
 
 interface IProps
 {
@@ -26,19 +29,11 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
   const [selectedFilter, setSelectedFilter] = React.useState('');
+  const [visible, setVisible] = React.useState(false);
+  const [dialogType, setDialogType] = React.useState('');
+  const [payload, setPayload] = React.useState(props.trainer.trainerid);
 
-  // Delete Trainer Action Handler call
-  const deleteTrainer = (trainer: ITrainer) =>
-  {
-    console.log('Delete');
-    //Update Redux
-    //Axios Request
-  }
-
-  // Navigate to Edit Trainer page
-  const editTrainer = () => {
-    navigation.navigate('ViewEditTrainer', props.trainer);
-  }
+  const dispatch = useDispatch();
 
   return (
     // Structures and displays the data from the FlatList
@@ -49,10 +44,15 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
         <Picker
             mode='dropdown'
             selectedValue={selectedFilter}
-            // Will need to extract the ternary because it is a code smell
           onValueChange={(itemValue, itemIndex) => {
-            itemValue === 'Edit' ? navigation.navigate('ViewEditTrainer', props.trainer) :
-            itemValue === 'Delete' ? deleteTrainer(props.trainer) : null
+            // Navigate to Edit Trainer screen
+            if(itemValue === 'Edit') {
+              navigation.navigate('ViewEditTrainer', props.trainer)
+             }
+            // Delete Trainer 
+            else if (itemValue === 'Delete') {
+               setVisible(true);
+            }
           }}
             style={{ width: 50 }}
         >
@@ -62,6 +62,17 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
         </Picker>
       </View>
       <Text style={listStyles.textRegular}>{'Email: ' + props.trainer.email}</Text>
+      <ConfirmDialog
+        type='deleteTrainer'
+        visible={visible}
+        setVisible={setVisible}
+        payload={{
+          batchId: 0,
+          trainerId: props.trainer.trainerid,
+          curriculumId: 0,
+          skillId: 0,
+        }}
+      />
       </View>
   );
 };

@@ -5,13 +5,13 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { screenStyles, textStyles, buttonStyles } from '../../../styles';
 
-/** We pass the filter state from the Batches screen to this component */
-interface IProps {
-  selectedFilter: any;
-  setSelectedFilter: any;
-}
+/**
+ * Add Skill - header component for the skills flatlist, scrolls with the flatlist
+ * @returns {React.FC} - skills title and add skill button
+ * @author Oriel Red Oral
+ */
 
-const SkillsListHeader: React.FC<IProps> = (props: IProps) => {
+const SkillsListHeader: React.FC = () => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
@@ -22,8 +22,9 @@ const SkillsListHeader: React.FC<IProps> = (props: IProps) => {
       <View style={screenStyles.titleContainer}>
         <Text style={textStyles.heading}>Skills</Text>
 
-        {/** Add batch button */}
+        {/** Add skill button */}
         <TouchableOpacity
+          testID='button'
           style={buttonStyles.buttonContainer}
           onPress={() => navigation.navigate('AddSkill')}
         >

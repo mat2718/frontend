@@ -7,7 +7,7 @@ let wrapper: any;
 
 describe('Diagram', () => {
   beforeEach(() => {
-    wrapper = mount(<Diagram/>); //for future wrap with store when redux is added -kai 
+    wrapper = mount(<Diagram/>); 
   });
 
   it('should be there', () => {

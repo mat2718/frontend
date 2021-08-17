@@ -1,5 +1,5 @@
 import { Picker } from '@react-native-picker/picker';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,6 +28,7 @@ const SearchBar: React.FC<IProps> = (props: IProps) => {
   {
     return state.trainers;
   })
+  
   
   // Searches for trainers upon press and filters depending on the case
   const searched = () => {

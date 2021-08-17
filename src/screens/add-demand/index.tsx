@@ -23,6 +23,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useDispatch } from 'react-redux';
 import axios from '../../../axiosConfig';
 import { addDemand } from '../../redux/actions/demand-actions';
+import Toast from 'react-native-toast-message';
 
 interface PropsI {
   route: {
@@ -76,16 +77,33 @@ const AddDemand: React.FC<PropsI> = ({ route }) => {
   };
 
   const addDemandClick = () => {
-    dispatch(
-      addDemand({
-        clientid: route.params.clientid,
-        curriculumid: curriculaValue,
-        needby: startDate.toISOString(),
-        quantitydemanded: howMany,
+    if(howMany) {
+      dispatch(
+        addDemand({
+          clientid: route.params.clientid,
+          curriculumid: curriculaValue,
+          needby: startDate.toISOString(),
+          quantitydemanded: howMany,
+        })
+      );
+      Toast.show({
+        type: 'success',
+        position: 'top',
+        text1: 'Success!',
+        text2: `Demand has been added!`,
+        topOffset: 50,
+      });
+      navigation.goBack();
+    }
+    else {
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Invalid Demand',
+        text2: 'The number of associates need by is empty.',
+        topOffset: 50,
       })
-    );
-
-    navigation.goBack();
+    }
   };
 
   return (

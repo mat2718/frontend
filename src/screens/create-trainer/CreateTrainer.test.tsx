@@ -1,10 +1,42 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import CreateTrainer from '.';
+import { initialState } from '../../redux/state';
+import axios from '../../../axiosConfig'
+import configureStore from 'redux-mock-store'
+import thunk from 'redux-thunk';
+import MockAdapter from 'axios-mock-adapter'
+import ITrainer from '../../entities/Trainer';
+import { Provider, useDispatch } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { Reducer } from '../../redux/reducer';
 
-describe('Create Trainer', () => {
-  const wrapper = mount(<CreateTrainer />);
-  const shallowWrapper = shallow(<CreateTrainer />);
+jest.mock('react-redux', () => {
+  return ({
+    ...jest.requireActual('react-redux'),
+    useSelector: () => {
+      return jest.fn();
+    },
+    useDispatch: () => jest.fn(),
+  });
+});
+
+describe('Create Trainer', () =>
+{
+  // const TestState = initialState;
+  const mockStore = createStore(
+    Reducer,
+    composeWithDevTools(applyMiddleware(thunk))
+  );
+  const wrapper = mount(
+    <Provider store={mockStore}>
+      <CreateTrainer />
+    </Provider>);
+  const shallowWrapper = shallow(
+    // <Provider store={mockStore}>
+      <CreateTrainer />
+   );
 
   it('Should contain all labels and Input fields', () => {
     expect(wrapper.find('TextInput').length).toBeGreaterThan(0);
@@ -87,4 +119,5 @@ describe('Create Trainer', () => {
     sub.props().onPress();
     expect(mockEventHandler).toHaveBeenCalled();
   });
+
 });
