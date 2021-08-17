@@ -82,10 +82,10 @@ function addConfig(config) {
   ];
 
   /* comment this out if you want to test all files */
-  config.testMatch = [
-    '<rootDir>/src/components/confirm-dialog/**/*.test.[jt]s?(x)',
-    // '<rootDir>/src/components/curricula/expandable-list/**/*.test.tsx',
-  ];
+  // config.testMatch = [
+  //   // '<rootDir>/src/components/confirm-dialog/**/*.test.[jt]s?(x)',
+  //   // '<rootDir>/src/components/curricula/expandable-list/**/*.test.tsx',
+  // ];
 
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
