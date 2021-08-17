@@ -4,8 +4,16 @@ module.exports = {
   projects: [addConfig(withEnzyme(require('jest-expo/android/jest-preset')))],
   collectCoverage: true,
   collectCoverageFrom: [
-    '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
-    '<rootDir>/src/**/*/batches/**/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/**/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/components/demands/**/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/components/batches/**/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/components/clients/clients-list-header/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/components/clients/clients-list-item/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/components/skills/**/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/screens/batches/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/screens/add-batch/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/screens/edit-batch/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/screens/view-batch/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/**/*.test.*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/components/clients_old/**/*',
     '!<rootDir>/src/screens/clients-old/**/*',
@@ -24,7 +32,6 @@ module.exports = {
     },
   },
 };
-
 
 /**
  * Returns an array with a single string that tells Babel to ignore uncompiled
@@ -94,7 +101,7 @@ function addConfig(config) {
     'expo-font',
     'expo-asset',
     'expo-constants',
-    'react-native-toast-message'
+    'react-native-toast-message',
   ];
 
   console.log(
