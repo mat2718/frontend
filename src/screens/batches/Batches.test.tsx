@@ -79,7 +79,7 @@ jest.mock('@react-navigation/native', () => {
 let wrapper: any;
 
 /** test suite */
-describe('tests Batches', () => {
+describe('Batches', () => {
   beforeEach(() => {
     wrapper = mount(
       <Provider store={mockStore}>

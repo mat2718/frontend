@@ -4,11 +4,12 @@ module.exports = {
   projects: [addConfig(withEnzyme(require('jest-expo/android/jest-preset')))],
   collectCoverage: true,
   collectCoverageFrom: [
+    '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/screens/batches/*.{ts,tsx,js,jsx}',
     '<rootDir>/src/screens/skills/*.{ts,tsx,js,jsx}',
     '<rootDir>/src/screens/add-skill/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/**/*/batches/**/*.{ts,tsx,js,jsx}',
-    '!<rootDir>/src/**/*.test.{ts,tsx,js,jsx}',
+    '<rootDir>/src/**/*.test.{ts,tsx,js,jsx}',
     '!<rootDir>/src/components/clients_old/**/*',
     '!<rootDir>/src/screens/clients-old/**/*',
     '!<rootDir>/src/assets/**/*',
@@ -81,11 +82,11 @@ function addConfig(config) {
   ];
 
   /* comment this out if you want to test all files */
-  config.testMatch = [
+  // config.testMatch = [
     // '<rootDir>/src/components/confirm-dialog/**/*.test.[jt]s?(x)',
     // '<rootDir>/src/components/curricula/expandable-list/**/*.test.tsx',
     // '<rootDir>/src/screens/add-demand/**/*.test.[jt]s?(x)'
-  ];
+  // ];
 
 
   // third-party libraries that throw errors
