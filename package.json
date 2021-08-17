@@ -64,6 +64,7 @@
     "jest-cli": "^26.6.3",
     "jest-expo": "^42.1.0",
     "jest-expo-enzyme": "^1.2.1",
+    "jest-mock-axios": "^4.4.0",
     "jest-sonar-reporter": "^2.0.0",
     "react-native-chart-kit": "^6.11.0",
     "react-native-snap-carousel": "^3.9.1",
