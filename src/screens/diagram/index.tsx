@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import {View,Text,StyleSheet,Dimensions, Button} from 'react-native';
-import { screenStyles, textStyles, buttonStyles } from '../../styles';
+import {View,Text,StyleSheet,Dimensions} from 'react-native';
+import { screenStyles, textStyles } from '../../styles';
 import { LineChart } from 'react-native-chart-kit';
 import { Picker } from '@react-native-picker/picker';
-import { getAllDemand, getDemandByDate, getDemandByCurrIdAndDate, getDemandByCurrId, getDemandByClientId, getDemandById} from '../../redux/actions/demand-actions';
+import {getDemandByDate, getDemandByCurrIdAndDate } from '../../redux/actions/demand-actions';
 import { useSelector} from "react-redux";
 import { IAppState } from '../../redux/state';
 import moment from 'moment';
+
+/**
+ * Diagram Screen - displays the client demand verus Revature supply of associates
+ * @returns {React.FC} - React Component for the Diagram screen
+ * @author Kaiyip Ho
+ */
 
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -35,6 +41,7 @@ import moment from 'moment';
     const startDate = moment(moment(start).subtract(6,"M")).format("YYYY-MM-01");
     const endDate = moment(moment(start).add(6,"M")).format("YYYY-MM-01")
 
+    //useEffect that calls diff action when picking diff curriculum
     useEffect(() => {
       let stringId = currCurriculum[1]
       if (stringId === "default"){
@@ -62,8 +69,6 @@ import moment from 'moment';
               value={[`${item}`,`${filteredArr[item]}`]}
             />
       ))
-
-      // res.unshift(<Picker.Item key={"default"} label="All Curriculum" value={["All Curriculum", "default"]} />);
 
       return res;
     }
@@ -188,8 +193,6 @@ import moment from 'moment';
     
     return (
       <View style={screenStyles.mainView}>
-        {/* <Button title="Console log DemandState" onPress={() => console.log(allBatches)}/>
-        <Button title="Console log SupplyState" onPress={() => console.log(filterSupplyDataByMonth())}/> */}
         <View style={screenStyles.titleContainer}>
 
           <Text style={textStyles.subHeading}>
@@ -197,11 +200,11 @@ import moment from 'moment';
             currCurriculum[0].slice(1)}{' '}
         </Text>
           <Picker
-          selectedValue={currCurriculum[0]}
-          onValueChange={(value:any) => setCurriculum(value)}
-          style={{ height: 50, width: 50,}}
-        >
-          
+            selectedValue={currCurriculum[0]}
+            onValueChange={(value:any) => setCurriculum(value)}
+            style={{ height: 50, width: 50,}}
+          >
+          <Picker.Item enabled={false} label='Select one' value={["Select one", "Select one"]}/>
           {renderPickerItems()}
         </Picker>
         </View>
@@ -262,7 +265,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   }, 
   curriculaNameContainer:{
-    // alignItems: 'center',
     marginBottom:10
   }, 
   numbersContainer:{
