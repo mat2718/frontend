@@ -8,7 +8,6 @@ import ViewBatch from '../../screens/view-batch';
 import Navigation from '..';
 import AddBatch from '../../screens/add-batch';
 import EditBatch from '../../screens/edit-batch';
-import Curricula from '../../screens/curricula';
 import AddEditCurriculum from '../../screens/add-edit-curriculum';
 import AddClient from '../../screens/add-client';
 import CreateTrainer from '../../screens/create-trainer';
@@ -16,7 +15,6 @@ import ViewEditTrainer from '../../screens/view-edit-trainer';
 import ViewClient from '../../screens/view-client';
 import Diagram from '../../screens/diagram';
 import AddDemand from '../../screens/add-demand';
-import EditDemand from '../../screens/edit-demand';
 import Skills from '../../screens/skills';
 import AddSkill from '../../screens/add-skill';
 import { colors } from '../../styles';
@@ -206,8 +204,8 @@ const RootStackNavigator = () => {
           },
         }}
       />
-      <Stack.Screen name='EditDemand' component={EditDemand} />
-      {/* <Stack.Screen name='Clients' component={ClientScreen} />
+      {/*<Stack.Screen name='EditDemand' component={EditDemand} />
+       <Stack.Screen name='Clients' component={ClientScreen} />
       <Stack.Screen name='EditClient' component={EditClient} />
       <Stack.Screen name='AddClient' component={AddClient} />
       

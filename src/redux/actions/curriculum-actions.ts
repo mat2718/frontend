@@ -37,9 +37,7 @@ export const GetAllCurricula = () => async (dispatch: Dispatch<IAppAction>) => {
 };
 
 /**api call for getting a specific curriculum by ID
- *
- * @param id
- *
+ * @param {id} number
  */
 
 export const GetCurriculum = (id: number) => async () => {
@@ -73,9 +71,7 @@ export const PostCurriculum =
   };
 
 /**api call for deleting a specific curriculum by ID
- *
- * @param id
- *
+ * @param {id} number
  */
 export const DeleteCurriculum = (curriculum: ICurriculum) => async () => {
   try {
