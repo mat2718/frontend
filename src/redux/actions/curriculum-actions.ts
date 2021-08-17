@@ -55,7 +55,7 @@ export const PostCurriculum =
     curriculumname: string;
     createdby: string;
     createdon: string;
-    skillIdArr: [];
+    skillIdArr: any[];
   }) =>
   async (dispatch: Dispatch<IAppAction>) => {
     try {

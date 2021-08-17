@@ -10,6 +10,17 @@ import { Picker } from '@react-native-picker/picker';
 import { TouchableOpacity } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 
+const mockNavigate = jest.fn();
+jest.mock('@react-navigation/native', () => {
+  return ({
+    ...jest.requireActual('@react-navigation/native'),
+    useNavigation: () => {
+      return ({
+        navigate: mockNavigate,
+      });
+    },
+  });
+});
 
 jest.requireActual('react-redux');
 
