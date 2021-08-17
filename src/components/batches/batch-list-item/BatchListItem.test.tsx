@@ -5,6 +5,12 @@ import { Text } from 'react-native';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import BatchListItem from '.';
+import * as axios from 'axios';
+
+const mockCurriculum = {
+  curriculumName: '',
+};
+jest.mock('axios');
 
 /**
  * Batch List Item Test - test file for the BatchistItemComponent
@@ -31,6 +37,15 @@ jest.mock('@react-navigation/native', () => {
 
 /** mockProps for this component */
 const mockProps = {
+<<<<<<< HEAD
+  batchId: 0,
+  batchSize: 25,
+  startDate: 'start date lol',
+  endDate: 'end date lol',
+  curriculum: mockCurriculum,
+  trainer: 0,
+  confirmed: true,
+=======
   batchId: 1,
   batchSize: 20,
   curriculumId: 1,
@@ -38,6 +53,7 @@ const mockProps = {
   startDate: new Date(Date.now()).toISOString(),
   endDate: new Date(Date.now()).toISOString(),
   confirmed: false,
+>>>>>>> dev-branch
 };
 
 /** testState */
@@ -87,11 +103,23 @@ describe('tests BatchListItem', () => {
 
   /** Tests the navigate button */
   it('pressing the button navigates to new screen', () => {
+    axios.get.mockResolvedValue(mockCurriculum);
     let button = wrapper
+<<<<<<< HEAD
+      .find({ testID: 'button' })
+      .findWhere( (node:any) => 
+        node.props().hasOwnProperty('onPress') 
+      );
+    button = button.length ? button.last() : button;
+=======
       .find({ testID: 'viewBatchButton' })
       .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
       .last();
+>>>>>>> a1b5ce57aaf2b30a6a65812a47ea7132fc4ed4aa
     button.invoke('onPress')();
+<<<<<<< HEAD
+    expect(mockNavigate).toHaveBeenCalled(); // don't test implementation details
+=======
     expect(mockNavigate).toHaveBeenCalled();
   });
 
@@ -169,5 +197,6 @@ describe('tests BatchListItem', () => {
       </Provider>
     );
     expect(completed).toBeTruthy();
+>>>>>>> dev-branch
   });
 });
