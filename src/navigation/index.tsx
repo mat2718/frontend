@@ -6,7 +6,13 @@ import React from 'react';
 import RootTabNavigator from './root-tab-navigator';
 import Logo from '../assets/logo';
 
-//https://docs.expo.dev/versions/latest/sdk/screens/ -Kai
+/**
+ * Drawer Navigation - displays a screen hidden on the left side that routes to specific components
+ * @return {React.FC} - React component for navigation in the form of a drawer
+ * @author Kaiyip Ho
+ * //https://docs.expo.dev/versions/latest/sdk/screens/ 
+ */
+
 enableScreens();
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
 

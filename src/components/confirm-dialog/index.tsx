@@ -9,12 +9,13 @@ import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { colors } from '../../styles';
 import Toast from 'react-native-toast-message';
+import { deleteATrainer } from '../../redux/actions/trainers-actions';
 
 /**
  * Confirm Dialog - the component that pops up when we need to confirm an action
  * @param {IProps} interface - includes the action type, visibility state, setVisible state, and the payload (id needed for functions)
  * @returns {React.FC} - React Component for the edit batch screen
- * @author Oriel Red Oral
+ * @author Oriel Red Oral and Imran Ilyas
  */
 
 interface IProps {
@@ -46,7 +47,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
       position: 'top',
       text1: 'Success!',
       text2: `Batch has been deleted!`,
-      topOffset: 125,
+      topOffset: 50,
     });
     navigation.goBack();
   };
@@ -59,9 +60,22 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
       position: 'top',
       text1: 'Success!',
       text2: `Skill has been deleted!`,
-      topOffset: 125,
+      topOffset: 50,
     });
   };
+
+  /** Delete Trainer Function */
+  const deleteTrainer = () => {
+    dispatch(deleteATrainer(props.payload.trainerId))
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: 'Success!',
+      text2: `A Trainer has been deleted!`,
+      topOffset: 50,
+    });
+    hideDialog();
+  }
 
   /** Confirm batch function */
   const confirmConfirmBatch = () => {
@@ -77,7 +91,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
       position: 'top',
       text1: 'Success!',
       text2: `Batch has been confirmed!`,
-      topOffset: 125,
+      topOffset: 50,
     });
     hideDialog();
   };
@@ -169,6 +183,37 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
                 </Button>
                 <Button
                   onPress={confirmDeleteSkill}
+                  style={styles.button}
+                  color={colors.orange}
+                >
+                  Yes
+                </Button>
+              </Dialog.Actions>
+            </Dialog>
+          </Portal>
+        </View>
+      );
+    case 'deleteTrainer':
+      return (
+        <View>
+          <Portal>
+            <Dialog visible={props.visible} onDismiss={hideDialog}>
+              <Dialog.Title>Delete Trainer</Dialog.Title>
+              <Dialog.Content>
+                <Paragraph>
+                  Are you sure you want to delete this trainer?
+                </Paragraph>
+              </Dialog.Content>
+              <Dialog.Actions>
+                <Button
+                  onPress={hideDialog}
+                  style={styles.button}
+                  color={colors.darkGray}
+                >
+                  No
+                </Button>
+                <Button
+                  onPress={deleteTrainer}
                   style={styles.button}
                   color={colors.orange}
                 >
