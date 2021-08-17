@@ -11,5 +11,5 @@ const state = {
 
 const arr = [0,1,2,3,4,5,6,7]
 it.each(arr)('tests the Reducer with action of type %i', (i) => {
-    Reducer(state, {type: i, payload: state});
+    Reducer( (i ? state : undefined), {type: i, payload: state});
 })

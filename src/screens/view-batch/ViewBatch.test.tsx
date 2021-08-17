@@ -1,15 +1,9 @@
 import React from 'react';
-<<<<<<< HEAD
-import { mount, shallow } from 'enzyme';
-=======
 import { mount } from 'enzyme';
 import ViewBatch from './';
->>>>>>> dev-branch
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-
-import ViewBatch from './index';
 
 jest.mock('react-native-vector-icons/MaterialCommunityIcons');
 jest.mock('react-native-chart-kit');
