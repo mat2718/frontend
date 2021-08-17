@@ -32,7 +32,7 @@ import { RootStore } from '../../../App';
  * @author Matthew Otto and Oriel Red Oral
  */
 
-interface PropsI {
+interface IProps {
   route: {
     params: {
       batchId: number;
@@ -45,7 +45,7 @@ interface PropsI {
   };
 }
 
-const ViewBatch: React.FC<PropsI> = ({ route }) => {
+const ViewBatch: React.FC<IProps> = ({ route }) => {
   /** Payload for the confirm dialog box */
   const payload = {
     batchId: route.params.batchId,

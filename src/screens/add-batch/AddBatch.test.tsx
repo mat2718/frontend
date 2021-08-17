@@ -3,8 +3,8 @@ import { mount } from 'enzyme';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import AddBatch from '.';
-import { Picker } from '@react-native-picker/picker';
 
 /**
  * Add Batch Test - test file for the AddBatch screen
@@ -13,6 +13,8 @@ import { Picker } from '@react-native-picker/picker';
 
 /** wrapper for mounting */
 let wrapper: any;
+let useEffect: any;
+let cleanup: any;
 
 /** mock react navigation */
 const mockBack = jest.fn();
@@ -30,33 +32,10 @@ jest.mock('@react-navigation/native', () => {
   };
 });
 
-jest.mock('react-native-toast-message', () => {
-  return({
-    __esModule: true,
-    ...jest.requireActual('react-native-toast-message'),
-    default: {
-      show: jest.fn(),
-    },
-  });
-});
-
-const mockDispatch = jest.fn();
-jest.mock('react-redux', () => {
-  return ({
-    ...jest.requireActual('react-redux'),
-    useDispatch: mockDispatch,
-  });
-});
-
 /** mockStore */
 let mockStore = configureStore([thunk])({
   curriculum: [],
 });
-
-/** mock function for addnewbatch */
-const AddNewBatch = () => {
-  return null;
-};
 
 /** test suite */
 describe('tests the AddBatch component', () => {
@@ -80,7 +59,7 @@ describe('tests the AddBatch component', () => {
       .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
       .last();
     button.invoke('onPress')();
-    expect(button).toBeTruthy();
+    expect(mockBack).toHaveBeenCalled();
   });
 
   /** Tests the calendar start date on change */
@@ -94,10 +73,37 @@ describe('tests the AddBatch component', () => {
     wrapper
       .find({ testID: 'startDateTest' })
       .findWhere((node: any) => {
-        return node.props().hasOwnProperty('OnChange');
+        return node.props().hasOwnProperty('onChange');
       })
       .forEach((node: any) => {
-        node.invoke('onChange')(Date.now());
+        node.invoke('onChange')(null, new Date(new Date(Date.now())));
+        node.invoke('onChange')(null, false);
       });
+  });
+
+  /** Tests the calendar end date on change */
+  it('should test the enddate calendar onchange', () => {
+    let button = wrapper
+      .find({ testID: 'endDateButton' })
+      .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
+      .last();
+    button.invoke('onPress')();
+
+    wrapper
+      .find({ testID: 'endDateTest' })
+      .findWhere((node: any) => {
+        return node.props().hasOwnProperty('onChange');
+      })
+      .forEach((node: any) => {
+        node.invoke('onChange')(null, new Date(new Date(Date.now())));
+        node.invoke('onChange')(null, false);
+      });
+  });
+
+  it('should unmount the component', () => {
+    useEffect = jest
+      .spyOn(React, 'useEffect')
+      .mockImplementation((cb) => (cleanup = cb()));
+    wrapper.unmount();
   });
 });

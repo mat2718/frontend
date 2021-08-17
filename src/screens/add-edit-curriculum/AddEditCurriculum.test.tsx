@@ -1,6 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Header from '../../components/batches/header';
 import AddEditCurriculum from '.'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { TextInput } from 'react-native';
@@ -63,12 +62,6 @@ describe('AddEditCurriculum', () => {
     expect(wrapper).not.toBe(undefined);
   });
 
-  // tests if the header is defined
-  it('should display the header', () => {
-    const shouldBeHeader = wrapper.find(<Header />);
-    expect(shouldBeHeader).toBeDefined();
-  });
-
   //tests
   // it('should have labels and input fields', () => {
   //   expect(wrapper.find('TextInput')).toHaveLength(4);
@@ -108,5 +101,3 @@ describe('AddEditCurriculum', () => {
       })
   })
 });
-
-// yeet

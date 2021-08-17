@@ -5,8 +5,6 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
-    '!<rootDir>/src/**/*/batches/**/*.{ts,tsx,js,jsx}',
-    '!<rootDir>/src/**/*.test.{ts,tsx,js,jsx}',
     '!<rootDir>/src/components/clients_old/**/*',
     '!<rootDir>/src/screens/clients-old/**/*',
     '!<rootDir>/src/assets/**/*',

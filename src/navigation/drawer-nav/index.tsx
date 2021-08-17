@@ -45,7 +45,7 @@ export const DrawerContent: React.FC = () => {
               )}
               label='Home'
               onPress={() => {
-                navigation.navigate('Main');
+                navigation.navigate('Batches');
               }}
             />
             <DrawerItem
@@ -78,7 +78,6 @@ export const DrawerContent: React.FC = () => {
             signOut();
           }}
         />
-        {/* <Drawer.Section style={styles.bottomDrawerSection}></Drawer.Section> */}
       </DrawerContentScrollView>
     </View>
   );

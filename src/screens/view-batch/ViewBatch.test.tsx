@@ -1,5 +1,10 @@
 import React from 'react';
+<<<<<<< HEAD
 import { mount, shallow } from 'enzyme';
+=======
+import { mount } from 'enzyme';
+import ViewBatch from './';
+>>>>>>> dev-branch
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
@@ -72,7 +77,7 @@ const props = {
 }
 
 /** test suite */
-describe('Batches', () => {
+describe('tests ViewBatch', () => {
   beforeEach(() => {
     wrapper = mount(
       <Provider store={mockStore}>
