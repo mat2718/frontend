@@ -50,15 +50,15 @@ export const addDemand =
     }
   };
 
-export const getDemandById =
-  async (demandId: number) => {
-    try {
-      const res = await axios.get(`demand/id/${demandId}`);
-      return res.data;
-    } catch (error) {
-      return error.response.data;
-    }
-  };
+// export const getDemandById =
+//   async (demandId: number) => {
+//     try {
+//       const res = await axios.get(`demand/id/${demandId}`);
+//       return res.data;
+//     } catch (error) {
+//       return error.response.data;
+//     }
+//   };
 
 export const getDemandByDate =
   async (startDate: string, endDate: string) => {
@@ -70,15 +70,15 @@ export const getDemandByDate =
     }
   };
 
-export const getDemandByCurrId =
-  async (curriculumId: number) => {
-    try {
-      const res = await axios.get(`demand/curriculum/${curriculumId}`);
-      return res.data;
-    } catch (error) {
-      return error.response.data;
-    }
-  };
+// export const getDemandByCurrId =
+//   async (curriculumId: number) => {
+//     try {
+//       const res = await axios.get(`demand/curriculum/${curriculumId}`);
+//       return res.data;
+//     } catch (error) {
+//       return error.response.data;
+//     }
+//   };
 
 export const getDemandByCurrIdAndDate =
   async (curriculumId: number, startDate: string, endDate: string) => {
@@ -92,11 +92,11 @@ export const getDemandByCurrIdAndDate =
     }
   };
 
-export const getDemandByClientId = async (clientId: number) => {
-  try {
-    const res = await axios.get(`demand/client/${clientId}`);
-    return res.data;
-  } catch (error) {
-    return error.response.data;
-  }
-};
+// export const getDemandByClientId = async (clientId: number) => {
+//   try {
+//     const res = await axios.get(`demand/client/${clientId}`);
+//     return res.data;
+//   } catch (error) {
+//     return error.response.data;
+//   }
+// };

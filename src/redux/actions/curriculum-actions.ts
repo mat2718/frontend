@@ -40,14 +40,14 @@ export const GetAllCurricula = () => async (dispatch: Dispatch<IAppAction>) => {
  * @param {id} number
  */
 
-export const GetCurriculum = (id: number) => async () => {
-  try {
-    const res: AxiosResponse = await axios.get(`curriculum/id/${id}`);
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
-};
+// export const GetCurriculum = (id: number) => async () => {
+//   try {
+//     const res: AxiosResponse = await axios.get(`curriculum/id/${id}`);
+//     return res.data;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 //api call to post a new curriculum
 export const PostCurriculum =
@@ -73,16 +73,16 @@ export const PostCurriculum =
 /**api call for deleting a specific curriculum by ID
  * @param {id} number
  */
-export const DeleteCurriculum = (curriculum: ICurriculum) => async () => {
-  try {
-    await axios.delete(`curriculum/id/${curriculum.curriculumid}`);
-    (() => {
-      const dispatcher = useDispatch();
-      dispatcher(GetAllCurricula());
-    })();
-    GetAllCurricula();
-    return 'Curriculum has been deleted.';
-  } catch (err) {
-    console.log(err);
-  }
-};
+// export const DeleteCurriculum = (curriculum: ICurriculum) => async () => {
+//   try {
+//     await axios.delete(`curriculum/id/${curriculum.curriculumid}`);
+//     (() => {
+//       const dispatcher = useDispatch();
+//       dispatcher(GetAllCurricula());
+//     })();
+//     GetAllCurricula();
+//     return 'Curriculum has been deleted.';
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
