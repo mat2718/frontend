@@ -1,15 +1,19 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import DemandsListItem from '.';
-import { TouchableOpacity } from 'react-native';
+
+/**
+ * DemandsListItem - test file for the DemandsListItem component
+ * @author  Oriel Red Oral
+ */
 
 let wrapper: any;
 
-describe('Batches', () => {
+describe('tests DemandsListItem', () => {
   beforeEach(() => {
     wrapper = mount(
       <DemandsListItem
-        curriculum='React Native'
+        curriculumid={2}
         needby={Date.now()}
         quantitydemanded={25}
       />

@@ -13,7 +13,6 @@ import { getAllBatches } from '../../redux/actions/batch-actions';
  * @author Matthew Otto and Oriel Red Oral
  */
 
-/** Basis for Entire Batch Screen */
 const Batches: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = React.useState('all');
   const [isFetching, setIsFetching] = React.useState(false);

@@ -6,9 +6,6 @@ import ClientsListItem from '../../components/clients/clients-list-item';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from '../../../App';
 
-/** Mock Data - PreRedux */
-export const data = ['Cognizant', 'Revature', 'Matts BBQ'];
-
 /** Basis for Entire Batch Screen */
 const Clients: React.FC = () => {
   /** Main item to render for the FlatList */
@@ -19,7 +16,9 @@ const Clients: React.FC = () => {
   };
 
   /** Get clients from store */
-  const clients = useSelector((state: RootStore) => state.clients);
+  const clients = useSelector((state: RootStore) => state.clients).sort(
+    (a, b) => (a.clientname > b.clientname ? 1 : -1)
+  );
 
   /** Main return statement */
   return (
@@ -29,7 +28,7 @@ const Clients: React.FC = () => {
        */}
 
       <FlatList
-        data={clients.sort((a, b) => (a > b ? 1 : -1))}
+        data={clients}
         renderItem={renderItem}
         keyExtractor={(item) => item.clientid.toString()}
         ListHeaderComponent={ClientsListHeader}

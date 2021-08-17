@@ -45,8 +45,10 @@ const CreateTrainer: React.FC = () =>
         type: 'success',
         position: 'top',
         text1: 'Success!',
-        text2: `${newTrainer.trainerfirst} ${newTrainer.trainerlast} has been added!`
+        text2: `${newTrainer.trainerfirst} ${newTrainer.trainerlast} has been added!`,
+        topOffset: 50,
       })
+      cleanUp();
     }
     else {
       // negative toast message if one or more fields are empty
@@ -54,10 +56,18 @@ const CreateTrainer: React.FC = () =>
         type: 'error',
         position: 'top',
         text1: 'Error',
-        text2: 'You have failed to fill in at least one of the required fields below.'
+        text2: 'You have failed to fill in at least one of the required fields below.',
+        topOffset: 50,
       })
     }
   };
+
+  // Reset to initial state
+  const cleanUp = () => {
+    setEmail('');
+    setLastName('');
+    setFirstName('');
+  }
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>

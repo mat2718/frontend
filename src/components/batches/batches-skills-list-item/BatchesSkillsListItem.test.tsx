@@ -25,7 +25,7 @@ jest.mock('@react-navigation/native', () => {
 let wrapper: any;
 
 /** Test suite */
-describe('Batches', () => {
+describe('tests BatchListItem', () => {
   beforeEach(() => {
     wrapper = mount(<BatchesSkillsListItem skillname='skill' />);
   });

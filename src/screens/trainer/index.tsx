@@ -4,6 +4,8 @@ import TrainerListHeader from '../../components/trainers/trainer-list-header';
 import { screenStyles } from '../../styles';
 import TrainersListItem from '../../components/trainers/trainers-list-item';
 import ITrainer from '../../Entities/Trainer';
+import { useSelector } from 'react-redux';
+import { IAppState } from '../../redux/state';
 
 /**
  * Main Trainer Screen - displays the trainer screen with all the trainers
@@ -14,8 +16,10 @@ import ITrainer from '../../Entities/Trainer';
 
 const MainTrainer: React.FC<ITrainer> = () =>
 {
-  const [sortedTrainer, setSortedTrainer] = useState<ITrainer[]>([])
+  const trainers:ITrainer[] = useSelector((state: IAppState) => state.trainers);
+  const [sortedTrainer, setSortedTrainer] = useState<ITrainer[]>(trainers)
 
+  // Returns the header which consists of the Search Bar and the Add Trainer Button
   const header = () =>
   {
     return (<TrainerListHeader setTrainerArr={setSortedTrainer}/>)

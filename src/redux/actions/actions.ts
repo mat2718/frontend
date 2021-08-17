@@ -1,15 +1,17 @@
-import IBatch from "../../entities/batch";
-import ICurriculum from "../../entities/curriculum";
-import IClient from "../../entities/client";
-import IDemand from "../../entities/demand";
-import ISkill from "../../entities/skill";
-import ITrainer from "../../entities/Trainer";
+import IBatch from '../../entities/batch';
+import ICurriculum from '../../entities/curriculum';
+import IClient from '../../entities/client';
+import IDemand from '../../entities/demand';
+import ISkill from '../../entities/skill';
+import ITrainer from '../../entities/Trainer';
+import IOneBatch from '../../entities/onebatch';
 
 export enum AppActions {
   UPDATE_SKILL,
   UPDATE_CLIENT,
   UPDATE_CURRICULA,
   UPDATE_BATCH,
+  UPDATE_ONE_BATCH,
   UPDATE_TRAINER,
   UPDATE_DEMAND,
 }
@@ -22,6 +24,7 @@ export interface IAppAction {
     demands: IDemand[];
     curricula: ICurriculum[];
     batches: IBatch[];
+    onebatch: IOneBatch[];
     trainers: ITrainer[];
   };
 }

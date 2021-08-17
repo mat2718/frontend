@@ -23,6 +23,7 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import { addBatch } from '../../redux/actions/batch-actions';
+import Toast from 'react-native-toast-message';
 
 /**
  * Add Batch - the component for adding a new batch to the database
@@ -93,19 +94,45 @@ const AddBatch: React.FC = () => {
 
   /** Add batch function */
   const AddNewBatch = () => {
-    dispatch(
-      addBatch({
-        trainerId: trainerValue,
-        curriculumId: curriculumValue,
-        batchSize: batchSizeValue,
-        startDate: startDate.toISOString(),
-        endDate: endDate.toISOString(),
-        clientId: null,
+    if(batchSizeValue && (startDate < endDate)) {
+      dispatch(
+        addBatch({
+          trainerId: trainerValue,
+          curriculumId: curriculumValue,
+          batchSize: batchSizeValue,
+          startDate: startDate.toISOString(),
+          endDate: endDate.toISOString(),
+          clientId: null,
+        })
+      );
+      Toast.show({
+        type: 'success',
+        position: 'top',
+        text1: 'Success!',
+        text2: `A new Batch has been added!`,
+        topOffset: 50,
+      });
+      navigation.goBack();
+    }
+    else if (!batchSizeValue) {
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Invalid Batch Size',
+        text2: 'The Batch Size Value is empty.',
+        topOffset: 50,
       })
-    );
-
-    navigation.goBack();
-  };
+    }
+    else if(startDate >= endDate) {
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Invalid Batch Date',
+        text2: 'The End Date is not greater than the Start Date',
+        topOffset: 50,
+      })
+    }
+  }
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
