@@ -51,28 +51,10 @@ const props = {
 describe('ExpandableList', () => {
   beforeEach(() => {
     wrapper = mount(
-<<<<<<< HEAD
       <Provider store={createMockStore(testState)}>
         <ExpandableList {...props} />
       </Provider>
       
-=======
-      <ExpandableList
-        curriculum={{
-          createdby: 'First Creator',
-          createdon: '2021-08-03',
-          curriculumid: 0,
-          lastmodified: 'First Creator',
-          lastmodifiedby: '2021-08-03',
-          curriculumname: 'Curriculum 1',
-          skillidarr: [0, 1, 2],
-          skillnamearr: ['JS', 'TS', 'React', 'React-Native'],
-        }}
-        onPress={() => {
-          /** function here??? */
-        }}
-      />
->>>>>>> dev-branch
     );
   });
 

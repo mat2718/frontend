@@ -82,11 +82,9 @@ function addConfig(config) {
   ];
 
   /* comment this out if you want to test all files */
-  // config.testMatch = [
-    // '<rootDir>/src/components/confirm-dialog/**/*.test.[jt]s?(x)',
-    // '<rootDir>/src/components/curricula/expandable-list/**/*.test.tsx',
-    // '<rootDir>/src/screens/diagram/**/*.test.[jt]s?(x)'
-  // ];
+  config.testMatch = [
+    '<rootDir>/src/components/**/*.test.[jt]s?(x)',
+  ];
 
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
@@ -108,10 +106,10 @@ function addConfig(config) {
 
   console.log(
     'transformIgnorePatterns set to: \n',
-    returnTransformIgnorePatterns(ignoreThese) + '\n'
+    returnTransformIgnorePatterns(ignoreThese)[0] + '\n'
   );
 
-  config.transformIgnorePatterns = returnTransformIgnorePatterns(ignoreThese[0]);
+  config.transformIgnorePatterns = returnTransformIgnorePatterns(ignoreThese);
 
   config.displayName = {
     name: 'components',
