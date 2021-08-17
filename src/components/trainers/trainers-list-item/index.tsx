@@ -35,25 +35,6 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
 
   const dispatch = useDispatch();
 
-  // Delete Trainer Action Handler call
-  const deleteTrainer = (trainer: ITrainer) =>
-  {
-    // Will need to implement modal
-    // setDialogType('deleteBatch');
-    // setVisible(true);
-    
-    dispatch(deleteATrainer(trainer));
-    Toast.show({
-      type: 'success',
-      position: 'top',
-      text1: 'Success!',
-      text2: 'You have deleted a trainer.',
-      topOffset: 50,
-    })
-    //Update Redux
-    //Axios Request
-  }
-
   return (
     // Structures and displays the data from the FlatList
     <View style={listStyles.listItemContainer}>
@@ -70,7 +51,7 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
              }
             // Delete Trainer 
             else if (itemValue === 'Delete') {
-               deleteTrainer(props.trainer)
+               setVisible(true);
             }
           }}
             style={{ width: 50 }}
@@ -81,12 +62,17 @@ const TrainersListItem: React.FC<IProps> = (props: IProps) =>
         </Picker>
       </View>
       <Text style={listStyles.textRegular}>{'Email: ' + props.trainer.email}</Text>
-      {/* <ConfirmDialog
-          type={dialogType}
-          setVisible={setVisible}
-          visible={visible}
-          payload={payload}
-        /> */}
+      <ConfirmDialog
+        type='deleteTrainer'
+        visible={visible}
+        setVisible={setVisible}
+        payload={{
+          batchId: 0,
+          trainerId: props.trainer.trainerid,
+          curriculumId: 0,
+          skillId: 0,
+        }}
+      />
       </View>
   );
 };
