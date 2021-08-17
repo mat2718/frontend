@@ -7,7 +7,7 @@ export default interface ICurriculum {
   lastmodified: string;
   lastmodifiedby: string;
   curriculumname: string;
-  skillidarr: [];
-  skillnamearr: [];
+  skillidarr: number[];
+  skillnamearr: string[];
   curriculumid: number;
 }

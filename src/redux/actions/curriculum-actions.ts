@@ -4,6 +4,7 @@ import { AppActions, IAppAction } from './actions';
 import { AxiosResponse } from 'axios';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import ISkill from '../../entities/skill';
 
 /**
  * Handler for Curricula - Axios requests to database for curricula
@@ -51,10 +52,10 @@ export const GetCurriculum = (id: number) => async () => {
 //api call to post a new curriculum
 export const PostCurriculum =
   (curriculum: {
-    name: string;
-    createdBy: string;
-    createdOn: string;
-    skills: number[];
+    curriculumname: string;
+    createdby: string;
+    createdon: string;
+    skillIdArr: [];
   }) =>
   async (dispatch: Dispatch<IAppAction>) => {
     try {
@@ -63,7 +64,7 @@ export const PostCurriculum =
         const dispatcher = useDispatch();
         dispatcher(GetAllCurricula());
       })();
-      return `${curriculum.name} has been added.`;
+      return `${curriculum.curriculumname} has been added.`;
     } catch (err) {
       console.log(err);
     }
