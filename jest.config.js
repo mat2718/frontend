@@ -88,6 +88,7 @@ function addConfig(config) {
     // '<rootDir>/src/screens/diagram/**/*.test.[jt]s?(x)'
   // ];
 
+
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
   const ignoreThese = [
@@ -108,10 +109,10 @@ function addConfig(config) {
 
   console.log(
     'transformIgnorePatterns set to: \n',
-    returnTransformIgnorePatterns(ignoreThese) + '\n'
+    returnTransformIgnorePatterns(ignoreThese)[0] + '\n'
   );
 
-  config.transformIgnorePatterns = returnTransformIgnorePatterns(ignoreThese[0]);
+  config.transformIgnorePatterns = returnTransformIgnorePatterns(ignoreThese);
 
   config.displayName = {
     name: 'components',
