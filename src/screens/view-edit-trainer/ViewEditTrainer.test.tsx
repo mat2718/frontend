@@ -3,8 +3,21 @@ import { mount, shallow } from 'enzyme';
 import ViewEditTrainer from '.';
 import { useRoute } from '@react-navigation/native';
 import ITrainer from '../../Entities/Trainer';
+import { Provider, useDispatch } from 'react-redux';
+import { Provider as PaperProvider} from 'react-native-paper'
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import { Reducer } from '../../redux/reducer';
 
 jest.mock('@react-navigation/native');
+jest.mock('react-redux', () =>
+{
+  return ({
+    ...jest.requireActual('react-redux'),
+    useSelector: jest.fn(),
+  })
+})
 describe('View/Edit Trainer', () =>
 {
   const trainer: ITrainer = {
@@ -18,8 +31,16 @@ describe('View/Edit Trainer', () =>
       ...trainer
     } as ITrainer
   })
+  const mockStore = createStore(
+    Reducer,
+    composeWithDevTools(applyMiddleware(thunk))
+  );
   const wrapper = mount(
-    <ViewEditTrainer />
+    <Provider store={mockStore}>
+      <PaperProvider>
+        <ViewEditTrainer />
+        </PaperProvider>
+    </Provider>
   );
   const shallowWrapper = shallow(
     <ViewEditTrainer />
@@ -27,6 +48,7 @@ describe('View/Edit Trainer', () =>
 
   it('Should contain all labels and Input fields', () =>
   {
+    useDispatch.mockReturnValue();
     expect(wrapper.find('TextInput')).toHaveLength(3);
 
     expect(
@@ -75,12 +97,14 @@ describe('View/Edit Trainer', () =>
 
   it('Should have a submit button', () =>
   {
+    useDispatch.mockReturnValue();
     const submit = shallowWrapper.find('TouchableOpacity');
     expect(submit).toBeDefined();
   });
 
   it('Should update states on text input', () =>
   {
+    useDispatch.mockReturnValue();
     const inputFN = wrapper
       .findWhere((node) => node.prop('placeholder') === 'First Name')
       .last()
