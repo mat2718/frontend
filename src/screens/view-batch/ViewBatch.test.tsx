@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import ViewBatch from '.';
+import ViewBatch from './index';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';

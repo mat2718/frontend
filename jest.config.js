@@ -80,7 +80,7 @@ function addConfig(config) {
 
   /* comment this out if you want to test all files */
   config.testMatch = [
-    '<rootDir>/src/redux/**/*.test.[jt]s?(x)',
+    '<rootDir>/src/components/**/ViewBatch.test.[jt]s?(x)',
   ];
 
 
