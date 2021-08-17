@@ -11,7 +11,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { Reducer } from '../../../redux/reducer';
 import Toast from 'react-native-toast-message'
-import { Provider as PaperProvider } from 'react-native-paper';
+import {Provider as PaperProvider} from 'react-native-paper'
 
 let wrapper: any;
 jest.mock('axios');
@@ -45,12 +45,11 @@ describe('Trainer list', () =>
       composeWithDevTools(applyMiddleware(thunk))
     );
     wrapper = mount(
-      <PaperProvider>
-        <Provider store={mockStore}>
+      <Provider store={mockStore}>
+        <PaperProvider>
           <TrainerListItem trainer={trainer} />
-        </Provider>
-      </PaperProvider>
-      );
+        </PaperProvider>
+        </Provider>);
   });
 
   // tests if the component is there

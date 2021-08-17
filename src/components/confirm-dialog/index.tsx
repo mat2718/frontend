@@ -153,7 +153,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
                 <Button
                   onPress={confirmDeleteBatch}
                   style={styles.button}
-                  color={colors.orange}
+                  color={"red"}
                 >
                   Yes
                 </Button>
@@ -184,7 +184,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
                 <Button
                   onPress={confirmDeleteSkill}
                   style={styles.button}
-                  color={colors.orange}
+                  color={"red"}
                 >
                   Yes
                 </Button>
@@ -215,7 +215,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
                 <Button
                   onPress={deleteTrainer}
                   style={styles.button}
-                  color={colors.orange}
+                  color={"red"}
                 >
                   Yes
                 </Button>

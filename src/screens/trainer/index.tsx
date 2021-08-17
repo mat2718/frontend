@@ -14,7 +14,7 @@ import { IAppState } from '../../redux/state';
  * @author Joab Smith and Imran Ilyas
  */
 
-const MainTrainer: React.FC<ITrainer> = () =>
+const MainTrainer: React.FC = () =>
 {
   const trainers:ITrainer[] = useSelector((state: IAppState) => state.trainers);
   const [sortedTrainer, setSortedTrainer] = useState<ITrainer[]>(trainers)

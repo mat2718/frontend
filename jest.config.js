@@ -5,12 +5,12 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
-    '<rootDir>/src/**/*/batches/**/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/**/*/batches/**/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/**/*.test.{ts,tsx,js,jsx}',
     '!<rootDir>/src/components/clients_old/**/*',
     '!<rootDir>/src/screens/clients-old/**/*',
-    // '!<rootDir>/src/assets/**/*',
-    // '!<rootDir>/src/types.ts',
+    '!<rootDir>/src/assets/**/*',
+    '!<rootDir>/src/types.ts',
     '!<rootDir>/src/entities/*',
   ],
   // coveragePathIgnorePatterns: [
@@ -46,10 +46,7 @@ function returnTransformIgnorePatterns(ignoreThese) {
     'native-base',
     'react-native-svg',
   ];
-  const allLibraries = [
-    ...defaultIgnore,
-    ...ignoreThese,
-  ];
+  const allLibraries = [...defaultIgnore, ...ignoreThese];
   const start = 'node_modules/(?!(jest-)?';
   const end = ')';
   let str = start;
@@ -82,9 +79,10 @@ function addConfig(config) {
   ];
 
   /* comment this out if you want to test all files */
-  config.testMatch = [
-    '<rootDir>/src/components/**/*.test.[jt]s?(x)',
-  ];
+  // config.testMatch = [
+  //   '<rootDir>/src/screens/*train*/*.test.[jt]s?(x)',
+  // ];
+
 
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
