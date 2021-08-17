@@ -5,8 +5,6 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
-    '!<rootDir>/src/**/*/batches/**/*.{ts,tsx,js,jsx}',
-    '!<rootDir>/src/**/*.test.{ts,tsx,js,jsx}',
     '!<rootDir>/src/components/clients_old/**/*',
     '!<rootDir>/src/screens/clients-old/**/*',
     '!<rootDir>/src/assets/**/*',
@@ -79,9 +77,11 @@ function addConfig(config) {
   ];
 
   /* comment this out if you want to test all files */
-  config.testMatch = [
-    '<rootDir>/src/redux/**/*.test.[jt]s?(x)',
-  ];
+  // config.testMatch = [
+    // '<rootDir>/src/components/confirm-dialog/**/*.test.[jt]s?(x)',
+    // '<rootDir>/src/components/curricula/expandable-list/**/*.test.tsx',
+    // '<rootDir>/src/screens/add-demand/**/*.test.[jt]s?(x)'
+  // ];
 
 
   // third-party libraries that throw errors

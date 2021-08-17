@@ -112,7 +112,6 @@ const AddBatch: React.FC = () => {
         text2: `A new Batch has been added!`,
         topOffset: 50,
       });
-      navigation.goBack();
     } else if (!batchSizeValue) {
       Toast.show({
         type: 'error',
@@ -130,6 +129,8 @@ const AddBatch: React.FC = () => {
         topOffset: 50,
       });
     }
+
+    navigation.goBack();
   };
 
   return (
@@ -266,6 +267,7 @@ const AddBatch: React.FC = () => {
             <View style={{ flexDirection: 'column' }}>
               <Text style={inputStyles.inputLabelText}>End Date</Text>
               <TouchableOpacity
+                testID='endDateButton'
                 style={styles.dateView}
                 onPress={() => setIsEndPickerShow(true)}
               >
