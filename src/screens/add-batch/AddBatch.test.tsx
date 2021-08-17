@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import AddBatch from '.';
+import { Picker } from '@react-native-picker/picker';
 
 /**
  * Add Batch Test - test file for the AddBatch screen
@@ -27,6 +28,24 @@ jest.mock('@react-navigation/native', () => {
       };
     },
   };
+});
+
+jest.mock('react-native-toast-message', () => {
+  return({
+    __esModule: true,
+    ...jest.requireActual('react-native-toast-message'),
+    default: {
+      show: jest.fn(),
+    },
+  });
+});
+
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => {
+  return ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: mockDispatch,
+  });
 });
 
 /** mockStore */

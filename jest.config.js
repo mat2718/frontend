@@ -79,10 +79,9 @@ function addConfig(config) {
   ];
 
   /* comment this out if you want to test all files */
-
-  config.testMatch = [
-    '<rootDir>/src/screens/*train*/*.test.[jt]s?(x)',
-  ];
+  // config.testMatch = [
+  //   '<rootDir>/src/navigation/*.test.[jt]s?(x)',
+  // ];
 
 
   // third-party libraries that throw errors
