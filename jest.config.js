@@ -82,20 +82,12 @@ function addConfig(config) {
   ];
 
   /* comment this out if you want to test all files */
-<<<<<<< HEAD
   // config.testMatch = [
     // '<rootDir>/src/components/confirm-dialog/**/*.test.[jt]s?(x)',
     // '<rootDir>/src/components/curricula/expandable-list/**/*.test.tsx',
     // '<rootDir>/src/screens/add-demand/**/*.test.[jt]s?(x)'
   // ];
 
-=======
-
-  config.testMatch = [
-    '<rootDir>/src/screens/*train*/*.test.[jt]s?(x)',
-  ];
-
->>>>>>> origin/trainers-redux-edition
 
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
