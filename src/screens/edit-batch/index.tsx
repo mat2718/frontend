@@ -109,7 +109,7 @@ const EditBatch: React.FC<PropsI> = ({ route }) => {
       setEndDate(val);
       setIsEndPickerShow(false);
     } else {
-      setEndDate(new Date(Date.now()));
+      setEndDate(new Date(new Date(Date.now())));
       setIsEndPickerShow(false);
     }
   };
@@ -153,7 +153,7 @@ const EditBatch: React.FC<PropsI> = ({ route }) => {
           <Text style={textStyles.heading}>Edit Batch</Text>
           {/** Add/Edit */}
           <TouchableOpacity
-            testID='editButton'
+            testID='editBatchButton'
             style={buttonStyles.buttonContainer}
             onPress={() => UpdateExistingBatch()}
           >
@@ -237,6 +237,7 @@ const EditBatch: React.FC<PropsI> = ({ route }) => {
             <View style={{ flexDirection: 'column' }}>
               <Text style={inputStyles.inputLabelText}>Start Date</Text>
               <TouchableOpacity
+                testID='startDateButton'
                 style={styles.dateView}
                 onPress={() => setIsStartPickerShow(true)}
               >
@@ -260,6 +261,7 @@ const EditBatch: React.FC<PropsI> = ({ route }) => {
             {/* The date picker */}
             {isStartPickerShow && (
               <DateTimePicker
+                testID='startDateTest'
                 value={startDate}
                 mode={'date'}
                 display={Platform.OS === 'ios' ? 'spinner' : 'default'}
@@ -271,6 +273,7 @@ const EditBatch: React.FC<PropsI> = ({ route }) => {
             <View style={{ flexDirection: 'column' }}>
               <Text style={inputStyles.inputLabelText}>End Date</Text>
               <TouchableOpacity
+                testID='endDateButton'
                 style={styles.dateView}
                 onPress={() => setIsEndPickerShow(true)}
               >
@@ -292,6 +295,7 @@ const EditBatch: React.FC<PropsI> = ({ route }) => {
             {/* The date picker */}
             {isEndPickerShow && (
               <DateTimePicker
+                testID='endDateTest'
                 value={endDate}
                 mode={'date'}
                 display={Platform.OS === 'ios' ? 'spinner' : 'default'}

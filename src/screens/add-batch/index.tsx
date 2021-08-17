@@ -94,7 +94,7 @@ const AddBatch: React.FC = () => {
 
   /** Add batch function */
   const AddNewBatch = () => {
-    if(batchSizeValue && (startDate < endDate)) {
+    if (batchSizeValue && startDate < endDate) {
       dispatch(
         addBatch({
           trainerId: trainerValue,
@@ -112,27 +112,26 @@ const AddBatch: React.FC = () => {
         text2: `A new Batch has been added!`,
         topOffset: 50,
       });
-      navigation.goBack();
-    }
-    else if (!batchSizeValue) {
+    } else if (!batchSizeValue) {
       Toast.show({
         type: 'error',
         position: 'top',
         text1: 'Invalid Batch Size',
         text2: 'The Batch Size Value is empty.',
         topOffset: 50,
-      })
-    }
-    else if(startDate >= endDate) {
+      });
+    } else if (startDate >= endDate) {
       Toast.show({
         type: 'error',
         position: 'top',
         text1: 'Invalid Batch Date',
         text2: 'The End Date is not greater than the Start Date',
         topOffset: 50,
-      })
+      });
     }
-  }
+
+    navigation.goBack();
+  };
 
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
@@ -232,6 +231,7 @@ const AddBatch: React.FC = () => {
             <View style={{ flexDirection: 'column' }}>
               <Text style={inputStyles.inputLabelText}>Start Date</Text>
               <TouchableOpacity
+                testID='startDateButton'
                 style={styles.dateView}
                 onPress={() => setIsStartPickerShow(true)}
               >
@@ -255,6 +255,7 @@ const AddBatch: React.FC = () => {
             {/* The date picker */}
             {isStartPickerShow && (
               <DateTimePicker
+                testID='startDateTest'
                 value={startDate}
                 mode={'date'}
                 display={Platform.OS === 'ios' ? 'spinner' : 'default'}
@@ -266,6 +267,7 @@ const AddBatch: React.FC = () => {
             <View style={{ flexDirection: 'column' }}>
               <Text style={inputStyles.inputLabelText}>End Date</Text>
               <TouchableOpacity
+                testID='endDateButton'
                 style={styles.dateView}
                 onPress={() => setIsEndPickerShow(true)}
               >
@@ -287,6 +289,7 @@ const AddBatch: React.FC = () => {
             {/* The date picker */}
             {isEndPickerShow && (
               <DateTimePicker
+                testID={'endDateTest'}
                 value={endDate}
                 mode={'date'}
                 display={Platform.OS === 'ios' ? 'spinner' : 'default'}
