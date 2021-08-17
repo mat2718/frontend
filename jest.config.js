@@ -51,8 +51,8 @@ function returnTransformIgnorePatterns(ignoreThese) {
     ...defaultIgnore,
     ...ignoreThese,
   ];
-  const start = 'node_modules/(?!(jest-)?(';
-  const end = ')/)';
+  const start = 'node_modules/(?!(jest-)?';
+  const end = ')';
   let str = start;
   for (const i in allLibraries) {
     if (+i === 0) {
@@ -84,7 +84,8 @@ function addConfig(config) {
 
   /* comment this out if you want to test all files */
   config.testMatch = [
-    '<rootDir>/src/components/batches/**/*.test.[jt]s?(x)',
+    '<rootDir>/src/components/curricula/**/*.test.[jt]s?(x)',
+    // '<rootDir>/src/components/curricula/expandable-list/**/*.test.tsx',
   ];
 
   // third-party libraries that throw errors
@@ -100,6 +101,8 @@ function addConfig(config) {
     'expo-font',
     'expo-asset',
     'expo-constants',
+    '@expo',
+    '@expo/vector-icons',
   ];
 
   console.log(
@@ -107,7 +110,7 @@ function addConfig(config) {
     returnTransformIgnorePatterns(ignoreThese) + '\n'
   );
 
-  config.transformIgnorePatterns = returnTransformIgnorePatterns(ignoreThese);
+  config.transformIgnorePatterns = returnTransformIgnorePatterns(ignoreThese[0]);
 
   config.displayName = {
     name: 'components',
