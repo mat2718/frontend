@@ -1,11 +1,19 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import * as Font from 'expo-font';
-import { NavigationContainer } from '@react-navigation/native';
-import RootStackNavigator from './Navigation/RootStackNavigator';
+import RootStackNavigator from './src/navigation/root-stack-navigator';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
+import { Reducer } from './src/redux/reducer';
+import { Provider } from 'react-redux';
+import Toast from 'react-native-toast-message';
+
+export type RootStore = ReturnType<typeof Reducer>;
 
 const App = () => {
   const [fontsLoaded, setFonts] = useState(false);
@@ -14,11 +22,16 @@ const App = () => {
     loadFonts();
   });
 
+  const store = createStore(
+    Reducer,
+    composeWithDevTools(applyMiddleware(thunk))
+  );
+
   const loadFonts = async () => {
     await Font.loadAsync({
-      FuturaBold: require('./assets/fonts/Futura-Std-Bold.otf'),
-      FuturaBook: require('./assets/fonts/Futura-Std-Book.otf'),
-      FuturaMedium: require('./assets/fonts/Futura-Std-Medium.otf'),
+      FuturaBold: require('./src/assets/fonts/Futura-Std-Bold.otf'),
+      FuturaBook: require('./src/assets/fonts/Futura-Std-Book.otf'),
+      FuturaMedium: require('./src/assets/fonts/Futura-Std-Medium.otf'),
     });
     setFonts(true);
   };
@@ -26,20 +39,23 @@ const App = () => {
   if (!fontsLoaded) {
     return (
       <SafeAreaProvider style={styles.container}>
-        <Text style={{ fontFamily: 'FuturaBold' }}>The app is loading</Text>
+        <Text>The app is loading</Text>
         <StatusBar style='auto' />
       </SafeAreaProvider>
     );
   } else {
     return (
-      <SafeAreaProvider style={styles.container}>
-        <NavigationContainer>
-          <PaperProvider theme={DefaultTheme}>
-            <StatusBar style='auto' />
-            <RootStackNavigator />
-          </PaperProvider>
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <Provider store={store}>
+        <SafeAreaProvider style={styles.container}>
+          <NavigationContainer>
+            <PaperProvider theme={DefaultTheme}>
+              <StatusBar style='auto' />
+              <RootStackNavigator />
+              <Toast ref={(ref) => Toast.setRef(ref)} />
+            </PaperProvider>
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </Provider>
     );
   }
 };

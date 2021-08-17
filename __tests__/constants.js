@@ -6,7 +6,7 @@ export const testState = {
 }
 
 
-export const ExampleComponent = () => {
+export const ExampleComponent = (props) => {
     const callback = jest.fn();
     return (
         <>
