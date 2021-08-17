@@ -99,7 +99,16 @@ const RootStackNavigator = () => {
       <Stack.Screen
         name='AddTrainer'
         component={CreateTrainer}
-        options={{ headerShown: true }}
+        options={{ 
+          headerShown: true,
+          title: 'Add a Trainer',
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            fontFamily: 'FuturaBook',
+            fontWeight: '700',
+            color: colors.darkGray,
+          },
+        }}
       />
       <Stack.Screen
         name='ViewEditTrainer'
@@ -136,8 +145,20 @@ const RootStackNavigator = () => {
         }}
       />
       {/** add your view/addedit screens here */}
-      <Stack.Screen name='Curricula' component={Curricula} />
-      <Stack.Screen name='AddEditCurriculum' component={AddEditCurriculum} />
+      <Stack.Screen 
+        name='AddEditCurriculum' 
+        component={AddEditCurriculum}
+        options={{
+          headerShown: true,
+          title: 'Add a Curriculum',
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            fontFamily: 'FuturaBook',
+            fontWeight: '700',
+            color: colors.darkGray,
+          },
+        }}
+      />
       <Stack.Screen
         name='ViewClient'
         component={ViewClient}

@@ -73,17 +73,9 @@ function addConfig(config) {
   ];
 
   /* comment this out if you want to test all files */
-  config.testMatch = [
-    '<rootDir>/src/components/demands/**/*.test.[jt]s?(x)',
-    '<rootDir>/src/components/batches/**/*.test.[jt]s?(x)',
-    '<rootDir>/src/components/clients/**/*.test.[jt]s?(x)',
-    '<rootDir>/src/components/skills/**/*.test.[jt]s?(x)',
-    // '<rootDir>/src/components/batches/**/*.test.[jt]s?(x)',
-    // '<rootDir>/src/screens/add-batch/*.test.[jt]s?(x)',
-    // '<rootDir>/src/screens/edit-batch/*.test.[jt]s?(x)',
-    // '<rootDir>/src/screens/view-batch/*.test.[jt]s?(x)',
-    // '!<rootDir>/src/screens/batches/**/*.test.[jt]s?(x)',
-  ];
+  // config.testMatch = [
+  //   '<rootDir>/src/components/trainers/**/*.test.[jt]s?(x)',
+  // ];
 
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
@@ -109,7 +101,6 @@ function addConfig(config) {
     'expo-font',
     'expo-asset',
     'expo-constants',
-    'react-native-iphone-x-helper',
     'react-native-toast-message',
   ];
 

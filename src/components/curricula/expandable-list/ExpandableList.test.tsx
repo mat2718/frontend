@@ -24,15 +24,15 @@ describe('ExpandableList', () => {
   beforeEach(() => {
     wrapper = mount(
       <ExpandableList
-        item={{
-          batches: [7, 9, 3],
-          createdBy: 'First Creator',
-          createdOn: '2021-08-03',
-          id: 0,
-          lastModified: 'First Creator',
-          lastModifiedBy: '2021-08-03',
-          name: 'Curriculum 1',
-          skills: ['JS', 'TS', 'React', 'React-Native'],
+        curriculum={{
+          createdby: 'First Creator',
+          createdon: '2021-08-03',
+          curriculumid: 0,
+          lastmodified: 'First Creator',
+          lastmodifiedby: '2021-08-03',
+          curriculumname: 'Curriculum 1',
+          skillidarr: [0, 1, 2],
+          skillnamearr: ['JS', 'TS', 'React', 'React-Native'],
         }}
         onPress={() => {
           /** function here??? */
@@ -42,7 +42,7 @@ describe('ExpandableList', () => {
   });
 
   // tests if the component is there
-  it('should be there', () => {
+  it('Component should appear', () => {
     expect(wrapper).toBeDefined();
   });
 
