@@ -5,11 +5,15 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '!<rootDir>/src/**/*.{ts,tsx,js,jsx}',
-    '!<rootDir>/src/components/batches/**/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/components/demands/**/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/components/batches/**/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/components/clients/clients-list-header/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/components/clients/clients-list-item/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/components/skills/**/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/screens/batches/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/screens/add-batch/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/screens/edit-batch/*.{ts,tsx,js,jsx}',
-    '<rootDir>/src/screens/view-batch/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/screens/view-batch/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/**/*.test.*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/components/clients_old/**/*',
     '!<rootDir>/src/screens/clients-old/**/*',
@@ -70,7 +74,10 @@ function addConfig(config) {
 
   /* comment this out if you want to test all files */
   config.testMatch = [
-    '<rootDir>/src/screens/view-batch/*.test.[jt]s?(x)',
+    '<rootDir>/src/components/demands/**/*.test.[jt]s?(x)',
+    '<rootDir>/src/components/batches/**/*.test.[jt]s?(x)',
+    '<rootDir>/src/components/clients/**/*.test.[jt]s?(x)',
+    '<rootDir>/src/components/skills/**/*.test.[jt]s?(x)',
     // '<rootDir>/src/components/batches/**/*.test.[jt]s?(x)',
     // '<rootDir>/src/screens/add-batch/*.test.[jt]s?(x)',
     // '<rootDir>/src/screens/edit-batch/*.test.[jt]s?(x)',

@@ -71,7 +71,7 @@ let mockStore = configureStore([thunk])({
 });
 
 /** Test suite */
-describe('BatchListItem', () => {
+describe('tests BatchListItem', () => {
   beforeEach(() => {
     wrapper = mount(
       <Provider store={mockStore}>
@@ -119,7 +119,7 @@ describe('BatchListItem', () => {
 
   /** Tests if the upcoming badge shows */
   it('tests if the upcoming badge shows', () => {
-    const active = mount(
+    const upcoming = mount(
       <Provider store={mockStore}>
         <BatchListItem
           batchId={1}
@@ -132,7 +132,7 @@ describe('BatchListItem', () => {
         />
       </Provider>
     );
-    expect(active).toBeTruthy();
+    expect(upcoming).toBeTruthy();
   });
 
   /** Tests if the active badge shows */
@@ -155,19 +155,19 @@ describe('BatchListItem', () => {
 
   /** Tests if the completed badge shows */
   it('tests if the completed badge shows', () => {
-    const active = mount(
+    const completed = mount(
       <Provider store={mockStore}>
         <BatchListItem
           batchId={1}
           batchSize={20}
           curriculumId={1}
           trainerId={1}
-          startDate={new Date(Date.now() + 24 * 60 * 60 - 2000).toISOString()}
-          endDate={new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()}
+          startDate={new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()}
+          endDate={new Date(Date.now() - 24 * 60 * 60 * 2000).toISOString()}
           confirmed={false}
         />
       </Provider>
     );
-    expect(active).toBeTruthy();
+    expect(completed).toBeTruthy();
   });
 });
