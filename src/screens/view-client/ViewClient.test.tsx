@@ -1,8 +1,11 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { mount } from 'enzyme';
-import Header from '../../components/batches/header';
 import ViewClient from '.';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { Reducer } from '../../redux/reducer';
+import thunk from 'redux-thunk';
 
 const mockNavigate = jest.fn();
 const mockGoBack = jest.fn();
@@ -19,29 +22,27 @@ jest.mock('@react-navigation/native', () => {
 });
 
 let wrapper: any;
+const store = createStore(Reducer, applyMiddleware(thunk));
 
 describe('Batches', () => {
   beforeEach(() => {
     wrapper = mount(
+    <Provider store={store}>
       <ViewClient
         route={{
           params: {
-            client: 'Revature',
+            clientid: 2,
+            clientname: 'Revature'
           },
         }}
       />
+    </Provider>
     );
   });
 
   //tests if the component is there
   it('should be there', () => {
     expect(wrapper).not.toBe(undefined);
-  });
-
-  // tests if the header is defined
-  it('should display the header', () => {
-    const shouldBeHeader = wrapper.find(Header);
-    expect(shouldBeHeader).toBeDefined();
   });
 
   /** tests the edit batch button */
@@ -62,4 +63,4 @@ describe('Batches', () => {
   });
 });
 
-// yeet
+

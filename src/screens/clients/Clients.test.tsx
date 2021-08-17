@@ -47,7 +47,7 @@ describe('Batches', () => {
   // tests if the flatlist holds the data we need
   it('should hold data', () => {
     const listData = wrapper.find(FlatList).props().data;
-    expect(listData.length).toBeGreaterThan(0);
+    expect(listData).toBe(store.clients);
   });
 });
 
