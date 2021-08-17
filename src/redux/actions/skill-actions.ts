@@ -19,29 +19,6 @@ export const getAllSkills = () => async (dispatch: Dispatch) => {
   }
 };
 
-/** Gets one skill by id */
-// export const getSkillById = async (skillId: number) => {
-//   try {
-//     const res = await axios.get(`skill/id/${skillId}`);
-//     return res.data;
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
-
-/** Gets one skill by name */
-// export const getSkillByName =
-//   (skillName: string) => async (dispatch: Dispatch) => {
-//     try {
-//       const res = await axios.get(`skill/id/${skillName}`);
-//       dispatch({
-//         type: AppActions.UPDATE_SKILL,
-//         payload: { skills: res.data },
-//       });
-//     } catch (e) {
-//       console.log(e);
-//     }
-//   };
 
 /** Creates a skill */
 export const addSkill = (skill: {}) => async (dispatch: Dispatch) => {
