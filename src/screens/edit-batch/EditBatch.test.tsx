@@ -1,6 +1,10 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import EditBatch from '.';
+import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
+import Toast from 'react-native-toast-message';
 
 /**
  * Edit Batch Test - test file for the EditBatch screen
@@ -9,6 +13,8 @@ import EditBatch from '.';
 
 /** wrapper for mounting */
 let wrapper: any;
+let useEffect: any;
+let cleanup: any;
 
 /** mock react navigation */
 const mockBack = jest.fn();
@@ -25,27 +31,30 @@ jest.mock('@react-navigation/native', () => {
   };
 });
 
-/** mock function for addnewbatch */
-const UpdateExistingBatch = () => {
-  return null;
-};
+/** mockStore */
+let mockStore = configureStore([thunk])({
+  curriculum: [],
+});
 
 /** test suite */
 describe('Batches', () => {
   beforeEach(() => {
     wrapper = mount(
-      <EditBatch
-        route={{
-          params: {
-            batchid: 1,
-            curriculumid: 1,
-            trainerid: 1,
-            batchsize: 25,
-            startdate: 'start date lol',
-            enddate: 'end date lol',
-          },
-        }}
-      />
+      <Provider store={mockStore}>
+        <Toast ref={(ref) => Toast.setRef(ref)} />
+        <EditBatch
+          route={{
+            params: {
+              batchid: 1,
+              curriculumid: 1,
+              trainerid: 1,
+              batchsize: 25,
+              startdate: new Date(Date.now()).toISOString(),
+              enddate: new Date(Date.now()).toISOString(),
+            },
+          }}
+        />
+      </Provider>
     );
   });
 
@@ -56,8 +65,56 @@ describe('Batches', () => {
 
   /** Tests the edit button, this is probably not the right way to do it */
   it('pressing the button navigates to new screen', () => {
-    let button = wrapper.find({ testID: 'editButton' }).last();
+    let button = wrapper
+      .find({ testID: 'editBatchButton' })
+      .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
+      .last();
     button.invoke('onPress')();
-    expect(mockNavigate).toHaveBeenCalledWith(() => UpdateExistingBatch());
+    expect(mockBack).toHaveBeenCalled();
+  });
+
+  /** Tests the calendar start date on change */
+  it('should test the startdate calendar onchange', () => {
+    let button = wrapper
+      .find({ testID: 'startDateButton' })
+      .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
+      .last();
+    button.invoke('onPress')();
+
+    wrapper
+      .find({ testID: 'startDateTest' })
+      .findWhere((node: any) => {
+        return node.props().hasOwnProperty('onChange');
+      })
+      .forEach((node: any) => {
+        node.invoke('onChange')(null, new Date(new Date(Date.now())));
+        node.invoke('onChange')(null, false);
+      });
+  });
+
+  /** Tests the calendar end date on change */
+  it('should test the enddate calendar onchange', () => {
+    let button = wrapper
+      .find({ testID: 'endDateButton' })
+      .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
+      .last();
+    button.invoke('onPress')();
+
+    wrapper
+      .find({ testID: 'endDateTest' })
+      .findWhere((node: any) => {
+        return node.props().hasOwnProperty('onChange');
+      })
+      .forEach((node: any) => {
+        node.invoke('onChange')(null, new Date(new Date(Date.now())));
+        node.invoke('onChange')(null, false);
+      });
+  });
+
+  it('should unmount the component', () => {
+    useEffect = jest
+      .spyOn(React, 'useEffect')
+      .mockImplementation((cb) => (cleanup = cb()));
+    wrapper.unmount();
   });
 });

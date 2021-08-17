@@ -4,7 +4,8 @@ module.exports = {
   projects: [addConfig(withEnzyme(require('jest-expo/android/jest-preset')))],
   collectCoverage: true,
   collectCoverageFrom: [
-    '<rootDir>/src/screens/add-batch/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/screens/batches/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/screens/view-batch/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/**/*/batches/**/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/**/*.test.{ts,tsx,js,jsx}',
     '!<rootDir>/src/components/clients_old/**/*',
@@ -79,16 +80,10 @@ function addConfig(config) {
   ];
 
   /* comment this out if you want to test all files */
-<<<<<<< HEAD
-  config.testMatch = ['<rootDir>/src/screens/add-batch/*.test.{ts,tsx,js,jsx}'];
-=======
-  // config.testMatch = [
-    // '<rootDir>/src/components/confirm-dialog/**/*.test.[jt]s?(x)',
-    // '<rootDir>/src/components/curricula/expandable-list/**/*.test.tsx',
-    // '<rootDir>/src/screens/diagram/**/*.test.[jt]s?(x)'
-  // ];
-
->>>>>>> dev-branch
+  config.testMatch = [
+    '!<rootDir>/src/screens/batches/*.test.[jt]s?(x)',
+    '<rootDir>/src/screens/view-batch/*.test.[jt]s?(x)',
+  ];
 
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
