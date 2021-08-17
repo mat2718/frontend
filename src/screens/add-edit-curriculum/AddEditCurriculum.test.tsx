@@ -5,6 +5,38 @@ import AddEditCurriculum from '.'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { TextInput } from 'react-native';
 
+interface ICurriculum {
+  batches: [];
+  createdBy: string;
+  createdOn: string;
+  id: number;
+  lastModified: string;
+  lastModifiedBy: string;
+  name: string;
+  skills: [];
+}
+
+// must look like ICurriculum
+const params = {
+  //etc
+}
+const mockGoBack = jest.fn();
+jest.mock('@react-navigation/native', () => {
+  return ({
+    ...jest.requireActual('@react-navigation/native'),
+    useRoute: () => {
+      return ({
+        route: params,
+      });
+    },
+    useNavigation: () => {
+      return ({
+        goBack: mockGoBack,
+      });
+    },
+  });
+});
+
 let wrapper: any;
 
 describe('AddEditCurriculum', () => {
@@ -66,9 +98,14 @@ describe('AddEditCurriculum', () => {
   // });
 
   it('textInput can run onChange text', () => {
-    wrapper.find(TextInput).forEach((node: any) => {
-      node.invoke('onTextChange')('hello')
-    })
+    wrapper
+      .find(TextInput)
+      .findWhere( (node:any) => {
+        return node.props().hasOwnProperty('onTextChange');
+      })
+      .forEach((node: any) => {
+        node.invoke('onTextChange')('hello')
+      })
   })
 });
 

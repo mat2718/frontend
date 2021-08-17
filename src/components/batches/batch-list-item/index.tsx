@@ -56,7 +56,7 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
     /** Structures and displays the data from the FlatList */
     <TouchableOpacity
       style={listStyles.listItemContainer}
-      testID='button'
+      testID='viewBatchButton'
       onPress={() => {
         navigation.navigate('ViewBatch', {
           batchId: props.batchId,
@@ -72,7 +72,7 @@ const BatchListItem: React.FC<IProps> = (props: IProps) => {
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Text style={listStyles.heading}>{curriculum?.curriculumname}</Text>
         {/* * Checks current date and start/end date of batch and applies tag based on status */}
-        {startDate < Date.now() && endDate > Date.now() ? (
+        {startDate <= Date.now() && endDate >= Date.now() ? (
           <View style={[badgesStyles.badge, { backgroundColor: '#f26925' }]}>
             <Text style={badgesStyles.badgeText}>Active</Text>
           </View>

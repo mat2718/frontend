@@ -28,6 +28,7 @@ const SkillsListItem: React.FC<IProps> = (props: IProps) => {
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Text style={listStyles.heading}>{props.skillname}</Text>
         <Picker
+          testID='picker'
           mode='dropdown'
           onValueChange={(itemValue, itemIndex) =>
             itemValue === 'delete' ? showDialog() : null

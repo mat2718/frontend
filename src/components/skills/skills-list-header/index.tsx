@@ -24,6 +24,7 @@ const SkillsListHeader: React.FC = () => {
 
         {/** Add skill button */}
         <TouchableOpacity
+          testID='button'
           style={buttonStyles.buttonContainer}
           onPress={() => navigation.navigate('AddSkill')}
         >

@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { listStyles, colors } from '../../../styles';
-import { Picker } from '@react-native-picker/picker';
 import axios from '../../../../axiosConfig';
 
 interface IProps {

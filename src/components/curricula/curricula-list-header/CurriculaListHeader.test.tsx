@@ -2,12 +2,33 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { TouchableOpacity } from 'react-native';
 import CurriculaListHeader from '.';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+
+
+const mockNavigate = jest.fn();
+jest.mock('@react-navigation/native', () => {
+  return ({
+    ...jest.requireActual('@react-navigation/native'),
+    useNavigation: () => {
+      return ({ 
+        navigate: mockNavigate 
+      });
+    },
+  });
+}); 
 
 let wrapper: any;
+const testState = {};
+const store = configureStore([thunk])(testState);
 
 describe('CurriculaListHeader', () => {
   beforeEach(() => {
-    wrapper = mount(<CurriculaListHeader />);
+    wrapper = mount(
+      <Provider store={store} >
+        <CurriculaListHeader /> 
+      </Provider>);
   });
 
   /** tests if the component is there */
