@@ -18,14 +18,12 @@ import { ThunkDispatch } from "redux-thunk";
 export const addTrainer = (trainer: ITrainer) => async (dispatch: Dispatch) => {
   try {
     await axios.post("trainer", trainer);
-    const trainers: ITrainer[] = await axios
-      .get("trainer")
-      .then((response) => response.data);
+    const trainers: AxiosResponse = await axios.get("trainer");
 
-    console.log("resp", trainers);
+    //console.log("resp", trainers);
     dispatch({
       type: AppActions.UPDATE_TRAINER,
-      payload: { trainers },
+      payload: { trainers: trainers.data },
     });
 
     return `${trainer.trainerfirst} ${trainer.trainerlast} has been added`;

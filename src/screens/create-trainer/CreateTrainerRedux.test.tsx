@@ -11,7 +11,15 @@ import ITrainer from "../../entities/Trainer";
 import { Reducer } from "../../redux/reducer";
 
 jest.mock("../../../axiosConfig");
-
+jest.mock('react-native-toast-message', () =>
+ ({
+    __esModule: true,
+    default:{
+      
+      show: jest.fn()
+    }
+  })
+)
 describe('Create Trainer Redux', () =>
 {
     const mockStore = createStore(

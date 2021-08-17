@@ -11,6 +11,7 @@ import { Provider, useDispatch } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Reducer } from '../../redux/reducer';
+import Toast from 'react-native-toast-message';
 
 jest.mock('react-redux', () => {
   return ({
@@ -21,6 +22,16 @@ jest.mock('react-redux', () => {
     useDispatch: () => jest.fn(),
   });
 });
+const showToastMock = jest.fn();
+jest.mock('react-native-toast-message', () =>
+ ({
+    __esModule: true,
+    default:{
+      
+      show: jest.fn()
+    }
+  })
+)
 
 describe('Create Trainer', () =>
 {
