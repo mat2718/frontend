@@ -1,4 +1,5 @@
 import { Picker } from '@react-native-picker/picker';
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -21,7 +22,7 @@ const SearchBar: React.FC<IProps> = (props: IProps) => {
   // hooks for the searchbar and the dropdown
   const [search, setSearch] = useState('');
   const [selectedValue, setSelectedValue] = useState('Search By');
-
+  const navigation = useNavigation()
   const dispatch = useDispatch();
   // Action for handling the trainer when searching
   const trainers:ITrainer[] = useSelector((state: IAppState) =>

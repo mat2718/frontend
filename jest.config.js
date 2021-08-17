@@ -4,7 +4,7 @@ module.exports = {
   projects: [addConfig(withEnzyme(require('jest-expo/android/jest-preset')))],
   collectCoverage: true,
   collectCoverageFrom: [
-    '<rootDir>/src/screens/add-batch/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/**/*/batches/**/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/**/*.test.{ts,tsx,js,jsx}',
     '!<rootDir>/src/components/clients_old/**/*',
