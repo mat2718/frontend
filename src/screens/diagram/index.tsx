@@ -4,46 +4,11 @@ import { screenStyles, textStyles, buttonStyles } from '../../styles';
 import { LineChart } from 'react-native-chart-kit';
 import { Picker } from '@react-native-picker/picker';
 import { getAllDemand, getDemandByDate, getDemandByCurrIdAndDate, getDemandByCurrId, getDemandByClientId, getDemandById} from '../../redux/actions/demand-actions';
-import { GetCurriculum } from '../../redux/actions/curriculum-actions';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import { IAppState } from '../../redux/state';
 import moment from 'moment';
 
-
-
-  const fakeDataGen = () => {
-    let dataArr = [];
-    let counter = 12;
-
-    while (counter){
-      dataArr.push(Math.random() * 100)
-      counter--
-    }
-    return dataArr;
-  }
-  
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-
-  //calls for +6 and -6 from date.now then sort - kai with BE 
-  const renderData = () => {
-    return {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-  datasets: [
-    {
-      data: fakeDataGen(),
-      color: (opacity = 5) => `rgba(242, 105, 38, ${opacity})`, // optional
-      strokeWidth: 2 // optional
-    },
-    {
-      data: fakeDataGen(),
-      color: (opacity = 1) => `rgba(115, 165, 194, ${opacity})`, // optional
-      strokeWidth: 2 // optional
-    }
-  ],
-  legend: ["Client Demand","Associate Supply"] // optional
-    };
-  }
-  
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   const Diagram: React.FC = () => {
     const allCurricula = useSelector((state: IAppState) => state.curricula)
@@ -51,8 +16,6 @@ import moment from 'moment';
     const [currCurriculum, setCurriculum] = useState(['All Curriculum', 'default']);
     const [demandData, setDemandData] = useState([]);
     const [supplyData, setSupplyData] = useState(allBatches);
-    const [yearDemand, setYearDemand] = useState(0);
-    const [yearSupply, setYearSupply] = useState(0);
 
     const screenWidth = Dimensions.get("window").width;
 
@@ -83,7 +46,7 @@ import moment from 'moment';
 
     //modular picker for when we get full Curriculum
     const renderPickerItems = () => {
-      let filteredArr:any = {};
+      let filteredArr:any = {"All Curriculum": "default"};
 
       for(let i = 0; i < allCurricula.length; i++){
         if(!filteredArr[allCurricula[i].curriculumname]){
@@ -100,7 +63,7 @@ import moment from 'moment';
             />
       ))
 
-      res.unshift(<Picker.Item key={"default"} label="All Curriculum" value={["All Curriculum", "default"]} />);
+      // res.unshift(<Picker.Item key={"default"} label="All Curriculum" value={["All Curriculum", "default"]} />);
 
       return res;
     }
@@ -119,7 +82,7 @@ import moment from 'moment';
       return labels;
     }
 
-    const filterSupplyDataByMonth = () => {
+    const filterSupplyDataByMonth:any = () => {
       let supplyObj:any = {};
       let month = moment(moment(start).subtract(6,"M")).format("YYYY-MM");
       let counter = 13;
@@ -132,17 +95,24 @@ import moment from 'moment';
       
       if(currCurriculum[1] === "default"){
         for(let data of supplyData){
-        const key = moment(data.enddate).format("YYYY-MM");
-        supplyObj[key] += data.batchsize;
-      };
+          const key = moment(data.enddate).format("YYYY-MM");
+          supplyObj[key] += data.batchsize;
+        };
         return Object.values(supplyObj);
       } else {
-        return [1,2,3,4,5,6,7,8,9,10,11,12,13]
+        for(let data of supplyData){
+          if(data.curriculumid === Number(currCurriculum[1])){
+            const key = moment(data.enddate).format("YYYY-MM");
+            supplyObj[key] += data.batchsize;
+          };
+        };
+        console.log(supplyObj);
+        return Object.values(supplyObj);
       }
-
+      
     };
 
-    const filterDemandDataByMonth = () => {
+    const filterDemandDataByMonth:any = () => {
       let demandObj:any = {};
       let month = moment(moment(start).subtract(6,"M")).format("YYYY-MM");
       let counter = 13;
@@ -158,14 +128,24 @@ import moment from 'moment';
         demandObj[key] += data.quantitydemanded;
         ;
       };
-      return((demandObj));
+      return Object.values(demandObj);
     };
 
+    const sumOf = (array:[]) => {
+      let sum = 0;
+      for(let num of array){
+        sum += num;
+      }
+      return sum;
+    }
+
     const differenceView = () => {
-      const result = yearDemand - yearSupply;
+      const demand = sumOf(filterDemandDataByMonth());
+      const supply = sumOf(filterSupplyDataByMonth());
+      const result =  supply - demand;
       if(result < 0){
         return (
-            <View style={styles.resultNumbers}>
+            <View style={styles.badResultNumbers}>
               <Text style={styles.statText}>UNDER</Text>
               <Text style={styles.statText}>{result}</Text>
             </View>
@@ -186,11 +166,30 @@ import moment from 'moment';
         )
       }
     }
+
+  const renderData = () => {
+    return {
+      labels: renderLabel(),
+      datasets: [
+        {
+          data: filterDemandDataByMonth(),
+          color: (opacity = 5) => `rgba(242, 105, 38, ${opacity})`, // optional
+          strokeWidth: 2 // optional
+        },
+        {
+          data: filterSupplyDataByMonth(),
+          color: (opacity = 1) => `rgba(115, 165, 194, ${opacity})`, // optional
+          strokeWidth: 2 // optional
+        }
+      ],
+      legend: ["Client Demand","Associate Supply"] // optional
+    };
+  }
     
     return (
       <View style={screenStyles.mainView}>
-        <Button title="Console log DemandState" onPress={() => console.log(allBatches)}/>
-        <Button title="Console log SupplyState" onPress={() => console.log(filterSupplyDataByMonth())}/>
+        {/* <Button title="Console log DemandState" onPress={() => console.log(allBatches)}/>
+        <Button title="Console log SupplyState" onPress={() => console.log(filterSupplyDataByMonth())}/> */}
         <View style={screenStyles.titleContainer}>
 
           <Text style={textStyles.subHeading}>
@@ -199,9 +198,10 @@ import moment from 'moment';
         </Text>
           <Picker
           selectedValue={currCurriculum[0]}
-          onValueChange={(currCurriculum:any) => setCurriculum(currCurriculum)}
+          onValueChange={(value:any) => setCurriculum(value)}
           style={{ height: 50, width: 50,}}
         >
+          
           {renderPickerItems()}
         </Picker>
         </View>
@@ -218,18 +218,18 @@ import moment from 'moment';
 
         <View style={styles.infoContainer}>
 
-          <View style={styles.curriculaNameContainer}><Text style={styles.curriculaName}>{`${currCurriculum} - YTD`}</Text></View>
+          <View style={styles.curriculaNameContainer}><Text style={styles.curriculaName}>{`${currCurriculum[0]} - YTD`}</Text></View>
 
           <View style={styles.numbersContainer}>
 
             <View style={styles.numbers}>
               <Text style={styles.statText}>Number of Demanded</Text>
-              <Text style={styles.statText}>20</Text>
+              <Text style={styles.statText}>{sumOf(filterDemandDataByMonth())}</Text>
             </View>
               
             <View style={styles.numbers}>
               <Text style={styles.statText}>Number of Associates</Text>
-              <Text style={styles.statText}>15</Text>
+              <Text style={styles.statText}>{sumOf(filterSupplyDataByMonth())}</Text>
             </View>
               
             {differenceView()}
@@ -278,7 +278,14 @@ const styles = StyleSheet.create({
     padding:7,
     flexDirection:"row",
     justifyContent:'space-between',
-    backgroundColor:'#BC7A00', //red for neg, netural color for close and green for pass
+    backgroundColor:'#0FAA32',
+    borderRadius: 25,
+  },
+  badResultNumbers:{
+    padding:7,
+    flexDirection:"row",
+    justifyContent:'space-between',
+    backgroundColor:'#E64963',
     borderRadius: 25,
   },
   progressRingView: {
