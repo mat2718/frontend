@@ -9,6 +9,18 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { Reducer } from '../../../redux/reducer';
 
+const mockNavigate = jest.fn();
+jest.mock('@react-navigation/native', () => {
+  return ({
+    ...jest.requireActual('@react-navigation/native'),
+    useNavigation: () => {
+      return ({
+        navigate: mockNavigate,
+      });
+    },
+  });
+});
+
 jest.mock('react-redux');
 jest.mock('axios');
 describe('Search Bar', () =>
