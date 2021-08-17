@@ -32,7 +32,7 @@ const AddSkill: React.FC = () => {
   const dispatch = useDispatch();
 
   const addClientClick = () => {
-    if(skill) {
+    if (skill) {
       dispatch(
         addSkill({
           skillName: skill,
@@ -46,15 +46,14 @@ const AddSkill: React.FC = () => {
         topOffset: 50,
       });
       navigation.goBack();
-    }
-    else {
+    } else {
       Toast.show({
         type: 'error',
         position: 'top',
         text1: 'Invalid Skill',
         text2: 'The Skill Name field is empty.',
         topOffset: 50,
-      })
+      });
     }
   };
 
@@ -73,6 +72,7 @@ const AddSkill: React.FC = () => {
           <Text style={textStyles.heading}>Add a Skill</Text>
           {/** Add/Edit */}
           <TouchableOpacity
+            testID='addSkillButton'
             style={buttonStyles.buttonContainer}
             onPress={() => addClientClick()}
           >
@@ -83,7 +83,11 @@ const AddSkill: React.FC = () => {
         {/** Skill name */}
         <View style={{ flexDirection: 'column' }}>
           <Text style={inputStyles.inputLabelText}>Skill name</Text>
-          <TextInput style={inputStyles.textInput} onChangeText={setSkill} />
+          <TextInput
+            style={inputStyles.textInput}
+            onChangeText={setSkill}
+            testID='skillNameInput'
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

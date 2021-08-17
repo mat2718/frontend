@@ -5,7 +5,8 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '!<rootDir>/src/screens/batches/*.{ts,tsx,js,jsx}',
-    '<rootDir>/src/screens/view-batch/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/screens/skills/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/screens/add-skill/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/**/*/batches/**/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/**/*.test.{ts,tsx,js,jsx}',
     '!<rootDir>/src/components/clients_old/**/*',
@@ -82,7 +83,8 @@ function addConfig(config) {
   /* comment this out if you want to test all files */
   config.testMatch = [
     '!<rootDir>/src/screens/batches/*.test.[jt]s?(x)',
-    '<rootDir>/src/screens/view-batch/*.test.[jt]s?(x)',
+    '<rootDir>/src/screens/skills/*.test.[jt]s?(x)',
+    '<rootDir>/src/screens/add-skill/*.test.[jt]s?(x)',
   ];
 
   // third-party libraries that throw errors

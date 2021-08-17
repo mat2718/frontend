@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import ViewBatch from '.';
+import ViewBatch from './';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
@@ -55,7 +55,7 @@ jest.mock('react-redux', () => ({
 }));
 
 /** test suite */
-describe('Batches', () => {
+describe('tests ViewBatch', () => {
   beforeEach(() => {
     wrapper = mount(
       <Provider store={mockStore}>

@@ -37,7 +37,7 @@ let mockStore = configureStore([thunk])({
 });
 
 /** test suite */
-describe('Batches', () => {
+describe('tests EditBatch', () => {
   beforeEach(() => {
     wrapper = mount(
       <Provider store={mockStore}>
