@@ -48,9 +48,9 @@ import moment from 'moment';
   const Diagram: React.FC = () => {
     const allCurricula = useSelector((state: IAppState) => state.curricula)
     const allBatches = useSelector((state: IAppState) => state.batches)
-    const [currCurriculum, setCurriculum] = useState('All Curriculum');
+    const [currCurriculum, setCurriculum] = useState(['All Curriculum', 'default']);
     const [demandData, setDemandData] = useState([]);
-    const [supplyData, setSupplyData] = useState('Supply');
+    const [supplyData, setSupplyData] = useState(allBatches);
     const [yearDemand, setYearDemand] = useState(0);
     const [yearSupply, setYearSupply] = useState(0);
 
@@ -73,15 +73,17 @@ import moment from 'moment';
     const endDate = moment(moment(start).add(6,"M")).format("YYYY-MM-01")
 
     useEffect(() => {
-      // if (currCurriculum === "All")
-      // getDemandById(20).then(res => setDemandData(res))
-      getDemandByDate(startDate, endDate).then((res) => setDemandData(res))
-      ;
+      let stringId = currCurriculum[1]
+      if (stringId === "default"){
+        getDemandByDate(startDate, endDate).then((res) => setDemandData(res))
+      } else {
+        getDemandByCurrIdAndDate(Number(stringId), startDate, endDate).then(res => setDemandData(res))
+      }
     }, [currCurriculum]);
 
     //modular picker for when we get full Curriculum
     const renderPickerItems = () => {
-      let filteredArr = {};
+      let filteredArr:any = {};
 
       for(let i = 0; i < allCurricula.length; i++){
         if(!filteredArr[allCurricula[i].curriculumname]){
@@ -90,17 +92,17 @@ import moment from 'moment';
       }
       const pickerData = Object.keys(filteredArr);
 
-      let data: any = [];
-      getDemandByDate(startDate, endDate).then(res => data = res);
-      let curriculumNamesArr = data.map(obj => obj.curriculumid)
-      let uniqueNames = [...new Set(curriculumNamesArr)];
-      return pickerData.map((item, index) => (
+      const res = pickerData.map((item, index) => (
             <Picker.Item
               key={index}
               label={item}
-              value={item}
+              value={[`${item}`,`${filteredArr[item]}`]}
             />
       ))
+
+      res.unshift(<Picker.Item key={"default"} label="All Curriculum" value={["All Curriculum", "default"]} />);
+
+      return res;
     }
 
     //renders the label months we need to see -6 and +6 months for the graph
@@ -118,7 +120,7 @@ import moment from 'moment';
     }
 
     const filterSupplyDataByMonth = () => {
-      let supplyObj = {};
+      let supplyObj:any = {};
       let month = moment(moment(start).subtract(6,"M")).format("YYYY-MM");
       let counter = 13;
 
@@ -127,16 +129,21 @@ import moment from 'moment';
         month = moment(moment(month).add(1, "M")).format("YYYY-MM");
         counter--;
       }
-
-      for(const data of allBatches){
+      
+      if(currCurriculum[1] === "default"){
+        for(let data of supplyData){
         const key = moment(data.enddate).format("YYYY-MM");
         supplyObj[key] += data.batchsize;
       };
-      return Object.values(supplyObj);
+        return Object.values(supplyObj);
+      } else {
+        return [1,2,3,4,5,6,7,8,9,10,11,12,13]
+      }
+
     };
 
     const filterDemandDataByMonth = () => {
-      let demandObj = {};
+      let demandObj:any = {};
       let month = moment(moment(start).subtract(6,"M")).format("YYYY-MM");
       let counter = 13;
 
@@ -146,7 +153,7 @@ import moment from 'moment';
         counter--;
       }
   
-      for(const data of demandData){
+      for(let data of demandData){
         const key = moment(data.needby).format("YYYY-MM");
         demandObj[key] += data.quantitydemanded;
         ;
@@ -182,20 +189,19 @@ import moment from 'moment';
     
     return (
       <View style={screenStyles.mainView}>
-        <Button title="Console log DemandState" onPress={() => console.log(demandData)}/>
+        <Button title="Console log DemandState" onPress={() => console.log(allBatches)}/>
         <Button title="Console log SupplyState" onPress={() => console.log(filterSupplyDataByMonth())}/>
         <View style={screenStyles.titleContainer}>
 
           <Text style={textStyles.subHeading}>
-          {currCurriculum.charAt(0).toUpperCase() +
-            currCurriculum.slice(1)}{' '}
+          {currCurriculum[0].charAt(0).toUpperCase() +
+            currCurriculum[0].slice(1)}{' '}
         </Text>
           <Picker
-          selectedValue={currCurriculum}
-          onValueChange={(currCurriculum: string) => setCurriculum(currCurriculum)}
+          selectedValue={currCurriculum[0]}
+          onValueChange={(currCurriculum:any) => setCurriculum(currCurriculum)}
           style={{ height: 50, width: 50,}}
         >
-          
           {renderPickerItems()}
         </Picker>
         </View>

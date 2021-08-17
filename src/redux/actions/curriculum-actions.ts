@@ -41,7 +41,7 @@ export const GetAllCurricula = () => async (dispatch: Dispatch<IAppAction>) => {
  *
  */
 
-export const GetCurriculum = (id: number) => async () => {
+export const GetCurriculum = async (id: number) => {
   try {
     const res: AxiosResponse = await axios.get(`curriculum/id/${id}`);
     return res.data;
