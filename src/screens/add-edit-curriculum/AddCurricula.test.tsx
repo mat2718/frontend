@@ -5,6 +5,10 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import AddEditCurriculum from '.';
 import { TextInput } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+let wrapper: any;
+let useEffect: any;
 
 const testState = {
     skills: {
@@ -15,6 +19,8 @@ const testState = {
 const createMockStore = configureStore([thunk]);
 
 const mockGoBack = jest.fn();
+const mockDispatch = jest.fn();
+jest.mock('react-native-toast-message');
 jest.mock('@react-navigation/native', () => {
     return ({
         ...jest.requireActual('@react-navigation/native'),
@@ -26,12 +32,21 @@ jest.mock('@react-navigation/native', () => {
     })
 })
 
-const mockDispatch = jest.fn();
 jest.mock('react-redux', () => {
     return ({
         ...jest.requireActual('react-redux'),
         useDispatch: () => mockDispatch
     });
+});
+
+jest.mock('react-native-toast-message', () => {
+    return({
+        __esModule: true,
+        ...jest.requireActual('react-native-toast-message'),
+        default: {
+            show: jest.fn()
+        }
+    })
 });
 
 describe('AddEditCurriculum', () => {
@@ -56,21 +71,9 @@ describe('AddEditCurriculum', () => {
         //name, createdon, createdby, skills
         expect(wrapper.find('TextInput').length).toBeGreaterThan(0);
 
-        expect(shallowWrap.findWhere((node: any) => {
-            return node.text().toLowerCase().includes('name');
-        }));
+        expect(wrapper.find({testID: 'name'}).length).toBeGreaterThan(1);
 
-        expect(shallowWrap.findWhere((node: any) => {
-            return node.text().toLowerCase().includes('createdon');
-        }));
-
-        expect(shallowWrap.findWhere((node: any) => {
-            return node.text().toLowerCase().includes('createdby');
-        }));
-
-        expect(shallowWrap.findWhere((node: any) => {
-            return node.text().toLowerCase().includes('skills');
-        }));
+        expect(wrapper.find({testID: 'createdby'}).length).toBeGreaterThan(1);
     });
 
     //Test to see if states update on text input
@@ -82,5 +85,23 @@ describe('AddEditCurriculum', () => {
         .forEach((node: any) => {
             node.invoke('onChangeText')('hello');
         })
+    });
+
+    //Tests calendar picker
+    it('Component should have a calendar picker', () => {
+        let button = wrapper.find({testID: 'dateBtn'})
+            .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
+            .last();
+        button.invoke('onPress')();
+
+        wrapper
+        .find({ testID: 'dateTest' })
+        .findWhere((node: any) => {
+          return node.props().hasOwnProperty('onChange');
+        })
+        .forEach((node: any) => {
+          node.invoke('onChange')(null, new Date(new Date(Date.now())));
+          node.invoke('onChange')(null, false);
+        });
     })
 })

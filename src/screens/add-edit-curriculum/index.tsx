@@ -102,7 +102,7 @@ const AddEditCurriculum: React.FC = () => {
           <View style={styles.form}>
               <Text style={inputStyles.inputLabelText}>Name:</Text>
               <TextInput
-              testID='Name'
+              testID='name'
               onChangeText={name => setName(name)}
               value={name}
               style={inputStyles.textInput}
@@ -112,6 +112,7 @@ const AddEditCurriculum: React.FC = () => {
           <View style={styles.form}>
               <Text style={inputStyles.inputLabelText}>Created By:</Text>
               <TextInput
+              testID='createdby'
               value={createdBy}
               onChangeText={(createdByText) => setCreatedBy(createdByText)}
               style={inputStyles.textInput}
@@ -151,7 +152,7 @@ const AddEditCurriculum: React.FC = () => {
           <View style={styles.form}>
               <Text style={inputStyles.inputLabelText}>Created On:</Text>
               {!isPickerShow && (
-              <TouchableOpacity onPress={showPicker}>
+              <TouchableOpacity testID='dateBtn' onPress={showPicker}>
                   <Text style={inputStyles.textInput}>
                       <MaterialCommunityIcons
                       name='calendar-edit'
@@ -165,6 +166,7 @@ const AddEditCurriculum: React.FC = () => {
 
               {isPickerShow && (
               <DateTimePicker
+                  testID= 'dateTest'
                   value={createdDate}
                   mode={'date'}
                   display={Platform.OS === 'ios' ? 'spinner' : 'default'}
