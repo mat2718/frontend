@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { ProgressChart } from 'react-native-chart-kit';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -21,6 +22,8 @@ import {
 } from '../../styles';
 import BatchesSkillsListItem from '../../components/batches/batches-skills-list-item';
 import ConfirmDialog from '../../components/confirm-dialog';
+import { getBatchById } from '../../redux/actions/batch-actions';
+import { RootStore } from '../../../App';
 
 /**
  * View Batch - main component for the view batch screen
@@ -32,45 +35,35 @@ import ConfirmDialog from '../../components/confirm-dialog';
 interface PropsI {
   route: {
     params: {
-      batchSize: number;
       batchId: number;
       curriculum: {
-        curriculumid: number;
-        curriculumname: string;
+        curriculumId: number;
         skillnamearr: [];
       };
-      trainer: {
-        trainerid: number;
-        trainerfirst: string;
-        trainerlast: string;
-      };
-      startDate: string;
-      endDate: string;
-      confirmed: boolean;
+      trainerId: number;
     };
   };
 }
 
 const ViewBatch: React.FC<PropsI> = ({ route }) => {
+  /** Payload for the confirm dialog box */
+  const payload = {
+    batchId: route.params.batchId,
+    trainerId: route.params.trainerId,
+    curriculumId: route.params.curriculum.curriculumId,
+    skillId: 0,
+  };
+
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 
+  /** useDispatch */
+  const dispatch = useDispatch();
+
   /** States for confirmBox */
   const [visible, setVisible] = React.useState(false);
   const [dialogType, setDialogType] = React.useState('');
-  const [payload, setPayload] = React.useState(route.params.batchId);
-
-  /** Dates for badge and progress ring */
-  const startTime = new Date(route.params.startDate).getTime();
-  const endTime = new Date(route.params.endDate).getTime();
-  const progress = (Date.now() - startTime) / (endTime - startTime);
-
-  /** Data for progress ring */
-  const data = {
-    labels: ['Progress'], // optional
-    data: [progress < 1 && progress > 0 ? progress : progress < 0 ? 0 : 1],
-  };
 
   /** ChartConfig  */
   const chartConfig = {
@@ -82,6 +75,36 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
     strokeWidth: 2, // optional, default 3
     barPercentage: 0.5,
     useShadowColorFromDataset: false, // optional
+  };
+
+  /** Get batch information */
+  const fetchBatch = () => {
+    dispatch(
+      getBatchById(
+        route.params.batchId,
+        route.params.trainerId,
+        route.params.curriculum.curriculumId
+      )
+    );
+  };
+
+  /** Run the fetchbatch function */
+  React.useEffect(() => {
+    fetchBatch();
+  }, []);
+
+  /** Get batch information from redux state */
+  const batch = useSelector((state: RootStore) => state.onebatch);
+
+  /** Dates for badge and progress ring */
+  const startTime = new Date(batch[0].startdate).getTime();
+  const endTime = new Date(batch[0].enddate).getTime();
+  const progress = (Date.now() - startTime) / (endTime - startTime);
+
+  /** Data for progress ring */
+  const data = {
+    labels: ['Progress'], // optional
+    data: [progress < 1 && progress > 0 ? progress : progress < 0 ? 0 : 1],
   };
 
   /** Render item for flatlist */
@@ -100,17 +123,17 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
             onPress={() =>
               navigation.navigate('EditBatch', {
                 batchid: route.params.batchId,
-                batchsize: route.params.batchSize,
-                trainerid: route.params.trainer.trainerid,
-                curriculumid: route.params.curriculum,
-                startdate: route.params.startDate,
-                enddate: route.params.endDate,
+                batchsize: batch[0].batchsize,
+                trainerid: route.params.trainerId,
+                curriculumid: route.params.curriculum.curriculumId,
+                startdate: batch[0].startdate,
+                enddate: batch[0].enddate,
               })
             }
             style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}
           >
             <Text style={textStyles.heading}>
-              {route.params.curriculum.curriculumname + ' '}
+              {batch[0].curriculumname + ' '}
               <MaterialCommunityIcons
                 name='pencil'
                 size={20}
@@ -120,7 +143,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
           </TouchableOpacity>
 
           {/** Confirm Button */}
-          {route.params.confirmed ? (
+          {batch[0].confirmed ? (
             <TouchableOpacity
               style={buttonStyles.buttonDisabled}
               disabled={true}
@@ -163,9 +186,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
             style={{ marginRight: 5 }}
           />
           <Text style={textStyles.regular}>
-            {route.params.trainer.trainerfirst +
-              ' ' +
-              route.params.trainer.trainerlast}
+            {batch[0].trainerfirst + ' ' + batch[0].trainerlast}
           </Text>
         </View>
 
@@ -180,7 +201,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
               style={{ marginRight: 5 }}
             />
             <Text style={textStyles.regular}>
-              {route.params.batchSize} Associates
+              {batch[0].batchsize} Associates
             </Text>
           </View>
           {/**SubBody: Start and End Date */}
@@ -192,9 +213,9 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
               style={{ marginRight: 5 }}
             />
             <Text style={textStyles.regular}>
-              {new Date(route.params.startDate).toDateString() +
+              {new Date(batch[0].startdate).toDateString() +
                 '\nto ' +
-                new Date(route.params.endDate).toDateString()}
+                new Date(batch[0].enddate).toDateString()}
             </Text>
           </View>
         </View>
@@ -208,7 +229,7 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
 
         {/** Skills list **/}
         <FlatList
-          data={route.params.curriculum.skillnamearr}
+          data={batch[0].skillnamearr.sort((a, b) => (a > b ? 1 : -1))}
           renderItem={renderItem}
           keyExtractor={(item: any) => item}
           style={{

@@ -7,7 +7,6 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import Header from '../../components/batches/header';
 import { addSkill } from '../../redux/actions/skill-actions';
 import { useDispatch } from 'react-redux';
 import {
@@ -17,6 +16,13 @@ import {
   buttonStyles,
 } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
+
+/**
+ * Add Skill - main screen for adding a new skill
+ * @returns {React.FC} - the screen for adding a new skill
+ * @author Oriel Red Oral
+ */
 
 const AddSkill: React.FC = () => {
   /** Navigation for going back a screen */
@@ -26,13 +32,30 @@ const AddSkill: React.FC = () => {
   const dispatch = useDispatch();
 
   const addClientClick = () => {
-    dispatch(
-      addSkill({
-        skillName: skill,
+    if(skill) {
+      dispatch(
+        addSkill({
+          skillName: skill,
+        })
+      );
+      Toast.show({
+        type: 'success',
+        position: 'top',
+        text1: 'Success!',
+        text2: `${skill} has been added to the Skill List!`,
+        topOffset: 50,
+      });
+      navigation.goBack();
+    }
+    else {
+      Toast.show({
+        type: 'error',
+        position: 'top',
+        text1: 'Invalid Skill',
+        text2: 'The Skill Name field is empty.',
+        topOffset: 50,
       })
-    );
-
-    navigation.goBack();
+    }
   };
 
   return (
@@ -57,7 +80,7 @@ const AddSkill: React.FC = () => {
           </TouchableOpacity>
         </View>
         {/** Form view */}
-        {/** Client name */}
+        {/** Skill name */}
         <View style={{ flexDirection: 'column' }}>
           <Text style={inputStyles.inputLabelText}>Skill name</Text>
           <TextInput style={inputStyles.textInput} onChangeText={setSkill} />

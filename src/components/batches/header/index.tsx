@@ -1,3 +1,5 @@
+/** DELETE THIS */
+
 import React from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
 import { colors } from '../../../styles';

@@ -26,6 +26,7 @@ import { getAllClients } from '../../redux/actions/client-actions';
 import { GetAllCurricula } from '../../redux/actions/curriculum-actions';
 import { getAllSkills } from '../../redux/actions/skill-actions';
 import { getAllTrainers } from '../../redux/actions/trainers-actions';
+import { getAllDemand } from '../../redux/actions/demand-actions';
 
 //see what happens
 //please import your screen and put in your screen in components-kai
@@ -38,6 +39,7 @@ const RootStackNavigator = () => {
   React.useEffect(() => {
     dispatch(getAllBatches());
     dispatch(getAllTrainers());
+    dispatch(getAllDemand());
     dispatch(getAllClients());
     dispatch(GetAllCurricula());
     dispatch(getAllSkills());
@@ -97,7 +99,16 @@ const RootStackNavigator = () => {
       <Stack.Screen
         name='AddTrainer'
         component={CreateTrainer}
-        options={{ headerShown: true }}
+        options={{ 
+          headerShown: true,
+          title: 'Add a Trainer',
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            fontFamily: 'FuturaBook',
+            fontWeight: '700',
+            color: colors.darkGray,
+          },
+        }}
       />
       <Stack.Screen
         name='ViewEditTrainer'
@@ -134,8 +145,20 @@ const RootStackNavigator = () => {
         }}
       />
       {/** add your view/addedit screens here */}
-      <Stack.Screen name='Curricula' component={Curricula} />
-      <Stack.Screen name='AddEditCurriculum' component={AddEditCurriculum} />
+      <Stack.Screen 
+        name='AddEditCurriculum' 
+        component={AddEditCurriculum}
+        options={{
+          headerShown: true,
+          title: 'Add a Curriculum',
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            fontFamily: 'FuturaBook',
+            fontWeight: '700',
+            color: colors.darkGray,
+          },
+        }}
+      />
       <Stack.Screen
         name='ViewClient'
         component={ViewClient}

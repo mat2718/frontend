@@ -1,10 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { useDispatch } from 'react-redux';
-import { RootStackParamList } from '../../../types';
 import { listStyles, colors } from '../../../styles';
-import { Picker } from '@react-native-picker/picker';
 import axios from '../../../../axiosConfig';
 
 interface IProps {
@@ -14,11 +10,7 @@ interface IProps {
 }
 
 const DemandsListItem: React.FC<IProps> = (props: IProps) => {
-  /** Navigation stuff */
-  type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
-
   /** States for Picker */
-  const [selectedFilter, setSelectedFilter] = React.useState();
   const [curriculum, setCurriculum] = React.useState([
     {
       curriculumname: '',
@@ -58,20 +50,6 @@ const DemandsListItem: React.FC<IProps> = (props: IProps) => {
               ' needed by ' +
               new Date(props.needby).toDateString()}
           </Text>
-        </View>
-        {/** Dropdown menu */}
-        <View>
-          <Picker
-            mode='dropdown'
-            selectedValue={selectedFilter}
-            onValueChange={(itemValue, itemIndex) =>
-              setSelectedFilter(itemValue)
-            }
-            style={{ width: 50 }}
-          >
-            <Picker.Item label='Edit demand' value='edit' />
-            <Picker.Item label='Delete demand' value='delete' />
-          </Picker>
         </View>
       </View>
     </View>

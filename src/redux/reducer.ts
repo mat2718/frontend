@@ -1,5 +1,5 @@
-import { AppActions, IAppAction } from "./actions/actions";
-import { IAppState, initialState } from "./state";
+import { AppActions, IAppAction } from './actions/actions';
+import { IAppState, initialState } from './state';
 
 /**
  * Reducers - determines changes to the application's state based on the actions
@@ -16,6 +16,9 @@ export const Reducer = (
   switch (action.type) {
     case AppActions.UPDATE_BATCH:
       newState.batches = action.payload.batches;
+      return newState;
+    case AppActions.UPDATE_ONE_BATCH:
+      newState.onebatch = action.payload.onebatch;
       return newState;
     case AppActions.UPDATE_CURRICULA:
       newState.curricula = action.payload.curricula;
