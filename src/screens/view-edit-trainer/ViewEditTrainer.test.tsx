@@ -16,8 +16,18 @@ jest.mock('react-redux', () =>
   return ({
     ...jest.requireActual('react-redux'),
     useSelector: jest.fn(),
+    useDispatch: () => jest.fn()
   })
 })
+jest.mock('react-native-toast-message', () =>
+ ({
+    __esModule: true,
+    default:{
+      
+      show: jest.fn()
+    }
+  })
+)
 describe('View/Edit Trainer', () =>
 {
   const trainer: ITrainer = {
@@ -48,7 +58,7 @@ describe('View/Edit Trainer', () =>
 
   it('Should contain all labels and Input fields', () =>
   {
-    useDispatch.mockReturnValue();
+    //useDispatch.mockReturnValue();
     expect(wrapper.find('TextInput')).toHaveLength(3);
 
     expect(
@@ -97,14 +107,14 @@ describe('View/Edit Trainer', () =>
 
   it('Should have a submit button', () =>
   {
-    useDispatch.mockReturnValue();
+    //useDispatch.mockReturnValue();
     const submit = shallowWrapper.find('TouchableOpacity');
     expect(submit).toBeDefined();
   });
 
   it('Should update states on text input', () =>
   {
-    useDispatch.mockReturnValue();
+    //useDispatch.mockReturnValue();
     const inputFN = wrapper
       .findWhere((node) => node.prop('placeholder') === 'First Name')
       .last()
