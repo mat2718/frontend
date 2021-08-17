@@ -83,8 +83,11 @@ function addConfig(config) {
 
   /* comment this out if you want to test all files */
   config.testMatch = [
-    '<rootDir>/src/components/confirm-dialog/**/*.test.[jt]s?(x)',
-    // '<rootDir>/src/components/curricula/expandable-list/**/*.test.tsx',
+    //'<rootDir>/src/components/confirm-dialog/**/*.test.[jt]s?(x)',
+    '<rootDir>/src/components/curricula/expandable-list/*.test.tsx',
+    '<rootDir>/src/components/curricula/curricula-list-header/*.test.tsx',
+    '<rootDir>/src/screens/add-edit-curriculum/*.test.tsx',
+    '<rootDir>/src/screens/curricula/*.test.tsx',
   ];
 
   // third-party libraries that throw errors

@@ -2,12 +2,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { ExpandableList } from '.';
 import { TouchableOpacity } from 'react-native';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createStackNavigator } from '@react-navigation/stack';
-// import { wrapInStoreProvider } from '../../../../__tests__/functions';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
 
 const testState = {};
 const createMockStore = configureStore([thunk]);
@@ -51,12 +47,6 @@ const props = {
 describe('ExpandableList', () => {
   beforeEach(() => {
     wrapper = mount(
-<<<<<<< HEAD
-      <Provider store={createMockStore(testState)}>
-        <ExpandableList {...props} />
-      </Provider>
-      
-=======
       <ExpandableList
         curriculum={{
           createdby: 'First Creator',
@@ -72,7 +62,6 @@ describe('ExpandableList', () => {
           /** function here??? */
         }}
       />
->>>>>>> dev-branch
     );
   });
 

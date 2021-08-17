@@ -67,10 +67,6 @@ describe('Curricula', () => {
     expect(button).toBeDefined();
   });
 
-  //test to see if onRefresh event is invoked
-  it('Flatlist should respond to onRefresh event', () => {
-  })
-
   it('Should react on press', () => {
     const onPressEvent = jest.fn();
     const wrap =  shallow(<ExpandableList curriculum={testState.testCurriculum} onPress={onPressEvent}/>);

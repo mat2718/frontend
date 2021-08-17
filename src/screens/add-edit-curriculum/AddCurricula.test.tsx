@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import AddCurricula from '.';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
+import AddEditCurriculum from '.';
 
 const testState = {
     skills: {
@@ -24,12 +24,12 @@ jest.mock('react-redux', () => {
 describe('AddCurricula', () => {
     const wrapper = mount(
         <Provider store={createMockStore(testState)}>
-            <AddCurricula />
+            <AddEditCurriculum />
         </Provider>
     );
     const shallowWrap = shallow(
         <Provider store={createMockStore(testState)}>
-            <AddCurricula />
+            <AddEditCurriculum />
         </Provider>
     );
 
