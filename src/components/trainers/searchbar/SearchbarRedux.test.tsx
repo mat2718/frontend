@@ -8,7 +8,6 @@ import SearchBar from ".";
 import { Reducer } from "../../../redux/reducer";
 import { Picker } from '@react-native-picker/picker';
 import { TouchableOpacity } from 'react-native';
-import { Provider as PaperProvider } from 'react-native-paper';
 
 
 jest.requireActual('react-redux');
@@ -23,13 +22,9 @@ describe('Search Bar button', () =>
     );
     const mock = jest.fn();
     const wrapper = mount(
-      <PaperProvider>
-        <Provider store={mockStore}>
-          <SearchBar setTrainer={mock} />
-        </Provider>
-      </PaperProvider>
-    );
-      
+      <Provider store={mockStore}>
+       <SearchBar setTrainer={mock} />
+      </Provider>);
     
     wrapper.find('TouchableOpacity').findWhere(node=>node === node).first().invoke('onPress')();
     
