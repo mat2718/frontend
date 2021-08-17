@@ -84,7 +84,7 @@ function addConfig(config) {
 
   /* comment this out if you want to test all files */
   config.testMatch = [
-    '<rootDir>/src/components/curricula/**/*.test.[jt]s?(x)',
+    '<rootDir>/src/components/confirm-dialog/**/*.test.[jt]s?(x)',
     // '<rootDir>/src/components/curricula/expandable-list/**/*.test.tsx',
   ];
 
