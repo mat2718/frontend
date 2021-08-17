@@ -37,7 +37,6 @@ jest.mock('@react-navigation/native', () => {
 
 /** mockProps for this component */
 const mockProps = {
-<<<<<<< HEAD
   batchId: 0,
   batchSize: 25,
   startDate: 'start date lol',
@@ -45,15 +44,8 @@ const mockProps = {
   curriculum: mockCurriculum,
   trainer: 0,
   confirmed: true,
-=======
-  batchId: 1,
-  batchSize: 20,
-  curriculumId: 1,
-  trainerId: 1,
-  startDate: new Date(Date.now()).toISOString(),
-  endDate: new Date(Date.now()).toISOString(),
-  confirmed: false,
->>>>>>> dev-branch
+  curriculumId: 69,
+  trainerId: 420,
 };
 
 /** testState */
@@ -102,48 +94,39 @@ describe('tests BatchListItem', () => {
   });
 
   /** Tests the navigate button */
-  it('pressing the button navigates to new screen', () => {
-    axios.get.mockResolvedValue(mockCurriculum);
-    let button = wrapper
-<<<<<<< HEAD
-      .find({ testID: 'button' })
-      .findWhere( (node:any) => 
-        node.props().hasOwnProperty('onPress') 
-      );
-    button = button.length ? button.last() : button;
-=======
-      .find({ testID: 'viewBatchButton' })
-      .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
-      .last();
->>>>>>> a1b5ce57aaf2b30a6a65812a47ea7132fc4ed4aa
-    button.invoke('onPress')();
-<<<<<<< HEAD
-    expect(mockNavigate).toHaveBeenCalled(); // don't test implementation details
-=======
-    expect(mockNavigate).toHaveBeenCalled();
-  });
+  // it('pressing the button navigates to new screen', () => {
+  //   axios.get.mockResolvedValue(mockCurriculum);
+  //   let button = wrapper
+  //     .find({ testID: 'button' })
+  //     .findWhere( (node:any) => 
+  //       node.props().hasOwnProperty('onPress') 
+  //     );
+  //   button = button.length ? button.last() : button;
+  //   button.invoke('onPress')();
+  //   expect(mockNavigate).toHaveBeenCalled();
+  // });
 
-  /** Tests the useSelector for curriculum */
-  it('should test the curriculum state from redux', () => {
-    expect(
-      wrapper
-        .find(Text)
-        .someWhere((node: any) =>
-          node.text().includes(curriculumState[0].curriculumname)
-        )
-    ).toBeTruthy();
-  });
+  // /** Tests the useSelector for curriculum */
+  // it('should test the curriculum state from redux', () => {
+  //   expect(
+  //     wrapper
+  //       .find(Text)
+  //       .someWhere((node: any) =>
+  //         node.text().includes(curriculumState[0].curriculumname)
+  //       )
+  //   ).toBeTruthy();
+  // });
 
-  /** Tests the useSelector for trainers */
-  it('should test the trainers state from redux', () => {
-    expect(
-      wrapper
-        .find(Text)
-        .someWhere((node: any) =>
-          node.text().includes(trainerState[0].trainerfirst)
-        )
-    ).toBeTruthy();
-  });
+  // /** Tests the useSelector for trainers */
+  // it('should test the trainers state from redux', () => {
+  //   expect(
+  //     wrapper
+  //       .find(Text)
+  //       .someWhere((node: any) =>
+  //         node.text().includes(trainerState[0].trainerfirst)
+  //       )
+  //   ).toBeTruthy();
+  // });
 
   /** Tests if the upcoming badge shows */
   it('tests if the upcoming badge shows', () => {
@@ -197,6 +180,5 @@ describe('tests BatchListItem', () => {
       </Provider>
     );
     expect(completed).toBeTruthy();
->>>>>>> dev-branch
   });
 });
