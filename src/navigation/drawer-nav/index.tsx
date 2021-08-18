@@ -11,14 +11,6 @@ export const DrawerContent: React.FC = () => {
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 
-  const signOut = () => {
-    console.log('SIGNED OUT');
-    // dispatch({
-    //     type: AppAction.LOGOUT,
-    //     payload: {}
-    // })
-  };
-
   //the onPress is the navigationing so if you need to change it to get to your screens change it to what you named your screens. these are placeholders for now- Kai
 
   return (
@@ -33,7 +25,9 @@ export const DrawerContent: React.FC = () => {
                 style={{ marginTop: 8 }}
               />
               <View style={{ marginLeft: 15, flexDirection: 'column' }}>
-                <Title style={styles.title}>{'Revature Manager'}</Title>
+                <Title style={styles.title}>
+                  {'Perfect Personnel \nPlacement'}
+                </Title>
               </View>
             </View>
           </View>
@@ -45,14 +39,14 @@ export const DrawerContent: React.FC = () => {
               )}
               label='Home'
               onPress={() => {
-                navigation.navigate('Batches');
+                navigation.navigate('Main');
               }}
             />
             <DrawerItem
               icon={({ color, size }) => (
                 <Icon name='chart-bell-curve' color={color} size={size} />
               )}
-              label='Diagram'
+              label='Supply vs Demand'
               onPress={() => {
                 navigation.navigate('Diagram');
               }}
@@ -69,15 +63,6 @@ export const DrawerContent: React.FC = () => {
             />
           </Drawer.Section>
         </View>
-        <DrawerItem
-          icon={({ color, size }) => (
-            <Icon name='exit-to-app' color={color} size={size} />
-          )}
-          label='Sign Out'
-          onPress={() => {
-            signOut();
-          }}
-        />
       </DrawerContentScrollView>
     </View>
   );

@@ -97,7 +97,7 @@ const RootStackNavigator = () => {
       <Stack.Screen
         name='AddTrainer'
         component={CreateTrainer}
-        options={{ 
+        options={{
           headerShown: true,
           title: 'Add a Trainer',
           headerTitleAlign: 'left',
@@ -133,7 +133,7 @@ const RootStackNavigator = () => {
         component={AddSkill}
         options={{
           headerShown: true,
-          title: 'Skills',
+          title: 'Add a Skill',
           headerTitleAlign: 'left',
           headerTitleStyle: {
             fontFamily: 'FuturaBook',
@@ -143,8 +143,8 @@ const RootStackNavigator = () => {
         }}
       />
       {/** add your view/addedit screens here */}
-      <Stack.Screen 
-        name='AddEditCurriculum' 
+      <Stack.Screen
+        name='AddEditCurriculum'
         component={AddEditCurriculum}
         options={{
           headerShown: true,
@@ -190,7 +190,7 @@ const RootStackNavigator = () => {
         component={Diagram}
         options={{
           headerShown: true,
-          title: 'Diagram',
+          title: 'Supply vs Demand',
           headerTitleAlign: 'left',
           headerTitleStyle: {
             fontFamily: 'FuturaBook',
