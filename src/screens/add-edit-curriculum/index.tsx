@@ -52,6 +52,7 @@ const AddEditCurriculum: React.FC = () => {
       type: 'success',
       position: 'top',
       text1: 'Success!',
+      topOffset: 50,
       text2: `Curriculum: ${newCurriculum.curriculumname} has been added.`
     })
     navigation.navigate('Curricula');
