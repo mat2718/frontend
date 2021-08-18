@@ -12,8 +12,15 @@ interface IProps {
   clientid: number;
 }
 
+/**
+ * Client List Item - displays each individual client on the Client Screen
+ * @param {IProps} props - properties for a client
+ * @returns {React.FC} - react component that navigates from Client to ViewClient upon press
+ * @author Matthew Otto and Oriel Red Oral
+ */
+
 const ClientsListItem: React.FC<IProps> = (props: IProps) => {
-  /** Navigation stuff */
+  /** Navigation */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 
