@@ -36,16 +36,37 @@ const AddEditCurriculum: React.FC = () => {
 
   //post Curriculum function for add-curriculum screen
   const postCurriculum = () => {
-    dispatch(PostCurriculum(props.newCurriculum));
+    const newCurriculum = {
+      curriculumname: name,
+      createdby: createdBy,
+      createdon: createdDate.toISOString(),
+      skillIdArr: skills
+  }
+
+  const json = JSON.stringify(newCurriculum);
+
+  if(newCurriculum.createdby && newCurriculum.createdon && newCurriculum.curriculumname && newCurriculum.skillIdArr) {
+    dispatch(PostCurriculum(json));
+    //add a success toast for each filled in input
     Toast.show({
       type: 'success',
       position: 'top',
       text1: 'Success!',
-      text2: 'A Curriculum has been added to the Curricula List.',
-      topOffset: 50
+      topOffset: 50,
+      text2: `Curriculum: ${newCurriculum.curriculumname} has been added.`
     })
-    navigation.goBack();
+    navigation.navigate('Curricula');
+    //fail toast for non-filled inputs
+  } else {
+    Toast.show({
+      type: 'error',
+      position: 'top',
+      text1: 'Error',
+      text2:`You have failed to fill in all the required fields below.`
+    })
   }
+}
+
 
   const showPicker = () => {
     setIsPickerShow(true);
@@ -61,6 +82,9 @@ const AddEditCurriculum: React.FC = () => {
     }
   };
 
+  const onSkillChange = (skills: ISkill) => {
+    setSkills(skills);
+  }
   return (
     <View style={screenStyles.safeAreaView}>
       <View style={screenStyles.mainView}>
@@ -129,7 +153,7 @@ const AddEditCurriculum: React.FC = () => {
           <View style={styles.form}>
               <Text style={inputStyles.inputLabelText}>Created On:</Text>
               {!isPickerShow && (
-              <TouchableOpacity testID='dateBtn' onPress={showPicker}>
+              <TouchableOpacity onPress={showPicker} testID='dateBtn' >
                   <Text style={inputStyles.textInput}>
                       <MaterialCommunityIcons
                       name='calendar-edit'
@@ -143,9 +167,9 @@ const AddEditCurriculum: React.FC = () => {
 
               {isPickerShow && (
               <DateTimePicker
+                  testID='dateTest'
                   value={createdDate}
-                mode={'date'}
-                testID='dateTest'
+                  mode={'date'}
                   display={Platform.OS === 'ios' ? 'spinner' : 'default'}
                   onChange={onCreatedChange}
                   style={styles.datePicker}
