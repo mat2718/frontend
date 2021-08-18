@@ -107,30 +107,29 @@ const AddBatch: React.FC = () => {
       );
       Toast.show({
         type: 'success',
-        position: 'top',
+        position: 'bottom',
         text1: 'Success!',
         text2: `A new Batch has been added!`,
-        topOffset: 50,
+        bottomOffset: 60,
       });
+      navigation.goBack();
     } else if (!batchSizeValue) {
       Toast.show({
         type: 'error',
-        position: 'top',
+        position: 'bottom',
         text1: 'Invalid Batch Size',
         text2: 'The Batch Size Value is empty.',
-        topOffset: 50,
+        bottomOffset: 60,
       });
     } else if (startDate >= endDate) {
       Toast.show({
         type: 'error',
-        position: 'top',
+        position: 'bottom',
         text1: 'Invalid Batch Date',
         text2: 'The End Date is not greater than the Start Date',
-        topOffset: 50,
+        bottomOffset: 60,
       });
     }
-
-    navigation.goBack();
   };
 
   return (
