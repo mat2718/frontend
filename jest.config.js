@@ -78,7 +78,7 @@ function addConfig(config) {
 
   /* comment this out if you want to test all files */
   config.testMatch = [
-    '<rootDir>/src/redux/**/reducer.test.[jt]s?(x)',
+    '<rootDir>/src/redux/**/*.test.[jt]s?(x)',
   ];
 
 
