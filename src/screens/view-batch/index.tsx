@@ -38,7 +38,7 @@ interface IProps {
       batchId: number;
       curriculum: {
         curriculumId: number;
-        skillnamearr: [];
+        skillnamearr: any[];
       };
       trainerId: number;
     };

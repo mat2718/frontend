@@ -157,6 +157,12 @@ describe('tests the ViewBatch screen', () => {
 
   /** tests if the component is there */
   it('should be there', () => {
+    wrapper = mount(
+      <Provider store={mockStore}>
+        {' '}
+        <ViewBatch {...props} />{' '}
+      </Provider>
+    );
     expect(wrapper).not.toBe(undefined);
   });
 

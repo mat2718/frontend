@@ -77,11 +77,7 @@ function addConfig(config) {
   ];
 
   /* comment this out if you want to test all files */
-  config.testMatch = [
-    // '<rootDir>/src/components/confirm-dialog/**/*.test.[jt]s?(x)',
-    // '<rootDir>/src/components/curricula/expandable-list/**/*.test.tsx',
-    '<rootDir>/src/screens/view-batch/*.test.[jt]s?(x)',
-  ];
+  config.testMatch = ['<rootDir>/src/screens/add-client/**/*.test.[jt]s?(x)'];
 
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
@@ -99,6 +95,7 @@ function addConfig(config) {
     '@expo',
     '@expo/vector-icons',
     'react-native-toast-message',
+    'react-native-chart-kit',
   ];
 
   console.log(
