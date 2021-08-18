@@ -4,7 +4,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import AddEditCurriculum from '.';
-import { TextInput } from 'react-native';
+import { TextInput, TouchableOpacity } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 let wrapper: any;
@@ -71,9 +71,8 @@ describe('AddEditCurriculum', () => {
         //name, createdon, createdby, skills
         expect(wrapper.find('TextInput').length).toBeGreaterThan(0);
 
-        expect(wrapper.find({testID: 'name'}).length).toBeGreaterThan(1);
+        expect(wrapper.find({testID: 'Name'}).length).toBeGreaterThan(1);
 
-        expect(wrapper.find({testID: 'createdby'}).length).toBeGreaterThan(1);
     });
 
     //Test to see if states update on text input

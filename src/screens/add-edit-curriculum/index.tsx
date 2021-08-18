@@ -129,7 +129,7 @@ const AddEditCurriculum: React.FC = () => {
           <View style={styles.form}>
               <Text style={inputStyles.inputLabelText}>Created On:</Text>
               {!isPickerShow && (
-              <TouchableOpacity onPress={showPicker}>
+              <TouchableOpacity testID='dateBtn' onPress={showPicker}>
                   <Text style={inputStyles.textInput}>
                       <MaterialCommunityIcons
                       name='calendar-edit'
@@ -144,7 +144,8 @@ const AddEditCurriculum: React.FC = () => {
               {isPickerShow && (
               <DateTimePicker
                   value={createdDate}
-                  mode={'date'}
+                mode={'date'}
+                testID='dateTest'
                   display={Platform.OS === 'ios' ? 'spinner' : 'default'}
                   onChange={onCreatedChange}
                   style={styles.datePicker}

@@ -1,4 +1,4 @@
-import { GetAllCurricula, GetCurriculum, PostCurriculum, DeleteCurriculum } from "../curriculum-actions";
+import { GetAllCurricula, PostCurriculum } from "../curriculum-actions";
 
 const mockCurriculum = {
     curriculumname: '',
@@ -21,7 +21,5 @@ const mockCurriculum2 = {
 it('can execute various action creators', () => {
     const mockDispatch = jest.fn();
     GetAllCurricula()(mockDispatch);
-    GetCurriculum(0)();
     PostCurriculum(mockCurriculum)(mockDispatch)
-    DeleteCurriculum(mockCurriculum2)();
 })

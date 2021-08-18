@@ -19,6 +19,15 @@ jest.mock('@react-navigation/native', () => {
   });
 });
 
+jest.mock('react-native-toast-message', () => {
+  return ({
+    __esModule: true,
+    default: {
+      show: jest.fn(),
+    },
+  });
+});
+
 let wrapper: any;
 const store = createStore(Reducer, applyMiddleware(thunk));
 
