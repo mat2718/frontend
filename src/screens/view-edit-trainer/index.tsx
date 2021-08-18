@@ -1,10 +1,25 @@
 import { useRoute } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Text, TextInput, SafeAreaView, ScrollView } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Keyboard,
+  TouchableWithoutFeedback,
+  Text,
+  TextInput,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 import ITrainer from '../../Entities/Trainer';
 import { updateTrainer } from '../../redux/actions/trainers-actions';
-import { inputStyles, screenStyles, buttonStyles, textStyles } from '../../styles';
+import {
+  inputStyles,
+  screenStyles,
+  buttonStyles,
+  textStyles,
+} from '../../styles';
 import Toast from 'react-native-toast-message';
 
 /**
@@ -13,12 +28,11 @@ import Toast from 'react-native-toast-message';
  * @author Joab Smith and Imran Ilyas
  */
 
-const ViewEditTrainer: React.FC = () =>
-{
+const ViewEditTrainer: React.FC = () => {
   // Routing to pass Trainer information as parameters
   const route = useRoute();
   const params = route.params as ITrainer;
-  
+
   // hooks for textinput
   const [firstName, setFirstName] = useState(params.trainerfirst);
   const [lastName, setLastName] = useState(params.trainerlast);
@@ -26,23 +40,22 @@ const ViewEditTrainer: React.FC = () =>
   const dispatch = useDispatch();
 
   // Axios request to update a trainer's information upon press
-  const update = () =>
-  {
+  const update = () => {
     const newTrainer: ITrainer = {
       trainerfirst: firstName,
       trainerlast: lastName,
       email: email,
-      trainerid: params.trainerid
-    }
+      trainerid: params.trainerid,
+    };
     dispatch(updateTrainer(newTrainer));
     // Display message upon updating a trainer
     Toast.show({
       type: 'success',
-      position: 'top',
+      position: 'bottom',
       text1: 'Updated Trainer!',
       text2: `You have successfully updated trainer: ${newTrainer.trainerfirst} ${newTrainer.trainerlast}`,
-      topOffset: 50,
-    })
+      bottomOffset: 50,
+    });
   };
 
   return (
@@ -50,38 +63,38 @@ const ViewEditTrainer: React.FC = () =>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         {/** Heading and button */}
         <View style={screenStyles.mainView}>
-        <View
-          style={{
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            marginTop: 10,
-          }}
-        >
-          {/** Heading text */}
-          <Text style={textStyles.heading}>Edit Trainer</Text>
-          {/** Update */}
-          <TouchableOpacity
-            style={buttonStyles.buttonContainer}
-            onPress={() => update()}
+          <View
+            style={{
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              marginTop: 10,
+            }}
           >
-            <Text style={buttonStyles.buttonText}>Update</Text>
-          </TouchableOpacity>
-        </View>
-        {/** Form view */}
-        {/** Client name */}
-        <View style={{ flexDirection: 'column' }}>
-              <Text style={inputStyles.inputLabelText}>First Name:</Text>
-        <TextInput
+            {/** Heading text */}
+            <Text style={textStyles.heading}>Edit Trainer</Text>
+            {/** Update */}
+            <TouchableOpacity
+              style={buttonStyles.buttonContainer}
+              onPress={() => update()}
+            >
+              <Text style={buttonStyles.buttonText}>Update</Text>
+            </TouchableOpacity>
+          </View>
+          {/** Form view */}
+          {/** Client name */}
+          <View style={{ flexDirection: 'column' }}>
+            <Text style={inputStyles.inputLabelText}>First Name:</Text>
+            <TextInput
               style={inputStyles.textInput}
               testID='Firstname'
               placeholder='First Name'
               onChangeText={setFirstName}
-                >
-               {firstName}
-             </TextInput>
+            >
+              {firstName}
+            </TextInput>
 
-             <Text style={inputStyles.inputLabelText}>Last Name:</Text>
-             <TextInput
+            <Text style={inputStyles.inputLabelText}>Last Name:</Text>
+            <TextInput
               style={inputStyles.textInput}
               testID='Lastname'
               placeholder='Last Name'
@@ -99,7 +112,7 @@ const ViewEditTrainer: React.FC = () =>
             >
               {email}
             </TextInput>
-        </View>
+          </View>
         </View>
       </TouchableWithoutFeedback>
     </SafeAreaView>

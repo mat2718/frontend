@@ -27,12 +27,12 @@ export const ExpandableList: React.FC<IProps> = ({ curriculum, onPress }) => {
       style={styles.icon}
     />
   );
-  
+
   //variables for more understandable data strings
   let createdDate = new Date(curriculum.createdon).toDateString();
   let modifiedDate = new Date(curriculum.lastmodified).toDateString();
   let skillsarr = curriculum.skillnamearr.join(', ');
-  
+
   //onPress event allowing for icon change and expanding transition
   const onCurriculumPress = () => {
     onPress();
@@ -70,28 +70,33 @@ export const ExpandableList: React.FC<IProps> = ({ curriculum, onPress }) => {
         {icon}
       </View>
       <View style={styles.textContainer}>
-        <Text style={listStyles.subHeading}>Created On: </Text>
-        <Text style={listStyles.textRegular}>{createdDate}</Text>
+        <Text style={listStyles.curriculaSubHeading}>Created On: </Text>
+        <Text style={listStyles.subHeading}>{createdDate}</Text>
       </View>
       <View style={styles.textContainer}>
-        <Text style={listStyles.subHeading}>Created By: </Text>
-        <Text style={listStyles.textRegular}>{curriculum.createdby}</Text>
+        <Text style={listStyles.curriculaSubHeading}>Created By: </Text>
+        <Text style={listStyles.subHeading}>{curriculum.createdby}</Text>
       </View>
 
       {expanded && (
         <>
           <View style={styles.textContainer}>
-            <Text style={listStyles.subHeading}>Last Modified On: </Text>
-            <Text style={listStyles.textRegular}>{modifiedDate}</Text>
+            <Text style={listStyles.curriculaSubHeading}>
+              Last Modified On:{' '}
+            </Text>
+            <Text style={listStyles.subHeading}>{modifiedDate}</Text>
           </View>
           <View style={styles.textContainer}>
-            <Text style={listStyles.subHeading}>Last Modified By: </Text>
-            <Text style={listStyles.textRegular}>{curriculum.lastmodifiedby}</Text>
+            <Text style={listStyles.curriculaSubHeading}>
+              Last Modified By:{' '}
+            </Text>
+            <Text style={listStyles.subHeading}>
+              {curriculum.lastmodifiedby}
+            </Text>
           </View>
           <View style={styles.textContainer}>
-            <Text style={listStyles.subHeading}>Skills: </Text>
-            <Text style={styles.textRegular}>{skillsarr}</Text>
-
+            <Text style={listStyles.curriculaSubHeading}>Skills: </Text>
+            <Text style={listStyles.subHeading}>{skillsarr}</Text>
           </View>
         </>
       )}
@@ -115,6 +120,6 @@ const styles = StyleSheet.create({
     fontFamily: 'FuturaBook',
     fontWeight: '700',
     flexWrap: 'wrap',
-    flex: 1 
+    flex: 1,
   },
 });

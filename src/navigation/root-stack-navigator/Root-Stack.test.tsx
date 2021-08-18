@@ -92,7 +92,7 @@ const store = configureStore([thunk])(testState)
 let wrapper:any;
 
 describe('testing RootStackNavigation', () => {
-    beforeEach( () => {
+    
         wrapper = mount(
             <Provider store={store} >
                 <NavigationContainer>
@@ -102,7 +102,7 @@ describe('testing RootStackNavigation', () => {
                 </NavigationContainer>
             </Provider>
         );
-    })
+    
 
     it('renders the component', () => {
         expect(wrapper).toBeDefined();

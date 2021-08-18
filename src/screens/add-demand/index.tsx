@@ -77,7 +77,7 @@ const AddDemand: React.FC<PropsI> = ({ route }) => {
   };
 
   const addDemandClick = () => {
-    if(howMany) {
+    if (howMany) {
       dispatch(
         addDemand({
           clientid: route.params.clientid,
@@ -88,21 +88,20 @@ const AddDemand: React.FC<PropsI> = ({ route }) => {
       );
       Toast.show({
         type: 'success',
-        position: 'top',
+        position: 'bottom',
         text1: 'Success!',
         text2: `Demand has been added!`,
-        topOffset: 50,
+        bottomOffset: 60,
       });
       navigation.goBack();
-    }
-    else {
+    } else {
       Toast.show({
         type: 'error',
-        position: 'top',
+        position: 'bottom',
         text1: 'Invalid Demand',
         text2: 'The number of associates need by is empty.',
-        topOffset: 50,
-      })
+        bottomOffset: 60,
+      });
     }
   };
 

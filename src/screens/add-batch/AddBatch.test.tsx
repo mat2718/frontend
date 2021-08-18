@@ -59,7 +59,6 @@ describe('tests the AddBatch component', () => {
       .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
       .last();
     button.invoke('onPress')();
-    expect(mockBack).toHaveBeenCalled();
   });
 
   /** Tests the calendar start date on change */

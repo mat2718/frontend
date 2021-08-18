@@ -40,19 +40,19 @@ const AddSkill: React.FC = () => {
       );
       Toast.show({
         type: 'success',
-        position: 'top',
+        position: 'bottom',
         text1: 'Success!',
         text2: `${skill} has been added to the Skill List!`,
-        topOffset: 50,
+        bottomOffset: 60,
       });
       navigation.goBack();
     } else {
       Toast.show({
         type: 'error',
-        position: 'top',
+        position: 'bottom',
         text1: 'Invalid Skill',
         text2: 'The Skill Name field is empty.',
-        topOffset: 50,
+        bottomOffset: 60,
       });
     }
   };

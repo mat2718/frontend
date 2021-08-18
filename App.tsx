@@ -11,12 +11,49 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import { Reducer } from './src/redux/reducer';
 import { Provider } from 'react-redux';
-import Toast from 'react-native-toast-message';
+import Toast, { BaseToast } from 'react-native-toast-message';
+import { colors } from './src/styles';
 
 export type RootStore = ReturnType<typeof Reducer>;
 
 const App = () => {
   const [fontsLoaded, setFonts] = useState(false);
+
+  /** Toast config */
+  const toastConfig = {
+    success: ({ text1, ...rest }: any) => (
+      <BaseToast
+        {...rest}
+        style={{ backgroundColor: colors.darkGray }}
+        contentContainerStyle={{ paddingHorizontal: 15 }}
+        text1Style={{
+          fontSize: 15,
+          color: colors.white,
+          fontWeight: 'semibold',
+        }}
+        text2Style={{
+          fontSize: 12,
+          color: colors.white,
+        }}
+      />
+    ),
+    error: ({ text1, ...rest }: any) => (
+      <BaseToast
+        {...rest}
+        style={{ backgroundColor: colors.darkGray }}
+        contentContainerStyle={{ paddingHorizontal: 15 }}
+        text1Style={{
+          fontSize: 15,
+          color: colors.white,
+          fontWeight: 'semibold',
+        }}
+        text2Style={{
+          fontSize: 12,
+          color: colors.white,
+        }}
+      />
+    ),
+  };
 
   useEffect(() => {
     loadFonts();
@@ -51,7 +88,7 @@ const App = () => {
             <PaperProvider theme={DefaultTheme}>
               <StatusBar style='auto' />
               <RootStackNavigator />
-              <Toast ref={(ref) => Toast.setRef(ref)} />
+              <Toast ref={(ref) => Toast.setRef(ref)} config={toastConfig} />
             </PaperProvider>
           </NavigationContainer>
         </SafeAreaProvider>
