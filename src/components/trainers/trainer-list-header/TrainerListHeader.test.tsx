@@ -39,7 +39,7 @@ describe('TrainerListHeader', () => {
         <Provider store={mockStore}>
       <TrainerListHeader
         setTrainerArr={() => {
-          /** function here??? */
+          //Deliberately empty
         }}
         />
         </Provider>);
