@@ -187,7 +187,7 @@ The Main Trainer screen (as shown in the first photo above) displays all trainer
 
 If the user chooses to edit the trainer, they will navigate to the third screen above where they can edit the first name, last name, and email of the trainer. The fourth screen is what happens if you click on Add Trainer which contains the same contents as the Edit Trainer Screen. Upon submitting a trainer, the fields will be cleaned up and you may add another trainer or return to the main trainer screen.
 
-*Note: A user can only delete a trainer that has not been added to a batch. To remove that trainer, the batch the trainer is mapped to needs to be deleted before deleting the trainer.* 
+Note: *A user can only delete a trainer that has not been added to a batch. To remove that trainer, the batch the trainer is mapped to needs to be deleted before deleting the trainer.* 
 
 ### Drawer
 
