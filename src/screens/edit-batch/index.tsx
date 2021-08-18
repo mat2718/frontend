@@ -130,10 +130,10 @@ const EditBatch: React.FC<PropsI> = ({ route }) => {
 
     Toast.show({
       type: 'success',
-      position: 'top',
+      position: 'bottom',
       text1: 'Success!',
       text2: `Batch has been edited!`,
-      topOffset: 125,
+      bottomOffset: 60,
     });
     navigation.goBack();
   };
