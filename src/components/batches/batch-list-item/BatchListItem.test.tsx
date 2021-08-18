@@ -93,41 +93,6 @@ describe('tests BatchListItem', () => {
     expect(wrapper).not.toBe(undefined);
   });
 
-  /** Tests the navigate button */
-  // it('pressing the button navigates to new screen', () => {
-  //   axios.get.mockResolvedValue(mockCurriculum);
-  //   let button = wrapper
-  //     .find({ testID: 'button' })
-  //     .findWhere( (node:any) => 
-  //       node.props().hasOwnProperty('onPress') 
-  //     );
-  //   button = button.length ? button.last() : button;
-  //   button.invoke('onPress')();
-  //   expect(mockNavigate).toHaveBeenCalled();
-  // });
-
-  // /** Tests the useSelector for curriculum */
-  // it('should test the curriculum state from redux', () => {
-  //   expect(
-  //     wrapper
-  //       .find(Text)
-  //       .someWhere((node: any) =>
-  //         node.text().includes(curriculumState[0].curriculumname)
-  //       )
-  //   ).toBeTruthy();
-  // });
-
-  // /** Tests the useSelector for trainers */
-  // it('should test the trainers state from redux', () => {
-  //   expect(
-  //     wrapper
-  //       .find(Text)
-  //       .someWhere((node: any) =>
-  //         node.text().includes(trainerState[0].trainerfirst)
-  //       )
-  //   ).toBeTruthy();
-  // });
-
   /** Tests if the upcoming badge shows */
   it('tests if the upcoming badge shows', () => {
     const upcoming = mount(
