@@ -25,7 +25,7 @@ const AddEditCurriculum: React.FC = () => {
   const [createdBy, setCreatedBy] = useState('');
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [createdDate, setCreatedDate] = useState(new Date(Date.now()));
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState<ISkill[]>([]);
 
   //get all skills from database for multi-select picker input
   const skillArr = useSelector((state: IAppState) => state.skills);
@@ -55,7 +55,6 @@ const AddEditCurriculum: React.FC = () => {
       topOffset: 50,
       text2: `Curriculum: ${newCurriculum.curriculumname} has been added.`
     })
-    navigation.navigate('Curricula');
     //fail toast for non-filled inputs
   } else {
     Toast.show({
@@ -82,7 +81,7 @@ const AddEditCurriculum: React.FC = () => {
     }
   };
 
-  const onSkillChange = (skills: ISkill) => {
+  const onSkillChange = (skills: ISkill[]) => {
     setSkills(skills);
   }
   return (

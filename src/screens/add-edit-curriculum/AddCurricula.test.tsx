@@ -50,7 +50,7 @@ jest.mock('react-native-toast-message', () => {
 });
 
 describe('AddEditCurriculum', () => {
-    const wrapper = mount(
+     wrapper = mount(
         <Provider store={createMockStore(testState)}>
             <AddEditCurriculum />
         </Provider>

@@ -12,7 +12,7 @@ import { Dispatch } from "redux";
  */
 
 //api call for getting all curricula
-export const GetAllCurricula = () => async (dispatch: Dispatch<IAppAction>) => {
+export const GetAllCurricula = () => async (dispatch: Dispatch) => {
   try {
     await axios.get("curriculum").then((res) => {
       const curricula: ICurriculum[] = res.data;
