@@ -1,7 +1,20 @@
 import React, { useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Platform } from 'react-native';
-import { buttonStyles, colors, inputStyles, screenStyles, textStyles } from '../../styles';
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Platform,
+} from 'react-native';
+import {
+  buttonStyles,
+  colors,
+  inputStyles,
+  screenStyles,
+  textStyles,
+} from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import { PostCurriculum } from '../../redux/actions/curriculum-actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,21 +31,20 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
  * @author Hannah Mulato
  */
 
-
 const AddEditCurriculum: React.FC = () => {
   //initializing states for each input field
-  const [name, setName] = useState(''); 
+  const [name, setName] = useState('');
   const [createdBy, setCreatedBy] = useState('');
   const [isPickerShow, setIsPickerShow] = useState(false);
   const [createdDate, setCreatedDate] = useState(new Date(Date.now()));
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState<ISkill[]>([]);
 
   //get all skills from database for multi-select picker input
   const skillArr = useSelector((state: IAppState) => state.skills);
 
   //initializing navigation and dispatch
-  const navigation = useNavigation<RootStackParamList>();  
-  const dispatch = useDispatch()
+  const navigation = useNavigation<RootStackParamList>();
+  const dispatch = useDispatch();
 
   //post Curriculum function for add-curriculum screen
   const postCurriculum = () => {
@@ -40,32 +52,37 @@ const AddEditCurriculum: React.FC = () => {
       curriculumname: name,
       createdby: createdBy,
       createdon: createdDate.toISOString(),
-      skillIdArr: skills
-  }
+      skillIdArr: skills,
+    };
 
-  const json = JSON.stringify(newCurriculum);
+    const json = JSON.stringify(newCurriculum);
 
-  if(newCurriculum.createdby && newCurriculum.createdon && newCurriculum.curriculumname && newCurriculum.skillIdArr) {
-    dispatch(PostCurriculum(json));
-    //add a success toast for each filled in input
-    Toast.show({
-      type: 'success',
-      position: 'top',
-      text1: 'Success!',
-      text2: `Curriculum: ${newCurriculum.curriculumname} has been added.`
-    })
-    navigation.navigate('Curricula');
-    //fail toast for non-filled inputs
-  } else {
-    Toast.show({
-      type: 'error',
-      position: 'top',
-      text1: 'Error',
-      text2:`You have failed to fill in all the required fields below.`
-    })
-  }
-}
-
+    if (
+      newCurriculum.createdby &&
+      newCurriculum.createdon &&
+      newCurriculum.curriculumname &&
+      newCurriculum.skillIdArr
+    ) {
+      dispatch(PostCurriculum(json));
+      //add a success toast for each filled in input
+      Toast.show({
+        type: 'success',
+        position: 'bottom',
+        text1: 'Success!',
+        bottomOffset: 60,
+        text2: `Curriculum: ${newCurriculum.curriculumname} has been added.`,
+      });
+      //fail toast for non-filled inputs
+    } else {
+      Toast.show({
+        type: 'error',
+        position: 'bottom',
+        text1: 'Error',
+        bottomOffset: 60,
+        text2: `You have failed to fill in all the required fields below.`,
+      });
+    }
+  };
 
   const showPicker = () => {
     setIsPickerShow(true);
@@ -81,98 +98,99 @@ const AddEditCurriculum: React.FC = () => {
     }
   };
 
-  const onSkillChange = (skills: ISkill) => {
+  const onSkillChange = (skills: ISkill[]) => {
     setSkills(skills);
-  }
+  };
   return (
     <View style={screenStyles.safeAreaView}>
       <View style={screenStyles.mainView}>
-        
         <View style={screenStyles.titleContainer}>
           <Text style={textStyles.heading}>Add Curriculum</Text>
           <TouchableOpacity
-              style={buttonStyles.buttonContainer}
-              onPress={postCurriculum}
+            style={buttonStyles.buttonContainer}
+            onPress={postCurriculum}
           >
-              <Text style={buttonStyles.buttonText}>Save</Text>
+            <Text style={buttonStyles.buttonText}>Save</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={{marginTop: 10}}>
+        <View style={{ marginTop: 10 }}>
           {/**Form View */}
           <View style={styles.form}>
-              <Text style={inputStyles.inputLabelText}>Name:</Text>
-              <TextInput
+            <Text style={inputStyles.inputLabelText}>Name:</Text>
+            <TextInput
               testID='Name'
-              onChangeText={name => setName(name)}
+              onChangeText={(name) => setName(name)}
               value={name}
               style={inputStyles.textInput}
-              />
+            />
           </View>
 
           <View style={styles.form}>
-              <Text style={inputStyles.inputLabelText}>Created By:</Text>
-              <TextInput
+            <Text style={inputStyles.inputLabelText}>Created By:</Text>
+            <TextInput
               value={createdBy}
               onChangeText={(createdByText) => setCreatedBy(createdByText)}
               style={inputStyles.textInput}
-              />
+            />
           </View>
 
           <View style={styles.form}>
-            <View style={{marginBottom: 10}}>
+            <View style={{ marginBottom: 10 }}>
               <Text style={inputStyles.inputLabelText}>Skills:</Text>
             </View>
-              <MultiSelect
+            <MultiSelect
               hideTags={false}
               items={skillArr}
-              uniqueKey="skillid"
-              displayKey="skillname"
+              uniqueKey='skillid'
+              displayKey='skillname'
               onSelectedItemsChange={(skills: any) => onSkillChange(skills)}
               selectedItems={skills}
               selectedItemTextColor={colors.blue}
               tagTextColor={colors.white}
-              selectText="  Choose skills"
-              searchInputPlaceholderText="Search Skills..."
-              selectedItemFontFamily="FuturaBook"
-              itemFontFamily="FuturaBook"
-              fontFamily="FuturaBook"
+              selectText='  Choose skills'
+              searchInputPlaceholderText='Search Skills...'
+              selectedItemFontFamily='FuturaBook'
+              itemFontFamily='FuturaBook'
+              fontFamily='FuturaBook'
               fontSize={12}
               tagBorderColor={colors.orange}
-              tagContainerStyle={{backgroundColor: colors.orange}}
+              tagContainerStyle={{ backgroundColor: colors.orange }}
               styleDropdownMenuSubsection={inputStyles.pickerContainer}
               tagRemoveIconColor={colors.white}
               submitButtonColor={colors.orange}
-              submitButtonText="Done"
-              styleSelectorContainer={{borderRadius: 30}}
-              styleListContainer={{borderRadius: 30}}
-              />
+              submitButtonText='Done'
+              styleSelectorContainer={{ borderRadius: 30 }}
+              styleListContainer={{ borderRadius: 30 }}
+            />
           </View>
 
           <View style={styles.form}>
-              <Text style={inputStyles.inputLabelText}>Created On:</Text>
-              {!isPickerShow && (
-              <TouchableOpacity onPress={showPicker}>
-                  <Text style={inputStyles.textInput}>
-                      <MaterialCommunityIcons
-                      name='calendar-edit'
-                      size={20}
-                      color='#474C55'
-                      />{'     '}
-                      {createdDate.toDateString()}</Text>
-                  
+            <Text style={inputStyles.inputLabelText}>Created On:</Text>
+            {!isPickerShow && (
+              <TouchableOpacity onPress={showPicker} testID='dateBtn'>
+                <Text style={inputStyles.textInput}>
+                  <MaterialCommunityIcons
+                    name='calendar-edit'
+                    size={20}
+                    color='#474C55'
+                  />
+                  {'     '}
+                  {createdDate.toDateString()}
+                </Text>
               </TouchableOpacity>
-              )}
+            )}
 
-              {isPickerShow && (
+            {isPickerShow && (
               <DateTimePicker
-                  value={createdDate}
-                  mode={'date'}
-                  display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                  onChange={onCreatedChange}
-                  style={styles.datePicker}
+                testID='dateTest'
+                value={createdDate}
+                mode={'date'}
+                display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                onChange={onCreatedChange}
+                style={styles.datePicker}
               />
-              )}
+            )}
           </View>
         </View>
       </View>
@@ -191,9 +209,9 @@ const styles = StyleSheet.create({
   },
   form: {
     width: '100%',
-    marginTop: 5, 
-    marginBottom: 5
-  }
+    marginTop: 5,
+    marginBottom: 5,
+  },
 });
 
 export default AddEditCurriculum;

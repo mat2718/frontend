@@ -188,7 +188,16 @@ const RootStackNavigator = () => {
       <Stack.Screen
         name='Diagram'
         component={Diagram}
-        options={{ headerShown: true }}
+        options={{
+          headerShown: true,
+          title: 'Diagram',
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            fontFamily: 'FuturaBook',
+            fontWeight: '700',
+            color: colors.darkGray,
+          },
+        }}
       />
       <Stack.Screen
         name='AddDemand'

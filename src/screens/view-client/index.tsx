@@ -15,6 +15,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { screenStyles, textStyles, buttonStyles, colors } from '../../styles';
 import { FlatList } from 'react-native-gesture-handler';
 import DemandsListItem from '../../components/demands/demands-list-item';
+import { getAllDemand } from '../../redux/actions/demand-actions';
+import { useDispatch } from 'react-redux';
 
 interface PropsI {
   route: {
@@ -29,6 +31,9 @@ interface PropsI {
 /** Mock data for now */
 
 const ViewClient: React.FC<PropsI> = ({ route }) => {
+  const [isFetching, setIsFetching] = React.useState(false);
+  const dispatch = useDispatch();
+
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
@@ -42,6 +47,18 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
         quantitydemanded={item.quantitydemanded}
       />
     );
+  };
+
+  /** fetch updated data for refresh function */
+  const fetchData = () => {
+    dispatch(getAllDemand());
+    setIsFetching(false);
+  };
+
+  /** refresh function for flatlist */
+  const onRefresh = () => {
+    setIsFetching(true);
+    fetchData();
   };
 
   /** Get demands */
@@ -107,6 +124,8 @@ const ViewClient: React.FC<PropsI> = ({ route }) => {
           }}
         >
           <FlatList
+            onRefresh={onRefresh}
+            refreshing={isFetching}
             data={demands}
             renderItem={renderItem}
             keyExtractor={(item) => item.demandid.toString()}

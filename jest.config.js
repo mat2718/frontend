@@ -5,18 +5,10 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
-    '<rootDir>/src/**/*/batches/**/*.{ts,tsx,js,jsx}',
-    '!<rootDir>/src/**/*.test.{ts,tsx,js,jsx}',
-    '!<rootDir>/src/components/clients_old/**/*',
-    '!<rootDir>/src/screens/clients-old/**/*',
-    // '!<rootDir>/src/assets/**/*',
-    // '!<rootDir>/src/types.ts',
+    '!<rootDir>/src/assets/**/*',
+    '!<rootDir>/src/types.ts',
     '!<rootDir>/src/entities/*',
   ],
-  // coveragePathIgnorePatterns: [
-  //   '**/__tests__/**/*.[jt]s?(x)',
-  //   '**/*/clients_old/**/*',
-  // ],
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
@@ -46,10 +38,7 @@ function returnTransformIgnorePatterns(ignoreThese) {
     'native-base',
     'react-native-svg',
   ];
-  const allLibraries = [
-    ...defaultIgnore,
-    ...ignoreThese,
-  ];
+  const allLibraries = [...defaultIgnore, ...ignoreThese];
   const start = 'node_modules/(?!(jest-)?';
   const end = ')';
   let str = start;
@@ -81,15 +70,6 @@ function addConfig(config) {
     '<rootDir>/__tests__/testExample.test.js',
   ];
 
-  /* comment this out if you want to test all files */
-  config.testMatch = [
-    //'<rootDir>/src/components/confirm-dialog/**/*.test.[jt]s?(x)',
-    '<rootDir>/src/components/curricula/expandable-list/*.test.tsx',
-    '<rootDir>/src/components/curricula/curricula-list-header/*.test.tsx',
-    '<rootDir>/src/screens/add-edit-curriculum/*.test.tsx',
-    '<rootDir>/src/screens/curricula/*.test.tsx',
-  ];
-
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
   const ignoreThese = [
@@ -106,14 +86,15 @@ function addConfig(config) {
     '@expo',
     '@expo/vector-icons',
     'react-native-toast-message',
+    'react-native-chart-kit',
   ];
 
   console.log(
     'transformIgnorePatterns set to: \n',
-    returnTransformIgnorePatterns(ignoreThese) + '\n'
+    returnTransformIgnorePatterns(ignoreThese)[0] + '\n'
   );
 
-  config.transformIgnorePatterns = returnTransformIgnorePatterns(ignoreThese[0]);
+  config.transformIgnorePatterns = returnTransformIgnorePatterns(ignoreThese);
 
   config.displayName = {
     name: 'components',

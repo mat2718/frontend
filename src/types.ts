@@ -33,8 +33,6 @@ export type RootStackParamList = {
 
 //Tab Navigation Type List
 export type RootTabParamList = {
-  Home: any;
-  Home2: any;
   Batches: any;
   Clients: any;
   Curricula: any;

@@ -44,10 +44,10 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
     dispatch(deleteBatch(props.payload.batchId));
     Toast.show({
       type: 'success',
-      position: 'top',
+      position: 'bottom',
       text1: 'Success!',
       text2: `Batch has been deleted!`,
-      topOffset: 50,
+      bottomOffset: 60,
     });
     navigation.goBack();
   };
@@ -57,25 +57,25 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
     dispatch(deleteSkill(props.payload.skillId));
     Toast.show({
       type: 'success',
-      position: 'top',
+      position: 'bottom',
       text1: 'Success!',
       text2: `Skill has been deleted!`,
-      topOffset: 50,
+      bottomOffset: 60,
     });
   };
 
   /** Delete Trainer Function */
   const deleteTrainer = () => {
-    dispatch(deleteATrainer(props.payload.trainerId))
+    dispatch(deleteATrainer(props.payload.trainerId));
     Toast.show({
       type: 'success',
-      position: 'top',
+      position: 'bottom',
       text1: 'Success!',
       text2: `A Trainer has been deleted!`,
-      topOffset: 50,
+      bottomOffset: 60,
     });
     hideDialog();
-  }
+  };
 
   /** Confirm batch function */
   const confirmConfirmBatch = () => {
@@ -88,10 +88,10 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
     );
     Toast.show({
       type: 'success',
-      position: 'top',
+      position: 'bottom',
       text1: 'Success!',
       text2: `Batch has been confirmed!`,
-      topOffset: 50,
+      bottomOffset: 50,
     });
     hideDialog();
   };
@@ -153,7 +153,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
                 <Button
                   onPress={confirmDeleteBatch}
                   style={styles.button}
-                  color={colors.orange}
+                  color={'red'}
                 >
                   Yes
                 </Button>
@@ -184,7 +184,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
                 <Button
                   onPress={confirmDeleteSkill}
                   style={styles.button}
-                  color={colors.orange}
+                  color={'red'}
                 >
                   Yes
                 </Button>
@@ -215,7 +215,7 @@ const ConfirmDialog: React.FC<IProps> = (props: IProps) => {
                 <Button
                   onPress={deleteTrainer}
                   style={styles.button}
-                  color={colors.orange}
+                  color={'red'}
                 >
                   Yes
                 </Button>

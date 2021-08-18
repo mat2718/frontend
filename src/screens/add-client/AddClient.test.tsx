@@ -1,8 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { FlatList, TouchableOpacity } from 'react-native';
-import Header from '../../components/batches/header';
 import AddClient from '.';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { Reducer } from '../../redux/reducer';
+import thunk from 'redux-thunk';
 
 const mockGoBack = jest.fn();
 jest.mock('@react-navigation/native', () => {
@@ -16,23 +19,29 @@ jest.mock('@react-navigation/native', () => {
   });
 });
 
+jest.mock('react-native-toast-message', () => {
+  return ({
+    __esModule: true,
+    default: {
+      show: jest.fn(),
+    },
+  });
+});
+
 let wrapper: any;
+const store = createStore(Reducer, applyMiddleware(thunk));
 
 describe('Batches', () => {
   beforeEach(() => {
-    wrapper = mount(<AddClient />);
+    wrapper = mount(
+      <Provider store={store}>
+        <AddClient />;
+      </Provider>)
   });
 
   //tests if the component is there
   it('should be there', () => {
     expect(wrapper).not.toBe(undefined);
-  });
-
-  // tests if the header is defined
-  it('should display the header', () => {
-    const shouldBeHeader = wrapper.find(Header);
-    expect(shouldBeHeader).toBeDefined();
-    //expect(shouldBeHeader.length).toBeGreaterThan(0); would also work
   });
 
   // tests the add button

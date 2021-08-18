@@ -26,7 +26,7 @@ const AddClient: React.FC = () => {
   const dispatch = useDispatch();
 
   const addClientClick = () => {
-    if(client){
+    if (client) {
       dispatch(
         addClient({
           clientName: client,
@@ -34,21 +34,20 @@ const AddClient: React.FC = () => {
       );
       Toast.show({
         type: 'success',
-        position: 'top',
+        position: 'bottom',
         text1: 'Success!',
         text2: `${client} has been added to the Client List!`,
-        topOffset: 50,
+        bottomOffset: 60,
       });
       navigation.goBack();
-    }
-    else {
+    } else {
       Toast.show({
         type: 'error',
-        position: 'top',
+        position: 'bottom',
         text1: 'Invalid Client',
         text2: 'The required Client field is empty.',
-        topOffset: 50,
-      })
+        bottomOffset: 60,
+      });
     }
   };
 

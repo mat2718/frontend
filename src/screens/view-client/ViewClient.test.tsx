@@ -1,35 +1,56 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { mount } from 'enzyme';
-import Header from '../../components/batches/header';
 import ViewClient from '.';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import configureStore from 'redux-mock-store';
+import { Reducer } from '../../redux/reducer';
+import thunk from 'redux-thunk';
+import { FlatList } from 'react-native';
 
 const mockNavigate = jest.fn();
 const mockGoBack = jest.fn();
 jest.mock('@react-navigation/native', () => {
-  return ({
+  return {
     ...jest.requireActual('@react-navigation/native'),
     useNavigation: () => {
-      return ({
+      return {
         navigate: mockNavigate,
         goBack: mockGoBack,
-      });
+      };
     },
-  });
+  };
 });
 
 let wrapper: any;
 
-describe('Batches', () => {
+/** mockStore */
+let mockStore = configureStore([thunk])({
+  demands: [
+    {
+      demandid: 2,
+      clientid: 2,
+      curriculumid: 2,
+      needby: '2021-08-30T00:00:00.000Z',
+      quantitydemanded: 12,
+    },
+  ],
+});
+
+describe('tests ViewClient', () => {
   beforeEach(() => {
     wrapper = mount(
-      <ViewClient
-        route={{
-          params: {
-            client: 'Revature',
-          },
-        }}
-      />
+      <Provider store={mockStore}>
+        <ViewClient
+          route={{
+            params: {
+              clientid: 2,
+              clientname: 'Revature',
+            },
+          }}
+        />
+      </Provider>
     );
   });
 
@@ -38,20 +59,12 @@ describe('Batches', () => {
     expect(wrapper).not.toBe(undefined);
   });
 
-  // tests if the header is defined
-  it('should display the header', () => {
-    const shouldBeHeader = wrapper.find(Header);
-    expect(shouldBeHeader).toBeDefined();
-  });
-
   /** tests the edit batch button */
   it('should be pressed', () => {
     const shouldBePressed = wrapper
       .find(TouchableOpacity)
-      .findWhere( (node:any) => 
-        node.props().hasOwnProperty('onPress')
-      )
-      .last()
+      .findWhere((node: any) => node.props().hasOwnProperty('onPress'))
+      .last();
 
     const myEventHandler = jest.spyOn(shouldBePressed.props(), 'onPress');
 
@@ -60,6 +73,25 @@ describe('Batches', () => {
 
     expect(myEventHandler).toHaveBeenCalled();
   });
-});
 
-// yeet
+  it('should display the flatlist', () => {
+    const shouldBeFlatlist = wrapper.find(FlatList);
+    expect(shouldBeFlatlist).toBeDefined();
+  });
+
+  it('should hold data', () => {
+    const listData = wrapper.find(FlatList).props().data;
+    expect(listData.length).toBeGreaterThan(0);
+  });
+
+  it('Flatlist responds to onRefresh event', () => {
+    wrapper
+      .find(FlatList)
+      .findWhere((node: any) => {
+        return node.props().hasOwnProperty('onChange');
+      })
+      .forEach((node: any) => {
+        node.invoke('onRefresh')();
+      });
+  });
+});

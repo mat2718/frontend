@@ -5,9 +5,13 @@ import ClientsListHeader from '../../components/clients/clients-list-header';
 import ClientsListItem from '../../components/clients/clients-list-item';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from '../../../App';
+import { getAllClients } from '../../redux/actions/client-actions';
 
 /** Basis for Entire Batch Screen */
 const Clients: React.FC = () => {
+  const [isFetching, setIsFetching] = React.useState(false);
+  const dispatch = useDispatch();
+
   /** Main item to render for the FlatList */
   const renderItem = ({ item }: { item: any }) => {
     return (
@@ -20,6 +24,18 @@ const Clients: React.FC = () => {
     (a, b) => (a.clientname > b.clientname ? 1 : -1)
   );
 
+  /** fetch updated data for refresh function */
+  const fetchData = () => {
+    dispatch(getAllClients());
+    setIsFetching(false);
+  };
+
+  /** refresh function for flatlist */
+  const onRefresh = () => {
+    setIsFetching(true);
+    fetchData();
+  };
+
   /** Main return statement */
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
@@ -28,6 +44,8 @@ const Clients: React.FC = () => {
        */}
 
       <FlatList
+        onRefresh={onRefresh}
+        refreshing={isFetching}
         data={clients}
         renderItem={renderItem}
         keyExtractor={(item) => item.clientid.toString()}

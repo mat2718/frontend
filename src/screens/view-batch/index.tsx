@@ -32,20 +32,22 @@ import { RootStore } from '../../../App';
  * @author Matthew Otto and Oriel Red Oral
  */
 
-interface PropsI {
+interface IProps {
   route: {
     params: {
       batchId: number;
       curriculum: {
         curriculumId: number;
-        skillnamearr: [];
+        skillnamearr: any[];
       };
       trainerId: number;
     };
   };
 }
 
-const ViewBatch: React.FC<PropsI> = ({ route }) => {
+const ViewBatch: React.FC<IProps> = ({ route }) => {
+  const [isFetching, setIsFetching] = React.useState(false);
+
   /** Payload for the confirm dialog box */
   const payload = {
     batchId: route.params.batchId,
@@ -75,6 +77,12 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
     strokeWidth: 2, // optional, default 3
     barPercentage: 0.5,
     useShadowColorFromDataset: false, // optional
+  };
+
+  /** refresh function for flatlist */
+  const onRefresh = () => {
+    setIsFetching(true);
+    fetchBatch();
   };
 
   /** Get batch information */
@@ -119,7 +127,6 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
         <View style={screenStyles.titleContainer}>
           {/** Touchable that takes us to the edit batch screen when clicking on the title */}
           <TouchableOpacity
-            testID='editButton'
             onPress={() =>
               navigation.navigate('EditBatch', {
                 batchid: route.params.batchId,
@@ -231,6 +238,8 @@ const ViewBatch: React.FC<PropsI> = ({ route }) => {
         <FlatList
           data={batch[0].skillnamearr.sort((a, b) => (a > b ? 1 : -1))}
           renderItem={renderItem}
+          onRefresh={onRefresh}
+          refreshing={isFetching}
           keyExtractor={(item: any) => item}
           style={{
             backgroundColor: colors.white,
@@ -336,12 +345,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 3,
     borderRadius: 15,
-    borderColor: colors.orange,
+    borderColor: '#FC4014',
   },
 
   deleteButtonText: {
     fontWeight: '700',
-    color: colors.orange,
+    color: '#FC4014',
   },
 });
 

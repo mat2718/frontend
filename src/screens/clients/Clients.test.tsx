@@ -1,40 +1,58 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import Clients, { data } from '.';
+import { mount, shallow } from 'enzyme';
+import Clients from '.';
 import { FlatList } from 'react-native';
-import Header from '../../components/batches/header';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { Reducer } from '../../redux/reducer';
+import thunk from 'redux-thunk';
 
 const mockNavigate = jest.fn();
 const mockGoBack = jest.fn();
 jest.mock('@react-navigation/native', () => {
-  return ({
+  return {
     __esModule: true,
     useNavigation: () => {
-      return ({
+      return {
         navigate: mockNavigate,
         goBack: mockGoBack,
-      });
+      };
     },
-  });
+  };
 });
 
 let wrapper: any;
+let shallowWrap: any;
+const store = createStore(Reducer, applyMiddleware(thunk));
 
-describe('Batches', () => {
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => {
+  return {
+    ...jest.requireActual('react-redux'),
+    useSelector: () => [
+      {
+        clientname: 'test',
+        clientid: 1,
+      },
+    ],
+    useDispatch: () => mockDispatch,
+  };
+});
+
+describe('tests Clients', () => {
   beforeEach(() => {
-    wrapper = mount(<Clients />);
+    wrapper = mount(
+      <Provider store={store}>
+        <Clients />;
+      </Provider>
+    );
+
+    shallowWrap = shallow(<Clients />);
   });
 
   //tests if the component is there
   it('should be there', () => {
     expect(wrapper).not.toBe(undefined);
-  });
-
-  // tests if the header is defined
-  it('should display the header', () => {
-    const shouldBeHeader = wrapper.find(Header);
-    expect(shouldBeHeader).toBeDefined();
-    //expect(shouldBeHeader.length).toBeGreaterThan(0); would also work
   });
 
   // tests if the flatlist is defined
@@ -45,9 +63,18 @@ describe('Batches', () => {
 
   // tests if the flatlist holds the data we need
   it('should hold data', () => {
-    const listData = wrapper.find(FlatList).props().data;
-    expect(listData).toEqual(data);
+    expect(shallowWrap.find('FlatList')).toHaveLength(1);
+  });
+
+  // tests the onrefresh
+  it('Flatlist responds to onRefresh event', () => {
+    wrapper
+      .find(FlatList)
+      .findWhere((node: any) => {
+        return node.props().hasOwnProperty('onChange');
+      })
+      .forEach((node: any) => {
+        node.invoke('onRefresh')();
+      });
   });
 });
-
-// yeet
