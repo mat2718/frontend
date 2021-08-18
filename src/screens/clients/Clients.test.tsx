@@ -10,41 +10,44 @@ import thunk from 'redux-thunk';
 const mockNavigate = jest.fn();
 const mockGoBack = jest.fn();
 jest.mock('@react-navigation/native', () => {
-  return ({
+  return {
     __esModule: true,
     useNavigation: () => {
-      return ({
+      return {
         navigate: mockNavigate,
         goBack: mockGoBack,
-      });
+      };
     },
-  });
+  };
 });
-
 
 let wrapper: any;
 let shallowWrap: any;
-const store = createStore(Reducer, applyMiddleware(thunk))
-jest.mock('react-redux', () =>
-{
-  return ({
-    ...jest.requireActual('react-redux'),
-    useSelector: () =>
-      [{
-        clientname: 'test',
-        clientid: 1
-      }],
-  });
- });
+const store = createStore(Reducer, applyMiddleware(thunk));
 
-describe('Clients', () => {
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => {
+  return {
+    ...jest.requireActual('react-redux'),
+    useSelector: () => [
+      {
+        clientname: 'test',
+        clientid: 1,
+      },
+    ],
+    useDispatch: () => mockDispatch,
+  };
+});
+
+describe('tests Clients', () => {
   beforeEach(() => {
     wrapper = mount(
       <Provider store={store}>
         <Clients />;
-      </Provider>)
+      </Provider>
+    );
 
-      shallowWrap = shallow(<Clients />);
+    shallowWrap = shallow(<Clients />);
   });
 
   //tests if the component is there
@@ -62,5 +65,16 @@ describe('Clients', () => {
   it('should hold data', () => {
     expect(shallowWrap.find('FlatList')).toHaveLength(1);
   });
-});
 
+  // tests the onrefresh
+  it('Flatlist responds to onRefresh event', () => {
+    wrapper
+      .find(FlatList)
+      .findWhere((node: any) => {
+        return node.props().hasOwnProperty('onChange');
+      })
+      .forEach((node: any) => {
+        node.invoke('onRefresh')();
+      });
+  });
+});

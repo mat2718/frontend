@@ -39,6 +39,22 @@ jest.mock('@react-navigation/native', () => {
   };
 });
 
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => {
+  return {
+    ...jest.requireActual('react-redux'),
+    useSelector: () => [
+      {
+        trainerfirst: 'Walter',
+        trainerlast: 'Poken',
+        email: 'walterpoken@rev.net',
+        trainerid: 76345654,
+      },
+    ],
+    useDispatch: () => mockDispatch,
+  };
+});
+
 describe('tests the Skills component', () => {
   beforeEach(() => {
     wrapper = mount(
@@ -62,5 +78,16 @@ describe('tests the Skills component', () => {
   it('should hold data', () => {
     const listData = wrapper.find(FlatList).props().data;
     expect(listData.length).toBeGreaterThan(0);
+  });
+
+  it('Flatlist responds to onRefresh event', () => {
+    wrapper
+      .find(FlatList)
+      .findWhere((node: any) => {
+        return node.props().hasOwnProperty('onRefresh');
+      })
+      .forEach((node: any) => {
+        node.invoke('onRefresh')();
+      });
   });
 });
