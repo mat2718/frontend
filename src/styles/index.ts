@@ -222,6 +222,12 @@ export const listStyles = StyleSheet.create({
     fontFamily: 'FuturaBook',
     fontWeight: '700',
   },
+
+  curriculaSubHeading: {
+    fontSize: 14,
+    color: colors.darkGray,
+    fontFamily: 'FuturaMedium',
+  },
 });
 
 // Badges Styles

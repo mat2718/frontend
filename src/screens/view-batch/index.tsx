@@ -345,12 +345,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 3,
     borderRadius: 15,
-    borderColor: colors.orange,
+    borderColor: '#FC4014',
   },
 
   deleteButtonText: {
     fontWeight: '700',
-    color: colors.orange,
+    color: '#FC4014',
   },
 });
 
