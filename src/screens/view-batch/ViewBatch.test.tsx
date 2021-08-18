@@ -5,13 +5,16 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 
+jest.mock('react-native-vector-icons/MaterialCommunityIcons');
+jest.mock('react-native-chart-kit');
+
 /**
  * View Batch Test - test file for the ViewBatch screen
  * @author Matthew Otto and Oriel Red Oral
  */
 
 /** wrapper for mounting */
-let wrapper: any;
+let wrapper:any;
 
 /** mock react navigation */
 const mockNavigate = jest.fn();
@@ -45,38 +48,41 @@ let batchesState = [
 /** mockStore */
 let mockStore = configureStore([thunk])({
   batches: batchesState,
+  onebatch: null,
 });
 
 /** mock dispatch */
 const mockDispatch = jest.fn();
 jest.mock('react-redux', () => ({
-  useSelector: jest.fn(),
   useDispatch: () => mockDispatch,
 }));
+
+const props = {
+  route: {
+    params: {
+      curriculum: {
+        curriculumId: 0,
+        skillnamearr: [],
+      },
+      trainerId: 1,
+      batchId: 1,
+    },
+  }
+}
 
 /** test suite */
 describe('tests ViewBatch', () => {
   beforeEach(() => {
     wrapper = mount(
       <Provider store={mockStore}>
-        <ViewBatch
-          route={{
-            params: {
-              curriculum: {
-                curriculumId: 0,
-                skillnamearr: [],
-              },
-              trainerId: 1,
-              batchId: 1,
-            },
-          }}
-        />
+        <ViewBatch {...props} />
       </Provider>
     );
   });
 
   /** tests if the component is there */
   it('should be there', () => {
+    wrapper = mount( <Provider store={mockStore}> <ViewBatch {...props}/> </Provider>)
     expect(wrapper).not.toBe(undefined);
   });
 
@@ -87,7 +93,7 @@ describe('tests ViewBatch', () => {
     expect(mockNavigate).toHaveBeenCalledWith('EditBatch', {
       batchid: 1,
       batchsize: 20,
-      trainerid: 1,
+      trainerId: 1,
       curriculumid: 1,
       startdate: 'start date lol',
       enddate: 'end date lol',
