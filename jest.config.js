@@ -77,9 +77,9 @@ function addConfig(config) {
   ];
 
   /* comment this out if you want to test all files */
-  config.testMatch = [
-    '<rootDir>/src/redux/**/*.test.[jt]s?(x)',
-  ];
+  // config.testMatch = [
+  //   '<rootDir>/src/screens/clients/**/*.test.[jt]s?(x)',
+  // ];
 
 
   // third-party libraries that throw errors
