@@ -1,5 +1,5 @@
 const colors = {
-    //The Six Colors Given to us to use by Kenny
+    //The Six Colors Given to us to use by Kenny from style guide
     primaryOrange: "rgb(242,105,38)",  
     primaryGray:"rgb(72,76,86)",
     primaryWhite: "rgb(255,255,255)",  
