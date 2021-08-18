@@ -45,10 +45,12 @@ jest.mock('react-redux', () => {
     ...jest.requireActual('react-redux'),
     useSelector: () => [
       {
-        trainerfirst: 'Walter',
-        trainerlast: 'Poken',
-        email: 'walterpoken@rev.net',
-        trainerid: 76345654,
+        skillid: 1,
+        skillname: 'Java',
+      },
+      {
+        skillid: 2,
+        skillname: 'JavaScript',
       },
     ],
     useDispatch: () => mockDispatch,
