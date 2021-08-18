@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Clients from '.';
 import { FlatList } from 'react-native';
 import { Provider } from 'react-redux';
@@ -23,14 +23,28 @@ jest.mock('@react-navigation/native', () => {
 
 
 let wrapper: any;
+let shallowWrap: any;
 const store = createStore(Reducer, applyMiddleware(thunk))
+jest.mock('react-redux', () =>
+{
+  return ({
+    ...jest.requireActual('react-redux'),
+    useSelector: () =>
+      [{
+        clientname: 'test',
+        clientid: 1
+      }],
+  });
+ });
 
-describe('Batches', () => {
+describe('Clients', () => {
   beforeEach(() => {
     wrapper = mount(
       <Provider store={store}>
         <Clients />;
       </Provider>)
+
+      shallowWrap = shallow(<Clients />);
   });
 
   //tests if the component is there
@@ -46,8 +60,7 @@ describe('Batches', () => {
 
   // tests if the flatlist holds the data we need
   it('should hold data', () => {
-    const listData = wrapper.find(FlatList).props().data;
-    expect(listData).toBe(store.clients);
+    expect(shallowWrap.find('FlatList')).toHaveLength(1);
   });
 });
 
