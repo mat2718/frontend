@@ -4,9 +4,9 @@ module.exports = {
   projects: [addConfig(withEnzyme(require('jest-expo/android/jest-preset')))],
   collectCoverage: true,
   collectCoverageFrom: [
-    '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
+    '!<rootDir>/src/**/*.{ts,tsx,js,jsx}',
     '!<rootDir>/src/components/clients_old/**/*',
-    '!<rootDir>/src/screens/clients-old/**/*',
+    '<rootDir>/src/screens/view-batch/**/*',
     '!<rootDir>/src/assets/**/*',
     '!<rootDir>/src/types.ts',
     '!<rootDir>/src/entities/*',
@@ -77,12 +77,11 @@ function addConfig(config) {
   ];
 
   /* comment this out if you want to test all files */
-  // config.testMatch = [
+  config.testMatch = [
     // '<rootDir>/src/components/confirm-dialog/**/*.test.[jt]s?(x)',
     // '<rootDir>/src/components/curricula/expandable-list/**/*.test.tsx',
-    // '<rootDir>/src/screens/add-demand/**/*.test.[jt]s?(x)'
-  // ];
-
+    '<rootDir>/src/screens/view-batch/*.test.[jt]s?(x)',
+  ];
 
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
