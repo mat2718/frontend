@@ -1,5 +1,4 @@
 import { getAllBatches, getBatchById, confirmBatch, addBatch, updateBatch, deleteBatch } from "../batch-actions";
-import * as axios from 'axios';
 
 const mockBatch = {
     batchId: 0,

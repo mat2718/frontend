@@ -1,15 +1,13 @@
 import axios from "../../../axiosConfig";
 import { Dispatch } from "redux";
 import ITrainer from "../../entities/Trainer";
-import { AppActions, IAppAction } from "./actions";
-import { IAppState } from "../state";
-import { useDispatch, useSelector } from "react-redux";
+import { AppActions } from "./actions";
+import { useDispatch } from "react-redux";
 import { AxiosResponse } from "axios";
-import { ThunkDispatch } from "redux-thunk";
 
 /**
  * Trainer Handler - Axios Requests to the Database regarding the Trainer
- * @param {ITrainer || IAppAction} interface - list properties of a trainer and for an expected payloaad
+ * @param {ITrainer || IAppAction} interface - list properties of a trainer and for an expected payload
  * @returns {success || err} - a message confirming the response of the action
  * @author Joab Smith and Imran Ilyas and Oriel Red Oral
  */

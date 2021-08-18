@@ -46,6 +46,8 @@ interface IProps {
 }
 
 const ViewBatch: React.FC<IProps> = ({ route }) => {
+  const [isFetching, setIsFetching] = React.useState(false);
+
   /** Payload for the confirm dialog box */
   const payload = {
     batchId: route.params.batchId,
@@ -75,6 +77,12 @@ const ViewBatch: React.FC<IProps> = ({ route }) => {
     strokeWidth: 2, // optional, default 3
     barPercentage: 0.5,
     useShadowColorFromDataset: false, // optional
+  };
+
+  /** refresh function for flatlist */
+  const onRefresh = () => {
+    setIsFetching(true);
+    fetchBatch();
   };
 
   /** Get batch information */
@@ -119,7 +127,6 @@ const ViewBatch: React.FC<IProps> = ({ route }) => {
         <View style={screenStyles.titleContainer}>
           {/** Touchable that takes us to the edit batch screen when clicking on the title */}
           <TouchableOpacity
-            testID='editButton'
             onPress={() =>
               navigation.navigate('EditBatch', {
                 batchid: route.params.batchId,
@@ -231,6 +238,8 @@ const ViewBatch: React.FC<IProps> = ({ route }) => {
         <FlatList
           data={batch[0].skillnamearr.sort((a, b) => (a > b ? 1 : -1))}
           renderItem={renderItem}
+          onRefresh={onRefresh}
+          refreshing={isFetching}
           keyExtractor={(item: any) => item}
           style={{
             backgroundColor: colors.white,

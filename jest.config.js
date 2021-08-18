@@ -5,16 +5,10 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
-    '!<rootDir>/src/components/clients_old/**/*',
-    '!<rootDir>/src/screens/clients-old/**/*',
     '!<rootDir>/src/assets/**/*',
     '!<rootDir>/src/types.ts',
     '!<rootDir>/src/entities/*',
   ],
-  // coveragePathIgnorePatterns: [
-  //   '**/__tests__/**/*.[jt]s?(x)',
-  //   '**/*/clients_old/**/*',
-  // ],
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
@@ -75,12 +69,6 @@ function addConfig(config) {
     '/clients_old/',
     '<rootDir>/__tests__/testExample.test.js',
   ];
-
-  /* comment this out if you want to test all files */
-  config.testMatch = [
-    '<rootDir>/src/redux/**/reducer.test.[jt]s?(x)',
-  ];
-
 
   // third-party libraries that throw errors
   // see https://jestjs.io/docs/tutorial-react-native#transformignorepatterns-customization
