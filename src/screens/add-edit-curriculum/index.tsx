@@ -103,7 +103,7 @@ const AddEditCurriculum: React.FC = () => {
           <View style={styles.form}>
               <Text style={inputStyles.inputLabelText}>Name:</Text>
               <TextInput
-              testID='name'
+              testID='Name'
               onChangeText={name => setName(name)}
               value={name}
               style={inputStyles.textInput}
