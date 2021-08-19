@@ -11,7 +11,7 @@ export const getAllClients = () => async (dispatch: Dispatch) => {
       payload: { clients: res.data },
     });
   } catch (e) {
-    console.log(e);
+    return e;
   }
 };
 
@@ -26,6 +26,6 @@ export const addClient = (client: {}) => async (dispatch: Dispatch) => {
     });
     return res.data``;
   } catch (e) {
-    console.log(e);
+    return e
   }
 };

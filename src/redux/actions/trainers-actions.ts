@@ -18,7 +18,6 @@ export const addTrainer = (trainer: ITrainer) => async (dispatch: Dispatch) => {
     await axios.post("trainer", trainer);
     const trainers: AxiosResponse = await axios.get("trainer");
 
-    //console.log("resp", trainers);
     dispatch({
       type: AppActions.UPDATE_TRAINER,
       payload: { trainers: trainers.data },
@@ -49,7 +48,6 @@ export const getAllTrainers = () => async (dispatch: Dispatch) => {
   try {
     await axios.get("trainer").then((response) => {
       const trainers: ITrainer[] = response.data;
-      console.log("resp", response.data, trainers);
       dispatch({
         type: AppActions.UPDATE_TRAINER,
         payload: { trainers },

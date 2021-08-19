@@ -44,7 +44,7 @@ export const addDemand = (demand: {}) => async (
 
     return "Demand has been added";
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 

@@ -8,14 +8,13 @@ export const getAllSkills = () => async (dispatch: Dispatch) => {
   try {
     await axios.get('skill').then((res) => {
       const skills: ISkill[] = res.data;
-      console.log('response', res.data, skills);
       dispatch({
         type: AppActions.UPDATE_SKILL,
         payload: { skills: res.data },
       });
     });
   } catch (e) {
-    console.log(e);
+    return e;
   }
 };
 
@@ -30,7 +29,7 @@ export const addSkill = (skill: {}) => async (dispatch: Dispatch) => {
       payload: { skills: res.data },
     });
   } catch (e) {
-    console.log(e);
+    return e;
   }
 };
 
@@ -44,6 +43,6 @@ export const deleteSkill = (skillId: number) => async (dispatch: Dispatch) => {
       payload: { skills: res.data },
     });
   } catch (e) {
-    console.log(e);
+    return e;
   }
 };

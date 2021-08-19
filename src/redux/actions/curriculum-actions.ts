@@ -30,7 +30,7 @@ export const GetAllCurricula = () => async (dispatch: Dispatch) => {
       return "Retrieved curricula";
     });
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };
 
@@ -49,6 +49,6 @@ export const PostCurriculum = (curriculum: {
     })();
     return `${curriculum.curriculumname} has been added.`;
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };

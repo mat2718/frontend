@@ -13,7 +13,7 @@ export const getAllBatches = () => async (dispatch: Dispatch) => {
       payload: { batches: res.data },
     });
   } catch (e) {
-    console.log(e);
+    return e;
   }
 };
 
@@ -45,7 +45,7 @@ export const getBatchById =
         },
       });
     } catch (e) {
-      console.log(e);
+      return e;
     }
   };
 
@@ -83,7 +83,7 @@ export const confirmBatch =
         payload: { batches: batch.data },
       });
     } catch (e) {
-      console.log(e);
+      return e;
     }
   };
 
@@ -98,7 +98,7 @@ export const addBatch = (batch: {}) => async (dispatch: Dispatch) => {
       payload: { batches: res.data },
     });
   } catch (e) {
-    console.log(e);
+    return e;
   }
 };
 
@@ -148,7 +148,7 @@ export const updateBatch =
         },
       });
     } catch (e) {
-      console.log(e);
+      return e;
     }
   };
 
@@ -162,6 +162,6 @@ export const deleteBatch = (batchId: number) => async (dispatch: Dispatch) => {
       payload: { batches: res.data },
     });
   } catch (e) {
-    console.log(e);
+    return e;
   }
 };
