@@ -34,15 +34,13 @@ const SearchBar: React.FC<IProps> = (props: IProps) => {
   // Searches for trainers upon press and filters depending on the case
   const searched = () => {
     // Call all trainers
-    dispatch(getAllTrainers());
     switch (selectedValue) {
       case 'ALL':
         props.setTrainer(trainers);
         break;
       case 'Fname':
         props.setTrainer(trainers.filter((trainer) =>
-         trainer.trainerfirst.startsWith(search)
-        )
+         trainer.trainerfirst.startsWith(search)        )
         );
         break;
       case 'Lname':
@@ -52,6 +50,7 @@ const SearchBar: React.FC<IProps> = (props: IProps) => {
         break;
       default:
         props.setTrainer(trainers);
+        break;
 
     }
   };
