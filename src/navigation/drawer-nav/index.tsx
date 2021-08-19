@@ -44,7 +44,7 @@ export const DrawerContent: React.FC = () => {
               )}
               label='Home'
               onPress={() => {
-                navigation.navigate('Main');
+                navigation.navigate('Batches');
               }}
             />
             <DrawerItem

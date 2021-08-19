@@ -56,9 +56,9 @@ const Diagram: React.FC = () => {
   };
 
   const date = new Date();
-  const start = moment(new Date()).format('YYYY-MM-01');
-  const startDate = moment(moment(start).subtract(6, 'M')).format('YYYY-MM-01');
-  const endDate = moment(moment(start).add(6, 'M')).format('YYYY-MM-01');
+  const start = moment(new Date()).format('YYYY-MM-DD');
+  const startDate = moment(moment(start).subtract(6, 'M')).format('YYYY-MM-DD');
+  const endDate = moment(moment(start).add(6, 'M')).format('YYYY-MM-DD');
 
   //useEffect that calls diff action when picking diff curriculum
   useEffect(() => {
