@@ -56,7 +56,7 @@ const ViewBatch: React.FC<IProps> = ({ route }) => {
     skillId: 0,
   };
 
-  /** Navigation stuff */
+  /** Navigation */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 
@@ -123,7 +123,6 @@ const ViewBatch: React.FC<IProps> = ({ route }) => {
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
       <View style={screenStyles.mainView}>
-        {/**Title: Curriculum */}
         <View style={screenStyles.titleContainer}>
           {/** Touchable that takes us to the edit batch screen when clicking on the title */}
           <TouchableOpacity

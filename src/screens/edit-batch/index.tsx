@@ -27,12 +27,12 @@ import Toast from 'react-native-toast-message';
 
 /**
  * Edit Batch - the component for editing a batch
- * @param {IProps} interface - includes information of batch that is to be edited
+ * @param {route} interface - includes information of batch that is to be edited
  * @returns {React.FC} - React Component for the edit batch screen
  * @author Matthew Otto and Oriel Red Oral
  */
 
-interface PropsI {
+interface IProps {
   route: {
     params: {
       batchid: number;
@@ -46,7 +46,7 @@ interface PropsI {
 }
 
 /** Main component screen */
-const EditBatch: React.FC<PropsI> = ({ route }) => {
+const EditBatch: React.FC<IProps> = ({ route }) => {
   /** States for inputs (listeners) */
   const [curriculumValue, setCurriculumValue] = React.useState(
     route.params.curriculumid

@@ -32,6 +32,7 @@ const AddSkill: React.FC = () => {
   const dispatch = useDispatch();
 
   const addClientClick = () => {
+    /** Form Validation */
     if (skill) {
       dispatch(
         addSkill({

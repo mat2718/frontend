@@ -18,6 +18,12 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 
+/**
+ * Add Client - screen that displays the Add Client Screen and uses a POST method
+ * @returns {React.FC} - react component for adding a client
+ * @author Oriel Red Oral and Imran Ilyas
+ */
+
 const AddClient: React.FC = () => {
   /** Navigation for going back a screen */
   const navigation = useNavigation();
@@ -26,6 +32,7 @@ const AddClient: React.FC = () => {
   const dispatch = useDispatch();
 
   const addClientClick = () => {
+    /** Form Validation */
     if (client) {
       dispatch(
         addClient({
