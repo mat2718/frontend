@@ -40,8 +40,8 @@ const SearchBar: React.FC<IProps> = (props: IProps) => {
         break;
       case 'Fname':
         props.setTrainer(trainers.filter((trainer) =>
-         trainer.trainerfirst.startsWith(search)        )
-        );
+         trainer.trainerfirst.startsWith(search)
+         ));
         break;
       case 'Lname':
         props.setTrainer(trainers.filter((trainer) =>
