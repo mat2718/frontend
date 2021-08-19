@@ -3,7 +3,12 @@ import { Dispatch } from 'redux';
 import { AppActions, IAppAction } from './actions';
 import ISkill from '../../entities/skill';
 
-/** Gets all skills from the backend */
+/**
+ * Gets all skills from the backend 
+ * @param {dispatch} Dispatch - dispatch function that accepts async actions
+ * @author Oriel Red Oral
+ */
+
 export const getAllSkills = () => async (dispatch: Dispatch) => {
   try {
     await axios.get('skill').then((res) => {
@@ -18,8 +23,11 @@ export const getAllSkills = () => async (dispatch: Dispatch) => {
   }
 };
 
-
-/** Creates a skill */
+/**
+ * Creates a skill  
+ * @param {dispatch} Dispatch - dispatch function that accepts async actions
+ * @author Oriel Red Oral
+ */
 export const addSkill = (skill: {}) => async (dispatch: Dispatch) => {
   try {
     await axios.post(`skill`, skill);
@@ -33,7 +41,12 @@ export const addSkill = (skill: {}) => async (dispatch: Dispatch) => {
   }
 };
 
-/** Deletes a skills */
+/**
+ * Deletes a skill by skillId 
+ * @param {dispatch} Dispatch - dispatch function that accepts async actions
+ * @author Oriel Red Oral
+ */
+
 export const deleteSkill = (skillId: number) => async (dispatch: Dispatch) => {
   try {
     await axios.delete(`skill/id/${skillId}`);
