@@ -111,7 +111,17 @@ const RootStackNavigator = () => {
       <Stack.Screen
         name='ViewEditTrainer'
         component={ViewEditTrainer}
-        options={{ headerShown: true }}
+        options={{ 
+          headerShown: true,
+          title: 'Edit Trainer',
+          headerTitleAlign: 'left',
+          headerTitleStyle: {
+            fontFamily: 'FuturaBook',
+            fontWeight: '700',
+            color: colors.darkGray,
+          },
+
+        }}
       />
       <Stack.Screen
         name='Skills'
