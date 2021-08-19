@@ -26,14 +26,18 @@ import { getAllSkills } from '../../redux/actions/skill-actions';
 import { getAllTrainers } from '../../redux/actions/trainers-actions';
 import { getAllDemand } from '../../redux/actions/demand-actions';
 
-//see what happens
-//please import your screen and put in your screen in components-kai
 const Stack = createStackNavigator<RootStackParamList>();
+
+/**
+ * Root Stack Navigator - Navigation across all Screens in the application
+ * @returns {React.FC} - react component for loading in main and subscreens
+ * @author Kaiyip Ho
+ */
 
 const RootStackNavigator = () => {
   const dispatch = useDispatch();
 
-  /** Load in db data and store in the redux state */
+  /** Load in database data and stores it in the redux state */
   React.useEffect(() => {
     dispatch(getAllBatches());
     dispatch(getAllTrainers());
@@ -223,12 +227,6 @@ const RootStackNavigator = () => {
           },
         }}
       />
-      {/*<Stack.Screen name='EditDemand' component={EditDemand} />
-       <Stack.Screen name='Clients' component={ClientScreen} />
-      <Stack.Screen name='EditClient' component={EditClient} />
-      <Stack.Screen name='AddClient' component={AddClient} />
-      
-      */}
     </Stack.Navigator>
   );
 };

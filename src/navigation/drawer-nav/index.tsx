@@ -7,11 +7,16 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types';
 
+/**
+ * Drawer Navigation -  routes to Supply/Demand graph and Skills screens
+ * @returns {React.FC} - react component for drawer navigation
+ * @author Kaiyip Ho
+ * the onPress is the navigation 
+ */
+
 export const DrawerContent: React.FC = () => {
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
-
-  //the onPress is the navigationing so if you need to change it to get to your screens change it to what you named your screens. these are placeholders for now- Kai
 
   return (
     <View style={{ flex: 1 }}>
