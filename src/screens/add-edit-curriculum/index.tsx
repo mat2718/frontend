@@ -56,7 +56,7 @@ const AddEditCurriculum: React.FC = () => {
     };
 
     const json = JSON.stringify(newCurriculum);
-
+    /** Form Validation */
     if (
       newCurriculum.createdby &&
       newCurriculum.createdon &&

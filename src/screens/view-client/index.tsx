@@ -18,7 +18,7 @@ import DemandsListItem from '../../components/demands/demands-list-item';
 import { getAllDemand } from '../../redux/actions/demand-actions';
 import { useDispatch } from 'react-redux';
 
-interface PropsI {
+interface IProps {
   route: {
     params: {
       clientid: number;
@@ -27,14 +27,18 @@ interface PropsI {
   };
 }
 
-/** We must fetch demand data from the client id */
-/** Mock data for now */
+/**
+ * View Client - displays a screen for a specific Client and its demands
+ * @param {route} interface - client properties necessary for viewing client 
+ * @returns {React.FC} - react component that renders the client and its demands and the add demand button
+ * @author Oriel Red Oral 
+ */
 
-const ViewClient: React.FC<PropsI> = ({ route }) => {
+const ViewClient: React.FC<IProps> = ({ route }) => {
   const [isFetching, setIsFetching] = React.useState(false);
   const dispatch = useDispatch();
 
-  /** Navigation stuff */
+  /** Navigation */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 

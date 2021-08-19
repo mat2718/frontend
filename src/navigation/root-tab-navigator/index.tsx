@@ -9,7 +9,12 @@ import Clients from '../../screens/clients';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
-//please import your screen and put in your screen in components, SplashScreen2 will is a placeholder! -kai
+/**
+ * Root Tab Navigator - the applications bottom navigation bar that navigates to all main screens
+ * @returns {React.FC} - react component for tab navigation
+ * @author Kaiyip Ho
+ */
+
 const RootTabNavigator = () => {
   return (
     <Tab.Navigator

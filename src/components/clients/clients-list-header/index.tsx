@@ -11,8 +11,15 @@ interface IProps {
   setSelectedFilter: any;
 }
 
+/**
+ * Client List Header - displays the header component for the Client Screen
+ * @param {IProps} props - properties for filter
+ * @returns {React.FC} - react component with Add Client button that naviagates to AddClient
+ * @author Matthew Otto and Oriel Red Oral
+ */
+
 const ClientsListHeader: React.FC<IProps> = (props: IProps) => {
-  /** Navigation stuff */
+  /** Navigation */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 

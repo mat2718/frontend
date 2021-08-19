@@ -7,6 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from '../../../App';
 import { getAllClients } from '../../redux/actions/client-actions';
 
+/**
+ * Main Client Screen - displays both the header and list client components
+ * @returns {React.FC} - react component that renders a FlatList of clients
+ * @author Oriel Red Oral
+ */
+
 /** Basis for Entire Batch Screen */
 const Clients: React.FC = () => {
   const [isFetching, setIsFetching] = React.useState(false);
@@ -36,12 +42,11 @@ const Clients: React.FC = () => {
     fetchData();
   };
 
-  /** Main return statement */
   return (
     <SafeAreaView style={screenStyles.safeAreaView}>
       {/** List of clients
-       * Takes in the picker filter value and updates accordingly
-       */}
+         * Takes in the picker filter value and updates accordingly
+      */}
 
       <FlatList
         onRefresh={onRefresh}

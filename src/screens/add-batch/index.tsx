@@ -33,7 +33,7 @@ import Toast from 'react-native-toast-message';
 
 /** Main component screen */
 const AddBatch: React.FC = () => {
-  /** States for inputs (listeners) */
+  /** States for input listeners */
   const [curriculumValue, setCurriculumValue] = React.useState(0);
   const [trainerValue, setTrainerValue] = React.useState(0);
   const [isStartPickerShow, setIsStartPickerShow] = React.useState(false);
@@ -94,6 +94,7 @@ const AddBatch: React.FC = () => {
 
   /** Add batch function */
   const AddNewBatch = () => {
+    /** Form Validation */
     if (batchSizeValue && startDate < endDate) {
       dispatch(
         addBatch({

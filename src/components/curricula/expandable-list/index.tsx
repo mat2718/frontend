@@ -10,7 +10,7 @@ interface IProps {
 }
 
 /**
- * Curriculum Expandable Flatlist- sub component of Curricula screen displaying list of curricula
+ * Curriculum Expandable Flatlist - sub component of Curricula screen displaying list of curricula
  * @param {IProps} interface- properties of curriculum entity and onPress event
  * @returns {React.FC} - React component returning an expandable view of curricula
  * @author Hannah Mulato
@@ -37,6 +37,7 @@ export const ExpandableList: React.FC<IProps> = ({ curriculum, onPress }) => {
   const onCurriculumPress = () => {
     onPress();
     setExpanded(!expanded);
+    // changes icon depending on if the button is clicked
     if (expanded === true) {
       setIcon(
         <MaterialCommunityIcons
@@ -78,6 +79,7 @@ export const ExpandableList: React.FC<IProps> = ({ curriculum, onPress }) => {
         <Text style={listStyles.subHeading}>{curriculum.createdby}</Text>
       </View>
 
+      {/* Display more information about curriculum upon press */}
       {expanded && (
         <>
           <View style={styles.textContainer}>

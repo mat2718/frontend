@@ -25,7 +25,7 @@ import axios from '../../../axiosConfig';
 import { addDemand } from '../../redux/actions/demand-actions';
 import Toast from 'react-native-toast-message';
 
-interface PropsI {
+interface IProps {
   route: {
     params: {
       clientid: number;
@@ -34,7 +34,14 @@ interface PropsI {
   };
 }
 
-const AddDemand: React.FC<PropsI> = ({ route }) => {
+/**
+ * Add Demand - screen for adding a demand to a client
+ * @param {route} interface - passes client properties as params
+ * @returns {React.FC} - react component that returns a set of information for adding a demand to the database
+ * @author Oriel Red Oral and Imran Ilyas
+ */
+
+const AddDemand: React.FC<IProps> = ({ route }) => {
   /** Navigation for going back a screen */
   const [howMany, setHowMany] = useState(0);
   const [curricula, setCurricula] = React.useState([
@@ -77,6 +84,7 @@ const AddDemand: React.FC<PropsI> = ({ route }) => {
   };
 
   const addDemandClick = () => {
+    /** Form Validation */
     if (howMany) {
       dispatch(
         addDemand({

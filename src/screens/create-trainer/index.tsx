@@ -93,7 +93,7 @@ const CreateTrainer: React.FC = () => {
               <Text style={buttonStyles.buttonText}>Submit</Text>
             </TouchableOpacity>
           </View>
-
+          {/* Inputs for Trainer */}
           <View style={{ flexDirection: 'column' }}>
             <Text style={inputStyles.inputLabelText}>First Name:</Text>
             <TextInput
