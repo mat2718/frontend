@@ -1,9 +1,14 @@
 import React from 'react';
 import { View, Image, StyleSheet, StatusBar } from 'react-native';
 
+/**
+ * Header - top header component displayed across all main screens
+ * @returns {React.FC} - react component that returns an image of the Revature logo
+ * @author Oriel Red Oral
+ */
+
 const Header: React.FC = () => {
   return (
-    /** Contains the Header for the application */
     <View style={styles.headerView}>
       <Image
         source={{

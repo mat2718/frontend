@@ -6,6 +6,7 @@ import ConfirmDialog from '../../../components/confirm-dialog';
 
 /**
  * Skill List Item - component that the skills flatlist uses as a renderItem
+ * @param {IProps} props - interface properties of a skill
  * @returns {React.FC} - the individual item for the skills list
  * @author Oriel Red Oral
  */

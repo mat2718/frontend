@@ -3,7 +3,13 @@ import { Dispatch } from 'redux';
 import { AppActions } from './actions';
 import { IBatchAxios } from '../../entities/onebatch';
 
-/** Gets all batches from the backend */
+/**
+ * Get All Batches
+ * @param {dispatch} Dispatch - dispatch function that accepts async actions
+ * @return {err} - response message
+ * @author Oriel Red Oral
+ */
+
 export const getAllBatches = () => async (dispatch: Dispatch) => {
   try {
     const res = await axios.get('batch');
@@ -13,11 +19,16 @@ export const getAllBatches = () => async (dispatch: Dispatch) => {
       payload: { batches: res.data },
     });
   } catch (e) {
-    console.log(e);
+    return e;
   }
 };
 
-/** Gets one batch from the backend */
+/**
+ * Get One Batch by BatchId 
+ * @param {dispatch} Dispatch - dispatch function that accepts async actions
+ * @return {AxiosResponse} - response message
+ * @author Oriel Red Oral
+ */
 export const getBatchById =
   (batchId: number, trainerId: number, curriculumId: number) =>
   async (dispatch: Dispatch) => {
@@ -45,12 +56,17 @@ export const getBatchById =
         },
       });
     } catch (e) {
-      console.log(e);
+      return e;
     }
   };
 
-/** Confirms a batch */
-export const confirmBatch =
+/**
+ * Update Batch 
+ * @param {dispatch} Dispatch - dispatch function that accepts async actions
+ * @return {e} - response message
+ * @author Oriel Red Oral
+ */
+ export const confirmBatch =
   (batchId: number, trainerId: number, curriculumId: number) =>
   async (dispatch: Dispatch) => {
     try {
@@ -83,12 +99,17 @@ export const confirmBatch =
         payload: { batches: batch.data },
       });
     } catch (e) {
-      console.log(e);
+      return e;
     }
   };
 
-/** Creates a batch */
-export const addBatch = (batch: {}) => async (dispatch: Dispatch) => {
+/**
+ * Add a Batch 
+ * @param {dispatch} Dispatch - dispatch function that accepts async actions
+ * @return {e} - response message
+ * @author Oriel Red Oral
+ */
+ export const addBatch = (batch: {}) => async (dispatch: Dispatch) => {
   try {
     await axios.post(`batch`, batch);
     const res = await axios.get('batch');
@@ -98,12 +119,17 @@ export const addBatch = (batch: {}) => async (dispatch: Dispatch) => {
       payload: { batches: res.data },
     });
   } catch (e) {
-    console.log(e);
+    return e;
   }
 };
 
-/** Update a batch */
-export const updateBatch =
+/**
+ * Update a Batch using PUT method 
+ * @param {dispatch} Dispatch - dispatch function that accepts async actions
+ * @return {e} - response message
+ * @author Oriel Red Oral
+ */
+ export const updateBatch =
   (batch: {
     batchId: number;
     trainerId: number;
@@ -148,12 +174,17 @@ export const updateBatch =
         },
       });
     } catch (e) {
-      console.log(e);
+      return e;
     }
   };
 
-/** Deletes a batch */
-export const deleteBatch = (batchId: number) => async (dispatch: Dispatch) => {
+/**
+ * Deletes a Batch 
+ * @param {dispatch} Dispatch - dispatch function that accepts async actions
+ * @return {e} - response message
+ * @author Oriel Red Oral
+ */
+ export const deleteBatch = (batchId: number) => async (dispatch: Dispatch) => {
   try {
     await axios.delete(`batch/id/${batchId}`);
     const res = await axios.get('batch');
@@ -162,6 +193,6 @@ export const deleteBatch = (batchId: number) => async (dispatch: Dispatch) => {
       payload: { batches: res.data },
     });
   } catch (e) {
-    console.log(e);
+    return e;
   }
 };

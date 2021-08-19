@@ -74,11 +74,8 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="redux_actions_demand_actions.html#addDemand" class="tsd-kind-icon">add<wbr>Demand</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="redux_actions_demand_actions.html#getAllDemand" class="tsd-kind-icon">get<wbr>All<wbr>Demand</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="redux_actions_demand_actions.html#getDemandByClientId" class="tsd-kind-icon">get<wbr>Demand<wbr>ByClient<wbr>Id</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="redux_actions_demand_actions.html#getDemandByCurrId" class="tsd-kind-icon">get<wbr>Demand<wbr>ByCurr<wbr>Id</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="redux_actions_demand_actions.html#getDemandByCurrIdAndDate" class="tsd-kind-icon">get<wbr>Demand<wbr>ByCurr<wbr>IdAnd<wbr>Date</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="redux_actions_demand_actions.html#getDemandByDate" class="tsd-kind-icon">get<wbr>Demand<wbr>ByDate</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="redux_actions_demand_actions.html#getDemandById" class="tsd-kind-icon">get<wbr>Demand<wbr>ById</a></li>
 							</ul>
 						</section>
 					</div>
@@ -90,15 +87,25 @@
 					<a name="addDemand" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> add<wbr>Demand</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">add<wbr>Demand<span class="tsd-signature-symbol">(</span>demand<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Demand has been added&quot;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Demand<span class="tsd-signature-symbol">(</span>demand<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Perfect-Personnel-Placement/frontend/blob/636cfd6/src/redux/actions/demand-actions.ts#L29">redux/actions/demand-actions.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/Perfect-Personnel-Placement/frontend/blob/0a2b6d6/src/redux/actions/demand-actions.ts#L38">redux/actions/demand-actions.ts:38</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>POST method, Adds a Demand</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>author</dt>
+									<dd><p>Oriel Red Oral</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -107,42 +114,10 @@
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Demand has been added&quot;</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<ul class="tsd-parameters">
-								<li class="tsd-parameter-signature">
-									<ul class="tsd-signatures tsd-kind-type-literal">
-										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Demand has been added&quot;</span><span class="tsd-signature-symbol">&gt;</span></li>
-									</ul>
-									<ul class="tsd-descriptions">
-										<li class="tsd-description">
-											<h4 class="tsd-parameters-title">Parameters</h4>
-											<ul class="tsd-parameters">
-												<li>
-													<h5>dispatch: <span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span></h5>
-												</li>
-											</ul>
-											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Demand has been added&quot;</span><span class="tsd-signature-symbol">&gt;</span></h4>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="getAllDemand" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>All<wbr>Demand</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>All<wbr>Demand<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/Perfect-Personnel-Placement/frontend/blob/636cfd6/src/redux/actions/demand-actions.ts#L8">redux/actions/demand-actions.ts:8</a></li>
-								</ul>
-							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>returns string, whether it is an error message or a successful response message</li>
+							</ul>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter-signature">
 									<ul class="tsd-signatures tsd-kind-type-literal">
@@ -165,48 +140,32 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="getDemandByClientId" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Demand<wbr>ByClient<wbr>Id</h3>
+					<a name="getAllDemand" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>All<wbr>Demand</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Demand<wbr>ByClient<wbr>Id<span class="tsd-signature-symbol">(</span>clientId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>All<wbr>Demand<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Perfect-Personnel-Placement/frontend/blob/636cfd6/src/redux/actions/demand-actions.ts#L93">redux/actions/demand-actions.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/Perfect-Personnel-Placement/frontend/blob/0a2b6d6/src/redux/actions/demand-actions.ts#L11">redux/actions/demand-actions.ts:11</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>clientId: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="getDemandByCurrId" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Demand<wbr>ByCurr<wbr>Id</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Demand<wbr>ByCurr<wbr>Id<span class="tsd-signature-symbol">(</span>curriculumId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/Perfect-Personnel-Placement/frontend/blob/636cfd6/src/redux/actions/demand-actions.ts#L72">redux/actions/demand-actions.ts:72</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>curriculumId: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets All Demands</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>author</dt>
+									<dd><p>Oriel Red Oral</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>returns string, whether it is an error message or a successful response message</li>
+							</ul>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter-signature">
 									<ul class="tsd-signatures tsd-kind-type-literal">
@@ -232,15 +191,25 @@
 					<a name="getDemandByCurrIdAndDate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Demand<wbr>ByCurr<wbr>IdAnd<wbr>Date</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Demand<wbr>ByCurr<wbr>IdAnd<wbr>Date<span class="tsd-signature-symbol">(</span>curriculumId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, startDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, endDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Demand<wbr>ByCurr<wbr>IdAnd<wbr>Date<span class="tsd-signature-symbol">(</span>curriculumId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, startDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, endDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Perfect-Personnel-Placement/frontend/blob/636cfd6/src/redux/actions/demand-actions.ts#L81">redux/actions/demand-actions.ts:81</a></li>
+									<li>Defined in <a href="https://github.com/Perfect-Personnel-Placement/frontend/blob/0a2b6d6/src/redux/actions/demand-actions.ts#L85">redux/actions/demand-actions.ts:85</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get Demand by Curriculum ID and Date</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>author</dt>
+									<dd><p>Oriel Red Oral</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -253,24 +222,9 @@
 									<h5>endDate: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<ul class="tsd-parameters">
-								<li class="tsd-parameter-signature">
-									<ul class="tsd-signatures tsd-kind-type-literal">
-										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
-									</ul>
-									<ul class="tsd-descriptions">
-										<li class="tsd-description">
-											<h4 class="tsd-parameters-title">Parameters</h4>
-											<ul class="tsd-parameters">
-												<li>
-													<h5>dispatch: <span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span></h5>
-												</li>
-											</ul>
-											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
-										</li>
-									</ul>
-								</li>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>response message</li>
 							</ul>
 						</li>
 					</ul>
@@ -279,15 +233,25 @@
 					<a name="getDemandByDate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Demand<wbr>ByDate</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Demand<wbr>ByDate<span class="tsd-signature-symbol">(</span>startDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, endDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Demand<wbr>ByDate<span class="tsd-signature-symbol">(</span>startDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, endDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Perfect-Personnel-Placement/frontend/blob/636cfd6/src/redux/actions/demand-actions.ts#L62">redux/actions/demand-actions.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/Perfect-Personnel-Placement/frontend/blob/0a2b6d6/src/redux/actions/demand-actions.ts#L70">redux/actions/demand-actions.ts:70</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get Demand by using a start and end date</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>author</dt>
+									<dd><p>Oriel Red Oral</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -297,65 +261,9 @@
 									<h5>endDate: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<ul class="tsd-parameters">
-								<li class="tsd-parameter-signature">
-									<ul class="tsd-signatures tsd-kind-type-literal">
-										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
-									</ul>
-									<ul class="tsd-descriptions">
-										<li class="tsd-description">
-											<h4 class="tsd-parameters-title">Parameters</h4>
-											<ul class="tsd-parameters">
-												<li>
-													<h5>dispatch: <span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span></h5>
-												</li>
-											</ul>
-											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="getDemandById" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Demand<wbr>ById</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Demand<wbr>ById<span class="tsd-signature-symbol">(</span>demandId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/Perfect-Personnel-Placement/frontend/blob/636cfd6/src/redux/actions/demand-actions.ts#L53">redux/actions/demand-actions.ts:53</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>demandId: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<ul class="tsd-parameters">
-								<li class="tsd-parameter-signature">
-									<ul class="tsd-signatures tsd-kind-type-literal">
-										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>dispatch<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
-									</ul>
-									<ul class="tsd-descriptions">
-										<li class="tsd-description">
-											<h4 class="tsd-parameters-title">Parameters</h4>
-											<ul class="tsd-parameters">
-												<li>
-													<h5>dispatch: <span class="tsd-signature-type">Dispatch</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/redux_actions_actions.IAppAction.html" class="tsd-signature-type" data-tsd-kind="Interface">IAppAction</a><span class="tsd-signature-symbol">&gt;</span></h5>
-												</li>
-											</ul>
-											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
-										</li>
-									</ul>
-								</li>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>response message</li>
 							</ul>
 						</li>
 					</ul>
@@ -382,19 +290,10 @@
 						<a href="redux_actions_demand_actions.html#getAllDemand" class="tsd-kind-icon">get<wbr>All<wbr>Demand</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="redux_actions_demand_actions.html#getDemandByClientId" class="tsd-kind-icon">get<wbr>Demand<wbr>ByClient<wbr>Id</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="redux_actions_demand_actions.html#getDemandByCurrId" class="tsd-kind-icon">get<wbr>Demand<wbr>ByCurr<wbr>Id</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="redux_actions_demand_actions.html#getDemandByCurrIdAndDate" class="tsd-kind-icon">get<wbr>Demand<wbr>ByCurr<wbr>IdAnd<wbr>Date</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="redux_actions_demand_actions.html#getDemandByDate" class="tsd-kind-icon">get<wbr>Demand<wbr>ByDate</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="redux_actions_demand_actions.html#getDemandById" class="tsd-kind-icon">get<wbr>Demand<wbr>ById</a>
 					</li>
 				</ul>
 			</nav>

@@ -1,6 +1,12 @@
 import React from 'react'
 import {StyleSheet} from 'react-native'
 import colors from './colors'
+
+/**
+ * Global StyleSheet
+ * @author Kaiyip Ho and Matthew Hanrahan and Oriel Red Oral
+ */
+
 const GlobalStyles = StyleSheet.create({
 
 button:{
@@ -84,9 +90,5 @@ listItem:{
   
 
 });
-
-
-
-
 
 export default GlobalStyles;

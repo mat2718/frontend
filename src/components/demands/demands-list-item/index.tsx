@@ -9,19 +9,21 @@ interface IProps {
   quantitydemanded: number;
 }
 
+/**
+ * Demand Item - displays content information for demands
+ * @param {IProps} props - curriculumid needed for the connection between curriculum and demand
+ * @returns {React.FC} - react component that returns demand information
+ * @author Oriel Red Oral
+ */
+
 const DemandsListItem: React.FC<IProps> = (props: IProps) => {
-  /** States for Picker */
   const [curriculum, setCurriculum] = React.useState([
     {
       curriculumname: '',
     },
   ]);
 
-  /**
-   * Touchable Link to contain individual Batch information.
-   * Will lead to Individual Batch information
-   */
-
+  // retrieves curriculum by id
   const fetchCurriculum = async () => {
     const res = await axios.get(`curriculum/id/${props.curriculumid}`);
     setCurriculum(res.data);
@@ -29,16 +31,14 @@ const DemandsListItem: React.FC<IProps> = (props: IProps) => {
 
   React.useEffect(() => {
     fetchCurriculum();
-
+    
+    // resets curriculum state
     return function cleanup() {
       setCurriculum([]);
     };
   }, []);
 
   return (
-    /** Individual Batch Touchable */
-
-    /** Structures and displays the data from the FlatList */
     <View style={styles.listItemContainer}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View>

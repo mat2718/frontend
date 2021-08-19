@@ -133,7 +133,6 @@ const Diagram: React.FC = () => {
           supplyObj[key] += data.batchsize;
         }
       }
-      console.log(supplyObj);
       return Object.values(supplyObj);
     }
   };

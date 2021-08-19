@@ -27,6 +27,13 @@ interface IProps {
   setSelectedFilter: any;
 }
 
+/**
+ * Batch List Header - loads the Add Batch Button and the BatchStats component
+ * @param {IProps} interface - includes information for batches
+ * @returns {React.FC} - React Component for the Batches Add Button and Picker Filter
+ * @author Matthew Otto and Oriel Red Oral
+ */
+
 const BatchesListHeader: React.FC<IProps> = (props: IProps) => {
   /** Navigation stuff */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;

@@ -2,9 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { ExpandableList } from '.';
 import { TouchableOpacity } from 'react-native';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createStackNavigator } from '@react-navigation/stack';
-// import { wrapInStoreProvider } from '../../../../__tests__/functions';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
@@ -63,11 +60,6 @@ describe('ExpandableList', () => {
     expect(wrapper).toBeDefined();
   });
 
-  //tests if button navigates to AddEdit Screen
-  it('Should navigate after button press', () => {
-    /* no-op*/
-  });
-
   it('can expand and de-expand the list', () => {
     //==========================================================================
     // expand list
@@ -91,7 +83,7 @@ describe('ExpandableList', () => {
       .findWhere( (node:any) => 
         node.props().hasOwnProperty('onPress')
       )
-    pressable = pressable.length ? pressable.last() : pressable; // probably unnecessary but it's a good safeguard
+    pressable = pressable.length ? pressable.last() : pressable; 
     pressable.invoke('onPress')();
   })
 

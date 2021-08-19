@@ -18,25 +18,18 @@ describe('some examples of tests you could write', () => {
         const node = wrapper.findWhere( node_ => 
             node_.text().toLowerCase().includes(username)
         );
-        console.log(node.last().debug());
         expect(node.length).toBeGreaterThan(0);
         
     });
 
     it('has pressable text with functional event handler', () => {        
         const wrap = shallowWrap.find(Pressable);
-        // console.log(wrap.debug());
         const mockEventHandler = jest.spyOn(wrap.props(), 'onPress');
         wrap.simulate('press');
         expect(mockEventHandler).toHaveBeenCalled();
     });
 
 });
-
-
-//==============================================================================
-// Now let's fancy
-//
 
 const returnComponent = (userName = 'dummyuser') => {
     const props = {

@@ -64,11 +64,6 @@ let mockStore = configureStore([thunk])({
 });
 
 describe('Main Trainer', () => {
-  // const mockStore = createStore(
-  //   Reducer,
-  //   composeWithDevTools(applyMiddleware(thunk))
-  // );
-
   const wrapper = mount(
     <Provider store={mockStore}>
       <PaperProvider>
@@ -78,14 +73,8 @@ describe('Main Trainer', () => {
   );
 
   const shallowWrapper = shallow(<MainTrainer />);
-  // trainerfirst='Forever'
-  // trainerlast='Young'
-  // email='fyoung@rev.net'
-  // trainerid= {7654}
-
   test('Should have all components', () => {
     expect(shallowWrapper.find('FlatList')).toHaveLength(1);
-    //const wrap = shallowWrapper.find('FlatList');
   });
 
   it('should display the flatlist', () => {

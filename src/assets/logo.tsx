@@ -1,7 +1,12 @@
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
-//Revature logo render for header for navigator- Kai
+/**
+ * Loading Screen - Renders Revature Logo while waiting for Expo to load the application
+ * @returns {React.FC} - react component that displays the Revature Logo
+ * @author Kaiyip Ho
+ */
+
 const Logo: React.FC = () => {
   return (
     <View style={styles.container}>

@@ -12,7 +12,7 @@ import { screenStyles, textStyles, buttonStyles } from '../../../styles';
  */
 
 const SkillsListHeader: React.FC = () => {
-  /** Navigation stuff */
+  /** Navigation */
   type mainScreenProp = StackNavigationProp<RootStackParamList, 'Main'>;
   const navigation = useNavigation<mainScreenProp>();
 

@@ -11,12 +11,16 @@ export const getAllClients = () => async (dispatch: Dispatch) => {
       payload: { clients: res.data },
     });
   } catch (e) {
-    console.log(e);
+    return e;
   }
 };
 
-/** adds a client */
-export const addClient = (client: {}) => async (dispatch: Dispatch) => {
+/**
+ * Get Demand by using a start and end date 
+ * @param {dispatch} Dispatch - dispatch function that accepts async actions
+ * @return {AxiosResponse} - response message
+ */
+ export const addClient = (client: {}) => async (dispatch: Dispatch) => {
   try {
     await axios.post('client', client);
     const res = await axios.get('client');
@@ -26,6 +30,6 @@ export const addClient = (client: {}) => async (dispatch: Dispatch) => {
     });
     return res.data``;
   } catch (e) {
-    console.log(e);
+    return e
   }
 };

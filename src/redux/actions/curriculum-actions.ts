@@ -7,7 +7,7 @@ import { Dispatch } from "redux";
 /**
  * Handler for Curricula - Axios requests to database for curricula
  * @param {ICurriculum || IAppAction} interface - lists properties of curricula and expected payload
- * @returns {success || err} - a message confirming response of action
+ * @returns {err} - a message confirming response of action, whether it is successful or a failure
  * @author Hannah Mulato
  */
 
@@ -30,7 +30,7 @@ export const GetAllCurricula = () => async (dispatch: Dispatch) => {
       return "Retrieved curricula";
     });
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };
 
@@ -49,6 +49,6 @@ export const PostCurriculum = (curriculum: {
     })();
     return `${curriculum.curriculumname} has been added.`;
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };

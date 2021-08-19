@@ -54,8 +54,5 @@ describe('Create Trainer Redux', () =>
         .find('TouchableOpacity')
         .findWhere((w) => w.text() === 'Submit')
         .first().invoke('onPress')();
-        //wrapper.update();
-        //expect(mockStore.getState().trainers).toContain(newTrainer)
-        
     })
 })
